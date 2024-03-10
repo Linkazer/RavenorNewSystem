@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - StaticObstacle
   - 
   - 
   - 
@@ -38,6 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Sol
+    uniqueID: 3727075899
+    locked: 0
+  - name: Grid
+    uniqueID: 192785165
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Mur
+    uniqueID: 3937953335
+    locked: 0
+  - name: PremierPlan
+    uniqueID: 3797150363
+    locked: 0
+  - name: UI
+    uniqueID: 3051399881
     locked: 0

@@ -1,0 +1,178 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[System.Serializable]
+public class Node : IHeapItem<Node> {
+
+	//Data Handlers
+	private List<NodeDataHandler> datasOnNode = new List<NodeDataHandler>(); //TODO
+
+	//Data
+	private bool staticObstacle;
+    private Vector3 worldPosition;
+    private int gridX;
+    private int gridY;
+
+	//Pathfinding
+    public int gCost;
+    public int hCost;
+    public Node parent;
+    public Node children;
+
+	public bool IsStaticObstacle => staticObstacle;
+	public int GridX => gridX;
+	public int GridY => gridY;
+	public Vector3 WorldPosition => worldPosition;
+
+    public bool IsWalkable => !staticObstacle && CheckWalkableFromDataOnNode();
+
+    public bool IsVisible => !staticObstacle && CheckVisibleFromDataOnNode();
+
+    public List<NodeDataHandler> DatasOnNode => datasOnNode; //TODO
+
+
+    public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY) {
+
+		SetNode(_walkable, _worldPos, _gridX, _gridY);
+	}
+
+    /// <summary>
+    /// Set the static data of the Node.
+    /// </summary>
+    /// <param name="_walkable">Is the Node walkable.</param>
+    /// <param name="_worldPos">The Node World Position.</param>
+    /// <param name="_gridX">The Node grid position on X axis.</param>
+    /// <param name="_gridY">The Node grid position on Y axis.</param>
+    public void SetNode(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
+	{
+		staticObstacle = !_walkable;
+		worldPosition = _worldPos;
+		gridX = _gridX;
+		gridY = _gridY;
+
+		gCost = 0;
+		hCost = 0;
+		parent = null;
+		children = null;
+		heapIndex = 0;
+	}
+
+	/// <summary>
+	/// Check if there are any Data On Node that is not walkable.
+	/// </summary>
+	/// <returns></returns>
+	private bool CheckWalkableFromDataOnNode()
+    {
+		bool toReturn = true;
+		
+		for(int i = 0; i < datasOnNode.Count; i++)
+        {
+			if(!datasOnNode[i].Walkable)
+            {
+				toReturn = false;
+            }
+        }
+
+		return toReturn;
+    }
+
+	/// <summary>
+	/// Check if there are any Data On Node that blobk the vision.
+	/// </summary>
+	/// <returns></returns>
+	private bool CheckVisibleFromDataOnNode()
+    {
+		bool toReturn = true;
+
+		for (int i = 0; i < datasOnNode.Count; i++)
+		{
+			if (datasOnNode[i].BlockVision)
+			{
+				toReturn = false;
+			}
+		}
+
+		return toReturn;
+	}
+
+	/// <summary>
+	/// Add a NodeDataHandler on the Node.
+	/// </summary>
+	/// <param name="toAdd">The NodeDataHandler to add.</param>
+	public void AddDataOnNode(NodeDataHandler toAdd)
+	{
+		if (!datasOnNode.Contains(toAdd))
+		{
+			for(int i = 0; i < datasOnNode.Count; i++)
+            {
+				datasOnNode[i].OnDataEnterCurrentNode(toAdd);
+			}
+
+			datasOnNode.Add(toAdd);
+		}
+	}
+
+	/// <summary>
+	/// Remove a NodeDataHandler from the Node.
+	/// </summary>
+	/// <param name="toRemove">The NodeDataHandler to remove.</param>
+	public void RemoveDataOnNode(NodeDataHandler toRemove)
+    {
+		if (datasOnNode.Contains(toRemove))
+		{
+			datasOnNode.Remove(toRemove);
+
+			for (int i = 0; i < datasOnNode.Count; i++)
+			{
+				datasOnNode[i].OnDataExitCurrentNode(toRemove);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Get a every Component of a type on the Node.
+	/// </summary>
+	/// <typeparam name="T">The type of Component to search for.</typeparam>
+	/// <returns>A list of every Component found.</returns>
+	public List<T> GetComponentOnNode<T>() where T : class
+	{
+        List<T> toReturn = new List<T>();
+
+        for (int i = 0; i < datasOnNode.Count; i++)
+        {
+            if (datasOnNode[i].TryGetComponentInHandler(out T foundComponent))
+            {
+                toReturn.Add(foundComponent);
+            }
+        }
+        return new List<T>(toReturn);
+    }
+
+    #region Heap
+    int heapIndex;
+
+    public int fCost {
+		get {
+			return gCost + hCost;
+		}
+	}
+
+	public int HeapIndex {
+		get {
+			return heapIndex;
+		}
+		set {
+			heapIndex = value;
+		}
+	}
+
+	public int CompareTo(Node nodeToCompare) {
+		int compare = fCost.CompareTo(nodeToCompare.fCost);
+		if (compare == 0) {
+			compare = hCost.CompareTo(nodeToCompare.hCost);
+		}
+		return -compare;
+	}
+    #endregion
+}
