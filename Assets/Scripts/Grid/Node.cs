@@ -15,8 +15,8 @@ public class Node : IHeapItem<Node> {
     private int gridY;
 
 	//Pathfinding
-    public int gCost;
-    public int hCost;
+    public float gCost;
+    public float hCost;
     public Node parent;
     public Node children;
 
@@ -152,7 +152,7 @@ public class Node : IHeapItem<Node> {
     #region Heap
     int heapIndex;
 
-    public int fCost {
+    public float fCost {
 		get {
 			return gCost + hCost;
 		}
