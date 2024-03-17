@@ -1,57 +1,118 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEntityActionHandler : MonoBehaviour
+public abstract class PlayerEntityActionHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerEntityActionInput[] playerActions;
+    protected PlayerEntityActionManager actionHandler;
 
-    [SerializeField] private EntityActionDoer actionDoerHandled;
+    protected bool isLocked;
 
-    public EntityActionDoer ActionDoerHandled => actionDoerHandled;
+    protected abstract EntityActionComponent EntityActionComponentHandled { get; }
 
-    public void SelectEntityActionDoer(EntityActionDoer actionDoer)
+    public abstract Type GetEntityActionType { get; }
+
+    public virtual void SetHandler(PlayerEntityActionManager handler)
     {
-        if(actionDoerHandled != actionDoer)
-        {
-            actionDoerHandled = actionDoer;
+        actionHandler = handler;
+    }
 
-            foreach (PlayerEntityActionInput action in playerActions)
-            {
-                action.SetHandler(this);
-            }
+    /// <summary>
+    /// Active l'ActionHandler (+ UI).
+    /// </summary>
+    public abstract void Enable();
+
+    /// <summary>
+    /// Désactive l'ActionHandler (+ UI).
+    /// </summary>
+    public abstract void Disable();
+
+    /// <summary>
+    /// Bloque l'ActionHandler (+ UI).
+    /// </summary>
+    /// <param name="doesLock">Should be locked ?</param>
+    public void Lock(bool doesLock)
+    {
+        if(doesLock != isLocked)
+        {
+            isLocked = doesLock;
+            UpdateActionAvailibility();
         }
     }
 
-    private void EnablePlayerActions()
+    /// <summary>
+    /// Update the ActionHandler with the Component availability (+ UI).
+    /// </summary>
+    public abstract void UpdateActionAvailibility();
+
+    /// <summary>
+    /// Called by the UI and the Inputs.
+    /// </summary>
+    public virtual void SelectAction()
     {
-        foreach (PlayerEntityActionInput action in playerActions)
-        {
-            if(actionDoerHandled.ActionComponents.ContainsKey(action.GetEntityActionType))
-            {
-                action.Enable();
-            }
-            else
-            {
-                action.Disable();
-            }
-        }
+        actionHandler.SelectAction(this);
+        EntityActionComponentHandled.SelectAction();
     }
 
-    private void DisablePlayerActions()
+    /// <summary>
+    /// Called by UI or when an other action is selected.
+    /// </summary>
+    public virtual void UnselectAction()
     {
-        foreach(PlayerEntityActionInput action in playerActions)
-        {
-            action.Disable();
-        }
+        EntityActionComponentHandled.UnselectAction();
+        actionHandler.UnselectAction();
     }
 
-    //Update doable action (Changement perso, fin d'action)
+    public virtual void UseAction(Vector2 usePosition)
+    {
+        EntityActionComponentHandled.UseAction(usePosition, EndAction);
+        actionHandler.OnUseAction(EntityActionComponentHandled);
+    }
 
-    //On fin d'action
+    protected virtual bool IsActionAvailable()
+    {
+        return EntityActionComponentHandled.IsActionAvailable();
+    }
 
-    //Do selected action ? (Géré directement dans les ActionInput ?)
-    // Si on fait dans les ActionInput, ajouter une fonction pour dire qu'une action est en cours
+    protected virtual void DisplayAction(Vector3 actionTargetPosition)
+    {
+        EntityActionComponentHandled.DisplayAction(actionTargetPosition);
+    }
 
-    //Display selected action
+    protected virtual void UndisplayAction()
+    {
+        EntityActionComponentHandled.UndisplayAction();
+    }
+
+    protected virtual bool IsActionUsable(Vector3 positionToCheck)
+    {
+        return EntityActionComponentHandled.IsActionUsable(positionToCheck);
+    }
+
+    protected virtual void CancelAction()
+    {
+        EntityActionComponentHandled.CancelAction();
+    }
+
+    protected virtual void EndAction()
+    {
+        actionHandler.OnEndAction(EntityActionComponentHandled);
+    }
+}
+
+public abstract class PlayerEntityActionHandler<T> : PlayerEntityActionHandler where T : EntityActionComponent
+{
+    protected T entityActionComponentHandled;
+
+    protected override EntityActionComponent EntityActionComponentHandled => entityActionComponentHandled;
+
+    public override Type GetEntityActionType => typeof(T);
+
+    public override void SetHandler(PlayerEntityActionManager handler)
+    {
+        base.SetHandler(handler);
+
+        handler.EntityHandled.TryGetComponentOfType<T>(out entityActionComponentHandled);
+    }
 }

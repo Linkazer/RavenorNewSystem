@@ -85,7 +85,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     public override void StartRound()
     {
-        Debug.Log("Start new round");
         currentMovementLeft = movementByTurn;
     }
 
@@ -506,7 +505,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         return true;
     }
 
-    protected override void OnDoAction(Vector3 actionPosition)
+    protected override void OnUseAction(Vector3 actionPosition)
     {
         TryMoveToDestination(actionPosition, EndAction);
     }

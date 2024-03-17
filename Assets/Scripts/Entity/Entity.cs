@@ -9,6 +9,8 @@ public class Entity : MonoBehaviour, IRoundHandler
 
     private Dictionary<Type, EntityComponent> componentByType = new Dictionary<Type, EntityComponent>();
 
+    public Dictionary<Type, EntityComponent> ComponentsByType => componentByType;
+
     /// <summary>
     /// Get the IEntityData from the data holder. The data holder depends on the Entity type used 
     /// (Ex : The CharacterEntity has a CharacterScriptable that contains multiple IEntityData)

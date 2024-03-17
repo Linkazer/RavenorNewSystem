@@ -27,14 +27,14 @@ public abstract class EntityActionComponent : EntityComponent
     /// <returns></returns>
     public abstract bool IsActionUsable(Vector3 positionToCheck);
 
-    public void DoAction(Vector3 actionTargetPosition, Action endCallback)
+    public void UseAction(Vector3 actionTargetPosition, Action endCallback)
     {
         endActionCallback = endCallback;
 
-        OnDoAction(actionTargetPosition);
+        OnUseAction(actionTargetPosition);
     }
 
-    protected abstract void OnDoAction(Vector3 actionTargetPosition);
+    protected abstract void OnUseAction(Vector3 actionTargetPosition);
 
     public abstract void CancelAction();
 

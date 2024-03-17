@@ -8,29 +8,20 @@ public class TEST_MVT_MoveCharaToClic : MonoBehaviour
 
     private bool isMoving;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        InputManager.Instance.OnMouseLeftDown += MoveCharaToPos;
-    }
+    public Entity[] possibleEntities;
 
-    private void Update()
+    private int curretnEntityid;
+
+    public void ChangeEntity()
     {
-        if (!isMoving)
+        curretnEntityid++;
+
+        if(curretnEntityid == possibleEntities.Length)
         {
-            movementToMove.DisplayAction(InputManager.MousePosition);
+            curretnEntityid = 0;
         }
+
+        PlayerEntityActionManager.Instance.SelectEntity(possibleEntities[curretnEntityid]);
     }
 
-    void MoveCharaToPos(Vector2 pos)
-    {
-        isMoving = true;
-        movementToMove.UndisplayAction();
-        movementToMove.TryMoveToDestination(pos, OnEndMove);
-    }
-
-    void OnEndMove()
-    {
-        isMoving = false;
-    }
 }
