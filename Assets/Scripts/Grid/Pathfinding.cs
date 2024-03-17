@@ -5,8 +5,8 @@ using System;
 
 public class Pathfinding : Singleton<Pathfinding> 
 {
-	private const float directDistance = 1.5f;
-	private const float diagonaleDistance = 2.25f;
+	public const float DirectDistance = 1.5f;
+	private const float DiagonaleDistance = 2.25f;
 
 	[SerializeField] private Grid grid;
 	
@@ -54,7 +54,7 @@ public class Pathfinding : Singleton<Pathfinding>
     /// <param name="distance">The max distance to check for node. Is only check if more than 0.</param>
     /// <param name="pathCalcul"></param>
     /// <returns></returns>
-    private List<Node> CalculatePathfinding(Node startNode, Node targetNode, float distance, bool checkNonStaticObstacle = true, bool targetIsObstacle = false)
+    public List<Node> CalculatePathfinding(Node startNode, Node targetNode, float distance, bool checkNonStaticObstacle = true, bool targetIsObstacle = false)
     {
         Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
         List<Node> usableNode = new List<Node>();
@@ -268,8 +268,8 @@ public class Pathfinding : Singleton<Pathfinding>
         float dstY = Mathf.Abs(nodeA.GridY - nodeB.GridY);
 
         if (dstX > dstY)
-            return diagonaleDistance * dstY + directDistance * (dstX - dstY);
-        return diagonaleDistance * dstX + directDistance * (dstY - dstX);
+            return DiagonaleDistance * dstY + DirectDistance * (dstX - dstY);
+        return DiagonaleDistance * dstX + DirectDistance * (dstY - dstX);
     }
 
 	/// <summary>

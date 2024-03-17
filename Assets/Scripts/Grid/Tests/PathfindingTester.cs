@@ -10,10 +10,34 @@ public class PathfindingTester : MonoBehaviour
     [SerializeField] private bool checkNonStatic = true;
     [SerializeField] private Color pathColor = Color.green;
 
+    private void Start()
+    {
+        InputManager.Instance.OnMouseLeftDown += MoveStartPosition;
+        InputManager.Instance.OnMouseRightDown += MoveEndPosition;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.Instance.OnMouseLeftDown -= MoveStartPosition;
+        InputManager.Instance.OnMouseRightDown -= MoveEndPosition;
+    }
+
+    private void MoveEndPosition(Vector2 pos)
+    {
+        endPosition.position = pos;
+        SearchForPath();
+    }
+
+    private void MoveStartPosition(Vector2 pos)
+    {
+        startPosition.position = pos;
+        SearchForPath();
+    }
+
     [ContextMenu("Search for Path")]
     private void SearchForPath()
     {
-        RVN_GridDisplayer.Instance.OnUnsetGridFeedback();
+        GridZoneDisplayer.Instance.OnUnsetGridFeedback();
 
         Debug.Log("Start Searching");
 
@@ -31,6 +55,6 @@ public class PathfindingTester : MonoBehaviour
 
     private void OnPathFound(Node[] pathFound)
     {
-        RVN_GridDisplayer.Instance.OnSetGridFeedback(new List<Node>(pathFound), pathColor);
+        GridZoneDisplayer.Instance.OnSetGridFeedback(new List<Node>(pathFound), pathColor);
     }
 }

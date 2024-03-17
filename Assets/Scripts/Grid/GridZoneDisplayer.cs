@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RVN_GridDisplayer : Singleton<RVN_GridDisplayer>
+public class GridZoneDisplayer : Singleton<GridZoneDisplayer>
 {
     [SerializeField] private GridNodeDisplay prefab;
 

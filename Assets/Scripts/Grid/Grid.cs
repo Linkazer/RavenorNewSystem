@@ -14,7 +14,7 @@ public class Grid : Singleton<Grid>
 	private float nodeDiameter;
 	private int gridSizeX, gridSizeY;
 
-    [SerializeField] private RVN_GridDisplayer gridDisplayer; //TODO
+    [SerializeField] private GridZoneDisplayer gridDisplayer; //TODO
 
     public int MaxSize
     {

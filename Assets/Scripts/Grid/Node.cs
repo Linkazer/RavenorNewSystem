@@ -6,7 +6,7 @@ using UnityEngine;
 public class Node : IHeapItem<Node> {
 
 	//Data Handlers
-	private List<NodeDataHandler> datasOnNode = new List<NodeDataHandler>(); //TODO
+	private List<EC_NodeHandler> entitiesOnNode = new List<EC_NodeHandler>(); //TODO
 
 	//Data
 	private bool staticObstacle;
@@ -25,11 +25,11 @@ public class Node : IHeapItem<Node> {
 	public int GridY => gridY;
 	public Vector3 WorldPosition => worldPosition;
 
-    public bool IsWalkable => !staticObstacle && CheckWalkableFromDataOnNode();
+    public bool IsWalkable => !staticObstacle && CheckWalkableFromEntitiesOnNode();
 
-    public bool IsVisible => !staticObstacle && CheckVisibleFromDataOnNode();
+    public bool IsVisible => !staticObstacle && CheckVisibleFromEntitiesOnNode();
 
-    public List<NodeDataHandler> DatasOnNode => datasOnNode; //TODO
+    public List<EC_NodeHandler> EntitiesOnNode => entitiesOnNode; //TODO
 
 
     public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY) {
@@ -62,13 +62,13 @@ public class Node : IHeapItem<Node> {
 	/// Check if there are any Data On Node that is not walkable.
 	/// </summary>
 	/// <returns></returns>
-	private bool CheckWalkableFromDataOnNode()
+	private bool CheckWalkableFromEntitiesOnNode()
     {
 		bool toReturn = true;
 		
-		for(int i = 0; i < datasOnNode.Count; i++)
+		for(int i = 0; i < entitiesOnNode.Count; i++)
         {
-			if(!datasOnNode[i].Walkable)
+			if(!entitiesOnNode[i].Walkable)
             {
 				toReturn = false;
             }
@@ -81,13 +81,13 @@ public class Node : IHeapItem<Node> {
 	/// Check if there are any Data On Node that blobk the vision.
 	/// </summary>
 	/// <returns></returns>
-	private bool CheckVisibleFromDataOnNode()
+	private bool CheckVisibleFromEntitiesOnNode()
     {
 		bool toReturn = true;
 
-		for (int i = 0; i < datasOnNode.Count; i++)
+		for (int i = 0; i < entitiesOnNode.Count; i++)
 		{
-			if (datasOnNode[i].BlockVision)
+			if (entitiesOnNode[i].BlockVision)
 			{
 				toReturn = false;
 			}
@@ -100,16 +100,16 @@ public class Node : IHeapItem<Node> {
 	/// Add a NodeDataHandler on the Node.
 	/// </summary>
 	/// <param name="toAdd">The NodeDataHandler to add.</param>
-	public void AddDataOnNode(NodeDataHandler toAdd)
+	public void AddEntityOnNode(EC_NodeHandler toAdd)
 	{
-		if (!datasOnNode.Contains(toAdd))
+		if (!entitiesOnNode.Contains(toAdd))
 		{
-			for(int i = 0; i < datasOnNode.Count; i++)
+			for(int i = 0; i < entitiesOnNode.Count; i++)
             {
-				datasOnNode[i].OnDataEnterCurrentNode(toAdd);
+				entitiesOnNode[i].OnDataEnterCurrentNode(toAdd);
 			}
 
-			datasOnNode.Add(toAdd);
+			entitiesOnNode.Add(toAdd);
 		}
 	}
 
@@ -117,15 +117,15 @@ public class Node : IHeapItem<Node> {
 	/// Remove a NodeDataHandler from the Node.
 	/// </summary>
 	/// <param name="toRemove">The NodeDataHandler to remove.</param>
-	public void RemoveDataOnNode(NodeDataHandler toRemove)
+	public void RemoveEntityOnNode(EC_NodeHandler toRemove)
     {
-		if (datasOnNode.Contains(toRemove))
+		if (entitiesOnNode.Contains(toRemove))
 		{
-			datasOnNode.Remove(toRemove);
+			entitiesOnNode.Remove(toRemove);
 
-			for (int i = 0; i < datasOnNode.Count; i++)
+			for (int i = 0; i < entitiesOnNode.Count; i++)
 			{
-				datasOnNode[i].OnDataExitCurrentNode(toRemove);
+				entitiesOnNode[i].OnDataExitCurrentNode(toRemove);
 			}
 		}
 	}
@@ -135,13 +135,13 @@ public class Node : IHeapItem<Node> {
 	/// </summary>
 	/// <typeparam name="T">The type of Component to search for.</typeparam>
 	/// <returns>A list of every Component found.</returns>
-	public List<T> GetComponentOnNode<T>() where T : class
+	public List<T> GetEntityComponentsOnNode<T>() where T : EntityComponent
 	{
         List<T> toReturn = new List<T>();
 
-        for (int i = 0; i < datasOnNode.Count; i++)
+        for (int i = 0; i < entitiesOnNode.Count; i++)
         {
-            if (datasOnNode[i].TryGetComponentInHandler(out T foundComponent))
+            if (entitiesOnNode[i].TryGetEntityComponentFromHoldingEntity(out T foundComponent))
             {
                 toReturn.Add(foundComponent);
             }

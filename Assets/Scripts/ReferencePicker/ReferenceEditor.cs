@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ravenor.referencePicker
+namespace ReferencePicker
 {
     public class ReferenceEditor : PropertyAttribute
     {
