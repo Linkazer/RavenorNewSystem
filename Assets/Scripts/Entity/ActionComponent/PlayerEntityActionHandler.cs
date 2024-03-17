@@ -7,7 +7,7 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
 {
     protected PlayerEntityActionManager actionHandler;
 
-    protected bool isLocked;
+    [SerializeField] protected bool isLocked;
 
     protected abstract EntityActionComponent EntityActionComponentHandled { get; }
 
@@ -64,39 +64,66 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
         actionHandler.UnselectAction();
     }
 
-    public virtual void UseAction(Vector2 usePosition)
+    /// <summary>
+    /// Use the action at a position.
+    /// </summary>
+    /// <param name="usePosition">The position where to use the action.</param>
+    /// <param name="callback">The callback at the end of the action.</param>
+    public virtual void UseAction(Vector2 usePosition, Action callback)
     {
-        EntityActionComponentHandled.UseAction(usePosition, EndAction);
-        actionHandler.OnUseAction(EntityActionComponentHandled);
+        if (!isLocked)
+        {
+            if(RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
+            {
+                actionHandler.AddLock(this);
+            }
+
+            EntityActionComponentHandled.UseAction(usePosition, callback);
+            actionHandler.OnUseAction(EntityActionComponentHandled);
+        }
     }
 
+    /// <summary>
+    /// Use the action at a position.
+    /// </summary>
+    /// <param name="usePosition">The position where to use the action.</param>
+    public virtual void UseAction(Vector2 usePosition)
+    {
+        UseAction(usePosition, EndAction);
+    }
+
+    /// <summary>
+    /// Check if the action is available.
+    /// </summary>
+    /// <returns></returns>
     protected virtual bool IsActionAvailable()
     {
         return EntityActionComponentHandled.IsActionAvailable();
     }
 
+    /// <summary>
+    /// Display the action.
+    /// </summary>
+    /// <param name="actionTargetPosition"></param>
     protected virtual void DisplayAction(Vector3 actionTargetPosition)
     {
         EntityActionComponentHandled.DisplayAction(actionTargetPosition);
     }
 
+    /// <summary>
+    /// Undisplay the action.
+    /// </summary>
     protected virtual void UndisplayAction()
     {
         EntityActionComponentHandled.UndisplayAction();
     }
 
-    protected virtual bool IsActionUsable(Vector3 positionToCheck)
-    {
-        return EntityActionComponentHandled.IsActionUsable(positionToCheck);
-    }
-
-    protected virtual void CancelAction()
-    {
-        EntityActionComponentHandled.CancelAction();
-    }
-
+    /// <summary>
+    /// Called at the end of the action.
+    /// </summary>
     protected virtual void EndAction()
     {
+        actionHandler.RemoveLock(this);
         actionHandler.OnEndAction(EntityActionComponentHandled);
     }
 }

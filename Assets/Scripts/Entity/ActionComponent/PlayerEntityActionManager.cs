@@ -10,7 +10,7 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
 
     private PlayerEntityActionHandler selectedAction;
 
-    private List<MonoBehaviour> locks = new List<MonoBehaviour>();
+    [SerializeField] private List<MonoBehaviour> locks = new List<MonoBehaviour>();
 
     public Entity EntityHandled => entityHandled;
 
@@ -19,6 +19,10 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         DisablePlayerActions();
     }
 
+    /// <summary>
+    /// Select the entity that is controlled.
+    /// </summary>
+    /// <param name="entity">The controlled entity.</param>
     public void SelectEntity(Entity entity)
     {
         if(entityHandled != entity)
@@ -50,6 +54,9 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Enable every PlayerEntityActionHandler that the controlled entity has.
+    /// </summary>
     private void EnablePlayerActions()
     {
         foreach (PlayerEntityActionHandler action in playerActions)
@@ -65,6 +72,9 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Disable every PlayerEntityActionHandler
+    /// </summary>
     private void DisablePlayerActions()
     {
         foreach(PlayerEntityActionHandler action in playerActions)
@@ -73,6 +83,10 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Add a Lock on the player action, preventing him to control the entity.
+    /// </summary>
+    /// <param name="lockCaller">The caller of the Lock.</param>
     public void AddLock(MonoBehaviour lockCaller)
     {
         locks.Add(lockCaller);
@@ -86,6 +100,10 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Remove a Lock on the player action.
+    /// </summary>
+    /// <param name="unlockCaller">The caller of the lock to remove.</param>
     public void RemoveLock(MonoBehaviour unlockCaller)
     {
         if (locks.Contains(unlockCaller))
@@ -102,6 +120,9 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Update every PlayerEntityActionHandler
+    /// </summary>
     public void UpdateActionsAvailability()
     {
         foreach (PlayerEntityActionHandler action in playerActions)
@@ -110,6 +131,10 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Select an Action.
+    /// </summary>
+    /// <param name="actionToSelect">The action to select.</param>
     public void SelectAction(PlayerEntityActionHandler actionToSelect)
     {
         if(selectedAction != actionToSelect)
@@ -122,20 +147,30 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
         }
     }
 
+    /// <summary>
+    /// Unselect the current action.
+    /// </summary>
     public void UnselectAction()
     {
         selectedAction = null;
     }
 
-
+    /// <summary>
+    /// Called when an action is used.
+    /// </summary>
+    /// <param name="actionUsed">The action used.</param>
     public void OnUseAction(EntityActionComponent actionUsed)
     {
-        AddLock(this);
+        //Debug.Log("Use action : " + actionUsed);
     }
 
+    /// <summary>
+    /// Called when an action ends.
+    /// </summary>
+    /// <param name="actionEnded">The action that ends.</param>
     public void OnEndAction(EntityActionComponent actionEnded)
     {
-        RemoveLock(this);
+        //Debug.Log("End action : " + actionEnded);
         UpdateActionsAvailability();
     }
 }

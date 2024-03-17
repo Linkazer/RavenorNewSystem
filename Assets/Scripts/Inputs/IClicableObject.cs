@@ -12,7 +12,6 @@ public interface IClicableObject
 
     public void OnMouseDown(int mouseId)
     {
-        Debug.Log(mouseId);
         switch (mouseId)
         {
             case 0:

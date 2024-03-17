@@ -178,8 +178,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
         onCancelMovement?.Invoke();
 
-        //endMovementCallback?.Invoke(); //TODO : Voir comment on gère pour les Interaction quand on fera le module d'interaction
-
         StopMovement();
     }
 
@@ -310,129 +308,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         onEnterNode?.Invoke(CurrentNode);
     }
 
-    /* ACTION SYSTEM
-    public override bool IsActionUsable(Vector2 actionTargetPosition)
-    {
-        if (CanMove && RVN_RoundManager.Instance.CurrentRoundMode == RVN_RoundManager.RoundMode.RealTime)
-        {
-            return true;
-        }
-
-        Node toCheck = Grid.GetNodeFromWorldPoint(actionTargetPosition);
-
-		if(toCheck.GetNodeComponent<CPN_InteractibleObject>().Count > 0)
-		{
-			if(Pathfinding.GetDistance(toCheck, CurrentNode) < 15)
-			{
-				return true;
-			}
-			else if(CanMove)
-			{
-				return CanInteractWithObject(toCheck.GetNodeComponent<CPN_InteractibleObject>()[0]);
-			}
-		}
-		else
-		{
-            return CanMove && CanMoveToDestination(actionTargetPosition);
-        }
-
-		return false;
-    }
-
-    public override bool CanSelectAction()
-    {
-        return true;
-    }
-
-    public override void UnselectAction()
-    {
-		if (currentMovement != null)
-		{
-			StopMovement();
-		}
-    }
-
-    public override void DisplayAction(Vector2 actionTargetPosition)
-    {
-        if (RVN_RoundManager.Instance.CurrentRoundMode == RVN_RoundManager.RoundMode.RealTime)
-        {
-            return;
-        }
-
-        Color colorMovement = Color.green;
-        colorMovement.a = 0.5f;
-        RVN_GridDisplayer.SetGridFeedback(GetPossibleMovementTarget(), colorMovement);
-
-        if (Grid.GetNodeFromWorldPoint(actionTargetPosition) != null)
-        {
-            List<Node> path = Pathfinding.CalculatePathfinding(currentNode, Grid.GetNodeFromWorldPoint(actionTargetPosition), currentMovementLeft);
-
-            List<Node> validPath = new List<Node>();
-            List<Node> opportunityPath = new List<Node>();
-
-            bool foundOpportunityAttack = false;
-
-            if (CheckForOpportunityAttack(currentNode))
-            {
-                foundOpportunityAttack = true;
-            }
-
-            foreach (Node n in path)
-            {
-                if (!foundOpportunityAttack)
-                {
-                    if (CheckForOpportunityAttack(n))
-                    {
-                        foundOpportunityAttack = true;
-                    }
-
-                    validPath.Add(n);
-                }
-                else
-                {
-                    opportunityPath.Add(n);
-                }
-            }
-
-            RVN_GridDisplayer.SetGridFeedback(validPath, Color.green);
-            RVN_GridDisplayer.SetGridFeedback(opportunityPath, Color.red);
-        }
-    }
-
-    public override void UndisplayAction(Vector2 actionTargetPosition)
-    {
-        RVN_GridDisplayer.UnsetGridFeedback();
-    }
-
-    public override bool TryDoAction(Vector2 actionTargetPosition, Action callback)
-    {
-        AskToMoveTo(actionTargetPosition, callback);
-
-		return true;
-    }
-     */
-
-    public void OnDrawGizmos()
-    {
-        if (path != null)
-        {
-            for (int i = targetIndex; i < path.Length; i++)
-            {
-                Gizmos.color = Color.white;
-                Gizmos.DrawCube(path[i].WorldPosition, Vector3.one * 0.1f);
-
-                if (i == targetIndex)
-                {
-                    Gizmos.DrawLine(transformToMove.position, path[i].WorldPosition);
-                }
-                else
-                {
-                    Gizmos.DrawLine(path[i - 1].WorldPosition, path[i].WorldPosition);
-                }
-            }
-        }
-    }
-
     public override bool IsActionAvailable()
     {
         return CanMove;
@@ -519,4 +394,26 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     {
         
     }
+
+    public void OnDrawGizmos()
+    {
+        if (path != null)
+        {
+            for (int i = targetIndex; i < path.Length; i++)
+            {
+                Gizmos.color = Color.white;
+                Gizmos.DrawCube(path[i].WorldPosition, Vector3.one * 0.1f);
+
+                if (i == targetIndex)
+                {
+                    Gizmos.DrawLine(transformToMove.position, path[i].WorldPosition);
+                }
+                else
+                {
+                    Gizmos.DrawLine(path[i - 1].WorldPosition, path[i].WorldPosition);
+                }
+            }
+        }
+    }
+
 }

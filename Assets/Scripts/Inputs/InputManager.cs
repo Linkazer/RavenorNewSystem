@@ -26,14 +26,16 @@ public class InputManager : Singleton<InputManager>
 
     private Vector2 mouseWorldPosition;
 
-    private IClicableObject currentClicHandlerTouched;
+    private EC_Clicable currentClicHandlerTouched;
 
     private bool isMiddleMouseDown;
 
     public Action<Vector2> OnMouseLeftDown;
-    public Action<IClicableObject> OnMouseLeftDownOnObject;
+    public Action<Vector2> OnMouseLeftDownWithoutObject;
+    public Action<EC_Clicable> OnMouseLeftDownOnObject;
     public Action<Vector2> OnMouseRightDown;
-    public Action<IClicableObject> OnMouseRightDownOnObject;
+    public Action<Vector2> OnMouseRightDownWithoutObject;
+    public Action<EC_Clicable> OnMouseRightDownOnObject;
     public Action<Vector2> OnMoveCameraInput;
     public Action<Vector2> OnMouseMiddleDown;
     public Action<Vector2> OnMouseMiddleUp;
@@ -109,7 +111,11 @@ public class InputManager : Singleton<InputManager>
             {
                 OnMouseLeftDownOnObject?.Invoke(currentClicHandlerTouched);
 
-                currentClicHandlerTouched.OnMouseDown(0);
+                currentClicHandlerTouched.MouseDown(0);
+            }
+            else
+            {
+                OnMouseLeftDownWithoutObject?.Invoke(mouseWorldPosition);
             }
         }
     }
@@ -142,7 +148,11 @@ public class InputManager : Singleton<InputManager>
             {
                 OnMouseRightDownOnObject?.Invoke(currentClicHandlerTouched);
 
-                currentClicHandlerTouched.OnMouseDown(1);
+                currentClicHandlerTouched.MouseDown(1);
+            }
+            else
+            {
+                OnMouseRightDownWithoutObject?.Invoke(mouseWorldPosition);
             }
         }
     }
@@ -159,11 +169,11 @@ public class InputManager : Singleton<InputManager>
     {
         RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero, 25f, ~layerToIgnore);
 
-        IClicableObject lastClicHandler = currentClicHandlerTouched;
+        EC_Clicable lastClicHandler = currentClicHandlerTouched;
 
-        if (hit.transform != null && hit.transform.gameObject.GetComponent<IClicableObject>() != null)
+        if (hit.transform != null && hit.transform.gameObject.GetComponent<EC_Clicable>() != null)
         {
-            currentClicHandlerTouched = hit.transform.gameObject.GetComponent<IClicableObject>();
+            currentClicHandlerTouched = hit.transform.gameObject.GetComponent<EC_Clicable>();
         }
         else if (currentClicHandlerTouched != null)
         {
@@ -174,12 +184,12 @@ public class InputManager : Singleton<InputManager>
         {
             if (lastClicHandler != null)
             {
-                lastClicHandler.OnMouseExit();
+                lastClicHandler.MouseExit();
             }
 
             if (currentClicHandlerTouched != null)
             {
-                currentClicHandlerTouched.OnMouseEnter();
+                currentClicHandlerTouched.MouseEnter();
             }
         }
 
