@@ -13,9 +13,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     [SerializeField] private Transform transformToMove;
 
-    [Header("Feedbacks and Animations")]
-    [SerializeField] private UnityEvent<Vector2> onChangeDirectionEvent;
-
     //Node
     private EC_NodeHandler nodeHandler;
 
@@ -27,12 +24,11 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     private Coroutine currentMovementRoutine;
 
 	private float currentMovementLeft;
-
-    //TODO : Interaction to do (On le fait ici ou dans un autre component ?)
-
     private Action endMovementCallback;
 
     private RoundMode currentRoundMode;
+
+    private EC_Animator entityAnimator;
 
     public Action<Node> onEnterNode;
     public Action<Node> onExitNode;
@@ -42,6 +38,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     public Action onCancelMovement;
 
     public Node CurrentNode => nodeHandler.CurrentNode;
+
+    public float MovementLeft => currentMovementLeft;
 
     public bool CanMove => currentMovementLeft >= Pathfinding.DirectDistance;
 
@@ -56,6 +54,15 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         if (!HoldingEntity.TryGetComponentOfType<EC_NodeHandler>(out nodeHandler))
         {
             Debug.LogError(HoldingEntity + " has EC_Movement without EC_NodeHandler.");
+        }
+
+        if(HoldingEntity.TryGetComponentOfType<EC_Animator>(out entityAnimator))
+        {
+            Debug.Log("Has animator : " + entityAnimator);
+        }
+        else
+        {
+            Debug.Log("Has no animator");
         }
 
         currentMovementLeft = movementByTurn;
@@ -174,8 +181,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     /// </summary>
     private void CancelMovement()
     {
-        //Animation ?
-
         onCancelMovement?.Invoke();
 
         StopMovement();
@@ -186,8 +191,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     /// </summary>
     private void EndMovement()
     {
-        //Animation ?
-
         onEndMovement?.Invoke();
 
         endMovementCallback?.Invoke();
@@ -201,7 +204,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     /// <param name="hasBeenCanceled"></param>
     private void StopMovement()
     {
-        //Animation
+        entityAnimator?.EndAnimation();
 
         if (currentMovementRoutine != null)
         {
@@ -224,17 +227,16 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     {
         Node currentWaypoint = path[targetIndex];
 
-        //Animation
-
         float lerpValue = 0;
         float distance = 0;
 
         posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
         posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
 
-        onChangeDirectionEvent?.Invoke(posTarget - posUnit); //TODO : Voir si on fait directement dans le code comme pour l'animation
-
         distance = Vector2.Distance(posUnit, posTarget);
+
+        entityAnimator?.PlayAnimation("Walk");
+        entityAnimator?.SetOrientation(posTarget - posUnit);
 
         while (true)
         {
@@ -269,7 +271,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
                 posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
                 posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
 
-                onChangeDirectionEvent?.Invoke(posTarget - posUnit); //TODO : Voir si on fait directement dans le code comme pour l'animation
+                entityAnimator?.SetOrientation(posTarget - posUnit);
 
                 distance = Vector2.Distance(posUnit, posTarget);
 
@@ -321,58 +323,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     public override void UnselectAction()
     {
        
-    }
-
-    public override void UndisplayAction()
-    {
-        GridZoneDisplayer.UnsetGridFeedback();
-    }
-
-    public override void DisplayAction(Vector3 actionTargetPosition)
-    {
-        if (RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime || !CanMove)
-        {
-            return;
-        }
-
-        Color colorMovement = Color.green;
-        colorMovement.a = 0.5f;
-        GridZoneDisplayer.SetGridFeedback(Pathfinding.Instance.CalculatePathfinding(CurrentNode, null, currentMovementLeft), colorMovement);
-
-        if (Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition) != null)
-        {
-            List<Node> path = Pathfinding.Instance.CalculatePathfinding(CurrentNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition), currentMovementLeft);
-
-            List<Node> validPath = new List<Node>();
-            List<Node> opportunityPath = new List<Node>();
-
-            //bool foundOpportunityAttack = false;
-
-            /*if (CheckForOpportunityAttack(currentNode))
-            {
-                foundOpportunityAttack = true;
-            }*/
-
-            foreach (Node n in path)
-            {
-                //if (!foundOpportunityAttack)
-                {
-                    /*if (CheckForOpportunityAttack(n))
-                    {
-                        foundOpportunityAttack = true;
-                    }*/
-
-                    validPath.Add(n);
-                }
-                /*else
-                {
-                    opportunityPath.Add(n);
-                }*/
-            }
-
-            GridZoneDisplayer.SetGridFeedback(validPath, Color.green);
-            GridZoneDisplayer.SetGridFeedback(opportunityPath, Color.red);
-        }
     }
 
     public override bool IsActionUsable(Vector3 positionToCheck)

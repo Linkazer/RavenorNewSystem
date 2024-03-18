@@ -17,9 +17,9 @@ public abstract class EntityActionComponent : EntityComponent
 
     public abstract void UnselectAction();
 
-    public abstract void DisplayAction(Vector3 actionTargetPosition);
+    /*public abstract void DisplayAction(Vector3 actionTargetPosition);
 
-    public abstract void UndisplayAction();
+    public abstract void UndisplayAction();*/
 
     /// <summary>
     /// Utilisé pour savoir si l'action peut être utilisée.

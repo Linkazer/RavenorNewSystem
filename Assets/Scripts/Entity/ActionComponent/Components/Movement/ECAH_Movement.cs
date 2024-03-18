@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         {
             if (movementHandler.CanMove && !isLocked)
             {
-                movementHandler.DisplayAction(InputManager.MousePosition);
+                DisplayAction(InputManager.MousePosition);
             }
         }
     }
@@ -65,11 +66,63 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
     public override void UnselectAction()
     {
         enabled = false;
-        movementHandler.UndisplayAction();
+        UndisplayAction();
 
         InputManager.Instance.OnMouseLeftDownWithoutObject -= UseAction;
         InputManager.Instance.OnMouseLeftDownOnObject -= UseActionOnInteractible;
         base.UnselectAction();
+    }
+
+    protected override void DisplayAction(Vector3 actionTargetPosition)
+    {
+        if (RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime || !movementHandler.CanMove)
+        {
+            return;
+        }
+
+        Color colorMovement = Color.green;
+        colorMovement.a = 0.5f;
+        GridZoneDisplayer.SetGridFeedback(Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, null, movementHandler.MovementLeft), colorMovement);
+
+        if (Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition) != null)
+        {
+            List<Node> path = Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition), movementHandler.MovementLeft);
+
+            List<Node> validPath = new List<Node>();
+            List<Node> opportunityPath = new List<Node>();
+
+            //bool foundOpportunityAttack = false;
+
+            /*if (CheckForOpportunityAttack(currentNode))
+            {
+                foundOpportunityAttack = true;
+            }*/
+
+            foreach (Node n in path)
+            {
+                //if (!foundOpportunityAttack)
+                {
+                    /*if (CheckForOpportunityAttack(n))
+                    {
+                        foundOpportunityAttack = true;
+                    }*/
+
+                    validPath.Add(n);
+                }
+                /*else
+                {
+                    opportunityPath.Add(n);
+                }*/
+            }
+
+            GridZoneDisplayer.SetGridFeedback(validPath, Color.green);
+            GridZoneDisplayer.SetGridFeedback(opportunityPath, Color.red);
+        }
+    }
+
+    protected override void UndisplayAction()
+    {
+        GridZoneDisplayer.UnsetGridFeedback();
     }
 
     /// <summary>
@@ -90,7 +143,7 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
 
     public override void UseAction(Vector2 usePosition, Action callback)
     {
-        movementHandler.UndisplayAction();
+        UndisplayAction();
 
         base.UseAction(usePosition, callback);
     }

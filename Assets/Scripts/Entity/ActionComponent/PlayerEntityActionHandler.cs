@@ -105,18 +105,12 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
     /// Display the action.
     /// </summary>
     /// <param name="actionTargetPosition"></param>
-    protected virtual void DisplayAction(Vector3 actionTargetPosition)
-    {
-        EntityActionComponentHandled.DisplayAction(actionTargetPosition);
-    }
+    protected abstract void DisplayAction(Vector3 actionTargetPosition);
 
     /// <summary>
     /// Undisplay the action.
     /// </summary>
-    protected virtual void UndisplayAction()
-    {
-        EntityActionComponentHandled.UndisplayAction();
-    }
+    protected abstract void UndisplayAction();
 
     /// <summary>
     /// Called at the end of the action.
