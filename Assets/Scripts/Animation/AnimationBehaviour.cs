@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class AnimationBehaviour : MonoBehaviour
 {
-    [SerializeField] private EC_Animator animatorComponent;
-
     protected AnimationData currentAnimation;
 
     public void Play(object animationEntryData, AnimationData animationToPlay)

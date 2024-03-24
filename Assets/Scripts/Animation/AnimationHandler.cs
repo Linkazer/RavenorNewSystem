@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EC_Animator : EntityComponent
+public class AnimationHandler : MonoBehaviour
 {
     [Header("Character Display")]
     [SerializeField] private Transform rendererTransform;
@@ -12,22 +12,7 @@ public class EC_Animator : EntityComponent
 
     private AnimationData currentAnim;
 
-    protected override void InitializeComponent()
-    {
-
-    }
-
-    public override void Activate()
-    {
-        PlayAnimation("Idle");
-    }
-
-    public override void Deactivate()
-    {
-        EndAnimation();
-    }
-
-    public void SetOrientation(Vector2 direction) //Appelé par des Unity Events (voir si besoin de changer)
+    public void SetOrientation(Vector2 direction)
     {
         if (direction.x > 0)
         {
@@ -69,15 +54,5 @@ public class EC_Animator : EntityComponent
     {
         PlayAnimation("Idle");
         currentAnim = null;
-    }
-
-    public override void StartRound()
-    {
-        
-    }
-
-    public override void EndRound()
-    {
-        
     }
 }

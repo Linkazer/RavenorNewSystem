@@ -28,7 +28,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     private RoundMode currentRoundMode;
 
-    private EC_Animator entityAnimator;
+    private EC_Renderer entityAnimator;
 
     public Action<Node> onEnterNode;
     public Action<Node> onExitNode;
@@ -56,7 +56,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
             Debug.LogError(HoldingEntity + " has EC_Movement without EC_NodeHandler.");
         }
 
-        if(HoldingEntity.TryGetComponentOfType<EC_Animator>(out entityAnimator))
+        if(HoldingEntity.TryGetComponentOfType<EC_Renderer>(out entityAnimator))
         {
             Debug.Log("Has animator : " + entityAnimator);
         }
@@ -204,7 +204,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     /// <param name="hasBeenCanceled"></param>
     private void StopMovement()
     {
-        entityAnimator?.EndAnimation();
+        entityAnimator?.AnimHandler.EndAnimation();
 
         if (currentMovementRoutine != null)
         {
@@ -235,8 +235,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
         distance = Vector2.Distance(posUnit, posTarget);
 
-        entityAnimator?.PlayAnimation("Walk");
-        entityAnimator?.SetOrientation(posTarget - posUnit);
+        entityAnimator?.AnimHandler.PlayAnimation("Walk");
+        entityAnimator?.AnimHandler.SetOrientation(posTarget - posUnit);
 
         while (true)
         {
@@ -271,7 +271,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
                 posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
                 posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
 
-                entityAnimator?.SetOrientation(posTarget - posUnit);
+                entityAnimator?.AnimHandler.SetOrientation(posTarget - posUnit);
 
                 distance = Vector2.Distance(posUnit, posTarget);
 
