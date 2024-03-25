@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiceManager
 {
-    public static List<Dice> RollDices(int diceNumber, MonoBehaviour asker, int faceBonus = 0)
+    public static List<Dice> RollDices(MonoBehaviour asker, int diceNumber, int faceBonus = 0)
     {
         List<Dice> toReturn = new List<Dice>();
 

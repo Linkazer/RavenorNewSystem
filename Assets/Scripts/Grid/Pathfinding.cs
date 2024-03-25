@@ -374,7 +374,7 @@ public class Pathfinding : Singleton<Pathfinding>
     /// <param name="distance">The distance at which to check.</param>
     /// <param name="needVision">Does the StartNode need vision on the Node.</param>
     /// <returns></returns>
-    public List<Node> GetAllNodeInDistance(Node startNode, int distance, bool needVision)
+    public List<Node> GetAllNodeInDistance(Node startNode, float distance, bool needVision)
     {
         Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
         List<Node> usableNode = new List<Node>();

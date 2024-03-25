@@ -8,7 +8,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     private IEC_HealthHandlerData data;
 
-
+    public IEC_HealthHandlerData Data => data;
 
     public override void SetComponentData(IEC_HealthHandlerData componentData)
     {

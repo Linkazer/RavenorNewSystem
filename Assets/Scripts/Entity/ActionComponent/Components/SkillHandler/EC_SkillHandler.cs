@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 {
+    public Node CurrentNode;
+
     private List<SkillHolder> usableSkills = new List<SkillHolder>();
+
+    private IEC_SkillHandlerData data;
+
+    public IEC_SkillHandlerData Data => data;
 
     public override void SetComponentData(IEC_SkillHandlerData componentData)
     {

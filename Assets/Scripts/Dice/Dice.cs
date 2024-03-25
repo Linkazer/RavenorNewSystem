@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Dice
 {
+    private const int NumberDiceFace = 8;
     private const float coefOnUse = 0.25f;
 
     public static Dictionary<MonoBehaviour, List<int>> dicesHistory = new Dictionary<MonoBehaviour, List<int>>();
@@ -12,6 +13,11 @@ public class Dice
     private int resultBonus;
 
     private float result;
+
+    public bool DoesHit = false;
+
+    public bool rerolledForOffensive;
+    public bool rerolledForDefensive;
 
     public float Result => result;
 
@@ -42,7 +48,12 @@ public class Dice
             }
         }
 
-        List<float> weights = new List<float>() { 1f, 1f, 1f, 1f, 1f, 1f };
+        List<float> weights = new List<float>();
+
+        for(int i = 0; i < NumberDiceFace; i++)
+        {
+            weights.Add(1f);
+        }
 
         foreach(int hist in history)
         {

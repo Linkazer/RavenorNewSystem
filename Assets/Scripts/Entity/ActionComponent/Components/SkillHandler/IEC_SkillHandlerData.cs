@@ -6,7 +6,7 @@ public interface IEC_SkillHandlerData : IEntityData
 {
     //TODO Skills
 
-    public int Precision { get; set; }
+    public int Accuracy { get; set; }
     public int PhysicalPower {  get; set; }
     public int MagicalPower {  get; set; }
     public int OffensiveAdvantage { get; set; }
