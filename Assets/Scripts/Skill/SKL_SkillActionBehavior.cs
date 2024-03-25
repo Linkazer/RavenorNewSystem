@@ -28,6 +28,6 @@ public abstract class SKL_SkillActionBehavior<T> : SKL_SkillActionBehavior where
 
     protected void EndResolve(SKL_SkillAction nextAction, SKL_SkillResolver resolver)
     {
-        resolver.TryEndSkillAction(nextAction);
+        resolver.EndSkillAction(nextAction);
     }
 }
