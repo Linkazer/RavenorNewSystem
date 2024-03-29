@@ -56,13 +56,9 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
             Debug.LogError(HoldingEntity + " has EC_Movement without EC_NodeHandler.");
         }
 
-        if(HoldingEntity.TryGetComponentOfType<EC_Renderer>(out entityAnimator))
+        if(!HoldingEntity.TryGetComponentOfType<EC_Renderer>(out entityAnimator))
         {
-            Debug.Log("Has animator : " + entityAnimator);
-        }
-        else
-        {
-            Debug.Log("Has no animator");
+            Debug.LogError(HoldingEntity + " has no animator");
         }
 
         currentMovementLeft = movementByTurn;
@@ -313,21 +309,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     public override bool IsActionAvailable()
     {
         return CanMove;
-    }
-
-    public override void SelectAction()
-    {
-        
-    }
-
-    public override void UnselectAction()
-    {
-       
-    }
-
-    public override bool IsActionUsable(Vector3 positionToCheck)
-    {
-        return true;
     }
 
     protected override void OnUseAction(Vector3 actionPosition)

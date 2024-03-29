@@ -5,9 +5,11 @@ using UnityEngine;
 
 public abstract class PlayerEntityActionHandler : MonoBehaviour
 {
+    [SerializeField] private bool forceLockOutsideTurnMode;
+
     protected PlayerEntityActionManager actionHandler;
 
-    [SerializeField] protected bool isLocked;
+    protected bool isLocked;
 
     protected abstract EntityActionComponent EntityActionComponentHandled { get; }
 
@@ -52,7 +54,7 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
     public virtual void SelectAction()
     {
         actionHandler.SelectAction(this);
-        EntityActionComponentHandled.SelectAction();
+        //EntityActionComponentHandled.SelectAction();
     }
 
     /// <summary>
@@ -60,7 +62,7 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
     /// </summary>
     public virtual void UnselectAction()
     {
-        EntityActionComponentHandled.UnselectAction();
+        //EntityActionComponentHandled.UnselectAction();
         actionHandler.UnselectAction();
     }
 
@@ -71,9 +73,11 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
     /// <param name="callback">The callback at the end of the action.</param>
     public virtual void UseAction(Vector2 usePosition, Action callback)
     {
+        UndisplayAction();
+
         if (!isLocked)
         {
-            if(RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
+            if(forceLockOutsideTurnMode || RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
             {
                 actionHandler.AddLock(this);
             }

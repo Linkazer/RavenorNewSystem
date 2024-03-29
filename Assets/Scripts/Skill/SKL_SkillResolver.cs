@@ -14,7 +14,7 @@ public class SKL_SkillResolver
     private Action postAnimationCallback; //TODO : Voir si on peut pas faire sans
     private Action removeLastSubResolverCallback; //TODO : Voir si on peut pas faire sans
 
-    private List<SKL_SkillResolver> subResolvers;
+    private List<SKL_SkillResolver> subResolvers = new List<SKL_SkillResolver>();
 
     public SKL_ResolvingSkillData SkillToResolve => skillToResolve;
 

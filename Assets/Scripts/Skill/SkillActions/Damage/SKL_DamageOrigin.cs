@@ -6,16 +6,16 @@ using UnityEngine;
 [Serializable]
 public abstract class SKL_DamageOrigin
 {
-    public abstract int GetDamageAmount(SKL_DamageActionData damageData);
+    public abstract int GetDamageAmount(SKL_ResolvingSkillData damageData);
 }
 
 public class SKL_DO_Dices : SKL_DamageOrigin
 {
-    public override int GetDamageAmount(SKL_DamageActionData damageData)
+    public override int GetDamageAmount(SKL_ResolvingSkillData damageData)
     {
         int toReturn = 0;
 
-        foreach(Dice dice in damageData.dices)
+        foreach(Dice dice in damageData.dicesResult)
         {
             if(dice.DoesHit)
             {
@@ -31,7 +31,7 @@ public class SKL_DO_Direct : SKL_DamageOrigin
 {
     [SerializeField] private int damageAmount;
 
-    public override int GetDamageAmount(SKL_DamageActionData damageData)
+    public override int GetDamageAmount(SKL_ResolvingSkillData damageData)
     {
         return damageAmount;
     }

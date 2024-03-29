@@ -4,13 +4,13 @@ using UnityEngine;
 
 public interface IEC_SkillHandlerData : IEntityData
 {
-    //TODO Skills
+    public List<SKL_SkillScriptable> Skills { get; }
 
-    public int Accuracy { get; set; }
-    public int PhysicalPower {  get; set; }
-    public int MagicalPower {  get; set; }
-    public int OffensiveAdvantage { get; set; }
-    public int OffensiveDisavantage { get; set; }
+    public int Accuracy { get; }
+    public int PhysicalPower {  get; }
+    public int MagicalPower {  get; }
+    public int OffensiveAdvantage { get; }
+    public int OffensiveDisavantage { get; }
 
     //TODO Ressource
 }

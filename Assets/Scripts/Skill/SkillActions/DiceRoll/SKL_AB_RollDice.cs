@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
 {
@@ -76,7 +77,7 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
         {
             //TODO Spell Rework : Check target possible (Voir si on met pas ça directement dans la Shape)
 
-            rolledDices = DiceManager.RollDices(resolvingData.Caster, actionToResolve.NumberDicesRoll, resolvingData.Caster != null ? resolvingData.Caster.Data.Accuracy : 0);
+            rolledDices = DiceManager.RollDices(resolvingData.Caster, actionToResolve.NumberDicesRoll, resolvingData.Caster != null ? resolvingData.Caster.Accuracy : 0);
 
             RollDices(rolledDices, resolvingData.Caster, hitedObject, out bool didHit);
 
@@ -96,16 +97,16 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
         didHit = false;
 
         float totalHits = 0;
-        int currentOffensiveRerolls = -target.Data.DefensiveDisavantage;//Equivalent d'augmenter le max d'Offensive reroll disponible)
+        int currentOffensiveRerolls = -target.DefensiveDisavantage;//Equivalent d'augmenter le max d'Offensive reroll disponible)
         int currentDefensiveRerolls = 0;
         if (caster != null)
         {
-            currentDefensiveRerolls = -caster.Data.OffensiveDisavantage;
+            currentDefensiveRerolls = -caster.OffensiveDisavantage;
         }
 
         for (int i = 0; i < dicesToRoll.Count; i++)
         {
-            totalHits += CheckDiceHit(caster, dicesToRoll[i], target.Data.Dodge, currentOffensiveRerolls < caster?.Data.OffensiveAdvantage, currentDefensiveRerolls < target.Data.DefensiveAdvantage, out bool usedOffensiveReroll, out bool usedDefensiveReroll);
+            totalHits += CheckDiceHit(caster, dicesToRoll[i], target.Dodge, currentOffensiveRerolls < caster?.OffensiveAdvantage, currentDefensiveRerolls < target.DefensiveAdvantage, out bool usedOffensiveReroll, out bool usedDefensiveReroll);
 
             if (usedDefensiveReroll)
             {

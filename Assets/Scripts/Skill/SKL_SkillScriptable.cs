@@ -22,7 +22,7 @@ public class SKL_SkillScriptable : ScriptableObject
     [Header("Usability")]
     [SerializeField] private int cooldown;
     [SerializeField] private SkillComplexity castComplexity;
-    [SerializeField] private int useByLevel;
+    [SerializeField] private int useByLevel = -1;
     [SerializeField] private int useByTurn;
 
     [Header("Ressource")]
@@ -55,7 +55,7 @@ public class SKL_SkillScriptable : ScriptableObject
         return skillActions.GetFirstUsableAction(resolveData);
     }
 
-    public List<Node> GetDisplayzone(Node casterNode, Node targetNode)
+    public List<Node> GetDisplayShape(Node casterNode, Node targetNode)
     {
         return privisualizedShape.GetZone(casterNode, targetNode);
     }

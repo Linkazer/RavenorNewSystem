@@ -13,19 +13,15 @@ public abstract class EntityActionComponent : EntityComponent
     /// <returns></returns>
     public abstract bool IsActionAvailable();
 
-    public abstract void SelectAction();
+    //public abstract void SelectAction(); Utile ?
 
-    public abstract void UnselectAction();
-
-    /*public abstract void DisplayAction(Vector3 actionTargetPosition);
-
-    public abstract void UndisplayAction();*/
+    //public abstract void UnselectAction(); Utile ?
 
     /// <summary>
     /// Utilisé pour savoir si l'action peut être utilisée.
     /// </summary>
     /// <returns></returns>
-    public abstract bool IsActionUsable(Vector3 positionToCheck);
+    //public abstract bool IsActionUsable(Vector3 positionToCheck); Utile ?
 
     public void UseAction(Vector3 actionTargetPosition, Action endCallback)
     {

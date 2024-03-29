@@ -50,6 +50,7 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         }
     }
 
+    //Called by the UI Button
     public override void SelectAction()
     {
         enabled = true;
@@ -139,13 +140,6 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         {
             EndAction();
         }
-    }
-
-    public override void UseAction(Vector2 usePosition, Action callback)
-    {
-        UndisplayAction();
-
-        base.UseAction(usePosition, callback);
     }
 
     protected override void EndAction()

@@ -50,15 +50,6 @@ public class GridZoneDisplayer : Singleton<GridZoneDisplayer>
                         displayedGrid[i, j].transform.position = grid[i, j].WorldPosition;
                         displayedGrid[i, j].node = grid[i, j];
                         displayedGrid[i, j].gameObject.name = $"Grid [{i},{j}]";
-
-                        if (grid[i, j].IsWalkable)
-                        {
-                            displayedGrid[i, j].SetColor(Color.blue);
-                        }
-                        else
-                        {
-                            displayedGrid[i, j].SetColor(Color.red);
-                        }
                     }
                 }
             }

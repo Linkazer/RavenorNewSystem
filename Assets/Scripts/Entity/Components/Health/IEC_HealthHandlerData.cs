@@ -4,11 +4,11 @@ using UnityEngine;
 
 public interface IEC_HealthHandlerData : IEntityData
 {
-    public int MaxHealth { get; set; }
-    public int CurrentHealth { get; set; }
-    public int MaxArmor { get; set; }
-    public int CurrentArmor { get; set; }
-    public int Dodge { get; set; }
-    public int DefensiveAdvantage { get; set; }
-    public int DefensiveDisavantage { get; set; }
+    public int MaxHealth { get; }
+    public int CurrentHealth { get; }
+    public int MaxArmor { get; }
+    public int CurrentArmor { get; }
+    public int Dodge { get; }
+    public int DefensiveAdvantage { get; }
+    public int DefensiveDisavantage { get; }
 }

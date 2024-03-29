@@ -24,7 +24,7 @@ public abstract class EntityComponent : MonoBehaviour, IRoundHandler
     /// </summary>
     protected abstract void InitializeComponent();
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
         Activate();
     }
@@ -32,7 +32,7 @@ public abstract class EntityComponent : MonoBehaviour, IRoundHandler
     private void OnDisable()
     {
         Deactivate();
-    }
+    }*/
 
     /// <summary>
     /// Activate the Component.

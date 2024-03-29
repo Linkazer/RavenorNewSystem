@@ -4,22 +4,53 @@ using UnityEngine;
 
 public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 {
-    public Node CurrentNode;
+    [SerializeField] private List<SkillHolder> usableSkills = new List<SkillHolder>();
 
-    private List<SkillHolder> usableSkills = new List<SkillHolder>();
+    [SerializeField] private int accuracy;
+    [SerializeField] private int physicalPower;
+    [SerializeField] private int magicalPower;  
+    [SerializeField] private int offensiveAdvantage;
+    [SerializeField] private int offensiveDisavantage;
 
-    private IEC_SkillHandlerData data;
+    private SkillHolder selectedSkill = null;
 
-    public IEC_SkillHandlerData Data => data;
+    private EC_NodeHandler nodeHandler;
+
+    public int Accuracy => accuracy;
+    public int PhysicalPower => physicalPower;
+    public int MagicalPower => magicalPower;
+    public int OffensiveAdvantage => offensiveAdvantage;
+    public int OffensiveDisavantage => offensiveDisavantage;
+
+    public Node CurrentNode => nodeHandler.CurrentNode;
+
+    public List<SkillHolder> UsableSkills => usableSkills;
+
+    public SkillHolder SelectedSkill => selectedSkill;
 
     public override void SetComponentData(IEC_SkillHandlerData componentData)
     {
-        
+        accuracy = componentData.Accuracy;
+        physicalPower = componentData.PhysicalPower;
+        magicalPower = componentData.MagicalPower;
+        offensiveAdvantage = componentData.OffensiveAdvantage;
+        offensiveDisavantage = componentData.OffensiveDisavantage;
+
+        usableSkills = new List<SkillHolder>();
+
+        foreach (SKL_SkillScriptable skill in componentData.Skills)
+        {
+            SkillHolder skillHolder = new SkillHolder(skill);
+            usableSkills.Add(skillHolder);
+        }
     }
 
     protected override void InitializeComponent()
     {
-        
+        if (!HoldingEntity.TryGetComponentOfType<EC_NodeHandler>(out nodeHandler))
+        {
+            Debug.LogError(HoldingEntity + " has EC_SkillHandler without EC_NodeHandler.");
+        }
     }
 
     public override void Activate()
@@ -39,7 +70,10 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public override void EndRound()
     {
-        //TODO Update Cooldowns
+        foreach(SkillHolder skillHolder in usableSkills)
+        {
+            skillHolder.UpdateCooldown();
+        }
     }
 
     public override bool IsActionAvailable()
@@ -47,24 +81,19 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         return true;
     }
 
-    public override bool IsActionUsable(Vector3 positionToCheck)
+    public void SelectSkill(SkillHolder skillHolderToSelect)
     {
-        return true;
-    }
-
-    public override void SelectAction()
-    {
-        
-    }
-
-    public override void UnselectAction()
-    {
-        
+        selectedSkill = skillHolderToSelect;
     }
 
     protected override void OnUseAction(Vector3 actionTargetPosition)
     {
-        
+        if(selectedSkill != null)
+        {
+            SKL_ResolvingSkillData resolvingSkillData = new SKL_ResolvingSkillData(selectedSkill.Scriptable, this, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
+            SKL_SkillResolverManager.Instance.ResolveSpell(resolvingSkillData, OnEndResolveSkill);
+            selectedSkill.UseSkill();
+        }
     }
 
     public override void CancelAction()
@@ -72,8 +101,13 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         
     }
 
+    private void OnEndResolveSkill()
+    {
+        EndAction();
+    }
+
     protected override void OnEndAction()
     {
-        
+        selectedSkill = null;
     }
 }

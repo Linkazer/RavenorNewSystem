@@ -5,20 +5,36 @@ using UnityEngine;
 public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 {
     [SerializeField] private ECUI_HealthDisplayer healthDisplayer;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int currentHealth;
+    [SerializeField] private int maxArmor;
+    [SerializeField] private int currentArmor;
+    [SerializeField] private int dodge;
+    [SerializeField] private int defensiveAdvantage;
+    [SerializeField] private int defensiveDisavantage;
 
-    private IEC_HealthHandlerData data;
-
-    public IEC_HealthHandlerData Data => data;
+    public int MaxHealth => maxHealth;
+    public int CurrentHealth => currentHealth;
+    public int MaxArmor => maxArmor;
+    public int CurrentArmor => currentArmor;
+    public int Dodge => dodge;
+    public int DefensiveAdvantage => defensiveAdvantage;
+    public int DefensiveDisavantage => defensiveDisavantage;
 
     public override void SetComponentData(IEC_HealthHandlerData componentData)
     {
-        data = componentData;
+        maxHealth = componentData.MaxHealth;
+        currentHealth = componentData.CurrentHealth;
+        maxArmor = componentData.MaxArmor;
+        currentArmor = componentData.CurrentArmor;
+        dodge = componentData.Dodge;
+        defensiveAdvantage = componentData.DefensiveAdvantage;
+        defensiveDisavantage = componentData.DefensiveDisavantage;
     }
 
     protected override void InitializeComponent()
     {
-        data.CurrentHealth = data.MaxHealth;
-        data.CurrentArmor = data.MaxArmor;
+        
     }
 
     public override void Activate()
@@ -43,13 +59,13 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     public void SetMaxHealth(int toSet)
     {
-        data.MaxHealth = toSet;
+        maxHealth = toSet;
 
-        healthDisplayer.OnSetMaxHealth(data.MaxHealth, data.CurrentHealth);
+        healthDisplayer.OnSetMaxHealth(maxHealth, currentHealth);
 
-        if (data.CurrentHealth > data.MaxHealth)
+        if (currentHealth > maxHealth)
         {
-            SetHealth(data.MaxHealth);
+            SetHealth(maxHealth);
         }
     }
 
@@ -57,13 +73,13 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnGainHealth(toGain);
 
-        if(data.CurrentHealth + toGain > data.MaxHealth)
+        if(currentHealth + toGain > maxHealth)
         {
-            SetHealth(data.MaxHealth);
+            SetHealth(maxHealth);
         }
         else
         {
-            SetHealth(data.CurrentHealth + toGain);
+            SetHealth(currentHealth + toGain);
         }
     }
 
@@ -71,14 +87,14 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnLoseHealth(toLose);
 
-        if (data.CurrentHealth - toLose <= 0)
+        if (currentHealth - toLose <= 0)
         {
             SetHealth(0);
             Succomb();
         }
         else
         {
-            SetHealth(data.CurrentHealth - toLose);
+            SetHealth(currentHealth - toLose);
         }
     }
 
@@ -86,7 +102,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnSetHealth(toSet);
 
-        data.CurrentHealth = toSet;
+        currentHealth = toSet;
     }
 
     private void Succomb()
@@ -99,10 +115,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnSetMaxArmor(toSet);
 
-        data.MaxArmor = toSet;
-        if (data.CurrentArmor > data.MaxArmor)
+        maxArmor = toSet;
+        if (currentArmor > maxArmor)
         {
-            SetArmor(data.MaxArmor);
+            SetArmor(maxArmor);
         }
     }
 
@@ -110,13 +126,13 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnGainArmor(toGain);
 
-        if (data.CurrentArmor + toGain > data.MaxArmor)
+        if (currentArmor + toGain > maxArmor)
         {
-            SetArmor(data.MaxArmor);
+            SetArmor(maxArmor);
         }
         else
         {
-            SetArmor(data.CurrentArmor + toGain);
+            SetArmor(currentArmor + toGain);
         }
     }
 
@@ -124,15 +140,15 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnLoseArmor(toLose);
 
-        if (data.CurrentArmor > 0)
+        if (currentArmor > 0)
         {
-            if (data.CurrentArmor - toLose <= 0)
+            if (currentArmor - toLose <= 0)
             {
                 SetArmor(0);
             }
             else
             {
-                SetArmor(data.CurrentArmor - toLose);
+                SetArmor(currentArmor - toLose);
             }
         }
     }
@@ -141,6 +157,6 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         healthDisplayer.OnSetArmor(toSet);
 
-        data.CurrentArmor = toSet;
+        currentArmor = toSet;
     }
 }
