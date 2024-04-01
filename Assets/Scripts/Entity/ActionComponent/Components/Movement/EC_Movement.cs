@@ -51,12 +51,12 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     protected override void InitializeComponent()
     {
-        if (!HoldingEntity.TryGetComponentOfType<EC_NodeHandler>(out nodeHandler))
+        if (!HoldingEntity.TryGetEntityComponentOfType<EC_NodeHandler>(out nodeHandler))
         {
             Debug.LogError(HoldingEntity + " has EC_Movement without EC_NodeHandler.");
         }
 
-        if(!HoldingEntity.TryGetComponentOfType<EC_Renderer>(out entityAnimator))
+        if(!HoldingEntity.TryGetEntityComponentOfType<EC_Renderer>(out entityAnimator))
         {
             Debug.LogError(HoldingEntity + " has no animator");
         }

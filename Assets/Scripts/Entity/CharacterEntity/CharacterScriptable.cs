@@ -3,7 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Character Scriptable", menuName = "Character/New Character")]
-public class CharacterScriptable : DialogueSpeaker, IEC_GridEntityData, IEC_RendererData, IEC_MovementData, IEC_HealthHandlerData, IEC_SkillHandlerData
+public class CharacterScriptable : DialogueSpeaker, 
+    IEC_GridEntityData, 
+    IEC_RendererData, 
+    IEC_MovementData, 
+    IEC_HealthHandlerData, 
+    IEC_SkillHandlerData,
+    IEC_StatusHandlerData
 {
     private const int BaseDodge = 2;
 
@@ -26,6 +32,9 @@ public class CharacterScriptable : DialogueSpeaker, IEC_GridEntityData, IEC_Rend
     [SerializeField] private int presence;
     [SerializeField] private int agilite;
     [SerializeField] private int instinct;
+
+    [Header("Passives")]
+    [SerializeField] private StatusData[] passives;
 
     [Header("Skills")]
     [SerializeField] private List<SKL_SkillScriptable> skills;
@@ -65,4 +74,6 @@ public class CharacterScriptable : DialogueSpeaker, IEC_GridEntityData, IEC_Rend
     public int OffensiveAdvantage => 0;//Utile ?
 
     public int OffensiveDisavantage => 0;//Utile ?
+
+    public StatusData[] Passives => passives;
 }

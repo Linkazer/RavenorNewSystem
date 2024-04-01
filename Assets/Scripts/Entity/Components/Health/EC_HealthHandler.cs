@@ -17,7 +17,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     public int CurrentHealth => currentHealth;
     public int MaxArmor => maxArmor;
     public int CurrentArmor => currentArmor;
-    public int Dodge => dodge;
+    public int Dodge => dodge > 0 ? dodge : 0;
     public int DefensiveAdvantage => defensiveAdvantage;
     public int DefensiveDisavantage => defensiveDisavantage;
 
@@ -158,5 +158,15 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         healthDisplayer.OnSetArmor(toSet);
 
         currentArmor = toSet;
+    }
+
+    public void AddDodgeBonus(int amount)
+    {
+        dodge += amount;
+    }
+
+    public void RemoveDodgeBonus(int amount)
+    {
+        dodge -= amount;
     }
 }

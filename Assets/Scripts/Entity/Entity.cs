@@ -27,7 +27,7 @@ public class Entity : MonoBehaviour, IRoundHandler
     /// <typeparam name="T">The type of the EntityComponent wanted.</typeparam>
     /// <param name="foundComponent">The found EntityComponent.</param>
     /// <returns>TRUE if an EntityComponent is found. Otherwise, FALSE.</returns>
-    public bool TryGetComponentOfType<T>(out T foundComponent) where T : EntityComponent
+    public bool TryGetEntityComponentOfType<T>(out T foundComponent) where T : EntityComponent
     {
         foundComponent = null;
 

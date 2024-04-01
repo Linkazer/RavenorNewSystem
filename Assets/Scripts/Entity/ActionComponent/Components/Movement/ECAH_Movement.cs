@@ -132,7 +132,7 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
     /// <param name="interactibleObject"></param>
     private void UseActionOnInteractible(EC_Clicable interactibleObject)
     {
-        if(interactibleObject.HoldingEntity.TryGetComponentOfType<EC_Interactable>(out EC_Interactable interactibleComponent))
+        if(interactibleObject.HoldingEntity.TryGetEntityComponentOfType<EC_Interactable>(out EC_Interactable interactibleComponent))
         {
             UseAction(interactibleComponent.HoldingEntity.transform.position, () => interactibleComponent.PlayInteraction(EndAction));
         }

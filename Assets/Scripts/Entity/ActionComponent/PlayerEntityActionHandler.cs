@@ -138,6 +138,6 @@ public abstract class PlayerEntityActionHandler<T> : PlayerEntityActionHandler w
     {
         base.SetHandler(handler);
 
-        handler.EntityHandled.TryGetComponentOfType<T>(out entityActionComponentHandled);
+        handler.EntityHandled.TryGetEntityComponentOfType<T>(out entityActionComponentHandled);
     }
 }

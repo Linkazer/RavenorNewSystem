@@ -47,7 +47,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     protected override void InitializeComponent()
     {
-        if (!HoldingEntity.TryGetComponentOfType<EC_NodeHandler>(out nodeHandler))
+        if (!HoldingEntity.TryGetEntityComponentOfType<EC_NodeHandler>(out nodeHandler))
         {
             Debug.LogError(HoldingEntity + " has EC_SkillHandler without EC_NodeHandler.");
         }

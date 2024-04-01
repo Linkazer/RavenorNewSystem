@@ -134,7 +134,7 @@ public class EC_NodeHandler : EntityComponent<IEC_GridEntityData>
             return false;
         }
 
-        return HoldingEntity.TryGetComponentOfType<T>(out foundComponent);
+        return HoldingEntity.TryGetEntityComponentOfType<T>(out foundComponent);
     }
 
     /// <summary>
