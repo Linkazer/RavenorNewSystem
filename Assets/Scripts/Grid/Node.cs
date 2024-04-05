@@ -6,7 +6,7 @@ using UnityEngine;
 public class Node : IHeapItem<Node> {
 
 	//Data Handlers
-	private List<EC_NodeHandler> entitiesOnNode = new List<EC_NodeHandler>(); //TODO
+	private List<EC_NodeHandler> entitiesOnNode = new List<EC_NodeHandler>();
 
 	//Data
 	private bool staticObstacle;
@@ -29,7 +29,7 @@ public class Node : IHeapItem<Node> {
 
     public bool IsVisible => !staticObstacle && CheckVisibleFromEntitiesOnNode();
 
-    public List<EC_NodeHandler> EntitiesOnNode => entitiesOnNode; //TODO
+    public List<EC_NodeHandler> EntitiesOnNode => entitiesOnNode;
 
 
     public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY) {

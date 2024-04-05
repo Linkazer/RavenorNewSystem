@@ -7,8 +7,6 @@ public class SKL_SkillResolverManager : Singleton<SKL_SkillResolverManager>
 {
     [SerializeField] private SKL_SkillActionBehavior[] skillActionBehaviors;
 
-    private List<SKL_SkillResolver> currentlyRunningResolvers = new List<SKL_SkillResolver>(); //TODO : Check l'utilité
-
     public SKL_SkillActionBehavior GetBehaviorForType(SKL_SkillAction actionSearchFor)
     {
         if(actionSearchFor != null)
@@ -29,11 +27,5 @@ public class SKL_SkillResolverManager : Singleton<SKL_SkillResolverManager>
     {
         SKL_SkillResolver skillResolver = new SKL_SkillResolver(resolvingSkill, callback);
         skillResolver.StartSkillAction(resolvingSkill.SkillData.GetFirstUsableSkillAction(resolvingSkill));
-        //currentlyRunningResolvers.Add(new SKL_SkillResolver(resolvingSkill, callback));
-    }
-
-    private void EndResolve(SKL_SkillResolver toEnd)
-    {
-        //currentlyRunningResolvers.Remove(toEnd);
     }
 }

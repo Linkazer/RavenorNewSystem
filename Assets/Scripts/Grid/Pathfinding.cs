@@ -41,9 +41,6 @@ public class Pathfinding : Singleton<Pathfinding>
 		}
 
 		return hasFoundPath;
-
-        //TODO : Return le succès du Path et passer le callback
-        //requestManager.FinishedProcessingPath(waypoints,pathSuccess);
     }
 
     /// <summary>

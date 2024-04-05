@@ -162,6 +162,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterChoiceButton
       objectReference: {fileID: 0}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1466199409717078111}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UE_SelectCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ControllableCharacterUI, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158932271311703002, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 9047095624911469219, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -6,8 +6,8 @@ using UnityEngine;
 public class CharacterScriptable : DialogueSpeaker, 
     IEC_GridEntityData, 
     IEC_RendererData, 
-    IEC_MovementData, 
-    IEC_HealthHandlerData, 
+    IEC_MovementData,
+    IEC_HealthHandlerData,
     IEC_SkillHandlerData,
     IEC_StatusHandlerData
 {
@@ -18,6 +18,7 @@ public class CharacterScriptable : DialogueSpeaker,
     [SerializeField] private bool blockVision = true;
 
     [Header("Render")]
+    [SerializeField] private float height = 1f;
     [SerializeField] private AnimationHandler renderer;
 
     [Header("Movement")]
@@ -76,4 +77,6 @@ public class CharacterScriptable : DialogueSpeaker,
     public int OffensiveDisavantage => 0;//Utile ?
 
     public StatusData[] Passives => passives;
+
+    public float UiHeight => height;
 }

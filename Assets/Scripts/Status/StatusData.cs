@@ -12,7 +12,7 @@ public class StatusData : ScriptableObject
 
     [SerializeField] private Poolable_FX statusFX;
 
-    [SerializeField, SerializeReference, ReferenceEditor(typeof(StatusEffect))] private StatusEffect[] effects; //TODO : Sortir les logiques de runtime des Effets
+    [SerializeField, SerializeReference, ReferenceEditor(typeof(StatusEffect))] private StatusEffect[] effects;
 
     public string Name => statusName.GetText();
     public string Description => description.GetText();

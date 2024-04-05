@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ECUI_HealthDisplayer : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
-    [SerializeField] private Image[] armorDisplayed; //TODO : Faire des scripts pour l'affichage des Armure avec animation
+    [SerializeField] private ECUI_ArmorState[] armorDisplayed;
 
     private float maxHealthBarFill;
     private float currentHealthBarFill;
@@ -21,7 +21,17 @@ public class ECUI_HealthDisplayer : MonoBehaviour
 
     public void OnSetMaxArmor(int amountToSet)
     {
-
+        for(int i = 0; i < armorDisplayed.Length; i++)
+        {
+            if(i < amountToSet)
+            {
+                armorDisplayed[i].SetVisible(true);
+            }
+            else
+            {
+                armorDisplayed[i].SetVisible(false);
+            }
+        }
     }
 
     public void OnSetHealth(int amountToSet)
@@ -33,7 +43,17 @@ public class ECUI_HealthDisplayer : MonoBehaviour
 
     public void OnSetArmor(int amountToSet)
     {
-
+        for (int i = 0; i < armorDisplayed.Length; i++)
+        {
+            if (i < amountToSet)
+            {
+                armorDisplayed[i].SetBroken(false);
+            }
+            else
+            {
+                armorDisplayed[i].SetBroken(true);
+            }
+        }
     }
 
     //Feedback Lose Health

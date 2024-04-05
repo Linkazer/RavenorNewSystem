@@ -11,8 +11,8 @@ public class SKL_SkillResolver
 
     private List<SKL_SkillActionAnimation> runningAnimations = new List<SKL_SkillActionAnimation>();
 
-    private Action postAnimationCallback; //TODO : Voir si on peut pas faire sans
-    private Action removeLastSubResolverCallback; //TODO : Voir si on peut pas faire sans
+    private Action postAnimationCallback; //AMELIORATION : Voir si on peut pas faire sans
+    private Action removeLastSubResolverCallback; //AMELIORATION : Voir si on peut pas faire sans
 
     private List<SKL_SkillResolver> subResolvers = new List<SKL_SkillResolver>();
 

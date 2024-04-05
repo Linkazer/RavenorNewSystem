@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActionManager : Singleton<PlayerActionManager>
 {
+    [SerializeField] private PlayerEntityComponentDisplay[] playerDisplays;
+
     [SerializeField] private PlayerActionHandler[] playerActions;
 
     [SerializeField] private PlayerEntityActionHandler[] playerEntityActions;
@@ -43,6 +46,14 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
                 selectedAction.UnselectAction();
             }
 
+            if(entityHandled != null)
+            {
+                foreach (PlayerEntityComponentDisplay display in playerDisplays)
+                {
+                    display.SetCharacter(null);
+                }
+            }
+
             entityHandled = entity;
 
             if (entityHandled == null)
@@ -54,6 +65,11 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
                 foreach (PlayerEntityActionHandler action in playerEntityActions)
                 {
                     action.SetHandler(this);
+                }
+
+                foreach(PlayerEntityComponentDisplay display in playerDisplays)
+                {
+                    display.SetCharacter(entityHandled as CharacterEntity);
                 }
 
                 EnablePlayerActions();

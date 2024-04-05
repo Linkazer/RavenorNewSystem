@@ -42,8 +42,6 @@ public class SKL_AB_DamageAction : SKL_SkillActionBehavior<SKL_AS_DamageAction>
     {
         int damageAmount = damageToApply.Origin.GetDamageAmount(resolvingSkillData);
 
-        Debug.Log("Damage done : " + damageAmount);
-
         switch(damageToApply.DamageType)
         {
             case SKL_DamageType.Normal:

@@ -11,4 +11,5 @@ public interface IEC_HealthHandlerData : IEntityData
     public int Dodge { get; }
     public int DefensiveAdvantage { get; }
     public int DefensiveDisavantage { get; }
+    public float UiHeight { get; }
 }

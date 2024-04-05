@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,11 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     public int DefensiveAdvantage => defensiveAdvantage;
     public int DefensiveDisavantage => defensiveDisavantage;
 
+    public Action<int> actOnChangeMaxHealth;
+    public Action<int> actOnChangeHealth;
+    public Action<int> actOnChangeMaxArmor;
+    public Action<int> actOnChangeArmor;
+
     public override void SetComponentData(IEC_HealthHandlerData componentData)
     {
         maxHealth = componentData.MaxHealth;
@@ -30,11 +36,19 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         dodge = componentData.Dodge;
         defensiveAdvantage = componentData.DefensiveAdvantage;
         defensiveDisavantage = componentData.DefensiveDisavantage;
+
+        if(healthDisplayer != null)
+        {
+            healthDisplayer.transform.localPosition = new Vector3(0, componentData.UiHeight, 0);
+        }
     }
 
     protected override void InitializeComponent()
     {
-        
+        SetMaxHealth(maxHealth);
+        SetMaxArmor(maxArmor);
+        SetHealth(currentHealth);
+        SetArmor(currentArmor);
     }
 
     public override void Activate()
@@ -62,6 +76,8 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         maxHealth = toSet;
 
         healthDisplayer.OnSetMaxHealth(maxHealth, currentHealth);
+
+        actOnChangeMaxHealth?.Invoke(maxHealth);
 
         if (currentHealth > maxHealth)
         {
@@ -100,15 +116,17 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     private void SetHealth(int toSet)
     {
-        healthDisplayer.OnSetHealth(toSet);
-
         currentHealth = toSet;
+
+        healthDisplayer.OnSetHealth(currentHealth);
+
+        actOnChangeHealth?.Invoke(currentHealth);
     }
 
     private void Succomb()
     {
         holdingEntity.Deactivate();
-        //TODO
+        //TODO : Animations et tout
     }
 
     public void SetMaxArmor(int toSet)
@@ -116,6 +134,9 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         healthDisplayer.OnSetMaxArmor(toSet);
 
         maxArmor = toSet;
+
+        actOnChangeMaxArmor?.Invoke(maxArmor);
+
         if (currentArmor > maxArmor)
         {
             SetArmor(maxArmor);
@@ -155,9 +176,11 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     private void SetArmor(int toSet)
     {
-        healthDisplayer.OnSetArmor(toSet);
-
         currentArmor = toSet;
+
+        healthDisplayer.OnSetArmor(currentArmor);
+
+        actOnChangeArmor?.Invoke(currentArmor);
     }
 
     public void AddDodgeBonus(int amount)

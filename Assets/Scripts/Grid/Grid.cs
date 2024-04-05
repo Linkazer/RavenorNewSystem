@@ -14,7 +14,7 @@ public class Grid : Singleton<Grid>
 	private float nodeDiameter;
 	private int gridSizeX, gridSizeY;
 
-    [SerializeField] private GridZoneDisplayer gridDisplayer; //TODO
+    [SerializeField] private GridZoneDisplayer gridDisplayer;
 
     public int MaxSize
     {
@@ -58,7 +58,7 @@ public class Grid : Singleton<Grid>
 			}
 		}
 
-		gridDisplayer.OnSetGrid(grid, gridSizeX, gridSizeY); //TODO
+		gridDisplayer.OnSetGrid(grid, gridSizeX, gridSizeY);
 	}
 
 	/// <summary>
