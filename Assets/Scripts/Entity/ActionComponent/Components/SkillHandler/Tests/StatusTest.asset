@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9fbb836ed4d9d040a54bdc7ac30d979, type: 3}
+  m_Name: StatusTest
+  m_EditorClassIdentifier: 
+  statusName:
+    frenchText: Test
+    englishText: 
+  description:
+    frenchText: Test test
+    englishText: 
+  icon: {fileID: 0}
+  statusFX: {fileID: 0}
+  effects:
+  - rid: 6537641225162326020
+  - rid: 6537641225162326021
+  references:
+    version: 2
+    RefIds:
+    - rid: 6537641225162326020
+      type: {class: StatusEffect_ChangeDodge, ns: , asm: Assembly-CSharp}
+      data:
+        trigger: 2
+        dodgeToGain: -2
+    - rid: 6537641225162326021
+      type: {class: StatusEffect_ChangeDodge, ns: , asm: Assembly-CSharp}
+      data:
+        trigger: 0
+        dodgeToGain: 5

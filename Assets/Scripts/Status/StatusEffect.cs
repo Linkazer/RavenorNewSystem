@@ -7,9 +7,11 @@ using UnityEngine;
 [Serializable]
 public abstract class StatusEffect
 {
-    //[SerializeField, ReferenceEditor(typeof(StatusTrigger))] protected StatusTrigger trigger;
+    [SerializeField] protected StatusTrigger trigger;
 
-    public abstract void ApplyEffect(AppliedStatus appliedStatus);
+    public StatusTrigger Trigger => trigger;
 
-    public abstract void RemoveEffect(AppliedStatus appliedStatus);
+    public abstract void DoEffect(AppliedStatus appliedStatus);
+
+    public abstract void UndoEffect(AppliedStatus appliedStatus);
 }

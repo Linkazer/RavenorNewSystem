@@ -70,9 +70,12 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public override void EndRound()
     {
-        foreach(SkillHolder skillHolder in usableSkills)
+        if (RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
         {
-            skillHolder.UpdateCooldown();
+            foreach (SkillHolder skillHolder in usableSkills)
+            {
+                skillHolder.ProgressCooldown();
+            }
         }
     }
 

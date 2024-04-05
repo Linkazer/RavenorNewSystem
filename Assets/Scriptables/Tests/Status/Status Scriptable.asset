@@ -19,12 +19,20 @@ MonoBehaviour:
     frenchText: 
     englishText: 
   icon: {fileID: 0}
+  statusFX: {fileID: 0}
   effects:
   - rid: 6537641201700175879
+  - rid: 6537641247533170688
   references:
     version: 2
     RefIds:
     - rid: 6537641201700175879
       type: {class: StatusEffect_ChangeDodge, ns: , asm: Assembly-CSharp}
       data:
+        trigger: 2
         dodgeToGain: -2
+    - rid: 6537641247533170688
+      type: {class: StatusEffect_ChangeDodge, ns: , asm: Assembly-CSharp}
+      data:
+        trigger: 0
+        dodgeToGain: 5

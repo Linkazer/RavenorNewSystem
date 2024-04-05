@@ -6,6 +6,8 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
 {
     [SerializeField] private List<StatusData> passives = new List<StatusData>();
 
+    [SerializeField] private Transform effectVisualHolder;
+
     private Dictionary<StatusData, AppliedStatus> effectiveStatus = new Dictionary<StatusData, AppliedStatus>();
 
     public override void SetComponentData(IEC_StatusHandlerData componentData)
@@ -41,9 +43,12 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
 
     public override void EndRound()
     {
-        foreach (KeyValuePair<StatusData, AppliedStatus> status in effectiveStatus)
+        if (RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
         {
-            status.Value.ProgressStatusDuration();
+            foreach (KeyValuePair<StatusData, AppliedStatus> status in effectiveStatus)
+            {
+                status.Value.ProgressStatusDuration();
+            }
         }
     }
 
@@ -59,6 +64,12 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
 
             appliedEffect.ApplyStatus(this, statusOrigin);
 
+            if (status.StatusFX != null)
+            {
+                appliedEffect.statusFX = PoolManager.InstatiatePoolableAtPosition(status.StatusFX, effectVisualHolder.position);
+                appliedEffect.statusFX.transform.parent = effectVisualHolder;
+            }
+
             effectiveStatus.Add(status, appliedEffect);
         }
     }
@@ -67,6 +78,10 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
     {
         if(effectiveStatus.ContainsKey(status))
         {
+            if (effectiveStatus[status].statusFX != null)
+            {
+                effectiveStatus[status].statusFX.End();
+            }
             effectiveStatus[status].RemoveStatus();
             effectiveStatus.Remove(status);
         }

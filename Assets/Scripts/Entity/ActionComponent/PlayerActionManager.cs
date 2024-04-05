@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
+public class PlayerActionManager : Singleton<PlayerActionManager>
 {
-    [SerializeField] private PlayerEntityActionHandler[] playerActions;
+    [SerializeField] private PlayerActionHandler[] playerActions;
 
-    [SerializeField] private Entity entityHandled;
+    [SerializeField] private PlayerEntityActionHandler[] playerEntityActions;
+
+    private Entity entityHandled;
 
     private PlayerEntityActionHandler selectedAction;
 
@@ -17,6 +19,11 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
     private void Start()
     {
         DisablePlayerActions();
+
+        foreach(PlayerActionHandler action in playerActions)
+        {
+            action.SetHandler(this);
+        }
     }
 
     /// <summary>
@@ -38,18 +45,19 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
 
             entityHandled = entity;
 
-            foreach (PlayerEntityActionHandler action in playerActions)
-            {
-                action.SetHandler(this);
-            }
-
             if (entityHandled == null)
             {
                 DisablePlayerActions();
             }
             else
             {
+                foreach (PlayerEntityActionHandler action in playerEntityActions)
+                {
+                    action.SetHandler(this);
+                }
+
                 EnablePlayerActions();
+                playerEntityActions[0].SelectAction();
             }
         }
     }
@@ -59,7 +67,7 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
     /// </summary>
     private void EnablePlayerActions()
     {
-        foreach (PlayerEntityActionHandler action in playerActions)
+        foreach (PlayerEntityActionHandler action in playerEntityActions)
         {
             if(entityHandled.ComponentsByType.ContainsKey(action.GetEntityActionType))
             {
@@ -77,7 +85,7 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
     /// </summary>
     private void DisablePlayerActions()
     {
-        foreach(PlayerEntityActionHandler action in playerActions)
+        foreach(PlayerEntityActionHandler action in playerEntityActions)
         {
             action.Disable();
         }
@@ -93,9 +101,14 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
 
         if(locks.Count == 1)
         {
-            foreach (PlayerEntityActionHandler action in playerActions)
+            foreach (PlayerEntityActionHandler action in playerEntityActions)
             {
                 action.Lock(true);
+            }
+
+            foreach(PlayerActionHandler playerAction in playerActions)
+            {
+                playerAction.Lock(true);
             }
         }
     }
@@ -112,9 +125,14 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
 
             if (locks.Count == 0)
             {
-                foreach (PlayerEntityActionHandler action in playerActions)
+                foreach (PlayerEntityActionHandler action in playerEntityActions)
                 {
                     action.Lock(false);
+                }
+
+                foreach (PlayerActionHandler playerAction in playerActions)
+                {
+                    playerAction.Lock(false);
                 }
             }
         }
@@ -125,7 +143,7 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
     /// </summary>
     public void UpdateActionsAvailability()
     {
-        foreach (PlayerEntityActionHandler action in playerActions)
+        foreach (PlayerEntityActionHandler action in playerEntityActions)
         {
             action.UpdateActionAvailibility();
         }
@@ -135,7 +153,7 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
     /// Select an Action.
     /// </summary>
     /// <param name="actionToSelect">The action to select.</param>
-    public void SelectAction(PlayerEntityActionHandler actionToSelect)
+    public void OnSelectAction(PlayerEntityActionHandler actionToSelect)
     {
         if(selectedAction != actionToSelect)
         {
@@ -153,6 +171,8 @@ public class PlayerEntityActionManager : Singleton<PlayerEntityActionManager>
     public void UnselectAction()
     {
         selectedAction = null;
+
+        playerEntityActions[0].SelectAction();
     }
 
     /// <summary>

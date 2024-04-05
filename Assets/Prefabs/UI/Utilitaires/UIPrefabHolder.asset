@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UIPrefabHolder
   m_EditorClassIdentifier: 
   TextPrefab: {fileID: 0}
-  Button: {fileID: 0}
+  Button: {fileID: 1281809739263541995, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
   ButtonWithText: {fileID: 0}

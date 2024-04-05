@@ -3,45 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PlayerEntityActionHandler : MonoBehaviour
+public abstract class PlayerEntityActionHandler : PlayerActionHandler
 {
     [SerializeField] private bool forceLockOutsideTurnMode;
-
-    protected PlayerEntityActionManager actionHandler;
-
-    protected bool isLocked;
 
     protected abstract EntityActionComponent EntityActionComponentHandled { get; }
 
     public abstract Type GetEntityActionType { get; }
-
-    public virtual void SetHandler(PlayerEntityActionManager handler)
-    {
-        actionHandler = handler;
-    }
-
-    /// <summary>
-    /// Active l'ActionHandler (+ UI).
-    /// </summary>
-    public abstract void Enable();
-
-    /// <summary>
-    /// Désactive l'ActionHandler (+ UI).
-    /// </summary>
-    public abstract void Disable();
-
-    /// <summary>
-    /// Bloque l'ActionHandler (+ UI).
-    /// </summary>
-    /// <param name="doesLock">Should be locked ?</param>
-    public void Lock(bool doesLock)
-    {
-        if(doesLock != isLocked)
-        {
-            isLocked = doesLock;
-            UpdateActionAvailibility();
-        }
-    }
 
     /// <summary>
     /// Update the ActionHandler with the Component availability (+ UI).
@@ -53,7 +21,7 @@ public abstract class PlayerEntityActionHandler : MonoBehaviour
     /// </summary>
     public virtual void SelectAction()
     {
-        actionHandler.SelectAction(this);
+        actionHandler.OnSelectAction(this);
         //EntityActionComponentHandled.SelectAction();
     }
 
@@ -134,7 +102,7 @@ public abstract class PlayerEntityActionHandler<T> : PlayerEntityActionHandler w
 
     public override Type GetEntityActionType => typeof(T);
 
-    public override void SetHandler(PlayerEntityActionManager handler)
+    public override void SetHandler(PlayerActionManager handler)
     {
         base.SetHandler(handler);
 

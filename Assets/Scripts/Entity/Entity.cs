@@ -9,6 +9,12 @@ public class Entity : MonoBehaviour, IRoundHandler
 
     private Dictionary<Type, EntityComponent> componentByType = new Dictionary<Type, EntityComponent>();
 
+    public Action actOnEntityStartRound;
+    public Action actOnEntityEndRound;
+
+    public Action<Entity> actOnActivateEntity;
+    public Action<Entity> actOnDeactivateEntity;
+
     public Dictionary<Type, EntityComponent> ComponentsByType => componentByType;
 
     /// <summary>
@@ -75,6 +81,8 @@ public class Entity : MonoBehaviour, IRoundHandler
             component.Activate();
         }
 
+        actOnActivateEntity?.Invoke(this);
+
         RoundManager.Instance.AddHandler(this);
     }
 
@@ -85,10 +93,14 @@ public class Entity : MonoBehaviour, IRoundHandler
     {
         RoundManager.Instance.RemoveHandler(this);
 
+        actOnDeactivateEntity?.Invoke(this);
+
         foreach (EntityComponent component in components)
         {
             component.Deactivate();
         }
+
+        gameObject.SetActive(false);//TEST
     }
 
     /// <summary>
@@ -100,6 +112,8 @@ public class Entity : MonoBehaviour, IRoundHandler
         {
             component.StartRound();
         }
+
+        actOnEntityStartRound?.Invoke();
     }
 
     /// <summary>
@@ -111,5 +125,7 @@ public class Entity : MonoBehaviour, IRoundHandler
         {
             component.EndRound();
         }
+
+        actOnEntityEndRound?.Invoke();
     }
 }

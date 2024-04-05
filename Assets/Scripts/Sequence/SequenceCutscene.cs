@@ -6,14 +6,14 @@ public class SequenceCutscene : Sequence
 {
     protected override void OnStartAction()
     {
-        PlayerEntityActionManager.Instance.AddLock(this);
+        PlayerActionManager.Instance.AddLock(this);
 
         base.OnStartAction();
     }
 
     protected override void OnEndAction()
     {
-        PlayerEntityActionManager.Instance.RemoveLock(this);
+        PlayerActionManager.Instance.RemoveLock(this);
 
         base.OnEndAction();
     }

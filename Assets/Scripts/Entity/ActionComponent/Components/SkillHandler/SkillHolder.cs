@@ -6,7 +6,6 @@ using UnityEngine;
 [Serializable]
 public class SkillHolder
 {
-    //Base Skill
     [SerializeField] private SKL_SkillScriptable scriptable;
 
     private RoundTimer cooldownTimer;
@@ -16,14 +15,12 @@ public class SkillHolder
 
     public Action<int> OnUpdateCooldown;
 
-    private int CurrentCooldown => cooldownTimer != null ? Mathf.CeilToInt(cooldownTimer.roundLeft) : 0;
+    public int CurrentCooldown => cooldownTimer != null ? Mathf.CeilToInt(cooldownTimer.roundLeft) : 0;
 
     public SKL_SkillScriptable Scriptable => scriptable;
 
     public SkillHolder(SKL_SkillScriptable skillScriptable)
     {
-        Debug.Log("Create Skill holder");
-
         scriptable = skillScriptable;
 
         cooldownTimer = null;
@@ -48,7 +45,7 @@ public class SkillHolder
 
     public bool IsUsable()
     {
-        return CurrentCooldown <= 0;// && utilisationByLevelLeft != 0;
+        return CurrentCooldown <= 0 && utilisationByLevelLeft != 0;
     }
 
     public void UseSkill()
@@ -71,6 +68,16 @@ public class SkillHolder
     {
         cooldownTimer = RoundManager.Instance.CreateRoundTimer(valueToSet, UpdateCooldown, EndCooldownTimer);
         OnUpdateCooldown?.Invoke(CurrentCooldown);
+    }
+
+    public void ProgressCooldown()
+    {
+        if (CurrentCooldown > 0)
+        {
+            cooldownTimer.ProgressRound(1);
+
+            UpdateCooldown();
+        }
     }
 
     public void UpdateCooldown()

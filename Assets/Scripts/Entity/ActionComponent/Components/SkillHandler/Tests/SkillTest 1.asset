@@ -26,91 +26,42 @@ MonoBehaviour:
   ressourceCost: 0
   range: 7
   privisualizedShape:
-    rid: 855651596618170368
+    rid: 6537641225162326018
   skillActions:
     possibleActions:
     - conditions: []
       spellAction:
-        rid: 855651596618170369
+        rid: 6537641290262642688
   references:
     version: 2
     RefIds:
-    - rid: 855651596618170368
-      type: {class: SKL_Shape_ByDistance, ns: , asm: Assembly-CSharp}
-      data:
-        zoneDistance: 2.5
-        needVision: 0
-    - rid: 855651596618170369
-      type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
+    - rid: 6537641225162326018
+      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 6537641290262642688
+      type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
       data:
         shape:
-          rid: 855651596618170370
+          rid: 6537641290262642689
         startAnimations:
-        - rid: 855651613007413248
-        numberDicesToRoll: 5
-        onDiceRollAnimation: []
-        touchAction:
-          possibleActions: []
-        touchSubActionOnTarget:
-          possibleActions:
-          - conditions: []
-            spellAction:
-              rid: 855651613007413249
-        noTouchAction:
-          possibleActions: []
-        noTouchSubActionOnTarget:
-          possibleActions: []
-        nextAction:
-          possibleActions:
-          - conditions: []
-            spellAction:
-              rid: 855651596618170371
-    - rid: 855651596618170370
-      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 855651596618170371
-      type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
-      data:
-        shape:
-          rid: 855651596618170372
-        startAnimations: []
-        numberDicesToRoll: 2
-        onDiceRollAnimation: []
-        touchAction:
-          possibleActions: []
-        touchSubActionOnTarget:
-          possibleActions: []
-        noTouchAction:
-          possibleActions: []
-        noTouchSubActionOnTarget:
-          possibleActions: []
+        - rid: 6537641290262642690
+        damagesData:
+        - origin:
+            rid: 6537641290262642691
+          damageType: 0
+        damageAnimations: []
         nextAction:
           possibleActions: []
-    - rid: 855651596618170372
+    - rid: 6537641290262642689
       type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 855651613007413248
+    - rid: 6537641290262642690
       type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
       data:
         animationTarget: 2
         animationDuration: 0.5
         animationName: Cast
-    - rid: 855651613007413249
-      type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
+    - rid: 6537641290262642691
+      type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}
       data:
-        shape:
-          rid: 855651613007413250
-        startAnimations: []
-        damagesData:
-        - origin:
-            rid: 855651613007413251
-          damageType: 0
-        damageAnimations: []
-        nextAction:
-          possibleActions: []
-    - rid: 855651613007413250
-      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 855651613007413251
-      type: {class: SKL_DO_Dices, ns: , asm: Assembly-CSharp}
-      data: 
+        damageAmount: 10

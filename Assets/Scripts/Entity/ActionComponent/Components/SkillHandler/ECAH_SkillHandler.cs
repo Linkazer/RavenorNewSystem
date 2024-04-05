@@ -9,8 +9,7 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     [SerializeField] private CanvasGroup skillsGroup;
 
-    //TODO : Bouton skills (Classe)
-    [SerializeField] private Button[] skillsButtons;
+    [SerializeField] private SkillButton[] skillsButtons;
 
     [SerializeField] private Color skillRangeColor;
     [SerializeField] private Color skillShapeColor;
@@ -34,11 +33,11 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         {
             if(i < skillHandler.UsableSkills.Count)
             {
-                skillsButtons[i].interactable = true;// skillHandler.UsableSkills[i].IsUsable();
+                skillsButtons[i].SetSkill(skillHandler.UsableSkills[i]);
             }
             else
             {
-                skillsButtons[i].interactable = false;
+                skillsButtons[i].SetSkill(null);
             }
         }
     }
@@ -51,7 +50,7 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
         for (int i = 0; i < skillsButtons.Length; i++)
         {
-            skillsButtons[i].interactable = false;
+            skillsButtons[i].SetSkill(null);
         }
     }
 
@@ -60,16 +59,9 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         skillsGroup.interactable = !isLocked;
         skillsGroup.blocksRaycasts = !isLocked;
 
-        for (int i = 0; i < skillsButtons.Length; i++)
+        for (int i = 0; i < skillHandler.UsableSkills.Count; i++)
         {
-            if (i < skillHandler.UsableSkills.Count)
-            {
-                skillsButtons[i].interactable = skillHandler.UsableSkills[i].IsUsable();
-            }
-            else
-            {
-                skillsButtons[i].interactable = false;
-            }
+            skillsButtons[i].SetUsability(skillHandler.UsableSkills[i].IsUsable());
         }
     }
 
@@ -95,6 +87,8 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     public override void UnselectAction()
     {
+        InputManager.Instance.OnMouseLeftDown -= UseAction;
+
         UndisplayAction();
 
         if(skillHandler != null)
@@ -147,7 +141,6 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     public void UE_UnselectSkill()
     {
-        InputManager.Instance.OnMouseLeftDown -= UseAction;
         UnselectAction();
     }
 }

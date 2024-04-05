@@ -6,7 +6,7 @@ public class StatusEffect_ChangeDodge : StatusEffect
 {
     [SerializeField] private int dodgeToGain;
     
-    public override void ApplyEffect(AppliedStatus appliedStatus)
+    public override void DoEffect(AppliedStatus appliedStatus)
     {
         if (appliedStatus.StatusTarget.HoldingEntity.TryGetEntityComponentOfType(out EC_HealthHandler healthHandler))
         {
@@ -14,7 +14,7 @@ public class StatusEffect_ChangeDodge : StatusEffect
         }
     }
 
-    public override void RemoveEffect(AppliedStatus appliedStatus)
+    public override void UndoEffect(AppliedStatus appliedStatus)
     {
         if (appliedStatus.StatusTarget.HoldingEntity.TryGetEntityComponentOfType(out EC_HealthHandler healthHandler))
         {

@@ -12,13 +12,17 @@ public class AppliedStatus
 
     private Action endStatusCallback;
 
-    public Action<AppliedStatus> onUpdateStatusDuration;
+    private List<AppliedEffect> effects = new List<AppliedEffect>();
+
+    public Action onUpdateStatusDuration;
+
+    public Poolable_FX statusFX;
 
     public EC_StatusHandler StatusTarget => targetStatusHandler;
 
     public AppliedStatus(StatusData nStatus, float nDuration, Action endCallback)
     {
-        status = nStatus;
+        status = MonoBehaviour.Instantiate(nStatus);
         duration = RoundManager.Instance.CreateRoundTimer(nDuration, UpdateStatusDuration, EndStatus);
 
         endStatusCallback = endCallback;
@@ -31,31 +35,32 @@ public class AppliedStatus
 
         foreach (StatusEffect effect in status.Effects)
         {
-            effect.ApplyEffect(this);
+            AppliedEffect appliedEffect = new AppliedEffect(effect, this);
+            appliedEffect.ApplyEffect();
+            effects.Add(appliedEffect);
         }
     }
 
     public void RemoveStatus()
     {
-        foreach (StatusEffect effect in status.Effects)
+        foreach(AppliedEffect appliedEffect in effects)
         {
-            effect.RemoveEffect(this);
+            appliedEffect.RemoveEffect();
         }
+
+        effects.Clear();
     }
 
     public void ProgressStatusDuration()
     {
-        if (RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
-        {
-            duration.ProgressRound(1);
+        duration.ProgressRound(1);
 
-            UpdateStatusDuration();
-        }
+        UpdateStatusDuration();
     }
 
     private void UpdateStatusDuration()
     {
-        onUpdateStatusDuration?.Invoke(this);
+        onUpdateStatusDuration?.Invoke();
     }
 
     private void EndStatus()

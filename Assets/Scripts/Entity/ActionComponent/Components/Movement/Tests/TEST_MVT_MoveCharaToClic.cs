@@ -21,7 +21,7 @@ public class TEST_MVT_MoveCharaToClic : MonoBehaviour
             curretnEntityid = 0;
         }
 
-        PlayerEntityActionManager.Instance.SelectEntity(possibleEntities[curretnEntityid]);
+        PlayerActionManager.Instance.SelectEntity(possibleEntities[curretnEntityid]);
     }
 
 }

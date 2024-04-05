@@ -10,11 +10,15 @@ public class StatusData : ScriptableObject
     [SerializeField] private RVN_Text description;
     [SerializeField] private Sprite icon;
 
-    [SerializeField, SerializeReference, ReferenceEditor(typeof(StatusEffect))] private StatusEffect[] effects;
+    [SerializeField] private Poolable_FX statusFX;
+
+    [SerializeField, SerializeReference, ReferenceEditor(typeof(StatusEffect))] private StatusEffect[] effects; //TODO : Sortir les logiques de runtime des Effets
 
     public string Name => statusName.GetText();
     public string Description => description.GetText();
     public Sprite Icon => icon;
+
+    public Poolable_FX StatusFX => statusFX;
 
     public StatusEffect[] Effects => effects;
 }
