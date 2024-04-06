@@ -9,7 +9,13 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
     [Header("UI")]
     [SerializeField] private ControllableTeamUI teamUi;
 
+    private bool areGrouped = true;
+
     private List<CharacterEntity> currentControllableCharacters = new List<CharacterEntity>();
+
+    public List<CharacterEntity> CurrentControllableCharacters => currentControllableCharacters;
+
+    public bool AreCharacterGrouped => areGrouped;
 
     [ContextMenu("Initialize")]
     public void Initialize()
@@ -21,6 +27,8 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
         }
 
         SelectCharacter(controllableCharacters[0]);
+
+        teamUi.SetGroupMode(areGrouped);
 
         RoundManager.Instance.actOnUpdateRoundMode += OnChangeRoundMode;
     }
@@ -123,5 +131,11 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
         {
             PlayerActionManager.Instance.SelectEntity(character);
         }
+    }
+
+    public void SetGroupMode(bool toSet)
+    {
+        areGrouped = toSet;
+        teamUi.SetGroupMode(areGrouped);
     }
 }

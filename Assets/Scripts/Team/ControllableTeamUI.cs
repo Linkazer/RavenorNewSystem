@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControllableTeamUI : PlayerActionHandler
 {
     [SerializeField] private CanvasGroup handlerGroup;
     [SerializeField] private ControllableTeamHandler teamHandler;
     [SerializeField] private ControllableCharacterUI[] characterUis;
+
+    [Header("Group Mode")]
+    [SerializeField] private Button groupModeButton;
+    [SerializeField] private Image groupModeIcon;
+    [SerializeField] private VerticalLayoutGroup characterUisHolder;
+    [SerializeField] private float spacingInGroupMode = 0f;
+    [SerializeField] private float spacingOutGroupMode = 15f;
+    [SerializeField] private Sprite groupModeInSprite;
+    [SerializeField] private Sprite groupModeOutSprite;
+
+    [Header("End Turn")]
     [SerializeField] private CanvasGroup endTurnGroup;
 
     private List<ControllableCharacterUI> usedDisplays = new List<ControllableCharacterUI>();
@@ -26,6 +38,25 @@ public class ControllableTeamUI : PlayerActionHandler
         base.Lock(doesLock);
 
         handlerGroup.interactable = !doesLock;
+    }
+
+    public void UE_ChangeGroupMode()
+    {
+        teamHandler.SetGroupMode(!teamHandler.AreCharacterGrouped);
+    }
+
+    public void SetGroupMode(bool toSet)
+    {
+        if(toSet)
+        {
+            characterUisHolder.spacing = spacingInGroupMode;
+            groupModeIcon.sprite = groupModeInSprite;
+        }
+        else
+        {
+            characterUisHolder.spacing = spacingOutGroupMode;
+            groupModeIcon.sprite = groupModeOutSprite;
+        }
     }
 
     public void SelectCharacter(CharacterEntity toSelect)

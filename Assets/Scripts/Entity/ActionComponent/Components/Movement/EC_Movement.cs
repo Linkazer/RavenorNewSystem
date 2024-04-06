@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -40,6 +41,11 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     public Node CurrentNode => nodeHandler.CurrentNode;
 
     public float MovementLeft => currentMovementLeft;
+
+    public Node[] CurrentPath => path;
+
+    public Node CurrentMovementTarget => path.Length > 0 ? path[path.Length - 1] : CurrentNode;
+    public Node CurrentMovementBeforeTarget => path.Length > 1 ? path[path.Length - 2] : CurrentNode;
 
     public bool CanMove => currentMovementLeft >= Pathfinding.DirectDistance;
 
@@ -136,8 +142,14 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         }
         else
         {
+            path = new Node[0];
             movementCallback?.Invoke();
         }
+    }
+
+    public void MoveAlongPath(Node[] pathToMoveAlong)
+    {
+        OnPathFound(pathToMoveAlong);
     }
 
     /// <summary>
@@ -187,6 +199,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     /// </summary>
     private void EndMovement()
     {
+        path = new Node[0];
+
         onEndMovement?.Invoke();
 
         endMovementCallback?.Invoke();
@@ -328,7 +342,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     public void OnDrawGizmos()
     {
-        if (path != null)
+        if (path != null && path.Length > 0)
         {
             for (int i = targetIndex; i < path.Length; i++)
             {

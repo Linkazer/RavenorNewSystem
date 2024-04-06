@@ -142,8 +142,156 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         }
     }
 
+    public override void UseAction(Vector2 usePosition, Action callback)
+    {
+        if (RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime && ControllableTeamHandler.Instance.AreCharacterGrouped)
+        {
+            foreach (CharacterEntity chara in ControllableTeamHandler.Instance.CurrentControllableCharacters)
+            {
+                if (chara.TryGetEntityComponentOfType(out EC_NodeHandler nodeHandler))
+                {
+                    nodeHandler.SetWalkable(true);
+                }
+            }
+
+            base.UseAction(usePosition, callback);
+
+            MoveAllOtherEntities(usePosition);
+        }
+        else
+        {
+            base.UseAction(usePosition, callback);
+        }
+    }
+
     protected override void EndAction()
     {
+        foreach (CharacterEntity chara in ControllableTeamHandler.Instance.CurrentControllableCharacters)
+        {
+            if (chara.TryGetEntityComponentOfType(out EC_NodeHandler nodeHandler))
+            {
+                nodeHandler.SetWalkable(false); //Voir pour reset à la place ?
+            }
+        }
+
         base.EndAction();
     }
+
+
+    private void MoveAllOtherEntities(Vector2 mainCharacterTargetPosition)
+    {
+        int currentPathIndex = 0;
+
+        Node[] targetNodes = GetFollowerPositions(movementHandler.CurrentMovementTarget, movementHandler.CurrentMovementBeforeTarget, ControllableTeamHandler.Instance.CurrentControllableCharacters.Count);
+
+        foreach (CharacterEntity chara in ControllableTeamHandler.Instance.CurrentControllableCharacters)
+        {
+            if (chara.TryGetEntityComponentOfType(out EC_Movement allyMovement))
+            {
+                if (allyMovement != movementHandler && currentPathIndex < targetNodes.Length)
+                {
+                    allyMovement.UseAction(targetNodes[currentPathIndex].WorldPosition, null);
+                    currentPathIndex++;
+                }
+            }
+        }
+    }
+
+    private Node[] GetFollowerPositions(Node targetNode, Node beforeTargetNode, int numberPositionWanted)
+    {
+        Vector2 direction = new Vector2(beforeTargetNode.GridX - targetNode.GridX, beforeTargetNode.GridY - targetNode.GridY);
+
+        Node[] toReturn = new Node[numberPositionWanted];
+        List<Node> usedNodes = new List<Node>();
+        usedNodes.Add(targetNode);
+
+        List<Node> usableNodes = GetFollowerNodes(direction, targetNode, numberPositionWanted);
+        for (int i = 0; i < numberPositionWanted; i++)
+        {
+            toReturn[i] = usableNodes[i];
+        }
+
+        return toReturn;
+    }
+
+    private List<Node> GetFollowerNodes(Vector2 direction, Node startNode, int numberPositionWanted)
+    {
+        List<Node> allNodeInDistance = Pathfinding.Instance.GetAllNodeInDistance(startNode, numberPositionWanted * 10, false);
+
+        allNodeInDistance.Remove(startNode);
+
+        for (int i = 0; i < allNodeInDistance.Count; i++)
+        {
+            if (!allNodeInDistance[i].IsWalkable)// && direction.x != 0 && ((allNodeInDistance[i].gridX - startNode.gridX) * direction.x > 0) && ((allNodeInDistance[i].gridY - startNode.gridY) *direction.y > 0))
+            {
+                allNodeInDistance.RemoveAt(i);
+                i--;
+            }
+        }
+
+        allNodeInDistance.Sort((n1, n2) => CompareNodes(n1, n2, startNode, direction));
+
+        return allNodeInDistance;
+    }
+
+    private int CompareNodes(Node n1, Node n2, Node startNode, Vector2 direction)
+    {
+        float n1Score = 0, n2Score = 0;
+
+        n1Score = Pathfinding.Instance.GetDistance(startNode, n1);
+        if (direction.x != 0 && ((n1.GridX - startNode.GridX) * direction.x < 0))
+        {
+            n1Score += 50;
+        }
+        else if (direction.y == 0 && ((n1.GridX - startNode.GridX) * direction.x > 0))
+        {
+            n1Score -= 25;
+        }
+        if (direction.y != 0 && ((n1.GridY - startNode.GridY) * direction.y < 0))
+        {
+            n1Score += 50;
+        }
+        else if (direction.x == 0 && ((n1.GridY - startNode.GridY) * direction.y > 0))
+        {
+            n1Score -= 25;
+        }
+        if (!Pathfinding.Instance.IsNodeVisible(startNode, n1))
+        {
+            n1Score += 100;
+        }
+
+        n2Score = Pathfinding.Instance.GetDistance(startNode, n2);
+        if (direction.x != 0 && ((n2.GridX - startNode.GridX) * direction.x < 0))
+        {
+            n2Score += 50;
+        }
+        else if (direction.y == 0 && ((n2.GridX - startNode.GridX) * direction.x > 0))
+        {
+            n2Score -= 25;
+        }
+        if (direction.y != 0 && ((n2.GridY - startNode.GridY) * direction.y < 0))
+        {
+            n2Score += 50;
+        }
+        else if (direction.x == 0 && ((n2.GridY - startNode.GridY) * direction.y > 0))
+        {
+            n2Score -= 25;
+        }
+        if (!Pathfinding.Instance.IsNodeVisible(startNode, n2))
+        {
+            n2Score += 100;
+        }
+
+        if (n1Score > n2Score)
+        {
+            return 1;
+        }
+        else if (n1Score < n2Score)
+        {
+            return -1;
+        }
+
+        return 0;
+    }
+
 }
