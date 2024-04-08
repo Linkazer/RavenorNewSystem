@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
+public class CameraController : Singleton<CameraController>
 {
     [SerializeField] private Camera camera;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
@@ -39,8 +39,10 @@ public class CameraController : MonoBehaviour
 
     public Camera UsedCamera => camera;
 
-    protected void Awake()
+    protected override void OnAwake()
     {
+        base.OnAwake();
+
         targetZoom = virtualCamera.m_Lens.OrthographicSize;
     }
 

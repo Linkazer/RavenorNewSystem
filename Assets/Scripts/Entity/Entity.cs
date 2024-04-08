@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour, IRoundHandler
 {
+    [SerializeField] private bool activateOnStart = true;
     [SerializeField] protected EntityComponent[] components;
 
     private Dictionary<Type, EntityComponent> componentByType = new Dictionary<Type, EntityComponent>();
@@ -48,7 +49,11 @@ public class Entity : MonoBehaviour, IRoundHandler
     private void Start()
     {
         SetComponents();
-        Activate();
+
+        if (activateOnStart)
+        {
+            Activate();
+        }
     }
 
     /// <summary>
@@ -74,7 +79,7 @@ public class Entity : MonoBehaviour, IRoundHandler
     /// <summary>
     /// Activate every EntityComponent.
     /// </summary>
-    public void Activate()
+    public virtual void Activate()
     {
         foreach (EntityComponent component in components)
         {
@@ -89,7 +94,7 @@ public class Entity : MonoBehaviour, IRoundHandler
     /// <summary>
     /// Deactivate every EntityComponent.
     /// </summary>
-    public void Deactivate()
+    public virtual void Deactivate()
     {
         RoundManager.Instance.RemoveHandler(this);
 

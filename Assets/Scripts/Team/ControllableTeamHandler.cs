@@ -17,16 +17,12 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
 
     public bool AreCharacterGrouped => areGrouped;
 
-    [ContextMenu("Initialize")]
     public void Initialize()
     {
-        foreach(CharacterEntity character in controllableCharacters)
+        if (controllableCharacters.Count > 0)
         {
-            teamUi.AddCharacter(character); //Pour les tests
-            ActivateControllableCharacter(character);
+            SelectCharacter(controllableCharacters[0]);
         }
-
-        SelectCharacter(controllableCharacters[0]);
 
         teamUi.SetGroupMode(areGrouped);
 
@@ -73,6 +69,11 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
         {
             controllableCharacters.Add(character);
             teamUi.AddCharacter(character);
+
+            if(RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime)
+            {
+                ActivateControllableCharacter(character);
+            }
         }
     }
 

@@ -67,8 +67,13 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     public override void UseAction(Vector2 usePosition)
     {
-        InputManager.Instance.OnMouseLeftDown -= UseAction;
         base.UseAction(usePosition);
+
+        if(skillHandler.SelectedSkill == null)
+        {
+            InputManager.Instance.OnMouseLeftDown -= UseAction;
+        }
+
     }
 
     protected override void EndAction()
@@ -104,14 +109,14 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
     protected override void DisplayAction(Vector3 actionTargetPosition)
     {
         GridZoneDisplayer.UnsetGridFeedback();
-        List<Node> rangeNodes = Pathfinding.Instance.GetAllNodeInDistance(skillHandler.CurrentNode, skillHandler.SelectedSkill.Scriptable.Range, true);
+        List<Node> rangeNodes = Pathfinding.Instance.GetAllNodeInDistance(skillHandler.CurrentNode, skillHandler.SelectedSkill.Range, true);
         Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition);
 
         GridZoneDisplayer.SetGridFeedback(rangeNodes, skillRangeColor);
 
         if (targetNode != null && rangeNodes.Contains(targetNode))
         {
-            GridZoneDisplayer.SetGridFeedback(skillHandler.SelectedSkill.Scriptable.GetDisplayShape(targetNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)), skillShapeColor);
+            GridZoneDisplayer.SetGridFeedback(skillHandler.SelectedSkill.GetDisplayShape(targetNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)), skillShapeColor);
         }
     }
 
@@ -120,23 +125,28 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         GridZoneDisplayer.UnsetGridFeedback();
     }
 
-    public void UE_SelectSkill(int skillIndex)
+    public void SelectSkill(SKL_SkillScriptable toSelect)
     {
-        if (skillHandler.SelectedSkill == skillHandler.UsableSkills[skillIndex])
+        if (skillHandler.SelectedSkill == toSelect)
         {
             UE_UnselectSkill();
         }
         else
         {
-            if(skillHandler.SelectedSkill == null)
+            if (skillHandler.SelectedSkill == null)
             {
                 InputManager.Instance.OnMouseLeftDown += UseAction;
             }
 
-            skillHandler.SelectSkill(skillHandler.UsableSkills[skillIndex]);
+            skillHandler.SelectSkill(toSelect);
 
             SelectAction();
         }
+    }
+
+    public void UE_SelectSkill(int skillIndex)
+    {
+        SelectSkill(skillHandler.UsableSkills[skillIndex].Scriptable);
     }
 
     public void UE_UnselectSkill()

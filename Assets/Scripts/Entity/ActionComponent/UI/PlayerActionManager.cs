@@ -72,8 +72,13 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
                     display.SetCharacter(entityHandled as CharacterEntity);
                 }
 
+                CameraController.Instance.SetCameraFocus(entityHandled.transform);
+
                 EnablePlayerActions();
-                playerEntityActions[0].SelectAction();
+                if (selectedAction == null)
+                {
+                    playerEntityActions[0].SelectAction();
+                }
             }
         }
     }
@@ -85,7 +90,7 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
     {
         foreach (PlayerEntityActionHandler action in playerEntityActions)
         {
-            if(entityHandled.ComponentsByType.ContainsKey(action.GetEntityActionType))
+            if(action.GetEntityActionType == null || entityHandled.ComponentsByType.ContainsKey(action.GetEntityActionType))
             {
                 action.Enable();
             }
@@ -184,11 +189,17 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
     /// <summary>
     /// Unselect the current action.
     /// </summary>
-    public void UnselectAction()
+    public void OnUnselectAction()
     {
-        selectedAction = null;
-
-        playerEntityActions[0].SelectAction();
+        if (selectedAction == playerEntityActions[0])
+        {
+            selectedAction = null;
+        }
+        else
+        {
+            selectedAction = playerEntityActions[0];
+            playerEntityActions[0].SelectAction();
+        }
     }
 
     /// <summary>

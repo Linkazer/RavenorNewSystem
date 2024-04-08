@@ -12,17 +12,11 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
 
     [SerializeField] private int nextCharacterIndex;
 
-    [ContextMenu("1. Force Start Battle")]
-    public void TEST_StartBattle()
-    {
-        StartBattle();
-    }
-
     public void StartBattle()
     {
-        if (charactersInBattle.Count > 0)
+        if (charactersInBattle.Count == 0)
         {
-            //return;
+            return;
         }
 
         nextCharacterIndex = 0;

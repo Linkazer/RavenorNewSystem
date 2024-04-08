@@ -82,8 +82,11 @@ public class ControllableTeamUI : PlayerActionHandler
             }
         }
 
-        usedDisplays.Add(characterUi);
-        characterUi.SetCharacter(character);
+        if (characterUi != null)
+        {
+            usedDisplays.Add(characterUi);
+            characterUi.SetCharacter(character);
+        }
     }
 
     public void RemoveCharacter(CharacterEntity character)

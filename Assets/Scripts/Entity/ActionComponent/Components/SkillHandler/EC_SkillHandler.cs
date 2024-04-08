@@ -12,7 +12,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
     [SerializeField] private int offensiveAdvantage;
     [SerializeField] private int offensiveDisavantage;
 
-    private SkillHolder selectedSkill = null;
+    private SKL_SkillScriptable selectedSkill = null;
 
     private EC_NodeHandler nodeHandler;
 
@@ -26,7 +26,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public List<SkillHolder> UsableSkills => usableSkills;
 
-    public SkillHolder SelectedSkill => selectedSkill;
+    public SKL_SkillScriptable SelectedSkill => selectedSkill;
 
     public override void SetComponentData(IEC_SkillHandlerData componentData)
     {
@@ -84,19 +84,30 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         return true;
     }
 
-    public void SelectSkill(SkillHolder skillHolderToSelect)
+    public void SelectSkill(SKL_SkillScriptable skillScriptableToSelect)
     {
-        selectedSkill = skillHolderToSelect;
+        selectedSkill = skillScriptableToSelect;
     }
 
     protected override void OnUseAction(Vector3 actionTargetPosition)
     {
-        if(selectedSkill != null)
+        if(selectedSkill != null && CanUseSkillAtNode(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)))
         {
-            SKL_ResolvingSkillData resolvingSkillData = new SKL_ResolvingSkillData(selectedSkill.Scriptable, this, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
-            SKL_SkillResolverManager.Instance.ResolveSpell(resolvingSkillData, OnEndResolveSkill);
-            selectedSkill.UseSkill();
+            ResolveSkill(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
+            GetSkillHolderForScriptable(selectedSkill)?.UseSkill();
+            selectedSkill = null;
         }
+    }
+
+    public void ResolveSkill(SKL_SkillScriptable skillData, Node resolutionPosition)
+    {
+        SKL_ResolvingSkillData resolvingSkillData = new SKL_ResolvingSkillData(skillData, this, resolutionPosition);
+        SKL_SkillResolverManager.Instance.ResolveSpell(resolvingSkillData, OnEndResolveSkill);
+    }
+
+    private bool CanUseSkillAtNode(SKL_SkillScriptable skillToCheck, Node nodeToCheck)
+    {
+        return Pathfinding.Instance.IsNodeVisible(CurrentNode, nodeToCheck, skillToCheck.Range);
     }
 
     public override void CancelAction()
@@ -112,5 +123,18 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
     protected override void OnEndAction()
     {
         selectedSkill = null;
+    }
+
+    private SkillHolder GetSkillHolderForScriptable(SKL_SkillScriptable scriptable)
+    {
+        foreach(SkillHolder skill in usableSkills)
+        {
+            if(skill.Scriptable == scriptable)
+            {
+                return skill;
+            }
+        }
+
+        return null;
     }
 }

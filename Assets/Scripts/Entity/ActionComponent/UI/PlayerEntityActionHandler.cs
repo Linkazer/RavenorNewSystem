@@ -31,7 +31,7 @@ public abstract class PlayerEntityActionHandler : PlayerActionHandler
     public virtual void UnselectAction()
     {
         //EntityActionComponentHandled.UnselectAction();
-        actionHandler.UnselectAction();
+        actionHandler.OnUnselectAction();
     }
 
     /// <summary>
