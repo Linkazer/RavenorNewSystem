@@ -8,6 +8,7 @@ public class ECAH_Inventory : PlayerEntityActionHandler<EC_InventoryHandler>
 {
     [SerializeField] private ECAH_SkillHandler skillActionHandler;
 
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private StoredItemButton[] storedItemButtons;
 
     public override void UpdateActionAvailibility()
@@ -27,12 +28,14 @@ public class ECAH_Inventory : PlayerEntityActionHandler<EC_InventoryHandler>
 
     public override void Enable()
     {
+        canvasGroup.alpha = 1f;
         InventoryManager.Instance.actOnUpdateInventory += UpdateDisplayedItems;
         UpdateDisplayedItems();
     }
 
     public override void Disable()
     {
+        canvasGroup.alpha = 0f;
         InventoryManager.Instance.actOnUpdateInventory -= UpdateDisplayedItems;
     }
 

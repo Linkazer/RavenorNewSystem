@@ -9,6 +9,7 @@ public class ECPD_HealthHandler : PlayerEntityComponentDisplay<EC_HealthHandler>
 {
     private EC_HealthHandler healthHandler => componentHandled;
 
+    [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image portrait;
 
     [SerializeField] private Image healthImageToFill;
@@ -17,6 +18,8 @@ public class ECPD_HealthHandler : PlayerEntityComponentDisplay<EC_HealthHandler>
 
     protected override void SetComponent(EC_HealthHandler entityComponent)
     {
+        canvasGroup.alpha = 1f;
+
         portrait.sprite = characterEntity.CharacterData.Portrait;
 
         SetMaxHealth(healthHandler.MaxHealth);
@@ -28,6 +31,7 @@ public class ECPD_HealthHandler : PlayerEntityComponentDisplay<EC_HealthHandler>
 
     protected override void UnsetComponent(EC_HealthHandler entityComponent)
     {
+        canvasGroup.alpha = 0f;
         healthHandler.actOnChangeMaxHealth -= SetMaxHealth;
         healthHandler.actOnChangeHealth -= SetCurrentHealth;
     }
