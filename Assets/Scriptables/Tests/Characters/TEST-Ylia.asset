@@ -20,7 +20,7 @@ MonoBehaviour:
   walkable: 0
   blockVision: 0
   height: 0.88
-  renderer: {fileID: 597415337700213217, guid: c32c2be9870ca9b4c870c92a5fe9d45d, type: 3}
+  renderer: {fileID: 8797840964735250056, guid: e63f9be19ab99cf4783998f814721a82, type: 3}
   speed: 5
   movementByTurn: 25
   healthPoints: 10

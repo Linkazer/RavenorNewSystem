@@ -56,6 +56,26 @@ public class Entity : MonoBehaviour, IRoundHandler
         }
     }
 
+#if UNITY_EDITOR
+    [ContextMenu("Set Component")]
+    public void EDITOR_SetComponents()
+    {
+        foreach (EntityComponent component in components)
+        {
+            if (!componentByType.ContainsKey(component.GetType()))
+            {
+                componentByType.Add(component.GetType(), component);
+            }
+            else
+            {
+                Debug.LogError($"!!! Component of type {component.GetType()} exist multiple times in {this} !!!");
+            }
+
+            component.EDITOR_SetComponents(this);
+        }
+    }
+#endif
+
     /// <summary>
     /// Set every EntityComponent holded by the Entity.
     /// </summary>

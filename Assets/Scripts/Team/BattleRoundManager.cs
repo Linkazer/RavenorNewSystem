@@ -12,30 +12,42 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
 
     [SerializeField] private int nextCharacterIndex;
 
+    private bool isBattleRunning = false;
+
     public void StartBattle()
     {
-        if (charactersInBattle.Count == 0)
+        if (!isBattleRunning)
         {
-            return;
+            if (charactersInBattle.Count == 0)
+            {
+                return;
+            }
+
+            nextCharacterIndex = 0;
+
+            RoundManager.instance.SetRoundMode(RoundMode.Round);
+
+            isBattleRunning = true;
+
+            StartNextCharactersTurn();
         }
-
-        nextCharacterIndex = 0;
-
-        RoundManager.instance.SetRoundMode(RoundMode.Round);
-
-        StartNextCharactersTurn();
     }
 
     public void EndBattle()
     {
-        foreach(CharacterEntity characterToRemove in charactersInBattle)
+        if (isBattleRunning)
         {
-            characterToRemove.actOnDeactivateEntity -= RemoveCharacterFromBattle;
+            isBattleRunning = false;
+
+            foreach (CharacterEntity characterToRemove in charactersInBattle)
+            {
+                characterToRemove.actOnDeactivateEntity -= RemoveCharacterFromBattle;
+            }
+
+            charactersInBattle.Clear();
+
+            RoundManager.instance.SetRoundMode(RoundMode.RealTime);
         }
-
-        charactersInBattle.Clear();
-
-        RoundManager.instance.SetRoundMode(RoundMode.RealTime);
     }
 
     public void AddCharacterInBattle(CharacterEntity characterToAdd)

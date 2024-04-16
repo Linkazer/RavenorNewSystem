@@ -22,6 +22,22 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
        
     }
 
+#if UNITY_EDITOR
+    public override void EDITOR_SetComponents(IEC_RendererData componentData)
+    {
+        if (animationHandler != null)
+        {
+            DestroyImmediate(animationHandler);
+        }
+
+        if (componentData != null)
+        {
+            animationHandler = Instantiate(componentData.AnimationHandler, transform);
+            animationHandler.transform.localPosition = Vector3.zero;
+        }
+    }
+#endif
+
     public override void Activate()
     {
         animationHandler.PlayAnimation("Idle");

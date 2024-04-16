@@ -24,6 +24,9 @@ public class LevelHandler : MonoBehaviour
     private IEnumerator InitializeLevel()
     {
         yield return 0;
+        Grid.Instance.CreateGrid();
+
+        yield return 0;
 
         foreach (CharacterEntity character in startingControllableCharacters)
         {

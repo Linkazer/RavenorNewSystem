@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +11,12 @@ public class DialogueHandler : MonoBehaviour
     [SerializeField] private CanvasGroup speakerGroup;
     [SerializeField] private TextMeshProUGUI speakerName;
     [SerializeField] private Image speakerPortrait;
+
+    [Header("Colors")]
+    [SerializeField] private Color speakColor = Color.black;
+    [SerializeField] private Color descriptionColor = new Color(0.37f, 0.16f, 0.05f);
+    [SerializeField] private Color linkedSpeakColor = Color.magenta;
+    [SerializeField] private Color linkedDescriptionColor = Color.magenta;
 
     private Action endCallback;
 
@@ -36,8 +40,6 @@ public class DialogueHandler : MonoBehaviour
     {
         endCallback = endDialogueTextCallback;
 
-        dialogueTextMesh.text = dialogueText;
-
         if(dialogueSpeaker == null)
         {
             speakerGroup.alpha = 0f;
@@ -49,6 +51,81 @@ public class DialogueHandler : MonoBehaviour
             speakerPortrait.sprite = dialogueSpeaker.Portrait;
             speakerGroup.alpha = 1f;
         }
+
+        string[] systemSentences = dialogueText.Split('<', '>');
+
+        string fullSentence = "";
+        bool isSystem = true;
+        int systemCount = 0;
+
+        bool isSpeaking = false;
+
+        foreach (string systStr in systemSentences)
+        {
+            if (fullSentence != "" && isSystem)
+            {
+                fullSentence += $">";
+
+                if (systemCount % 2 == 0)
+                {
+                    fullSentence += "</color>";
+                }
+            }
+
+            isSystem = !isSystem;
+
+            if (isSystem)
+            {
+                if (systemCount % 2 == 0)
+                {
+                    if (isSpeaking)
+                    {
+                        fullSentence += $"<color=#{ColorUtility.ToHtmlStringRGB(linkedSpeakColor)}>";
+                    }
+                    else
+                    {
+                        fullSentence += $"<color=#{ColorUtility.ToHtmlStringRGB(linkedDescriptionColor)}>";
+                    }
+                }
+
+                systemCount++;
+
+                fullSentence += "<" + systStr;
+            }
+            else
+            {
+                string[] formedSentence = systStr.Split('“', '”', '"');
+
+                for (int i = 0; i < formedSentence.Length; i++)
+                {
+                    if (i != 0)
+                    {
+                        isSpeaking = !isSpeaking;
+
+                        if (!isSpeaking)
+                        {
+                            fullSentence += '"';
+                            fullSentence += "</color>";
+                        }
+
+                        if (isSpeaking)
+                        {
+                            fullSentence += $"<color=#{ColorUtility.ToHtmlStringRGB(speakColor)}>\"";
+                        }
+                        else
+                        {
+                            fullSentence += $"<color=#{ColorUtility.ToHtmlStringRGB(descriptionColor)}>";
+                        }
+                    }
+
+                    fullSentence += formedSentence[i];
+                }
+            }
+        }
+
+        fullSentence += "</color>";
+
+        dialogueTextMesh.text = fullSentence;
 
         ActiveHandlerInput(true);
     }

@@ -31,5 +31,6 @@ MonoBehaviour:
       data:
         speaker: {fileID: 11400000, guid: 2fc51b13cd91d5b49b32b7cb5ce78cca, type: 2}
         text:
-          frenchText: "Enfin, nous y voil\xE0. J'y croyais plus pendant un moment."
+          frenchText: "\"Enfin, nous y voil\xE0. J'y croyais plus pendant un moment.\"
+            s'exclama Eral."
           englishText: 

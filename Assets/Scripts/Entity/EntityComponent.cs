@@ -8,6 +8,14 @@ public abstract class EntityComponent : MonoBehaviour, IRoundHandler
 
     public Entity HoldingEntity => holdingEntity;
 
+#if UNITY_EDITOR
+    [ContextMenu("Set Component")]
+    public virtual void EDITOR_SetComponents(Entity componentEntityHolder)
+    {
+
+    }
+#endif
+
     /// <summary>
     /// Set the EntityComponent, and link it with its Entity.
     /// </summary>
@@ -52,6 +60,22 @@ public abstract class EntityComponent<T> : EntityComponent where T : IEntityData
     /// </summary>
     /// <param name="componentData">The data to set from.</param>
     public abstract void SetComponentData(T componentData);
+
+
+#if UNITY_EDITOR
+    public override void EDITOR_SetComponents(Entity componentEntityHolder)
+    {
+        if (componentEntityHolder.GetComponentData() is T)
+        {
+            SetComponentData((T)componentEntityHolder.GetComponentData());
+        }
+    }
+
+    public virtual void EDITOR_SetComponents(T componentData)
+    {
+
+    }
+#endif
 
     public override void SetComponent(Entity componentEntityHandler)
     {
