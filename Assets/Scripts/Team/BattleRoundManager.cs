@@ -14,14 +14,35 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
 
     private bool isBattleRunning = false;
 
+    public bool IsBattleRunning => isBattleRunning;
+
+    public void OnCharacterUpdateHostility(CharacterEntity updatedEntity)
+    {
+        if (!CheckHostileCharacterLeft())
+        {
+            EndBattle();
+        }
+        else if(!isBattleRunning)
+        {
+            StartBattle();
+        }
+    }
+
     public void StartBattle()
     {
         if (!isBattleRunning)
         {
-            if (charactersInBattle.Count == 0)
-            {
-                return;
+            charactersInBattle.Clear();
+
+            foreach (CharacterEntity character in CharacterManager.Instance.ActiveCharacters) 
+            { 
+                if(character.Hostility != CharacterHostility.Neutral)
+                {
+                    charactersInBattle.Add(character);
+                }
             }
+
+            charactersInBattle.Sort((x,y) => CheckCharacterPriority(x,y));
 
             nextCharacterIndex = 0;
 
@@ -33,16 +54,25 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
         }
     }
 
+    private int CheckCharacterPriority(CharacterEntity chara1, CharacterEntity chara2)
+    {
+        if (chara1.Priority > chara2.Priority)
+        {
+            return 1;
+        }
+        else if (chara1.Priority < chara2.Priority)
+        {
+            return -1;
+        }
+
+        return 0;
+    }
+
     public void EndBattle()
     {
         if (isBattleRunning)
         {
             isBattleRunning = false;
-
-            foreach (CharacterEntity characterToRemove in charactersInBattle)
-            {
-                characterToRemove.actOnDeactivateEntity -= RemoveCharacterFromBattle;
-            }
 
             charactersInBattle.Clear();
 
@@ -54,8 +84,6 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
     {
         if(!charactersInBattle.Contains(characterToAdd))
         {
-            characterToAdd.actOnDeactivateEntity += RemoveCharacterFromBattle;
-
             charactersInBattle.Add(characterToAdd);
         }
     }
@@ -68,8 +96,6 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
             if (charactersInBattle.Contains(characterToRemove))
             {
                 charactersInBattle.Remove(characterToRemove);
-
-                characterToRemove.actOnDeactivateEntity -= RemoveCharacterFromBattle;
 
                 if (!CheckHostileCharacterLeft())
                 {
@@ -129,7 +155,7 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
 
         nextCharacterIndex++;
 
-        while(nextCharacterIndex < charactersInBattle.Count && charactersInBattle[nextCharacterIndex].IsHostile == nextCharacters[0].IsHostile && controllableTeamHandler.CanCharacterBeControlled(charactersInBattle[nextCharacterIndex]))
+        while(nextCharacterIndex < charactersInBattle.Count && charactersInBattle[nextCharacterIndex].Hostility == nextCharacters[0].Hostility && controllableTeamHandler.CanCharacterBeControlled(charactersInBattle[nextCharacterIndex]))
         {
             nextCharacters.Add(charactersInBattle[nextCharacterIndex]);
             nextCharacterIndex++;
@@ -147,7 +173,7 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
     {
         foreach(CharacterEntity character in charactersInBattle)
         {
-            if(character.IsHostile)
+            if(character.Hostility == CharacterHostility.Hostile)
             {
                 return true;
             }
@@ -166,6 +192,8 @@ public class BattleRoundManager : Singleton<BattleRoundManager>
     private void EndBattleRound()
     {
         RoundManager.instance.EndGlobalRound();
+
+        charactersInBattle.Sort((x, y) => CheckCharacterPriority(x, y));
 
         StartBattleRound();
     }

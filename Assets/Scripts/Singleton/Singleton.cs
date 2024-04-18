@@ -7,6 +7,8 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
     protected static T instance = null;
 
+    [SerializeField] private bool isPersistant;
+
     public static T Instance => instance;
 
     public static Action WaitForInitialization;
@@ -22,12 +24,19 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
         else
         {
             instance = this as T;
+
+            if(isPersistant)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
+
             WaitForInitialization?.Invoke();
             WaitForInitialization = null;
         }
 
         OnAwake();
     }
+
 
     protected virtual void OnAwake()
     {

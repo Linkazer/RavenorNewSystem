@@ -2,18 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterHostility
+{
+    Ally,
+    Hostile,
+    Neutral
+}
+
 public class CharacterEntity : Entity
 {
     [SerializeField] private CharacterScriptable characterData;
 
-    [SerializeField] private bool isHostile = false;
+    [SerializeField] private CharacterHostility hostility;
     [SerializeField] private int teamIndex = 0;
+
+    [SerializeField] private int priority;
 
     public CharacterScriptable CharacterData => characterData;
 
-    public bool IsHostile => isHostile;
+    public CharacterHostility Hostility => hostility;
 
     public int TeamIndex => teamIndex;
+
+    public int Priority => priority;
 
     public override IEntityData GetComponentData()
     {
@@ -23,25 +34,24 @@ public class CharacterEntity : Entity
     public override void Activate()
     {
         base.Activate();
+
+        CharacterManager.Instance.AddActiveCharacter(this);
     }
 
     public override void Deactivate()
     {
-        SetHostile(false);
+        CharacterManager.Instance.RemoveActiveCharacter(this);
 
         base.Deactivate();
     }
 
-    public void SetHostile(bool toSet)
+    public void SetHostile(CharacterHostility toSet)
     {
-        if(isHostile != toSet)
+        if(hostility != toSet)
         {
-            isHostile = toSet;
+            hostility = toSet;
 
-            if(isHostile)
-            {
-                BattleRoundManager.Instance.StartBattle();
-            }
+            CharacterManager.Instance.UpdateCharacterHostility(this);
         }
     }
 }

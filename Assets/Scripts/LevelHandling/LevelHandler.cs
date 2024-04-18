@@ -26,6 +26,8 @@ public class LevelHandler : MonoBehaviour
         yield return 0;
         Grid.Instance.CreateGrid();
 
+        ControllableTeamHandler.Instance.Initialize();
+
         yield return 0;
 
         foreach (CharacterEntity character in startingControllableCharacters)
@@ -45,16 +47,16 @@ public class LevelHandler : MonoBehaviour
             possibleEnd.Initialize(this);
         }
 
-        startCutscene.StartAction(ActivateLevel);
-    }
-
-    public void ActivateLevel()
-    {
         foreach (CharacterEntity character in startingControllableCharacters)
         {
             ControllableTeamHandler.Instance.AddCharacter(character);
         }
 
-        ControllableTeamHandler.Instance.Initialize();
+        startCutscene.StartAction(ActivateLevel);
+    }
+
+    public void ActivateLevel()
+    {
+        
     }
 }

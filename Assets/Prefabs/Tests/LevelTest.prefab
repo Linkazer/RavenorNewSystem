@@ -5618,7 +5618,6 @@ MonoBehaviour:
   startingControllableCharacters:
   - {fileID: 6207522410507061082}
   - {fileID: 6181251505015271469}
-  - {fileID: 6512528138447134785}
   startingActiveEntities: []
   startCutscene: {fileID: 1939041909236430632}
 --- !u!1 &7653887608756822211
@@ -5667,6 +5666,54 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_SortAtRoot: 0
+--- !u!1 &7841746286698493713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2472921096258896786}
+  - component: {fileID: 8891572694290630723}
+  m_Layer: 0
+  m_Name: AddChara
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2472921096258896786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841746286698493713}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3529827633074977985}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8891572694290630723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7841746286698493713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81a7ab75cabe8e24b99084d8331abfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityToHandle:
+  - {fileID: 6512528138447134785}
+  doesActivate: 1
+  canBeControlled: 1
 --- !u!1 &8026891004935251579
 GameObject:
   m_ObjectHideFlags: 0
@@ -5731,6 +5778,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6725568473483550929}
+  - {fileID: 2472921096258896786}
   m_Father: {fileID: 4186575728505072419}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1939041909236430632
@@ -5747,6 +5795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steps:
   - mainAction: {fileID: 1602378998429113431}
+    secondaryActions: []
+  - mainAction: {fileID: 8891572694290630723}
     secondaryActions: []
 --- !u!1 &8312191953801177580
 GameObject:
@@ -6274,9 +6324,17 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: hostility
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: 25a3b859424bbaf499f600f7da21d3b3, type: 2}
+    - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: activateOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.5
@@ -6630,6 +6688,10 @@ PrefabInstance:
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: 25a3b859424bbaf499f600f7da21d3b3, type: 2}
+    - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: activateOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.5
@@ -6983,6 +7045,10 @@ PrefabInstance:
       propertyPath: characterData
       value: 
       objectReference: {fileID: 11400000, guid: 25a3b859424bbaf499f600f7da21d3b3, type: 2}
+    - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: activateOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.5

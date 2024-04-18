@@ -27,6 +27,7 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
         teamUi.SetGroupMode(areGrouped);
 
         RoundManager.Instance.actOnUpdateRoundMode += OnChangeRoundMode;
+        OnChangeRoundMode(RoundManager.Instance.CurrentRoundMode);
     }
 
     private void OnDestroy()
@@ -73,6 +74,11 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
             if(RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime)
             {
                 ActivateControllableCharacter(character);
+            }
+
+            if(controllableCharacters.Count == 1)
+            {
+                SelectCharacter(controllableCharacters[0]);
             }
         }
     }
