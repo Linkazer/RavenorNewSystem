@@ -73,13 +73,38 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
 
         bool didHitAtLeastOne = false;
 
+        int touchBonus = 0;
+
+        if (resolvingData.Caster != null)
+        {
+            switch (actionToResolve.OffensiveTrait)
+            {
+                case SkillTrait.Force:
+                    touchBonus = resolvingData.Caster.Force;
+                    break;
+                case SkillTrait.Agilite:
+                    touchBonus = resolvingData.Caster.Agilite;
+                    break;
+                case SkillTrait.Esprit:
+                    touchBonus = resolvingData.Caster.Esprit;
+                    break;
+                case SkillTrait.Presence:
+                    touchBonus = resolvingData.Caster.Presence;
+                    break;
+                case SkillTrait.Instinct:
+                    touchBonus = resolvingData.Caster.Instinct;
+                    break;
+            }
+        }
+
         foreach (EC_HealthHandler hitedObject in hitableObjects)
         {
+
             //TODO Spell Rework : Check target possible (Voir si on met pas ça directement dans la Shape)
 
-            rolledDices = DiceManager.RollDices(resolvingData.Caster, actionToResolve.NumberDicesRoll, resolvingData.Caster != null ? resolvingData.Caster.Accuracy : 0);
+            rolledDices = DiceManager.RollDices(resolvingData.Caster, actionToResolve.NumberDicesRoll, touchBonus);
 
-            RollDices(rolledDices, resolvingData.Caster, hitedObject, out bool didHit);
+            RollDices(rolledDices, actionToResolve.DefensiveTrait, resolvingData.Caster, hitedObject, out bool didHit);
 
             //hitedObject.DisplayDiceResults(actionDices); //TODO : Feedback des résultats de dés
 
@@ -92,7 +117,7 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
         return didHitAtLeastOne;
     }
 
-    private void RollDices(List<Dice> dicesToRoll, EC_SkillHandler caster, EC_HealthHandler target, out bool didHit)
+    private void RollDices(List<Dice> dicesToRoll, SkillDefensiveTrait defensiveTraitUsed, EC_SkillHandler caster, EC_HealthHandler target, out bool didHit)
     {
         didHit = false;
 
@@ -104,9 +129,21 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
             currentDefensiveRerolls = -caster.OffensiveDisavantage;
         }
 
+        int touchDefense = 0;
+        switch (defensiveTraitUsed)
+        {
+            case SkillDefensiveTrait.Dodge:
+                touchDefense = target.Dodge;
+                break;
+            case SkillDefensiveTrait.Will:
+                touchDefense = target.Will;
+                break;
+        }
+
+
         for (int i = 0; i < dicesToRoll.Count; i++)
         {
-            totalHits += CheckDiceHit(caster, dicesToRoll[i], target.Dodge, currentOffensiveRerolls < caster?.OffensiveAdvantage, currentDefensiveRerolls < target.DefensiveAdvantage, out bool usedOffensiveReroll, out bool usedDefensiveReroll);
+            totalHits += CheckDiceHit(caster, dicesToRoll[i], touchDefense, currentOffensiveRerolls < caster?.OffensiveAdvantage, currentDefensiveRerolls < target.DefensiveAdvantage, out bool usedOffensiveReroll, out bool usedDefensiveReroll);
 
             if (usedDefensiveReroll)
             {

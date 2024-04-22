@@ -33,3 +33,4 @@ MonoBehaviour:
   passives: []
   skills:
   - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
+  ressourceUsed: 2

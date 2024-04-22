@@ -6,6 +6,8 @@ using UnityEngine;
 public class SKL_AS_RollDice : SKL_SkillAction
 {
     [SerializeField] private int numberDicesToRoll;
+    [SerializeField] private SkillTrait offensiveTrait;
+    [SerializeField] private SkillDefensiveTrait defensiveTrait;
 
     [Header("Animation")]
     [SerializeField, SerializeReference, ReferenceEditor(typeof(SKL_SkillActionAnimation))] private SKL_SkillActionAnimation[] onDiceRollAnimation;
@@ -18,6 +20,9 @@ public class SKL_AS_RollDice : SKL_SkillAction
     [SerializeField] private SKL_SkillActionChooser nextAction;
 
     public int NumberDicesRoll => numberDicesToRoll;
+
+    public SkillTrait OffensiveTrait => offensiveTrait;
+    public SkillDefensiveTrait DefensiveTrait => defensiveTrait;
 
     public SKL_SkillActionAnimation[] OnDiceRollAnimation => onDiceRollAnimation;
 

@@ -9,6 +9,7 @@ public interface IEC_HealthHandlerData : IEntityData
     public int MaxArmor { get; }
     public int CurrentArmor { get; }
     public int Dodge { get; }
+    public int Will { get; }
     public int DefensiveAdvantage { get; }
     public int DefensiveDisavantage { get; }
     public float UiHeight { get; }

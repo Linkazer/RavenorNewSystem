@@ -19,6 +19,8 @@ public class SkillHolder
 
     public SKL_SkillScriptable Scriptable => scriptable;
 
+    public int UtilisationByLevelLeft => utilisationByLevelLeft;
+
     public SkillHolder(SKL_SkillScriptable skillScriptable)
     {
         scriptable = skillScriptable;

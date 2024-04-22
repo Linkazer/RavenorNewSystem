@@ -23,7 +23,7 @@ MonoBehaviour:
   castComplexity: 0
   useByLevel: -1
   useByTurn: 0
-  ressourceCost: 0
+  ressourceCost: 2
   range: 7
   privisualizedShape:
     rid: 6537641225162326018
@@ -59,7 +59,7 @@ MonoBehaviour:
       type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
       data:
         animationTarget: 2
-        animationDuration: 0.5
+        animationDuration: 2
         animationName: Cast
     - rid: 6537641290262642691
       type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}

@@ -12,6 +12,7 @@ public class CharacterScriptable : DialogueSpeaker,
     IEC_StatusHandlerData
 {
     private const int BaseDodge = 2;
+    private const int BaseWill = 2;
 
     [Header("Movement")]
     [SerializeField] private bool walkable = false;
@@ -40,6 +41,9 @@ public class CharacterScriptable : DialogueSpeaker,
     [Header("Skills")]
     [SerializeField] private List<SKL_SkillScriptable> skills;
 
+    [Header("Ressource")]
+    [SerializeField] private SkillRessourceType ressourceUsed;
+
     public bool Walkable => walkable;
 
     public bool BlockVision => blockVision;
@@ -52,6 +56,8 @@ public class CharacterScriptable : DialogueSpeaker,
 
     public List<SKL_SkillScriptable> Skills => skills;
 
+    public SkillRessourceType RessourceTypeUsed => ressourceUsed;
+
     public int MaxHealth => healthPoints;
 
     public int CurrentHealth => healthPoints;//Utile ? => Peut être utile pour les Ennemis (Au lieu d'en faire des Character avec des Stats de base, on les créer de 0 avec les stats de combat directement)
@@ -62,15 +68,17 @@ public class CharacterScriptable : DialogueSpeaker,
 
     public int Dodge => BaseDodge + agilite;
 
+    public int Will => BaseWill + esprit;
+
     public int DefensiveAdvantage => 0;//Utile ?
 
     public int DefensiveDisavantage => 0;//Utile ?
 
-    public int Accuracy => instinct;
-
-    public int PhysicalPower => force;
-
-    public int MagicalPower => esprit;
+    public int Force => force;
+    public int Esprit => esprit;
+    public int Presence => presence;
+    public int Agilite => agilite;
+    public int Instinct => instinct;
 
     public int OffensiveAdvantage => 0;//Utile ?
 

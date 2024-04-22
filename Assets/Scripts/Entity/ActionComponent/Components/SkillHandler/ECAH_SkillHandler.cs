@@ -22,6 +22,21 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         }
     }
 
+    public override void Lock(bool doesLock)
+    {
+        base.Lock(doesLock);
+
+        if(doesLock)
+        {
+            skillsGroup.interactable = false;
+            skillsGroup.blocksRaycasts = false;
+        }
+        else if(skillsGroup.alpha > 0)
+        {
+            skillsGroup.interactable = true;
+            skillsGroup.blocksRaycasts = true;
+        }
+    }
 
     public override void Enable()
     {
@@ -61,7 +76,10 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
         for (int i = 0; i < skillHandler.UsableSkills.Count; i++)
         {
-            skillsButtons[i].SetUsability(skillHandler.UsableSkills[i].IsUsable());
+            bool isUsable = (skillHandler.RessourceUsed == null || skillHandler.RessourceUsed.HasEnoughRessource(skillHandler.UsableSkills[i].Scriptable.RessourceCost))
+                            && skillHandler.UsableSkills[i].IsUsable();
+
+            skillsButtons[i].SetUsability(isUsable);
         }
     }
 

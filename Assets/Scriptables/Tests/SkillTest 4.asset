@@ -31,37 +31,33 @@ MonoBehaviour:
     possibleActions:
     - conditions: []
       spellAction:
-        rid: 6537641290262642688
+        rid: 6537641606301089793
   references:
     version: 2
     RefIds:
     - rid: 6537641225162326018
       type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6537641290262642688
-      type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
+    - rid: 6537641606301089793
+      type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:
         shape:
-          rid: 6537641290262642689
-        startAnimations:
-        - rid: 6537641290262642690
-        damagesData:
-        - origin:
-            rid: 6537641290262642691
-          damageType: 0
-        damageAnimations: []
+          rid: 6537641606301089794
+        startAnimations: []
+        numberDicesToRoll: 0
+        offensiveTrait: 0
+        defensiveTrait: 0
+        onDiceRollAnimation: []
+        touchAction:
+          possibleActions: []
+        touchSubActionOnTarget:
+          possibleActions: []
+        noTouchAction:
+          possibleActions: []
+        noTouchSubActionOnTarget:
+          possibleActions: []
         nextAction:
           possibleActions: []
-    - rid: 6537641290262642689
+    - rid: 6537641606301089794
       type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6537641290262642690
-      type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
-      data:
-        animationTarget: 2
-        animationDuration: 0.5
-        animationName: Cast
-    - rid: 6537641290262642691
-      type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}
-      data:
-        damageAmount: 10

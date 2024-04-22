@@ -26,7 +26,7 @@ public class SKL_SkillScriptable : ScriptableObject
     [SerializeField] private int useByTurn;
 
     [Header("Ressource")]
-    [SerializeField] private int ressourceCost; //TODO : Ressources
+    [SerializeField] private int ressourceCost;
 
     [Header("Shape")]
     [SerializeField] private float range;

@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum SkillDefensiveTrait
+{
+    Dodge,
+    Will,
+}
+
 public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 {
     [SerializeField] private ECUI_HealthDisplayer healthDisplayer;
@@ -11,6 +17,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     [SerializeField] private int maxArmor;
     [SerializeField] private int currentArmor;
     [SerializeField] private int dodge;
+    [SerializeField] private int will;
     [SerializeField] private int defensiveAdvantage;
     [SerializeField] private int defensiveDisavantage;
 
@@ -19,6 +26,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     public int MaxArmor => maxArmor;
     public int CurrentArmor => currentArmor;
     public int Dodge => dodge > 0 ? dodge : 0;
+    public int Will => will > 0 ? will : 0;
     public int DefensiveAdvantage => defensiveAdvantage;
     public int DefensiveDisavantage => defensiveDisavantage;
 
@@ -34,6 +42,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         maxArmor = componentData.MaxArmor;
         currentArmor = componentData.CurrentArmor;
         dodge = componentData.Dodge;
+        will = componentData.Will;
         defensiveAdvantage = componentData.DefensiveAdvantage;
         defensiveDisavantage = componentData.DefensiveDisavantage;
 
