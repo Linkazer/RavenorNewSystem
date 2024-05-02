@@ -267,6 +267,13 @@ MonoBehaviour:
     animationUsed: {fileID: 6706563370260675977}
     doesLoop: 1
     linkedAnimation: Idle
+  - animationName: Cast
+    animationUsed: {fileID: 6706563370260675977}
+    doesLoop: 0
+    linkedAnimation: Idle
+  mainSortingGroup: {fileID: 5776113386322234100}
+  frontHandSortingGroup: {fileID: 4331309895946782143}
+  backHandSortingGroup: {fileID: 718324883624467586}
 --- !u!114 &6706563370260675977
 MonoBehaviour:
   m_ObjectHideFlags: 0

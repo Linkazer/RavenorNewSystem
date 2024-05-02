@@ -14,6 +14,7 @@ public class SKL_ChooserCondition_RessourceAmountCheck : SKL_SkillActionChooserC
         NotEqual
     }
 
+    [SerializeField] private SkillRessourceType ressourceTypeWanted;
     [SerializeField] private int ressourceAmountToCheck;
     [SerializeField] private CheckToDo checkToDo;
 
@@ -21,6 +22,11 @@ public class SKL_ChooserCondition_RessourceAmountCheck : SKL_SkillActionChooserC
     {
         if (castedSpellData.Caster.RessourceUsed != null)
         {
+            if (castedSpellData.Caster.RessourceUsed.RessourceType != ressourceTypeWanted)
+            {
+                return false;
+            }
+
             int currentCasterRessource = castedSpellData.Caster.RessourceUsed.CurrentAmount;
 
             switch (checkToDo)

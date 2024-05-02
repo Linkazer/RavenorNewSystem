@@ -125,8 +125,15 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
     {
         if(selectedSkill != null && CanUseSkillAtNode(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)))
         {
+            if(HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer renderer))
+            {
+                renderer.SetOrientation(actionTargetPosition - holdingEntity.transform.position);
+            }
+
             ResolveSkill(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
             GetSkillHolderForScriptable(selectedSkill)?.UseSkill();
+
+            selectedSkill = null;
         }
     }
 
@@ -148,11 +155,6 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     private void OnEndResolveSkill()
     {
-        if (ressourceUsed != null)
-        {
-            ressourceUsed.OnUseSkillWithRessource(selectedSkill.RessourceCost);
-        }
-        selectedSkill = null;
         EndAction();
     }
 

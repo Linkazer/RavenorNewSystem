@@ -93,7 +93,7 @@ public class RoundManager : Singleton<RoundManager>
     {
         if(currentRoundMode != toSet)
         {
-            switch(toSet)
+            switch (toSet)
             {
                 case RoundMode.RealTime:
                     if (globalRoundTimer == null)

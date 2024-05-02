@@ -60,6 +60,8 @@ public class Entity : MonoBehaviour, IRoundHandler
     [ContextMenu("Set Component")]
     public void EDITOR_SetComponents()
     {
+        componentByType = new Dictionary<Type, EntityComponent>();
+
         foreach (EntityComponent component in components)
         {
             if (!componentByType.ContainsKey(component.GetType()))
@@ -86,10 +88,6 @@ public class Entity : MonoBehaviour, IRoundHandler
             if (!componentByType.ContainsKey(component.GetType()))
             {
                 componentByType.Add(component.GetType(), component);
-            }
-            else
-            {
-                Debug.LogError($"!!! Component of type {component.GetType()} exist multiple times in {this} !!!");
             }
 
             component.SetComponent(this);

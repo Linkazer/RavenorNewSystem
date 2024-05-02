@@ -15,12 +15,12 @@ public abstract class SkillRessource
 
     public int CurrentAmount => currentAmount;
 
+    public abstract SkillRessourceType RessourceType { get; }
+
     public virtual void Initialize(EC_SkillHandler nSkillHandler)
     {
         skillHandler = nSkillHandler;
         currentAmount = startAmount;
-
-        Debug.Log(currentAmount);
     }
 
     public virtual void Ativate()
@@ -47,8 +47,6 @@ public abstract class SkillRessource
         }
 
         actOnUpdateRessource?.Invoke(currentAmount);
-
-        Debug.Log(currentAmount);
     }
 
     public void RemoveRessource(int amountToRemove)

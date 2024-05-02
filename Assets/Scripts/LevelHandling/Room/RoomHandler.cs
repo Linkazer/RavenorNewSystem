@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEditor.TerrainTools;
 using System;
+using Unity.VisualScripting;
 
 public class RoomHandler : MonoBehaviour
 {
@@ -32,23 +33,41 @@ public class RoomHandler : MonoBehaviour
     private IEnumerator StartOpenningRoomSequence()
     {
         PlayerActionManager.Instance.AddLock(this);
-        roomOpeningCamera.enabled = true;
 
-        foreach(Entity entity in entitiesToEnable)
+        foreach (Entity entity in entitiesToEnable)
         {
             entity.Activate();
         }
 
-        yield return new WaitForSeconds(1f);
+        if (roomOpeningCamera != null)
+        {
+            roomOpeningCamera.enabled = true;
 
-        openningCutscene.StartAction(() => StartCoroutine(EndOpeningRoomSequence()));
+            yield return new WaitForSeconds(1f);
+        }
+
+        Debug.Log(openningCutscene);
+
+        if (openningCutscene != null)
+        {
+            openningCutscene.StartAction(() => StartCoroutine(EndOpeningRoomSequence()));
+        }
+        else
+        {
+            StartCoroutine(EndOpeningRoomSequence());
+        }
     }
 
     private IEnumerator EndOpeningRoomSequence()
     {
-        roomOpeningCamera.enabled = false;
+        if (roomOpeningCamera != null)
+        {
+            roomOpeningCamera.enabled = false;
 
-        yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
 
         PlayerActionManager.Instance.RemoveLock(this);
         endOpenCallback?.Invoke();

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     [SerializeField] private CanvasGroup skillsGroup;
 
+    [SerializeField] private TextMeshProUGUI ressourceAmountText;
     [SerializeField] private SkillButton[] skillsButtons;
 
     [SerializeField] private Color skillRangeColor;
@@ -20,6 +22,28 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         {
             DisplayAction(InputManager.MousePosition);
         }
+    }
+
+    public override void SetHandler(PlayerActionManager handler)
+    {
+        base.SetHandler(handler);
+
+        if(skillHandler.RessourceUsed != null)
+        {
+            skillHandler.RessourceUsed.actOnUpdateRessource += UpdateRessource;
+
+            UpdateRessource(skillHandler.RessourceUsed.CurrentAmount);
+        }
+    }
+
+    public override void UnsetHandler()
+    {
+        if (skillHandler.RessourceUsed != null)
+        {
+            skillHandler.RessourceUsed.actOnUpdateRessource -= UpdateRessource;
+        }
+
+        base.UnsetHandler();
     }
 
     public override void Lock(bool doesLock)
@@ -55,6 +79,8 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
                 skillsButtons[i].SetSkill(null);
             }
         }
+
+        UpdateActionAvailibility();
     }
 
     public override void Disable()
@@ -160,6 +186,11 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
             SelectAction();
         }
+    }
+
+    private void UpdateRessource(int ressourceAmount)
+    {
+        ressourceAmountText.text = ressourceAmount.ToString();
     }
 
     public void UE_SelectSkill(int skillIndex)

@@ -75,6 +75,10 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
             {
                 ActivateControllableCharacter(character);
             }
+            else
+            {
+                teamUi.DisableCharacter(character);
+            }
 
             if(controllableCharacters.Count == 1)
             {

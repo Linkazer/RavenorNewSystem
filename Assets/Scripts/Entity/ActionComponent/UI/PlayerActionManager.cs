@@ -58,6 +58,11 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
 
             if (entityHandled == null)
             {
+                foreach (PlayerEntityActionHandler action in playerEntityActions)
+                {
+                    action.UnsetHandler();
+                }
+
                 DisablePlayerActions();
             }
             else

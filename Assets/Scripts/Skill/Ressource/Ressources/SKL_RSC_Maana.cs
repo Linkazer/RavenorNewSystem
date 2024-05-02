@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SKL_RSC_Maana : SkillRessource
 {
+    public override SkillRessourceType RessourceType => SkillRessourceType.Maana;
+
     public override void Initialize(EC_SkillHandler nSkillHandler)
     {
         limits = new Vector2Int(0, 3);

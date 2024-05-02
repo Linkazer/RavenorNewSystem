@@ -122,11 +122,37 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
         didHit = false;
 
         float totalHits = 0;
-        int currentOffensiveRerolls = -target.DefensiveDisavantage;//Equivalent d'augmenter le max d'Offensive reroll disponible)
+        int currentOffensiveRerolls = 0;//Equivalent d'augmenter le max d'Offensive reroll disponible)
         int currentDefensiveRerolls = 0;
-        if (caster != null)
+
+        int maxOffensiveRerolls = 0;
+        int maxDefensiveRerolls = 0;
+
+        if(caster != null)
         {
-            currentDefensiveRerolls = -caster.OffensiveDisavantage;
+            maxOffensiveRerolls = caster.OffensiveAdvantage + target.DefensiveDisavantage;
+            maxDefensiveRerolls = target.DefensiveAdvantage + caster.OffensiveDisavantage;
+        }
+        else
+        {
+            maxOffensiveRerolls = target.DefensiveDisavantage;
+            maxDefensiveRerolls = target.DefensiveAdvantage;
+        }
+
+        if (maxOffensiveRerolls > maxDefensiveRerolls)
+        {
+            maxOffensiveRerolls -= maxDefensiveRerolls;
+            maxDefensiveRerolls = 0;
+        }
+        else if (maxDefensiveRerolls > maxOffensiveRerolls)
+        {
+            maxDefensiveRerolls -= maxOffensiveRerolls;
+            maxOffensiveRerolls = 0;
+        }
+        else
+        {
+            maxOffensiveRerolls = 0;
+            maxDefensiveRerolls = 0;
         }
 
         int touchDefense = 0;
@@ -143,7 +169,7 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
 
         for (int i = 0; i < dicesToRoll.Count; i++)
         {
-            totalHits += CheckDiceHit(caster, dicesToRoll[i], touchDefense, currentOffensiveRerolls < caster?.OffensiveAdvantage, currentDefensiveRerolls < target.DefensiveAdvantage, out bool usedOffensiveReroll, out bool usedDefensiveReroll);
+            totalHits += CheckDiceHit(caster, dicesToRoll[i], touchDefense, currentOffensiveRerolls < maxOffensiveRerolls, currentDefensiveRerolls < maxDefensiveRerolls, out bool usedOffensiveReroll, out bool usedDefensiveReroll);
 
             if (usedDefensiveReroll)
             {

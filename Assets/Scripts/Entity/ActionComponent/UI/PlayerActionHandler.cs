@@ -13,6 +13,11 @@ public abstract class PlayerActionHandler : MonoBehaviour
         actionHandler = handler;
     }
 
+    public virtual void UnsetHandler()
+    {
+
+    }
+
     /// <summary>
     /// Active l'ActionHandler (+ UI).
     /// </summary>

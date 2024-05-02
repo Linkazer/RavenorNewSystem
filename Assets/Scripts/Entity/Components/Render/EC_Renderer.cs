@@ -8,6 +8,18 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
 
     public AnimationHandler AnimHandler => animationHandler;
 
+    public void SetOrientation(Vector2 direction)
+    {
+        if (direction.x > 0)
+        {
+            transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+        else if (direction.x < 0)
+        {
+            transform.localEulerAngles = new Vector3(0, -180, 0);
+        }
+    }
+
     public override void SetComponentData(IEC_RendererData componentData)
     {
         if(animationHandler == null)

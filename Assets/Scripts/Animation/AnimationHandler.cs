@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AnimationHandler : MonoBehaviour
 {
@@ -10,19 +12,12 @@ public class AnimationHandler : MonoBehaviour
     [Header("Character Animations")]
     [SerializeField] private AnimationData[] animations;
 
-    private AnimationData currentAnim;
+    [Header("Sorting Groups")]
+    [SerializeField] private SortingGroup mainSortingGroup;
+    [SerializeField] private SortingGroup frontHandSortingGroup;
+    [SerializeField] private SortingGroup backHandSortingGroup;
 
-    public void SetOrientation(Vector2 direction)
-    {
-        if (direction.x > 0)
-        {
-            rendererTransform.localEulerAngles = new Vector3(0, 0, 0);
-        }
-        else if (direction.x < 0)
-        {
-            rendererTransform.localEulerAngles = new Vector3(0, -180, 0);
-        }
-    }
+    private AnimationData currentAnim;
 
     public void PlayAnimation(string animationName)
     {
@@ -54,5 +49,25 @@ public class AnimationHandler : MonoBehaviour
     {
         PlayAnimation("Idle");
         currentAnim = null;
+    }
+
+    public void ANIM_UpdateMainSortingGroup(int sortingOrder)
+    {
+        mainSortingGroup.sortingOrder = sortingOrder;
+    }
+
+    public void ANIM_UpdateFrontHandSortingGroup(int sortingOrder)
+    {
+        frontHandSortingGroup.sortingOrder = sortingOrder;
+    }
+
+    public void ANIM_UpdateBackHandSortingGroup(int sortingOrder)
+    {
+        backHandSortingGroup.sortingOrder = sortingOrder;
+    }
+
+    public void ANIM_PlayFX(Poolable_FX fxToPlay)
+    {
+        PoolManager.InstatiatePoolableAtPosition(fxToPlay, transform.position, null);
     }
 }

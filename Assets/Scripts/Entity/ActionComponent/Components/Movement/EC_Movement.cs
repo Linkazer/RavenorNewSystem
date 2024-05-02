@@ -246,7 +246,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         distance = Vector2.Distance(posUnit, posTarget);
 
         entityAnimator?.AnimHandler.PlayAnimation("Walk");
-        entityAnimator?.AnimHandler.SetOrientation(posTarget - posUnit);
+        entityAnimator?.SetOrientation(posTarget - posUnit);
 
         while (true)
         {
@@ -281,7 +281,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
                 posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
                 posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
 
-                entityAnimator?.AnimHandler.SetOrientation(posTarget - posUnit);
+                entityAnimator?.SetOrientation(posTarget - posUnit);
 
                 distance = Vector2.Distance(posUnit, posTarget);
 

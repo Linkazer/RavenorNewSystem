@@ -20,7 +20,7 @@ MonoBehaviour:
     frenchText: 
     englishText: 
   cooldown: 4
-  castComplexity: 0
+  castComplexity: 1
   useByLevel: -1
   useByTurn: 0
   ressourceCost: 2
@@ -31,37 +31,37 @@ MonoBehaviour:
     possibleActions:
     - conditions: []
       spellAction:
-        rid: 6537641290262642688
+        rid: 6537641763905470464
   references:
     version: 2
     RefIds:
     - rid: 6537641225162326018
       type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6537641290262642688
+    - rid: 6537641763905470464
       type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
       data:
         shape:
-          rid: 6537641290262642689
+          rid: 6537641763905470465
         startAnimations:
-        - rid: 6537641290262642690
+        - rid: 6537641763905470466
         damagesData:
         - origin:
-            rid: 6537641290262642691
-          damageType: 0
+            rid: 6537641763905470467
+          damageType: 3
         damageAnimations: []
         nextAction:
           possibleActions: []
-    - rid: 6537641290262642689
+    - rid: 6537641763905470465
       type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6537641290262642690
+    - rid: 6537641763905470466
       type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
       data:
         animationTarget: 2
-        animationDuration: 2
+        animationDuration: 2.5
         animationName: Cast
-    - rid: 6537641290262642691
+    - rid: 6537641763905470467
       type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 10
+        damageAmount: 8

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SKL_RSC_Chanting : SkillRessource
 {
+    public override SkillRessourceType RessourceType => SkillRessourceType.Chant;
+
     public override void Initialize(EC_SkillHandler nSkillHandler)
     {
         limits = new Vector2Int(0, 3);
