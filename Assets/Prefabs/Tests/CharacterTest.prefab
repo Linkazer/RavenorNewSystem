@@ -38,7 +38,6 @@ Transform:
   - {fileID: 6253121192755656021}
   - {fileID: 7554978216263438447}
   - {fileID: 3652749846084722356}
-  - {fileID: 1226000883113928079}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3409250983530852487
@@ -57,7 +56,6 @@ MonoBehaviour:
   components:
   - {fileID: 4552919008966869287}
   - {fileID: 2450928735371425493}
-  - {fileID: 3971643235109273626}
   - {fileID: 3036241063815971955}
   - {fileID: 3125883405212109715}
   - {fileID: 4179433055324614356}
@@ -491,6 +489,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usableSkills:
   - scriptable: {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
+  force: 0
+  esprit: 0
+  presence: 0
+  agilite: 0
+  instinct: 0
   offensiveAdvantage: 0
   offensiveDisavantage: 0
 --- !u!1 &3539966252685878812
@@ -835,55 +838,6 @@ MonoBehaviour:
   speed: 5
   movementByTurn: 15
   transformToMove: {fileID: 5310817080565035071}
---- !u!1 &8471228112801029422
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1226000883113928079}
-  - component: {fileID: 3971643235109273626}
-  m_Layer: 0
-  m_Name: TraitHandler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1226000883113928079
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8471228112801029422}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5310817080565035071}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3971643235109273626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8471228112801029422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd7c39b20c079e04f8d0c6919ffb4cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  force: 0
-  esprit: 0
-  presence: 0
-  agilite: 0
-  instinct: 0
 --- !u!1001 &1269589687936346978
 PrefabInstance:
   m_ObjectHideFlags: 0
