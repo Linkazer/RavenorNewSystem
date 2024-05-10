@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6cfd48a00dcb32947a9377bfde6bbc0c, type: 3}
-  m_Name: TEST-Ylia
+  m_Name: TEST_E_Armure
   m_EditorClassIdentifier: 
   speakerName:
-    frenchText: Ylia
+    frenchText: TEST_E_Armure
     englishText: 
   speakerNameColor: {r: 0.28773582, g: 0.7976702, b: 1, a: 1}
-  speakerPortrait: {fileID: 21300000, guid: eac86b572decff04b9c34c62e1830160, type: 3}
+  speakerPortrait: {fileID: 21300000, guid: b9777391ee6c68d48ab090b1e39e094a, type: 3}
   walkable: 0
   blockVision: 0
   height: 0.88
   renderer: {fileID: 6022577937452092619, guid: 69b4aaf4c76a20549a56488b84bc774f, type: 3}
   speed: 5
   movementByTurn: 7.5
-  healthPoints: 10
-  armor: 3
+  healthPoints: 6
+  armor: 2
   force: 0
-  esprit: -1
-  presence: 2
+  esprit: 0
+  presence: 0
   agilite: 0
-  instinct: 1
+  instinct: 0
   passives: []
   skills:
-  - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
-  ressourceUsed: 2
+  - {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
+  ressourceUsed: 0

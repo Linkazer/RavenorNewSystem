@@ -14,10 +14,10 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public void AddItem(StorableItem item, int quantityToAdd)
     {
-        int indexInInventory = ContainsItem(item);
+        int indexInInventory = GetItemIndex(item);
         if (indexInInventory < 0)
         {
-            storedItemsInInventory.Add(new StoredItem(item, quantityToAdd));
+            storedItemsInInventory.Add(new StoredItem(item, 0));
             indexInInventory = storedItemsInInventory.Count - 1;
         }
 
@@ -56,7 +56,7 @@ public class InventoryManager : Singleton<InventoryManager>
         actOnUpdateInventory?.Invoke();
     }
 
-    public int ContainsItem(StorableItem item)
+    public int GetItemIndex(StorableItem item)
     {
         for(int i = 0; i < storedItemsInInventory.Count; i++)
         {
@@ -67,5 +67,19 @@ public class InventoryManager : Singleton<InventoryManager>
         }
 
         return -1;
+    }
+
+    public int GetItemAmount(StorableItem item)
+    {
+        int index = GetItemIndex(item);
+
+        if(index < 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return storedItemsInInventory[index].amount;
+        }
     }
 }

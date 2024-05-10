@@ -39,7 +39,6 @@ public class EC_Interactable : EntityComponent<IEC_InteractableData>
 
     public void PlayInteraction(Action interactionCallback)
     {
-        Debug.Log("Interaction");
         interactionCutscene.StartAction(() => EndInteraction(interactionCallback));
     }
 

@@ -80,19 +80,19 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
             switch (actionToResolve.OffensiveTrait)
             {
                 case SkillTrait.Force:
-                    touchBonus = resolvingData.Caster.Force;
+                    touchBonus = resolvingData.Caster.Traits.Force;
                     break;
                 case SkillTrait.Agilite:
-                    touchBonus = resolvingData.Caster.Agilite;
+                    touchBonus = resolvingData.Caster.Traits.Agilite;
                     break;
                 case SkillTrait.Esprit:
-                    touchBonus = resolvingData.Caster.Esprit;
+                    touchBonus = resolvingData.Caster.Traits.Esprit;
                     break;
                 case SkillTrait.Presence:
-                    touchBonus = resolvingData.Caster.Presence;
+                    touchBonus = resolvingData.Caster.Traits.Presence;
                     break;
                 case SkillTrait.Instinct:
-                    touchBonus = resolvingData.Caster.Instinct;
+                    touchBonus = resolvingData.Caster.Traits.Instinct;
                     break;
             }
         }

@@ -24,7 +24,7 @@ MonoBehaviour:
   useByLevel: -1
   useByTurn: 0
   ressourceCost: 2
-  range: 7
+  range: 10
   privisualizedShape:
     rid: 6537641225162326018
   skillActions:

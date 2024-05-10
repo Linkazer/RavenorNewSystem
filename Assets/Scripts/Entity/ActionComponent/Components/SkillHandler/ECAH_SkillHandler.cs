@@ -116,6 +116,7 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         if(skillHandler.SelectedSkill == null)
         {
             InputManager.Instance.OnMouseLeftDown -= UseAction;
+            InputManager.Instance.OnMouseRightDown -= OnRightMouseButton;
         }
 
     }
@@ -134,9 +135,15 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         base.SelectAction();
     }
 
+    private void OnRightMouseButton(Vector2 mousePosition)
+    {
+        UnselectAction();
+    }
+
     public override void UnselectAction()
     {
         InputManager.Instance.OnMouseLeftDown -= UseAction;
+        InputManager.Instance.OnMouseRightDown -= OnRightMouseButton;
 
         UndisplayAction();
 
@@ -180,6 +187,7 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
             if (skillHandler.SelectedSkill == null)
             {
                 InputManager.Instance.OnMouseLeftDown += UseAction;
+                InputManager.Instance.OnMouseRightDown += OnRightMouseButton;
             }
 
             skillHandler.SelectSkill(toSelect);

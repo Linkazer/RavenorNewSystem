@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 public class RoomHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera roomOpeningCamera;
-    [SerializeField] private Entity[] entitiesToEnable;
 
     [SerializeField] private SequenceCutscene openningCutscene;
 
@@ -33,11 +32,6 @@ public class RoomHandler : MonoBehaviour
     private IEnumerator StartOpenningRoomSequence()
     {
         PlayerActionManager.Instance.AddLock(this);
-
-        foreach (Entity entity in entitiesToEnable)
-        {
-            entity.Activate();
-        }
 
         if (roomOpeningCamera != null)
         {

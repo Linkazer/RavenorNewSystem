@@ -7,7 +7,7 @@ public class SQA_ActivateEntity : SequenceAction
 {
     [SerializeField] private Entity[] entityToHandle;
     [SerializeField] private bool doesActivate;
-    [SerializeField] private bool isControllable;
+    [SerializeField] private bool TEMP_isControllable = true;
 
     protected override void OnStartAction()
     {
@@ -22,7 +22,7 @@ public class SQA_ActivateEntity : SequenceAction
                 entity.Deactivate();
             }
 
-            if (entity is CharacterEntity && isControllable)
+            if (entity is CharacterEntity && TEMP_isControllable)
             {
                 ControllableTeamHandler.Instance.AddCharacter(entity as CharacterEntity);
             }

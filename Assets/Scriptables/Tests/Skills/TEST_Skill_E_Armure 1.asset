@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1c2a9f8da3a1104c8378faa9ed1ded8, type: 3}
+  m_Name: TEST_Skill_E_Armure 1
+  m_EditorClassIdentifier: 
+  displayName:
+    frenchText: Skill 1 Armure
+    englishText: 
+  icon: {fileID: 0}
+  description:
+    frenchText: 
+    englishText: 
+  cooldown: 0
+  castComplexity: 0
+  useByLevel: -1
+  useByTurn: 0
+  ressourceCost: 0
+  range: 2.5
+  privisualizedShape:
+    rid: 6537641225162326018
+  skillActions:
+    possibleActions:
+    - conditions: []
+      spellAction:
+        rid: 6429555930163314688
+  references:
+    version: 2
+    RefIds:
+    - rid: 6429555930163314688
+      type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
+      data:
+        shape:
+          rid: 6429555930163314689
+        startAnimations:
+        - rid: 6429555930163314690
+        numberDicesToRoll: 2
+        offensiveTrait: 0
+        defensiveTrait: 0
+        onDiceRollAnimation: []
+        touchAction:
+          possibleActions: []
+        touchSubActionOnTarget:
+          possibleActions:
+          - conditions: []
+            spellAction:
+              rid: 6429555930163314691
+        noTouchAction:
+          possibleActions: []
+        noTouchSubActionOnTarget:
+          possibleActions: []
+        nextAction:
+          possibleActions: []
+    - rid: 6429555930163314689
+      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 6429555930163314690
+      type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        animationTarget: 2
+        animationDuration: 0.5
+        animationName: Cast
+    - rid: 6429555930163314691
+      type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        shape:
+          rid: 6429555930163314692
+        startAnimations: []
+        damagesData:
+        - origin:
+            rid: 6429555930163314695
+          damageType: 0
+        damageAnimations:
+        - rid: 6429555930163314693
+        nextAction:
+          possibleActions: []
+    - rid: 6429555930163314692
+      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 6429555930163314693
+      type: {class: SKL_Animation_Fx, ns: , asm: Assembly-CSharp}
+      data:
+        animationTarget: 1
+        animationDuration: 0
+        fxToPlay: {fileID: 1611882667578466474, guid: 3c4c1000ee6cf75468859a3758c7611e, type: 3}
+    - rid: 6429555930163314695
+      type: {class: SKL_DO_Dices, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 6537641225162326018
+      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
+      data: 
