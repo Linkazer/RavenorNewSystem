@@ -10,7 +10,7 @@ public class SQA_DoCheck : SequenceAction
     private class CheckAction
     {
         [SerializeReference, ReferenceEditor(typeof(Checker))] public Checker[] checkers;
-        public SequenceAction actionOnValidCheck;
+        [SerializeReference, ReferenceEditor(typeof(SequenceAction))] public SequenceAction actionOnValidCheck;
 
         public bool IsCheckValid()
         {
@@ -27,7 +27,7 @@ public class SQA_DoCheck : SequenceAction
     }
 
     [SerializeField] private CheckAction[] checks;
-    [SerializeField] private SequenceAction actionOnNoValidCheck;
+    [SerializeField, SerializeReference, ReferenceEditor(typeof(SequenceAction))] private SequenceAction actionOnNoValidCheck;
 
     protected override void OnStartAction(SequenceContext context)
     {

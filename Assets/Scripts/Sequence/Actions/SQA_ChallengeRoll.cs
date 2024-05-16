@@ -1,3 +1,4 @@
+using ReferencePicker;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ public class SQA_ChallengeRoll : SequenceAction
     private struct ChallengeSuccessPossibility
     {
         public int minimumSuccessNeeded;
-        public SequenceAction actionOnSuccess;
+        [SerializeReference, ReferenceEditor(typeof(SequenceAction))] public SequenceAction actionOnSuccess;
     }
 
     [Serializable]
@@ -35,7 +36,7 @@ public class SQA_ChallengeRoll : SequenceAction
 
         if(challengedEntity != null && challengedEntity.TryGetEntityComponentOfType(out EC_TraitHandler traitsHandler))
         {
-            SequenceAction challengeResult = GetChallengeResultAction(challenge, traitsHandler);
+            SequenceAction challengeResult = GetChallengeResultAction(context, challenge, traitsHandler);
 
             if(challengeResult != null)
             {
@@ -62,7 +63,7 @@ public class SQA_ChallengeRoll : SequenceAction
         
     }
 
-    private SequenceAction GetChallengeResultAction(ChallengeRoll challengeToRoll, EC_TraitHandler entityChallenged)
+    private SequenceAction GetChallengeResultAction(SequenceContext context, ChallengeRoll challengeToRoll, EC_TraitHandler entityChallenged)
     {
         int diceResultBonus = 0;
 
@@ -72,7 +73,7 @@ public class SQA_ChallengeRoll : SequenceAction
 
         }
 
-        List<Dice> challengeDices = DiceManager.RollDices(this, BaseDiceAmountForChallenge, diceResultBonus);
+        List<Dice> challengeDices = DiceManager.RollDices(context.currentSequence, BaseDiceAmountForChallenge, diceResultBonus);
 
         int result = 0;
 

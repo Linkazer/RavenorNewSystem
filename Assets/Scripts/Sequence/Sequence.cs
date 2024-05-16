@@ -2,24 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ReferencePicker;
 
-public class Sequence : SequenceAction
+public class Sequence : MonoBehaviour
 {
     [Serializable]
     public class SequenceStep
     {
-        public SequenceAction mainAction;
-        public List<SequenceAction> secondaryActions = new List<SequenceAction>();
+        [SerializeReference, ReferenceEditor(typeof(SequenceAction))] public SequenceAction mainAction;
+        [SerializeReference, ReferenceEditor(typeof(SequenceAction))] public SequenceAction[] secondaryActions;
     }
 
     [SerializeField] private List<SequenceStep> steps = new List<SequenceStep>();
 
     private int currentStep = 0;
 
+    private Action endCallback;
+
     [ContextMenu("Fill Sequence")]
     public void FillSequence()
     {
-        steps = new List<SequenceStep>();
+        /*steps = new List<SequenceStep>();
 
         foreach (Transform child in transform)
         {
@@ -55,17 +58,17 @@ public class Sequence : SequenceAction
 
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(gameObject);
-#endif
+#endif*/
     }
 
     public void PlaySequence(Action callback)
     {
-        StartAction(new SequenceContext(this), callback);
+        StartSequence(new SequenceContext(this), callback);
     }
 
     public void PlaySequence(Action callback, Entity entity)
     {
-        StartAction(new SequenceContext(this, entity), callback);
+        StartSequence(new SequenceContext(this, entity), callback);
     }
 
     private void NextStep(SequenceContext context)
@@ -74,7 +77,7 @@ public class Sequence : SequenceAction
 
         if (currentStep >= steps.Count)
         {
-            EndAction(context);
+            EndSequence();
         }
         else
         {
@@ -87,20 +90,17 @@ public class Sequence : SequenceAction
         }
     }
 
-    protected override void OnStartAction(SequenceContext context)
+    protected virtual void StartSequence(SequenceContext context, Action callback)
     {
+        endCallback = callback;
+
         currentStep = -1;
 
         NextStep(context);
     }
 
-    protected override void OnEndAction(SequenceContext context)
+    protected virtual void EndSequence()
     {
-        
-    }
-
-    protected override void OnSkipAction(SequenceContext context)
-    {
-        throw new NotImplementedException();
+        endCallback?.Invoke();
     }
 }

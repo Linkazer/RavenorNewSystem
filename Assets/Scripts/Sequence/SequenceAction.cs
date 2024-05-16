@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SequenceAction : MonoBehaviour
+[Serializable]
+public abstract class SequenceAction// : MonoBehaviour
 {
     private Action endCallback;
 
