@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EntityTraits
+{
+    Force,
+    Esprit,
+    Presence,
+    Agilite,
+    Instinct
+}
+
 public class EC_TraitHandler : EntityComponent<IEC_TraitHandlerData>
 {
     [SerializeField] private int force;
@@ -35,6 +44,25 @@ public class EC_TraitHandler : EntityComponent<IEC_TraitHandlerData>
     protected override void InitializeComponent()
     {
         
+    }
+
+    public int GetTraitValue(EntityTraits wantedTrait)
+    {
+        switch(wantedTrait)
+        {
+            case EntityTraits.Force:
+                return Force;
+            case EntityTraits.Agilite:
+                return Agilite;
+            case EntityTraits.Esprit:
+                return Esprit;
+            case EntityTraits.Presence:
+                return Presence;
+            case EntityTraits.Instinct:
+                return Instinct;
+        }
+
+        return 0;
     }
 
     public override void Activate()

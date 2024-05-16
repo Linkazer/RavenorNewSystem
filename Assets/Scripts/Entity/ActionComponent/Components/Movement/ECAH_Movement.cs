@@ -134,7 +134,7 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
     {
         if(interactibleObject.HoldingEntity.TryGetEntityComponentOfType<EC_Interactable>(out EC_Interactable interactibleComponent))
         {
-            UseAction(interactibleComponent.HoldingEntity.transform.position, () => interactibleComponent.PlayInteraction(EndAction));
+            UseAction(interactibleComponent.HoldingEntity.transform.position, () => interactibleComponent.PlayInteraction(EndAction, movementHandler.HoldingEntity));
         }
         else
         {

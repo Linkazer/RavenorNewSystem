@@ -28,7 +28,7 @@ MonoBehaviour:
   force: 0
   esprit: 0
   presence: 0
-  agilite: 0
+  agilite: 50
   instinct: 0
   passives: []
   skills:

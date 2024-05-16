@@ -7,38 +7,38 @@ public abstract class SequenceAction : MonoBehaviour
 {
     private Action endCallback;
 
-    public void StartAction()
+    public void StartAction(SequenceContext context)
     {
         endCallback = null;
 
-        OnStartAction();
+        OnStartAction(context);
     }
 
-    public void StartAction(Action callback)
+    public void StartAction(SequenceContext context, Action callback)
     {
         endCallback = callback;
 
-        OnStartAction();
+        OnStartAction(context);
     }
 
-    public void EndAction()
+    public void EndAction(SequenceContext context)
     {
-        OnEndAction();
+        OnEndAction(context);
 
         endCallback?.Invoke();
     }
 
-    public void SkipAction(Action callback)
+    public void SkipAction(SequenceContext context, Action callback)
     {
-        OnSkipAction();
+        OnSkipAction(context);
     }
 
     //Start action
-    protected abstract void OnStartAction();
+    protected abstract void OnStartAction(SequenceContext context);
 
     //End Action
-    protected abstract void OnEndAction();
+    protected abstract void OnEndAction(SequenceContext context);
 
     //Skip action
-    protected abstract void OnSkipAction();
+    protected abstract void OnSkipAction(SequenceContext context);
 }

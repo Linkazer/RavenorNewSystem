@@ -37,9 +37,9 @@ public class EC_Interactable : EntityComponent<IEC_InteractableData>
         canBeInteractedWith = false;
     }
 
-    public void PlayInteraction(Action interactionCallback)
+    public void PlayInteraction(Action interactionCallback, Entity interactor)
     {
-        interactionCutscene.StartAction(() => EndInteraction(interactionCallback));
+        interactionCutscene.PlaySequence(() => EndInteraction(interactionCallback), interactor);
     }
 
     private void EndInteraction(Action callback)

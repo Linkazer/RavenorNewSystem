@@ -8,18 +8,18 @@ public class SQA_Wait : SequenceAction
 
     private Timer waitTimer;
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
-        waitTimer = TimerManager.CreateGameTimer(waitTime, EndAction);
+        waitTimer = TimerManager.CreateGameTimer(waitTime, () => EndAction(context));
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         waitTimer?.Stop();
         waitTimer = null;
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
         waitTimer?.Execute();
         waitTimer = null;

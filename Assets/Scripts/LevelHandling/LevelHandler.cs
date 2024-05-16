@@ -52,7 +52,7 @@ public class LevelHandler : MonoBehaviour
             ControllableTeamHandler.Instance.AddCharacter(character);
         }
 
-        startCutscene.StartAction(ActivateLevel);
+        startCutscene.PlaySequence(ActivateLevel);
     }
 
     public void ActivateLevel()

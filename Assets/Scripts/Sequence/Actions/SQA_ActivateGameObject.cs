@@ -7,22 +7,22 @@ public class SQA_ActivateGameObject : SequenceAction
     [SerializeField] private GameObject[] objectsToHandle;
     [SerializeField] private bool doesActivate;
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
         foreach (GameObject gameObject in objectsToHandle)
         {
             gameObject.SetActive(doesActivate);
         }
 
-        EndAction();
+        EndAction(context);
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
 
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
 
     }

@@ -75,26 +75,9 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
 
         int touchBonus = 0;
 
-        if (resolvingData.Caster != null)
+        if (resolvingData.Caster != null && resolvingData.Caster.HoldingEntity.TryGetEntityComponentOfType<EC_TraitHandler>(out EC_TraitHandler casterTraits))
         {
-            switch (actionToResolve.OffensiveTrait)
-            {
-                case SkillTrait.Force:
-                    touchBonus = resolvingData.Caster.Force;
-                    break;
-                case SkillTrait.Agilite:
-                    touchBonus = resolvingData.Caster.Agilite;
-                    break;
-                case SkillTrait.Esprit:
-                    touchBonus = resolvingData.Caster.Esprit;
-                    break;
-                case SkillTrait.Presence:
-                    touchBonus = resolvingData.Caster.Presence;
-                    break;
-                case SkillTrait.Instinct:
-                    touchBonus = resolvingData.Caster.Instinct;
-                    break;
-            }
+            touchBonus = casterTraits.GetTraitValue(actionToResolve.OffensiveTrait);
         }
 
         foreach (EC_HealthHandler hitedObject in hitableObjects)
@@ -104,7 +87,27 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
 
             rolledDices = DiceManager.RollDices(resolvingData.Caster, actionToResolve.NumberDicesRoll, touchBonus);
 
-            RollDices(rolledDices, actionToResolve.DefensiveTrait, resolvingData.Caster, hitedObject, out bool didHit);
+            bool didHit = false;
+
+            if (hitedObject.HoldingEntity.TryGetEntityComponentOfType(out EC_SkillAbsorberHandler skillAbsorberHandlers))
+            {
+                RollDices(rolledDices, actionToResolve.DefensiveTrait, resolvingData.Caster, skillAbsorberHandlers, out didHit);
+
+                foreach (Dice dice in rolledDices)
+                {
+                    UnityEngine.Debug.Log(dice.Result + " : " + dice.DoesHit);
+                }
+            }
+            else
+            {
+                didHit = true;
+
+                foreach(Dice dice in rolledDices)
+                {
+                    dice.DoesHit = true;
+                    UnityEngine.Debug.Log("Force Success");
+                }
+            }
 
             //hitedObject.DisplayDiceResults(actionDices); //TODO : Feedback des résultats de dés
 
@@ -117,7 +120,7 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
         return didHitAtLeastOne;
     }
 
-    private void RollDices(List<Dice> dicesToRoll, SkillDefensiveTrait defensiveTraitUsed, EC_SkillHandler caster, EC_HealthHandler target, out bool didHit)
+    private void RollDices(List<Dice> dicesToRoll, SkillDefensiveTrait defensiveTraitUsed, EC_SkillHandler caster, EC_SkillAbsorberHandler target, out bool didHit)
     {
         didHit = false;
 
@@ -130,12 +133,12 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
 
         if(caster != null)
         {
-            maxOffensiveRerolls = caster.OffensiveAdvantage + target.DefensiveDisavantage;
+            maxOffensiveRerolls = caster.OffensiveAdvantage + target.DefensiveDisadvantage;
             maxDefensiveRerolls = target.DefensiveAdvantage + caster.OffensiveDisavantage;
         }
         else
         {
-            maxOffensiveRerolls = target.DefensiveDisavantage;
+            maxOffensiveRerolls = target.DefensiveDisadvantage;
             maxDefensiveRerolls = target.DefensiveAdvantage;
         }
 
@@ -156,6 +159,7 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
         }
 
         int touchDefense = 0;
+
         switch (defensiveTraitUsed)
         {
             case SkillDefensiveTrait.Dodge:
@@ -165,7 +169,6 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
                 touchDefense = target.Will;
                 break;
         }
-
 
         for (int i = 0; i < dicesToRoll.Count; i++)
         {

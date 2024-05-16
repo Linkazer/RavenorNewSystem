@@ -8,12 +8,11 @@ public class CharacterScriptable : DialogueSpeaker,
     IEC_RendererData, 
     IEC_MovementData,
     IEC_HealthHandlerData,
+    IEC_TraitHandlerData,
     IEC_SkillHandlerData,
+    IEC_SkillAbsorberHandlerData,
     IEC_StatusHandlerData
 {
-    private const int BaseDodge = 2;
-    private const int BaseWill = 2;
-
     [Header("Movement")]
     [SerializeField] private bool walkable = false;
     [SerializeField] private bool blockVision = true;
@@ -66,9 +65,9 @@ public class CharacterScriptable : DialogueSpeaker,
 
     public int CurrentArmor => armor;//Utile ?
 
-    public int Dodge => BaseDodge + agilite;
+    public int DodgeBonus => 0;
 
-    public int Will => BaseWill + esprit;
+    public int WillBonus => 0;
 
     public int DefensiveAdvantage => 0;//Utile ?
 

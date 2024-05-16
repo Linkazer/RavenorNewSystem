@@ -44,7 +44,7 @@ public class RoomHandler : MonoBehaviour
 
         if (openningCutscene != null)
         {
-            openningCutscene.StartAction(() => StartCoroutine(EndOpeningRoomSequence()));
+            openningCutscene.PlaySequence(() => StartCoroutine(EndOpeningRoomSequence()));
         }
         else
         {

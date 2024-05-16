@@ -9,17 +9,17 @@ public class SQA_MoveCharacter : SequenceAction
     [SerializeField] private Transform movementStart;
     [SerializeField] private Transform movementTarget;
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
-        toMove.TryMoveToDestination(movementTarget.position, EndAction);
+        toMove.TryMoveToDestination(movementTarget.position, () => EndAction(context));
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
        
     }

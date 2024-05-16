@@ -16,19 +16,11 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     [SerializeField] private int currentHealth;
     [SerializeField] private int maxArmor;
     [SerializeField] private int currentArmor;
-    [SerializeField] private int dodge;
-    [SerializeField] private int will;
-    [SerializeField] private int defensiveAdvantage;
-    [SerializeField] private int defensiveDisavantage;
 
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
     public int MaxArmor => maxArmor;
     public int CurrentArmor => currentArmor;
-    public int Dodge => dodge > 0 ? dodge : 0;
-    public int Will => will > 0 ? will : 0;
-    public int DefensiveAdvantage => defensiveAdvantage;
-    public int DefensiveDisavantage => defensiveDisavantage;
 
     public Action<int> actOnChangeMaxHealth;
     public Action<int> actOnChangeHealth;
@@ -41,10 +33,6 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         currentHealth = componentData.CurrentHealth;
         maxArmor = componentData.MaxArmor;
         currentArmor = componentData.CurrentArmor;
-        dodge = componentData.Dodge;
-        will = componentData.Will;
-        defensiveAdvantage = componentData.DefensiveAdvantage;
-        defensiveDisavantage = componentData.DefensiveDisavantage;
 
         if(healthDisplayer != null)
         {
@@ -84,7 +72,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         maxHealth = toSet;
 
-        healthDisplayer.OnSetMaxHealth(maxHealth, currentHealth);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnSetMaxHealth(maxHealth, currentHealth);
+        }
 
         actOnChangeMaxHealth?.Invoke(maxHealth);
 
@@ -96,7 +87,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     public void GainHealth(int toGain)
     {
-        healthDisplayer.OnGainHealth(toGain);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnGainHealth(toGain);
+        }
 
         if(currentHealth + toGain > maxHealth)
         {
@@ -110,7 +104,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     public void LoseHealth(int toLose)
     {
-        healthDisplayer.OnLoseHealth(toLose);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnLoseHealth(toLose);
+        }
 
         if (currentHealth - toLose <= 0)
         {
@@ -127,7 +124,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         currentHealth = toSet;
 
-        healthDisplayer.OnSetHealth(currentHealth);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnSetHealth(currentHealth);
+        }
 
         actOnChangeHealth?.Invoke(currentHealth);
     }
@@ -140,7 +140,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     public void SetMaxArmor(int toSet)
     {
-        healthDisplayer.OnSetMaxArmor(toSet);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnSetMaxArmor(toSet);
+        }
 
         maxArmor = toSet;
 
@@ -154,7 +157,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     public void GainArmor(int toGain)
     {
-        healthDisplayer.OnGainArmor(toGain);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnGainArmor(toGain);
+        }
 
         if (currentArmor + toGain > maxArmor)
         {
@@ -168,7 +174,10 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     public void LoseArmor(int toLose)
     {
-        healthDisplayer.OnLoseArmor(toLose);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnLoseArmor(toLose);
+        }
 
         if (currentArmor > 0)
         {
@@ -187,18 +196,11 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     {
         currentArmor = toSet;
 
-        healthDisplayer.OnSetArmor(currentArmor);
+        if (healthDisplayer != null)
+        {
+            healthDisplayer.OnSetArmor(currentArmor);
+        }
 
         actOnChangeArmor?.Invoke(currentArmor);
-    }
-
-    public void AddDodgeBonus(int amount)
-    {
-        dodge += amount;
-    }
-
-    public void RemoveDodgeBonus(int amount)
-    {
-        dodge -= amount;
     }
 }

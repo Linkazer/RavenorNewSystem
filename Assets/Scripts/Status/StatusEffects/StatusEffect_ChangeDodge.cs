@@ -8,17 +8,17 @@ public class StatusEffect_ChangeDodge : StatusEffect
     
     public override void DoEffect(AppliedStatus appliedStatus)
     {
-        if (appliedStatus.StatusTarget.HoldingEntity.TryGetEntityComponentOfType(out EC_HealthHandler healthHandler))
+        if (appliedStatus.StatusTarget.HoldingEntity.TryGetEntityComponentOfType(out EC_SkillAbsorberHandler skillAbsorber))
         {
-            healthHandler.AddDodgeBonus(dodgeToGain);
+            skillAbsorber.dodgeBonus += dodgeToGain;
         }
     }
 
     public override void UndoEffect(AppliedStatus appliedStatus)
     {
-        if (appliedStatus.StatusTarget.HoldingEntity.TryGetEntityComponentOfType(out EC_HealthHandler healthHandler))
+        if (appliedStatus.StatusTarget.HoldingEntity.TryGetEntityComponentOfType(out EC_SkillAbsorberHandler skillAbsorber))
         {
-            healthHandler.RemoveDodgeBonus(dodgeToGain);
+            skillAbsorber.dodgeBonus -= dodgeToGain;
         }
     }
 }

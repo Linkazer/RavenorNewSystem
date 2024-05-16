@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SequenceCutscene : Sequence
 {
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
         PlayerActionManager.Instance.AddLock(this);
 
-        base.OnStartAction();
+        base.OnStartAction(context);
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         PlayerActionManager.Instance.RemoveLock(this);
 
-        base.OnEndAction();
+        base.OnEndAction(context);
     }
 }

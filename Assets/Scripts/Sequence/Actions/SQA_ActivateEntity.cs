@@ -9,7 +9,7 @@ public class SQA_ActivateEntity : SequenceAction
     [SerializeField] private bool doesActivate;
     [SerializeField] private bool TEMP_isControllable = true;
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
         foreach(Entity entity in entityToHandle)
         {
@@ -28,15 +28,15 @@ public class SQA_ActivateEntity : SequenceAction
             }
         }
 
-        EndAction();
+        EndAction(context);
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
         
     }

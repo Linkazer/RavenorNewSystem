@@ -2,24 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SkillTrait
-{
-    Force,
-    Esprit,
-    Presence,
-    Agilite,
-    Instinct
-}
-
 public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 {
     [SerializeField] private List<SkillHolder> usableSkills = new List<SkillHolder>();
 
-    [SerializeField] private int force;
-    [SerializeField] private int esprit;
-    [SerializeField] private int presence;
-    [SerializeField] private int agilite;
-    [SerializeField] private int instinct;
     [SerializeField] private int offensiveAdvantage;
     [SerializeField] private int offensiveDisavantage;
 
@@ -29,11 +15,6 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     private EC_NodeHandler nodeHandler;
 
-    public int Force => force;
-    public int Esprit => esprit;
-    public int Presence => presence;
-    public int Agilite => agilite;
-    public int Instinct => instinct;
     public int OffensiveAdvantage => offensiveAdvantage;
     public int OffensiveDisavantage => offensiveDisavantage;
 
@@ -47,11 +28,6 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public override void SetComponentData(IEC_SkillHandlerData componentData)
     {
-        force = componentData.Force;
-        agilite = componentData.Agilite;
-        instinct = componentData.Instinct;
-        esprit = componentData.Esprit;
-        presence = componentData.Presence;
         offensiveAdvantage = componentData.OffensiveAdvantage;
         offensiveDisavantage = componentData.OffensiveDisavantage;
 

@@ -58,38 +58,48 @@ public class Sequence : SequenceAction
 #endif
     }
 
-    private void NextStep()
+    public void PlaySequence(Action callback)
+    {
+        StartAction(new SequenceContext(this), callback);
+    }
+
+    public void PlaySequence(Action callback, Entity entity)
+    {
+        StartAction(new SequenceContext(this, entity), callback);
+    }
+
+    private void NextStep(SequenceContext context)
     {
         currentStep++;
 
         if (currentStep >= steps.Count)
         {
-            EndAction();
+            EndAction(context);
         }
         else
         {
             foreach (SequenceAction act in steps[currentStep].secondaryActions)
             {
-                act.StartAction();
+                act.StartAction(context);
             }
 
-            steps[currentStep].mainAction.StartAction(NextStep);
+            steps[currentStep].mainAction.StartAction(context, () => NextStep(context));
         }
     }
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
         currentStep = -1;
 
-        NextStep();
+        NextStep(context);
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
         throw new NotImplementedException();
     }

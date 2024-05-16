@@ -6,17 +6,17 @@ public class SQA_OpenRoom : SequenceAction
 {
     [SerializeField] private RoomHandler roomToOpen;
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
-        roomToOpen.OpenRoom(EndAction);
+        roomToOpen.OpenRoom(() => EndAction(context));
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
         
     }

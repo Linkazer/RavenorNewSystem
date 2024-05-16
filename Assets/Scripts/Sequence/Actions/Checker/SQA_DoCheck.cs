@@ -29,7 +29,7 @@ public class SQA_DoCheck : SequenceAction
     [SerializeField] private CheckAction[] checks;
     [SerializeField] private SequenceAction actionOnNoValidCheck;
 
-    protected override void OnStartAction()
+    protected override void OnStartAction(SequenceContext context)
     {
         foreach(CheckAction check in checks)
         {
@@ -37,11 +37,11 @@ public class SQA_DoCheck : SequenceAction
             {
                 if (check.actionOnValidCheck != null)
                 {
-                    check.actionOnValidCheck.StartAction(EndAction);
+                    check.actionOnValidCheck.StartAction(context, () => EndAction(context));
                 }
                 else
                 {
-                    EndAction();
+                    EndAction(context);
                 }
                 return;
             }
@@ -49,20 +49,20 @@ public class SQA_DoCheck : SequenceAction
 
         if (actionOnNoValidCheck != null)
         {
-            actionOnNoValidCheck.StartAction(EndAction);
+            actionOnNoValidCheck.StartAction(context, () => EndAction(context));
         }
         else
         {
-            EndAction();
+            EndAction(context);
         }
     }
 
-    protected override void OnEndAction()
+    protected override void OnEndAction(SequenceContext context)
     {
         
     }
 
-    protected override void OnSkipAction()
+    protected override void OnSkipAction(SequenceContext context)
     {
         
     }
