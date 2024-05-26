@@ -43,6 +43,9 @@ public class CharacterScriptable : DialogueSpeaker,
     [Header("Ressource")]
     [SerializeField] private SkillRessourceType ressourceUsed;
 
+    [Header("Expertises")]
+    [SerializeField] private List<ChallengeExpertiseLevel> expertises;
+
     public bool Walkable => walkable;
 
     public bool BlockVision => blockVision;
@@ -78,6 +81,8 @@ public class CharacterScriptable : DialogueSpeaker,
     public int Presence => presence;
     public int Agilite => agilite;
     public int Instinct => instinct;
+
+    public List<ChallengeExpertiseLevel> Expertises => expertises;
 
     public int OffensiveAdvantage => 0;//Utile ?
 

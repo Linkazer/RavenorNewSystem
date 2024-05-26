@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class SQA_ChallengeRoll : SequenceAction
 {
-    private const int BaseDiceAmountForChallenge = 3;
-
     [Serializable]
     private struct ChallengeSuccessPossibility
     {
@@ -15,15 +13,10 @@ public class SQA_ChallengeRoll : SequenceAction
         [SerializeReference, ReferenceEditor(typeof(SequenceAction))] public SequenceAction actionOnSuccess;
     }
 
-    [Serializable]
-    private class ChallengeRoll
-    {
-        public EntityTraits traitWanted;
-        public int difficulty;
-        public ChallengeSuccessPossibility[] successPossibilities;
-    }
+    [SerializeField] private ChallengeRollData challenge;
+    [SerializeField] private ChallengeSuccessPossibility[] possiblesResults;
 
-    [SerializeField] private ChallengeRoll challenge;
+    private SequenceContext currentContext;
 
     protected override void OnStartAction(SequenceContext context)
     {
@@ -36,16 +29,7 @@ public class SQA_ChallengeRoll : SequenceAction
 
         if(challengedEntity != null && challengedEntity.TryGetEntityComponentOfType(out EC_TraitHandler traitsHandler))
         {
-            SequenceAction challengeResult = GetChallengeResultAction(context, challenge, traitsHandler);
-
-            if(challengeResult != null)
-            {
-                challengeResult.StartAction(context, () => EndAction(context));
-            }
-            else
-            {
-                EndAction(context);
-            }
+            InitializeChallenge(traitsHandler);
         }
         else
         {
@@ -63,36 +47,33 @@ public class SQA_ChallengeRoll : SequenceAction
         
     }
 
-    private SequenceAction GetChallengeResultAction(SequenceContext context, ChallengeRoll challengeToRoll, EC_TraitHandler entityChallenged)
+    private void InitializeChallenge(EC_TraitHandler traitsHandler)
     {
-        int diceResultBonus = 0;
+        ChallengeManager.Instance.InitializeChallenge(challenge, traitsHandler, OnChallengeResolved);
+    }
 
-        if(entityChallenged != null )
+    private void OnChallengeResolved(int result)
+    {
+        Debug.Log(result);
+
+        SequenceAction resultAction = null;
+
+        foreach (ChallengeSuccessPossibility successPossibility in possiblesResults)
         {
-            diceResultBonus = entityChallenged.GetTraitValue(challengeToRoll.traitWanted);
-
-        }
-
-        List<Dice> challengeDices = DiceManager.RollDices(context.currentSequence, BaseDiceAmountForChallenge, diceResultBonus);
-
-        int result = 0;
-
-        foreach(Dice dice in challengeDices)
-        {
-            if(dice.Result > challengeToRoll.difficulty)
+            if (result >= successPossibility.minimumSuccessNeeded)
             {
-                result++;
+                resultAction = successPossibility.actionOnSuccess;
+                break;
             }
         }
 
-        foreach(ChallengeSuccessPossibility successPossibility in challengeToRoll.successPossibilities)
+        if (resultAction != null)
         {
-            if(result >= successPossibility.minimumSuccessNeeded)
-            {
-                return successPossibility.actionOnSuccess;
-            }
+            resultAction.StartAction(currentContext, () => EndAction(currentContext));
         }
-
-        return null;
+        else
+        {
+            EndAction(currentContext);
+        }
     }
 }

@@ -19,10 +19,10 @@ public class Sequence : MonoBehaviour
 
     private Action endCallback;
 
-    [ContextMenu("Fill Sequence")]
+    /*[ContextMenu("Fill Sequence")]
     public void FillSequence()
     {
-        /*steps = new List<SequenceStep>();
+        steps = new List<SequenceStep>();
 
         foreach (Transform child in transform)
         {
@@ -58,9 +58,10 @@ public class Sequence : MonoBehaviour
 
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(gameObject);
-#endif*/
+#endif
     }
-
+*/
+    
     public void PlaySequence(Action callback)
     {
         StartSequence(new SequenceContext(this), callback);

@@ -34,3 +34,6 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
   ressourceUsed: 2
+  expertises:
+  - level: 4
+    expertise: {fileID: 11400000, guid: 3885207e93e7a9d44a4d72b3868388a4, type: 2}

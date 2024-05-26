@@ -17,10 +17,11 @@ public class UI_ChallengeDice : MonoBehaviour
     private int rollStage = 0;
     private bool succeedDice = false;
 
-    public int RollStage => rollStage;
+    public bool Success => succeedDice;
 
     public void Activate()
     {
+        succeedDice = false;
         rollTimer?.Stop();
 
         parentObject.SetActive(true);
@@ -29,6 +30,7 @@ public class UI_ChallengeDice : MonoBehaviour
 
     public void Deactivate()
     {
+        succeedDice = false;
         SetRollStage(0);
         parentObject.SetActive(false);
     }
