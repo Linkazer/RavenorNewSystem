@@ -7,6 +7,7 @@ public class Entity : MonoBehaviour, IRoundHandler
 {
     [SerializeField] private bool activateOnStart = true;
     [SerializeField] protected EntityComponent[] components;
+    [SerializeField] private CharacterHostility hostility;
 
     private Dictionary<Type, EntityComponent> componentByType = new Dictionary<Type, EntityComponent>();
 
@@ -17,6 +18,8 @@ public class Entity : MonoBehaviour, IRoundHandler
     public Action<Entity> actOnDeactivateEntity;
 
     public Dictionary<Type, EntityComponent> ComponentsByType => componentByType;
+
+    public CharacterHostility Hostility => hostility;
 
     /// <summary>
     /// Get the IEntityData from the data holder. The data holder depends on the Entity type used 
@@ -150,5 +153,29 @@ public class Entity : MonoBehaviour, IRoundHandler
         }
 
         actOnEntityEndRound?.Invoke();
+    }
+
+    public void SetHostile(CharacterHostility toSet)
+    {
+        if (hostility != toSet)
+        {
+            hostility = toSet;
+
+            CharacterManager.Instance.UpdateCharacterHostility(this);
+        }
+    }
+
+    public bool IsHostileTo(Entity otherEntityToCheck)
+    {
+        switch(hostility)
+        {
+            case CharacterHostility.Ally:
+                return otherEntityToCheck.hostility == CharacterHostility.Hostile;
+            case CharacterHostility.Hostile:
+                return otherEntityToCheck.hostility == CharacterHostility.Ally;
+            case CharacterHostility.Neutral:
+                return false;
+        }
+        return false;
     }
 }

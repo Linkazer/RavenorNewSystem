@@ -9151,6 +9151,10 @@ PrefabInstance:
       propertyPath: activateOnStart
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4179433055324614356, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: opportunitySkill.scriptable
+      value: 
+      objectReference: {fileID: 11400000, guid: 21f6a8847af170146a82212c0fad5343, type: 2}
     - target: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.5
@@ -9503,6 +9507,10 @@ PrefabInstance:
     - target: {fileID: 3125883405212109715, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: currentHealth
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: hostility
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: characterData

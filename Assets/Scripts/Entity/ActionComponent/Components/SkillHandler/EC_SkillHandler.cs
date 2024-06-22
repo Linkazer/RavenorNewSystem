@@ -6,10 +6,13 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 {
     [SerializeField] private List<SkillHolder> usableSkills = new List<SkillHolder>();
 
+    [SerializeField] private SkillHolder opportunitySkill;
+
     [SerializeField] private int offensiveAdvantage;
     [SerializeField] private int offensiveDisavantage;
 
     private SkillRessource ressourceUsed;
+    private int opportunityAttackLeft = 1;
 
     private SKL_SkillScriptable selectedSkill = null;
 
@@ -48,6 +51,12 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         {
             Debug.LogError(HoldingEntity + " has EC_SkillHandler without EC_NodeHandler.");
         }
+        else
+        {
+            nodeHandler.actOnExitNode += RemoveOpportunityAttack;
+            nodeHandler.actOnEnterNode += PlaceOpportunityAttack;
+            PlaceOpportunityAttack(CurrentNode);
+        }
 
         if(ressourceUsed != null)
         {
@@ -69,11 +78,13 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         {
             ressourceUsed.Deactivate();
         }
+
+        RemoveOpportunityAttack(CurrentNode);
     }
 
     public override void StartRound()
     {
-        
+        //opportunityAttackLeft = 1;
     }
 
     public override void EndRound()
@@ -101,13 +112,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
     {
         if(selectedSkill != null && CanUseSkillAtNode(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)))
         {
-            if(HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer renderer))
-            {
-                renderer.SetOrientation(actionTargetPosition - holdingEntity.transform.position);
-            }
-
             ResolveSkill(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
-            GetSkillHolderForScriptable(selectedSkill)?.UseSkill();
 
             selectedSkill = null;
         }
@@ -115,8 +120,15 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public void ResolveSkill(SKL_SkillScriptable skillData, Node resolutionPosition)
     {
+        if (HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer renderer))
+        {
+            renderer.SetOrientation(resolutionPosition.WorldPosition - holdingEntity.transform.position);
+        }
+
         SKL_ResolvingSkillData resolvingSkillData = new SKL_ResolvingSkillData(skillData, this, resolutionPosition);
         SKL_SkillResolverManager.Instance.ResolveSpell(resolvingSkillData, OnEndResolveSkill);
+
+        GetSkillHolderForScriptable(selectedSkill)?.UseSkill();
     }
 
     private bool CanUseSkillAtNode(SKL_SkillScriptable skillToCheck, Node nodeToCheck)
@@ -150,5 +162,59 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         }
 
         return null;
+    }
+
+    private void PlaceOpportunityAttack(Node nodeToPlaceAround)
+    {
+        if (opportunitySkill != null && opportunitySkill.Scriptable != null)
+        {
+            List<Node> targetNodes = Pathfinding.Instance.GetAllNodeInDistance(nodeToPlaceAround, opportunitySkill.Scriptable.Range, true);
+
+            foreach (Node node in targetNodes)
+            {
+                if (!node.exitBlockers.Contains(TriggerOpportunityAttack))
+                {
+                    node.exitBlockers.Add(TriggerOpportunityAttack);
+                }
+            }
+        }
+    }
+
+    private void RemoveOpportunityAttack(Node nodeToRemoveAround)
+    {
+        if (opportunitySkill != null && opportunitySkill.Scriptable != null)
+        {
+            List<Node> targetNodes = Pathfinding.Instance.GetAllNodeInDistance(nodeToRemoveAround, opportunitySkill.Scriptable.Range, true);
+
+            foreach (Node node in targetNodes)
+            {
+                if (node.exitBlockers.Contains(TriggerOpportunityAttack))
+                {
+                    node.exitBlockers.Remove(TriggerOpportunityAttack);
+                }
+            }
+        }
+    }
+
+    private bool TriggerOpportunityAttack(EC_NodeHandler attackTarget)
+    {
+        if(opportunitySkill != null)
+        {
+            if(opportunityAttackLeft > 0 && HoldingEntity.IsHostileTo(attackTarget.HoldingEntity))
+            {
+                opportunityAttackLeft--;
+                ResolveSkill(opportunitySkill.Scriptable, attackTarget.CurrentNode);
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
     }
 }

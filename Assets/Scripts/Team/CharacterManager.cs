@@ -44,7 +44,7 @@ public class CharacterManager : Singleton<CharacterManager>
         }
     }
 
-    public void UpdateCharacterHostility(CharacterEntity toUpdate)
+    public void UpdateCharacterHostility(Entity toUpdate)
     {
         BattleManager.Instance.OnCharacterUpdateHostility(toUpdate);
     }

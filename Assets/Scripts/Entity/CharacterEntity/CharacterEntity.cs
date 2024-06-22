@@ -13,16 +13,9 @@ public class CharacterEntity : Entity
 {
     [SerializeField] private CharacterScriptable characterData;
 
-    [SerializeField] private CharacterHostility hostility;
-    [SerializeField] private int teamIndex = 0;
-
     [SerializeField] private int priority;
 
     public CharacterScriptable CharacterData => characterData;
-
-    public CharacterHostility Hostility => hostility;
-
-    public int TeamIndex => teamIndex;
 
     public int Priority => priority;
 
@@ -43,15 +36,5 @@ public class CharacterEntity : Entity
         CharacterManager.Instance.RemoveActiveCharacter(this);
 
         base.Deactivate();
-    }
-
-    public void SetHostile(CharacterHostility toSet)
-    {
-        if(hostility != toSet)
-        {
-            hostility = toSet;
-
-            CharacterManager.Instance.UpdateCharacterHostility(this);
-        }
     }
 }

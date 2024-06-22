@@ -1,12 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Node : IHeapItem<Node> {
+public class Node : IHeapItem<Node> 
+{
+	public delegate bool NodeBlocker(EC_NodeHandler handlerToBlock);
 
 	//Data Handlers
 	private List<EC_NodeHandler> entitiesOnNode = new List<EC_NodeHandler>();
+
+	public List<NodeBlocker> entryBlockers = new List<NodeBlocker>();
+	public List<NodeBlocker> exitBlockers = new List<NodeBlocker>();
 
 	//Data
 	private bool staticObstacle;

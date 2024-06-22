@@ -92,11 +92,6 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
             if (hitedObject.HoldingEntity.TryGetEntityComponentOfType(out EC_SkillAbsorberHandler skillAbsorberHandlers))
             {
                 RollDices(rolledDices, actionToResolve.DefensiveTrait, resolvingData.Caster, skillAbsorberHandlers, out didHit);
-
-                foreach (Dice dice in rolledDices)
-                {
-                    UnityEngine.Debug.Log(dice.Result + " : " + dice.DoesHit);
-                }
             }
             else
             {

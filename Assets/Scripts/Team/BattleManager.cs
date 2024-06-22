@@ -29,7 +29,7 @@ public class BattleManager : Singleton<BattleManager>
     /// Update the Battle state when a character change its hostility
     /// </summary>
     /// <param name="updatedEntity">The character updated</param>
-    public void OnCharacterUpdateHostility(CharacterEntity updatedEntity)
+    public void OnCharacterUpdateHostility(Entity updatedEntity)
     {
         if (!CheckHostileCharacterLeft())
         {

@@ -27,6 +27,8 @@ public class EC_NodeHandler : EntityComponent<IEC_GridEntityData>
     [Header("Devs")]
     [SerializeField] private bool drawGizmos = false;
 
+    public Action<Node> actOnEnterNode;
+    public Action<Node> actOnExitNode;
     public Action<EC_NodeHandler> actOnDataEnter;
     public Action<EC_NodeHandler> actOnDataExit;
 
@@ -96,6 +98,7 @@ public class EC_NodeHandler : EntityComponent<IEC_GridEntityData>
         {
             currentNode.AddEntityOnNode(this);
 
+            actOnEnterNode?.Invoke(currentNode);
             OnEnterNode?.Invoke(currentNode);
         }
     }
@@ -117,6 +120,7 @@ public class EC_NodeHandler : EntityComponent<IEC_GridEntityData>
         {
             if (applyNodeEffect)
             {
+                actOnExitNode?.Invoke(currentNode);
                 OnExitNode?.Invoke(currentNode);
             }
 

@@ -245,55 +245,86 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
         distance = Vector2.Distance(posUnit, posTarget);
 
-        entityAnimator?.AnimHandler.PlayAnimation("Walk");
         entityAnimator?.SetOrientation(posTarget - posUnit);
+
+        if(TryTriggerOpportunityAttack(CurrentNode))
+        {
+            EndMovement();
+            yield break;
+        }
+
+        entityAnimator?.AnimHandler.PlayAnimation("Walk");
 
         while (true)
         {
             lerpValue += Time.deltaTime * speed / distance;
 
-            if (CurrentNode != currentWaypoint && lerpValue >= 1)
+            if (lerpValue >= 1) //Check for the next Node to reach
             {
-                ChangeNode(currentWaypoint);
-            }
-
-            if (lerpValue >= 1)
-            {
-                targetIndex++;
-
-                if (targetIndex >= path.Length)
+                if(CurrentNode != currentWaypoint)
                 {
                     if (currentRoundMode == RoundMode.Round)
                     {
-                        currentMovementLeft -= CurrentNode.gCost;
+                        currentMovementLeft -= Pathfinding.Instance.GetDistance(CurrentNode, currentWaypoint);
                     }
+
+                    ChangeNode(currentWaypoint);
+                }
+
+                targetIndex++;
+
+                if (targetIndex >= path.Length)//Check if the movement should end.
+                {
+                    /*if (currentRoundMode == RoundMode.Round)
+                    {
+                        currentMovementLeft -= CurrentNode.gCost;
+                    }*/
 
                     EndMovement();
 
                     transformToMove.position = currentWaypoint.WorldPosition;
                     break;
                 }
+                else
+                {
+                    if (TryTriggerOpportunityAttack(CurrentNode))
+                    {
+                        EndMovement();
+                        break;
+                    }
 
-                currentWaypoint = path[targetIndex];
+                    //Continue following path
+                    currentWaypoint = path[targetIndex];
 
-                lerpValue--;
+                    lerpValue--;
 
-                posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
-                posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
+                    posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
+                    posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
 
-                entityAnimator?.SetOrientation(posTarget - posUnit);
+                    entityAnimator?.SetOrientation(posTarget - posUnit);
 
-                distance = Vector2.Distance(posUnit, posTarget);
-
-                //if (isMovementCosting || RVN_RoundManager.Instance.IsPaused) //TODO : Check pour les Cinématique ou autres ?
-                //{
-                //    StopMovement();
-                //}
+                    distance = Vector2.Distance(posUnit, posTarget);
+                }
             }
 
             transformToMove.position = Vector3.Lerp(posUnit, posTarget, lerpValue);
             yield return null;
         }
+    }
+
+    private bool TryTriggerOpportunityAttack(Node nodeToExit)
+    {
+        bool toReturn = false;
+
+        foreach(Node.NodeBlocker blocker in nodeToExit.exitBlockers)
+        {
+            if(blocker.Invoke(nodeHandler))
+            {
+                toReturn = true;
+            }
+        }
+
+        return toReturn;
     }
 
     /// <summary>

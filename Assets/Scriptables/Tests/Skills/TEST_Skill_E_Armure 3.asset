@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1c2a9f8da3a1104c8378faa9ed1ded8, type: 3}
+  m_Name: TEST_Skill_E_Armure 3
+  m_EditorClassIdentifier: 
+  displayName:
+    frenchText: Skill 1 Armure
+    englishText: 
+  icon: {fileID: 0}
+  description:
+    frenchText: 
+    englishText: 
+  cooldown: 0
+  castComplexity: 0
+  useByLevel: -1
+  useByTurn: 0
+  ressourceCost: 0
+  range: 2.5
+  privisualizedShape:
+    rid: 6537641225162326018
+  skillActions:
+    possibleActions:
+    - conditions: []
+      spellAction:
+        rid: 1837237164533612544
+  references:
+    version: 2
+    RefIds:
+    - rid: 1837237164533612544
+      type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
+      data:
+        shape:
+          rid: 1837237164533612545
+        startAnimations:
+        - rid: 1837237164533612546
+        damagesData:
+        - origin:
+            rid: 1837237164533612547
+          damageType: 3
+        damageAnimations: []
+        nextAction:
+          possibleActions: []
+    - rid: 1837237164533612545
+      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1837237164533612546
+      type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        animationTarget: 2
+        animationDuration: 3
+        animationName: Cast
+    - rid: 1837237164533612547
+      type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 5
+    - rid: 6537641225162326018
+      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
+      data: 
