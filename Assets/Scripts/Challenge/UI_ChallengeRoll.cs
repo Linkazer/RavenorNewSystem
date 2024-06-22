@@ -6,8 +6,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Handle the UI for the Challenge Roll.
+/// </summary>
 public class UI_ChallengeRoll : MonoBehaviour
 {
+    /// <summary>
+    /// The data of a resolving Challenge Roll.
+    /// </summary>
     private struct ResolvingChallenge
     {
         public ChallengeRollData challenge;
@@ -18,6 +24,9 @@ public class UI_ChallengeRoll : MonoBehaviour
         public Action<int> resultCallback;
     }
 
+    /// <summary>
+    /// The base amount of dice a challenged TraitHandler roll.
+    /// </summary>
     private const int BaseChallengeDiceAmount = 3;
 
     [Header("UI")]
@@ -36,6 +45,12 @@ public class UI_ChallengeRoll : MonoBehaviour
 
     private ResolvingChallenge currentChallenge;
 
+    /// <summary>
+    /// Initialize the UI for a Challenge Roll.
+    /// </summary>
+    /// <param name="nChallengeRoll">The Challenge Roll data.</param>
+    /// <param name="nChallengedHandler">The challenged TraitHandler.</param>
+    /// <param name="callback">The methods called when the challenge is done, with the amount of success as entry.</param>
     public void InitializeChallenge(ChallengeRollData nChallengeRoll, EC_TraitHandler nChallengedHandler, Action<int> callback)
     {
         List<UI_ChallengeDice> usedDices = new List<UI_ChallengeDice>();
@@ -84,6 +99,12 @@ public class UI_ChallengeRoll : MonoBehaviour
         validateResultButton.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Roll one of the die.
+    /// Called by a UnityEvent.
+    /// </summary>
+    /// <param name="diceToRoll">The die to roll.</param>
+    /// <param name="durationOffset">The offset duration of the roll.</param>
     public void UE_RollDice(UI_ChallengeDice diceToRoll, float durationOffset)
     {
         if (currentChallenge.dicesUsedForChallenge.Contains(diceToRoll) && !currentChallenge.alreadyRolledDices.Contains(diceToRoll))
@@ -103,6 +124,9 @@ public class UI_ChallengeRoll : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when the last dice is rolled. Change the state of the UI from "Roll" to "Result".
+    /// </summary>
     private void OnRolledLastDice()
     {
         diceRollButton.gameObject.SetActive(false);
@@ -110,11 +134,19 @@ public class UI_ChallengeRoll : MonoBehaviour
         validateResultButton.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Roll every dices at once.
+    /// Called in a UnityEvent.
+    /// </summary>
     public void UE_RollAllDices()
     {
         StartCoroutine(RollAllDices());
     }
 
+    /// <summary>
+    /// Validate the Challenge Roll.
+    /// Called in a UnityEvent.
+    /// </summary>
     public void UE_ValidateChallenge()
     {
         int finalResult = 0;
@@ -134,6 +166,10 @@ public class UI_ChallengeRoll : MonoBehaviour
         currentChallenge.resultCallback?.Invoke(finalResult);
     }
 
+    /// <summary>
+    /// Roll all dices with a small offset.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator RollAllDices()
     {
         List<UI_ChallengeDice> diceToRoll = new List<UI_ChallengeDice>();

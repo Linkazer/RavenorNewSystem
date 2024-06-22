@@ -19,8 +19,8 @@ MonoBehaviour:
   speakerPortrait: {fileID: 21300000, guid: b9777391ee6c68d48ab090b1e39e094a, type: 3}
   walkable: 0
   blockVision: 0
-  height: 0.88
-  renderer: {fileID: 6022577937452092619, guid: 69b4aaf4c76a20549a56488b84bc774f, type: 3}
+  height: 1.125
+  renderer: {fileID: 1685990531744323952, guid: f36c06570598f934cad731e4badc0f62, type: 3}
   speed: 5
   movementByTurn: 7.5
   healthPoints: 6
@@ -33,6 +33,7 @@ MonoBehaviour:
   passives: []
   skills:
   - {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
+  opportunitySkill: {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
   ressourceUsed: 0
   expertises:
   - level: 4

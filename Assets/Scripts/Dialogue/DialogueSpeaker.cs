@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Data of a Dialogue speaker.
+/// </summary>
 [CreateAssetMenu(fileName = "Speaker Scriptable", menuName = "Dialogue/New Speaker")]
 public class DialogueSpeaker : ScriptableObject
 {

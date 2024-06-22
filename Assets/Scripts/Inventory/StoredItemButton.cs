@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handle the button of an Item in the Inventory UI.
+/// </summary>
 public class StoredItemButton : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
@@ -12,6 +15,10 @@ public class StoredItemButton : MonoBehaviour
 
     private StoredItem linkedItem;
 
+    /// <summary>
+    /// Set the item held by the button.
+    /// </summary>
+    /// <param name="nLinkedItem">The item to hold.</param>
     public void SetItem(StoredItem nLinkedItem)
     {
         if (nLinkedItem == null)
@@ -32,6 +39,9 @@ public class StoredItemButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Update the usability of the item.
+    /// </summary>
     public void UpdateUsability()
     {
         canvasGroup.interactable = linkedItem.amount > 0 && linkedItem.item is StorableItem_Usable;

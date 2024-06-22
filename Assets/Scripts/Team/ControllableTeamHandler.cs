@@ -121,7 +121,7 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
             {
                 if (RoundManager.instance.CurrentRoundMode == RoundMode.Round)
                 {
-                    BattleRoundManager.Instance.EndCharacterTurn(character);
+                    BattleManager.Instance.EndCharacterTurn(character);
                 }
 
                 if (currentControllableCharacters.Count > 0)

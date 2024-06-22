@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Handle the Inventory system.
+/// </summary>
 public class InventoryManager : Singleton<InventoryManager>
 {
     private List<StoredItem> storedItemsInInventory = new List<StoredItem>();
@@ -12,7 +15,12 @@ public class InventoryManager : Singleton<InventoryManager>
 
     public List<StoredItem> StoredItemsInInventory => storedItemsInInventory;
 
-    public void AddItem(StorableItem item, int quantityToAdd)
+    /// <summary>
+    /// Add an item in the inventory.
+    /// </summary>
+    /// <param name="item">The item to add.</param>
+    /// <param name="quantityToAdd">The amount to add.</param>
+    public void AddItem(StorableItem item, int quantityToAdd = 1)
     {
         int indexInInventory = GetItemIndex(item);
         if (indexInInventory < 0)
@@ -31,6 +39,11 @@ public class InventoryManager : Singleton<InventoryManager>
         actOnUpdateInventory?.Invoke();
     }
 
+    /// <summary>
+    /// Remove an item from the inventory.
+    /// </summary>
+    /// <param name="item">The item to remove.</param>
+    /// <param name="quantityToRemove">The amount to remove.</param>
     public void RemoveItem(StorableItem item, int quantityToRemove = 1)
     {
         StoredItem itemToRemove = null;
@@ -56,6 +69,11 @@ public class InventoryManager : Singleton<InventoryManager>
         actOnUpdateInventory?.Invoke();
     }
 
+    /// <summary>
+    /// Get the inventory index of an item.
+    /// </summary>
+    /// <param name="item">The item to search for.</param>
+    /// <returns>The index of the item in the inventory.</returns>
     public int GetItemIndex(StorableItem item)
     {
         for(int i = 0; i < storedItemsInInventory.Count; i++)
@@ -69,6 +87,11 @@ public class InventoryManager : Singleton<InventoryManager>
         return -1;
     }
 
+    /// <summary>
+    /// Get the amount of an item in the inventory.
+    /// </summary>
+    /// <param name="item">The item to search for.</param>
+    /// <returns>The amount of the asked item the inventory has.</returns>
     public int GetItemAmount(StorableItem item)
     {
         int index = GetItemIndex(item);

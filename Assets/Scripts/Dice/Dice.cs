@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains the data of a Dice.
+/// </summary>
 public class Dice
 {
     private const int NumberDiceFace = 8;
@@ -31,6 +34,11 @@ public class Dice
         resultBonus = bonus;
     }
 
+    /// <summary>
+    /// Roll the dice.
+    /// </summary>
+    /// <param name="asker">The MonoBehavior that used the dice. Used to balance probabilities.</param>
+    /// <returns>The result of the roll.</returns>
     public float Roll(MonoBehaviour asker)
     {
         int diceResult = 0;

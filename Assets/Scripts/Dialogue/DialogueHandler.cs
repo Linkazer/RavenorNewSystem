@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handle the UI of a Dialogue.
+/// </summary>
 public class DialogueHandler : MonoBehaviour
 {
     [Header("UI")]
@@ -36,6 +39,12 @@ public class DialogueHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Display the text of a Dialogue line.
+    /// </summary>
+    /// <param name="dialogueSpeaker">The speaker of the line.</param>
+    /// <param name="dialogueText">The line to display.</param>
+    /// <param name="endDialogueTextCallback">The mthod to call when the player clic to go to the next line/action.</param>
     public void DisplayDialogueText(DialogueSpeaker dialogueSpeaker, string dialogueText, Action endDialogueTextCallback)
     {
         endCallback = endDialogueTextCallback;
@@ -130,22 +139,35 @@ public class DialogueHandler : MonoBehaviour
         ActiveHandlerInput(true);
     }
 
+    /// <summary>
+    /// End the current Dialogue line.
+    /// </summary>
     private void EndDisplayDialogueText()
     {
         ActiveHandlerInput(false);
         endCallback?.Invoke();
     }
 
+    /// <summary>
+    /// Show the Dialogue UI.
+    /// </summary>
     public void ShowDialogueHandler()
     {
         handlerGroup.alpha = 1f;
     }
 
+    /// <summary>
+    /// Hide the Dialogue UI.
+    /// </summary>
     public void HideDialogueHandler()
     {
         handlerGroup.alpha = 0f;
     }
 
+    /// <summary>
+    /// Activate or deactivate inputs on the Dialogue UI.
+    /// </summary>
+    /// <param name="toSet">Inputs state.</param>
     private void ActiveHandlerInput(bool toSet)
     {
         handlerGroup.interactable = toSet;

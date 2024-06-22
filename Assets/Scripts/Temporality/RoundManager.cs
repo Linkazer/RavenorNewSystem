@@ -10,6 +10,9 @@ public enum RoundMode
     RealTime,
 }
 
+/// <summary>
+/// Gère tout ce qui est en lien avec les Tours de jeux (Début, Fin et fonctionnement en mode Temps réel)
+/// </summary>
 public class RoundManager : Singleton<RoundManager>
 {
     public const float RoundDuration = 6f;

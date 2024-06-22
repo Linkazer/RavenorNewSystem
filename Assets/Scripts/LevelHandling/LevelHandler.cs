@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handle a Level.
+/// </summary>
 public class LevelHandler : MonoBehaviour
 {
     public static LevelHandler CurrentLevel;
@@ -14,6 +17,9 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] private SequenceCutscene startCutscene;
     [SerializeField] private LevelEnd[] possibleEnds = new LevelEnd[0];
 
+    /// <summary>
+    /// Instantiate the Level.
+    /// </summary>
     public void InstantiateLevel()
     {
         CurrentLevel = this;
@@ -21,6 +27,10 @@ public class LevelHandler : MonoBehaviour
         StartCoroutine(InitializeLevel());
     }
 
+    /// <summary>
+    /// Initialize the Level.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator InitializeLevel()
     {
         yield return 0;

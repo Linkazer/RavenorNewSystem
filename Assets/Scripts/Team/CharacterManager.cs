@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Gère le stockage de tous les personnages actifs dans le niveau
+/// </summary>
 public class CharacterManager : Singleton<CharacterManager>
 {
     private List<CharacterEntity> activeCharacters = new List<CharacterEntity>();
@@ -14,13 +17,13 @@ public class CharacterManager : Singleton<CharacterManager>
         {
             activeCharacters.Add(toAdd);
 
-            if (BattleRoundManager.Instance.IsBattleRunning)
+            if (BattleManager.Instance.IsBattleRunning)
             {
-                BattleRoundManager.Instance.AddCharacterInBattle(toAdd);
+                BattleManager.Instance.AddCharacterInBattle(toAdd);
             }
             else if(toAdd.Hostility == CharacterHostility.Hostile)
             {
-                BattleRoundManager.Instance.StartBattle();
+                BattleManager.Instance.StartBattle();
             }
         }
     }
@@ -33,9 +36,9 @@ public class CharacterManager : Singleton<CharacterManager>
             {
                 activeCharacters.Remove(toRemove as CharacterEntity);
 
-                if (BattleRoundManager.Instance.IsBattleRunning)
+                if (BattleManager.Instance.IsBattleRunning)
                 {
-                    BattleRoundManager.Instance.RemoveCharacterFromBattle(toRemove);
+                    BattleManager.Instance.RemoveCharacterFromBattle(toRemove);
                 }
             }
         }
@@ -43,6 +46,6 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public void UpdateCharacterHostility(CharacterEntity toUpdate)
     {
-        BattleRoundManager.Instance.OnCharacterUpdateHostility(toUpdate);
+        BattleManager.Instance.OnCharacterUpdateHostility(toUpdate);
     }
 }

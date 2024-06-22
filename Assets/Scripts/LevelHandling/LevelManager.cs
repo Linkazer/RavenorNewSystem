@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handle the Level selection.
+/// </summary>
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] private LevelScriptable levelToLoad;

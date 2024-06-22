@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Animation Behavior for animations using the Animator.
+/// </summary>
 public class ANIMBH_Animator : AnimationBehaviour
 {
     [SerializeField] protected Animator animator;
@@ -35,6 +38,9 @@ public class ANIMBH_Animator : AnimationBehaviour
         animator.Play("Base Layer.Character_Idle");
     }
 
+    /// <summary>
+    /// Set a timer to end the animation when animation is completed.
+    /// </summary>
     private void SetAnimationLength()
     {
         if (!currentAnimation.DoesLoop)

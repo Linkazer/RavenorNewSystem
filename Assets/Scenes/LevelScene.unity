@@ -4441,9 +4441,34 @@ MonoBehaviour:
   enableEdgeCamera: 0
   cameraLimit: {x: -50, y: 50, z: -50, w: 50}
   actionMoveCameraInput: {fileID: -3533170608830815885, guid: 4d534e77863cc8241b86355c368b0847, type: 3}
-  zoomForce: 1
+  zoomForce: 0.1
   zoomSpeed: 5
-  zoomLimits: {x: 3, y: 20}
+  startZoom: 0.6
+  zoomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  zoomLimits: {x: 3, y: 10}
   currentFocus: {fileID: 0}
 --- !u!4 &758719857
 Transform:

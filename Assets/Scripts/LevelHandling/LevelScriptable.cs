@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains the data of a Level.
+/// </summary>
 [CreateAssetMenu(fileName = "New Level", menuName = "Level/Create new Level")]
 public class LevelScriptable : ScriptableObject
 {

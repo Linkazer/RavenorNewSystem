@@ -6,6 +6,9 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Handle the Inputs of the Player.
+/// </summary>
 public class InputManager : Singleton<InputManager>
 {
     [SerializeField] public LayerMask layerToIgnore;
@@ -56,17 +59,17 @@ public class InputManager : Singleton<InputManager>
     {
         playerControl.Enable();
 
-        actionMouseMovementInput.action.performed += UpdateMousePosition;
+        actionMouseMovementInput.action.performed += UpdateMousePosition; //Called while mouse is moving.
 
-        actionMouseLeftClicInput.action.canceled += LeftMouseInput;
+        actionMouseLeftClicInput.action.canceled += LeftMouseInput; //Called when the left clic is done.
 
-        actionMouseRightClicInput.action.canceled += RightMouseInput;
+        actionMouseRightClicInput.action.canceled += RightMouseInput; //Called when the right clic is done.
 
-        actionMouseMiddle.action.started += MiddleMouseInputDown;
+        actionMouseMiddle.action.started += MiddleMouseInputDown; //Called when the middle clic start.
+       
+        actionMouseMiddle.action.canceled += MiddleMouseInputDown; //Called when the middle clic is done.
 
-        actionMouseMiddle.action.canceled += MiddleMouseInputDown;
-
-        actionMouseScroll.action.performed += ScrollMouseInput;
+        actionMouseScroll.action.performed += ScrollMouseInput; //Called while the middle clic is pressed.
     }
 
     private void OnDisable()
@@ -89,8 +92,6 @@ public class InputManager : Singleton<InputManager>
         if (!evtSyst.IsPointerOverGameObject())
         {
             UpdateRaycastHitObject();
-
-            OnMouseScroll?.Invoke(actionMouseScroll.action.ReadValue<Vector2>().normalized);
         }
     }
 

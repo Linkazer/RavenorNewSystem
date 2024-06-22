@@ -6,6 +6,9 @@ using UnityEditor.TerrainTools;
 using System;
 using Unity.VisualScripting;
 
+/// <summary>
+/// Handle a Room.
+/// </summary>
 public class RoomHandler : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera roomOpeningCamera;
@@ -14,7 +17,7 @@ public class RoomHandler : MonoBehaviour
 
     private bool isOpen;
     private Action endOpenCallback;
-
+    
     public void OpenRoom(Action callback)
     {
         if(!isOpen)

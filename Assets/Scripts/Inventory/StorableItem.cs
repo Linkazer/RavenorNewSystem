@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains the data of an item that can be put in the inventory.
+/// </summary>
 [CreateAssetMenu(fileName ="Storable Item", menuName ="Inventory/Base Item")]
 public class StorableItem : ScriptableObject
 {

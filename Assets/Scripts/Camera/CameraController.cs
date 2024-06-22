@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Script to handle the main Camera.
+/// </summary>
 public class CameraController : Singleton<CameraController>
 {
     [SerializeField] private Camera camera;
@@ -22,11 +25,12 @@ public class CameraController : Singleton<CameraController>
     [Header("Zoom")]
     [SerializeField] private float zoomForce;
     [SerializeField] private float zoomSpeed;
+    [SerializeField] private float startZoom = 0.5f;
+    [SerializeField] private AnimationCurve zoomCurve;
     [SerializeField] private Vector2 zoomLimits;
 
     [Header("Debug")]
     [SerializeField] private Transform currentFocus;
-
 
     private Vector2 mouseDirection;
 
@@ -39,11 +43,16 @@ public class CameraController : Singleton<CameraController>
 
     public Camera UsedCamera => camera;
 
+    private float ZoomRange => zoomLimits.y - zoomLimits.x;
+
+    private float RealTargetZoom => zoomLimits.x + (ZoomRange * zoomCurve.Evaluate(targetZoom));
+
     protected override void OnAwake()
     {
         base.OnAwake();
 
-        targetZoom = virtualCamera.m_Lens.OrthographicSize;
+        targetZoom = startZoom;
+        virtualCamera.m_Lens.OrthographicSize = RealTargetZoom;
     }
 
     private void Start()
@@ -130,19 +139,23 @@ public class CameraController : Singleton<CameraController>
         SetCameraPosition(cameraHandler.transform.position + new Vector3(direction.x, direction.y, 0) * speed * Time.unscaledDeltaTime);
     }
 
+    /// <summary>
+    /// Zomm the camera.
+    /// </summary>
+    /// <param name="scrollDirection">The data of the scroll for the zoom.</param>
     private void Zoom(Vector2 scrollDirection)
     {
         if (scrollDirection.y != 0)
         {
-            float nextZoom = virtualCamera.m_Lens.OrthographicSize - (scrollDirection.y * zoomForce);
+            float nextZoom = targetZoom - (scrollDirection.normalized.y * zoomForce);
 
-            if (nextZoom > zoomLimits.y)
+            if (nextZoom > 1)
             {
-                nextZoom = zoomLimits.y;
+                nextZoom = 1;
             }
-            else if (nextZoom < zoomLimits.x)
+            else if (nextZoom < 0)
             {
-                nextZoom = zoomLimits.x;
+                nextZoom = 0;
             }
 
             targetZoom = nextZoom;
@@ -150,20 +163,22 @@ public class CameraController : Singleton<CameraController>
         }
     }
 
+    [System.Obsolete("Obsolete ? A supprimé la prochaine fois qu'on passe sur le script")]
     public void SetCameraPositionAndZoom(Vector2 position, float zoom)
     {
         SetCameraPosition(position);
         targetZoom = zoom;
 
-        if (targetZoom < zoomLimits.x)
+        if (targetZoom < 0)
         {
-            targetZoom = zoomLimits.x;
+            targetZoom = 0;
         }
-        else if (targetZoom > zoomLimits.y)
+        else if (targetZoom > 1)
         {
-            targetZoom = zoomLimits.y;
+            targetZoom = 1;
         }
-        virtualCamera.m_Lens.OrthographicSize = targetZoom;
+
+        virtualCamera.m_Lens.OrthographicSize = RealTargetZoom;
     }
 
     /// <summary>
@@ -238,15 +253,15 @@ public class CameraController : Singleton<CameraController>
             }
         }
 
-        if (virtualCamera.m_Lens.OrthographicSize != targetZoom)
+        if (virtualCamera.m_Lens.OrthographicSize != RealTargetZoom)
         {
-            if (Mathf.Abs(targetZoom - virtualCamera.m_Lens.OrthographicSize) > Time.deltaTime)
+            if (Mathf.Abs(RealTargetZoom - virtualCamera.m_Lens.OrthographicSize) > Time.deltaTime)
             {
-                virtualCamera.m_Lens.OrthographicSize += (targetZoom - virtualCamera.m_Lens.OrthographicSize) * zoomSpeed * Time.deltaTime;
+                virtualCamera.m_Lens.OrthographicSize += (RealTargetZoom - virtualCamera.m_Lens.OrthographicSize) * zoomSpeed * Time.deltaTime;
             }
             else
             {
-                virtualCamera.m_Lens.OrthographicSize = targetZoom;
+                virtualCamera.m_Lens.OrthographicSize = RealTargetZoom;
             }
         }
     }

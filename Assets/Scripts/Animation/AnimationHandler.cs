@@ -19,11 +19,20 @@ public class AnimationHandler : MonoBehaviour
 
     private AnimationData currentAnim;
 
+    /// <summary>
+    /// Play an animation.
+    /// </summary>
+    /// <param name="animationName">The Name/ID of the animation to play.</param>
     public void PlayAnimation(string animationName)
     {
         PlayAnimation(animationName, null);
     }
 
+    /// <summary>
+    /// Play an animation with specific data.
+    /// </summary>
+    /// <param name="animationName">The Name/ID of the animation to play.</param>
+    /// <param name="animationData">The data for the animation.</param>
     public void PlayAnimation(string animationName, object animationData)
     {
         if (currentAnim == null || currentAnim.AnimationName != animationName)
@@ -45,12 +54,17 @@ public class AnimationHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Set the animation to the base animation (Idle)
+    /// </summary>
     public void EndAnimation()
     {
         PlayAnimation("Idle");
         currentAnim = null;
     }
 
+    /// Methods that can be used in the Animator.
+    #region Animator Methods
     public void ANIM_UpdateMainSortingGroup(int sortingOrder)
     {
         mainSortingGroup.sortingOrder = sortingOrder;
@@ -70,4 +84,5 @@ public class AnimationHandler : MonoBehaviour
     {
         PoolManager.InstatiatePoolableAtPosition(fxToPlay, transform.position, null);
     }
+    #endregion
 }

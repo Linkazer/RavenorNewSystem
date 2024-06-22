@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains the data of a StorableItem present in the Inventory.
+/// </summary>
 [Serializable]
 public class StoredItem
 {

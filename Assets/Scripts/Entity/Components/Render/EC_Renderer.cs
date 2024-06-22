@@ -22,11 +22,17 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
 
     public override void SetComponentData(IEC_RendererData componentData)
     {
-        if(animationHandler == null)
+        if(animationHandler != null)
         {
-            animationHandler = Instantiate(componentData.AnimationHandler, transform);
-            animationHandler.transform.localPosition = Vector3.zero;
+#if UNITY_EDITOR
+            DestroyImmediate(animationHandler.gameObject);
+#else
+            Destroy(animationHandler.gameObject);
+#endif
         }
+
+        animationHandler = Instantiate(componentData.AnimationHandler, transform);
+        animationHandler.transform.localPosition = Vector3.zero;
     }
 
     protected override void InitializeComponent()

@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager>
 {
+    private Dictionary<PrefabAssetType, List<Poolable_FX>> instantiatedFX = new Dictionary<PrefabAssetType, List<Poolable_FX>>(); //Peut être utilisé comme base pour un système de Pool complet
+
     /// <summary>
     /// Instatiate an Animation object at the wanted position.
     /// </summary>

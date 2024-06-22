@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// Handle Dialogue logic.
+/// </summary>
 public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField] private DialogueHandler dialogueHandler;
@@ -16,11 +19,19 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public DialogueHandler CurrentHandler => dialogueHandler;
 
+    /// <summary>
+    /// Set the current Dialogue UI.
+    /// </summary>
+    /// <param name="handler">The Dialogue UI to set.</param>
     public void SetCurrentHandler(DialogueHandler handler)
     {
         dialogueHandler = handler;
     }
 
+    /// <summary>
+    /// Unset the current Dialogue UI.
+    /// </summary>
+    /// <param name="handler">The Dialogue UI to unset.</param>
     public void UnsetCurrentHandler(DialogueHandler handler)
     {
         if(dialogueHandler == handler)
@@ -29,6 +40,11 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
+    /// <summary>
+    /// Play a Dialogue.
+    /// </summary>
+    /// <param name="dialogueToPlay">The Dialogue to play.</param>
+    /// <param name="endDialogueCallback">The method to call at the end of the Dialogue.</param>
     public void PlayDialogue(DialogueScriptable dialogueToPlay, Action endDialogueCallback)
     {
         currentDialogueProgress = -1;
@@ -41,6 +57,9 @@ public class DialogueManager : Singleton<DialogueManager>
         PlayNextDialogueAction();
     }
 
+    /// <summary>
+    /// Play the next Action of the Dialogue.
+    /// </summary>
     private void PlayNextDialogueAction()
     {
         currentDialogueProgress++;
@@ -55,6 +74,9 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
+    /// <summary>
+    /// End the current Dialogue.
+    /// </summary>
     private void EndDialogue()
     {
         CurrentHandler.HideDialogueHandler();

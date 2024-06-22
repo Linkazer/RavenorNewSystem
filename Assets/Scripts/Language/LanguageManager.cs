@@ -18,4 +18,7 @@ public class LanguageManager : Singleton<LanguageManager>
     {
         instance.currentLanguage = (PossibleLanguage)languageIndex;
     }
+
+    //Code Review : Voir comment on pourrait faire pour mettre à jour les langues automatiquement.
+    //              Pas forcément nécessaire. Si on met le choix de langue uniquement dans le menu principal, on aura qu'à recharger le menu principal
 }

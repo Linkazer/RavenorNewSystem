@@ -170,7 +170,7 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         {
             if (chara.TryGetEntityComponentOfType(out EC_NodeHandler nodeHandler))
             {
-                nodeHandler.SetWalkable(false); //Voir pour reset à la place ?
+                nodeHandler.SetWalkable(false);
             }
         }
 

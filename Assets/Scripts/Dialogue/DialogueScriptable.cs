@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The data of a Dialogue.
+/// </summary>
 [CreateAssetMenu(fileName ="Dialogue Scriptable", menuName ="Dialogue/New Dialogue")]
 public class DialogueScriptable : ScriptableObject
 {
