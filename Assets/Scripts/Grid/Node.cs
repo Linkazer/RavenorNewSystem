@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class Node : IHeapItem<Node> 
 {
-	public delegate bool NodeBlocker(EC_NodeHandler handlerToBlock);
+	public delegate bool NodeBlocker(EC_NodeHandler handlerToBlock, object[] triggerData);
 
 	//Data Handlers
 	private List<EC_NodeHandler> entitiesOnNode = new List<EC_NodeHandler>();

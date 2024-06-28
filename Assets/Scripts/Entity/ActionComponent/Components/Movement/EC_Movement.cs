@@ -247,7 +247,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
         entityAnimator?.SetOrientation(posTarget - posUnit);
 
-        if(TryTriggerOpportunityAttack(CurrentNode))
+        if(CheckForOpportunityAttack(CurrentNode, true))
         {
             EndMovement();
             yield break;
@@ -287,7 +287,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
                 }
                 else
                 {
-                    if (TryTriggerOpportunityAttack(CurrentNode))
+                    if (CheckForOpportunityAttack(CurrentNode, true))
                     {
                         EndMovement();
                         break;
@@ -312,13 +312,15 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         }
     }
 
-    private bool TryTriggerOpportunityAttack(Node nodeToExit)
+    public bool CheckForOpportunityAttack(Node nodeToCheckAround, bool triggerAttack)
     {
         bool toReturn = false;
 
-        foreach(Node.NodeBlocker blocker in nodeToExit.exitBlockers)
+        object[] blockerTriggerData = new object[] { triggerAttack };
+
+        foreach (Node.NodeBlocker blocker in nodeToCheckAround.exitBlockers)
         {
-            if(blocker.Invoke(nodeHandler))
+            if (blocker.Invoke(nodeHandler, blockerTriggerData))
             {
                 toReturn = true;
             }
@@ -326,6 +328,23 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
         return toReturn;
     }
+
+    /*private bool TryTriggerOpportunityAttack(Node nodeToExit)
+    {
+        bool toReturn = false;
+
+        object[] blockerTriggerData = new object[] { true };
+
+        foreach(Node.NodeBlocker blocker in nodeToExit.exitBlockers)
+        {
+            if(blocker.Invoke(nodeHandler, blockerTriggerData))
+            {
+                toReturn = true;
+            }
+        }
+
+        return toReturn;
+    }*/
 
     /// <summary>
     /// Teleport the Component to the target Node.

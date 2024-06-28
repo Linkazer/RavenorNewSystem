@@ -22,7 +22,7 @@ MonoBehaviour:
   height: 1
   renderer: {fileID: 6022577937452092619, guid: 69b4aaf4c76a20549a56488b84bc774f, type: 3}
   speed: 5
-  movementByTurn: 7.5
+  movementByTurn: 15
   healthPoints: 10
   armor: 3
   force: 0
@@ -33,7 +33,6 @@ MonoBehaviour:
   passives: []
   skills:
   - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
-  opportunitySkill: {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
   ressourceUsed: 2
   expertises:
   - level: 4

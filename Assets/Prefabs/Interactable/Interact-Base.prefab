@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 2526031770465228590}
   - {fileID: 3326753007699228777}
   - {fileID: 4389370316123445752}
+  hostility: 2
 --- !u!1 &4336087245057345237
 GameObject:
   m_ObjectHideFlags: 0

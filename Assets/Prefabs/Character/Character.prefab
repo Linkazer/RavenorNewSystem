@@ -65,9 +65,8 @@ MonoBehaviour:
   - {fileID: 8756184738862015014}
   - {fileID: 7068744281123618637}
   - {fileID: 7839398702212082824}
+  hostility: 2
   characterData: {fileID: 0}
-  hostility: 0
-  teamIndex: 0
   priority: 0
 --- !u!1 &1463639796156078115
 GameObject:
@@ -540,6 +539,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   usableSkills:
   - scriptable: {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
+  opportunitySkill:
+    scriptable: {fileID: 0}
   offensiveAdvantage: 0
   offensiveDisavantage: 0
 --- !u!1 &3539966252685878812

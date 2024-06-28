@@ -92,28 +92,28 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
             List<Node> validPath = new List<Node>();
             List<Node> opportunityPath = new List<Node>();
 
-            //bool foundOpportunityAttack = false;
+            bool foundOpportunityAttack = false;
 
-            /*if (CheckForOpportunityAttack(currentNode))
+            if (movementHandler.CheckForOpportunityAttack(movementHandler.CurrentNode, false))
             {
                 foundOpportunityAttack = true;
-            }*/
+            }
 
             foreach (Node n in path)
             {
-                //if (!foundOpportunityAttack)
+                if (!foundOpportunityAttack)
                 {
-                    /*if (CheckForOpportunityAttack(n))
+                    if (movementHandler.CheckForOpportunityAttack(n, false))
                     {
                         foundOpportunityAttack = true;
-                    }*/
+                    }
 
                     validPath.Add(n);
                 }
-                /*else
+                else
                 {
                     opportunityPath.Add(n);
-                }*/
+                }
             }
 
             GridZoneDisplayer.SetGridFeedback(validPath, Color.green);

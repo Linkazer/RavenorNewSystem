@@ -7,7 +7,7 @@ public class Entity : MonoBehaviour, IRoundHandler
 {
     [SerializeField] private bool activateOnStart = true;
     [SerializeField] protected EntityComponent[] components;
-    [SerializeField] private CharacterHostility hostility;
+    [SerializeField] private CharacterHostility hostility = CharacterHostility.Neutral;
 
     private Dictionary<Type, EntityComponent> componentByType = new Dictionary<Type, EntityComponent>();
 

@@ -5671,6 +5671,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1837237272078974976
+      type: {class: SQA_PlaySequence, ns: , asm: Assembly-CSharp}
+      data:
+        sequenceToPlay: {fileID: 3059594414163006539}
     - rid: 6429556250007044105
       type: {class: SQA_DoCheck, ns: , asm: Assembly-CSharp}
       data:
@@ -5678,7 +5682,7 @@ MonoBehaviour:
         - checkers:
           - rid: 6429556250007044106
           actionOnValidCheck:
-            rid: 6429556250007044110
+            rid: 1837237272078974976
         actionOnNoValidCheck:
           rid: 6429556250007044111
     - rid: 6429556250007044106
@@ -5686,10 +5690,6 @@ MonoBehaviour:
       data:
         itemToCheck: {fileID: 11400000, guid: ff0ab138fc4355e4c994615901e26f07, type: 2}
         minimumAmount: 1
-    - rid: 6429556250007044110
-      type: {class: SQA_OpenRoom, ns: , asm: Assembly-CSharp}
-      data:
-        roomToOpen: {fileID: 7192508218828940188}
     - rid: 6429556250007044111
       type: {class: SQA_PlaySequence, ns: , asm: Assembly-CSharp}
       data:
@@ -7588,6 +7588,17 @@ PrefabInstance:
       addedObject: {fileID: 1098598758075981441}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 109582e1ed4514949a03edad3fdb603a, type: 3}
+--- !u!114 &3059594414163006539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3654981666428167036, guid: 109582e1ed4514949a03edad3fdb603a, type: 3}
+  m_PrefabInstance: {fileID: 1787021530659600183}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdf118947cc28b45b67ad8d5a0d076e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3536005694801740302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3017038933597500729, guid: 109582e1ed4514949a03edad3fdb603a, type: 3}
@@ -9510,7 +9521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: hostility
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: characterData
@@ -9520,9 +9531,13 @@ PrefabInstance:
       propertyPath: activateOnStart
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4179433055324614356, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: opportunitySkill.scriptable
+      value: 
+      objectReference: {fileID: 11400000, guid: 21f6a8847af170146a82212c0fad5343, type: 2}
     - target: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.5
+      value: -7.5
       objectReference: {fileID: 0}
     - target: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.y

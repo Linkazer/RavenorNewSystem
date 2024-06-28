@@ -172,9 +172,9 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
             foreach (Node node in targetNodes)
             {
-                if (!node.exitBlockers.Contains(TriggerOpportunityAttack))
+                if (!node.exitBlockers.Contains(CheckOpportunityAttack))
                 {
-                    node.exitBlockers.Add(TriggerOpportunityAttack);
+                    node.exitBlockers.Add(CheckOpportunityAttack);
                 }
             }
         }
@@ -188,22 +188,27 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
             foreach (Node node in targetNodes)
             {
-                if (node.exitBlockers.Contains(TriggerOpportunityAttack))
+                if (node.exitBlockers.Contains(CheckOpportunityAttack))
                 {
-                    node.exitBlockers.Remove(TriggerOpportunityAttack);
+                    node.exitBlockers.Remove(CheckOpportunityAttack);
                 }
             }
         }
     }
 
-    private bool TriggerOpportunityAttack(EC_NodeHandler attackTarget)
+    private bool CheckOpportunityAttack(EC_NodeHandler attackTarget, object[] triggerData)
     {
+        bool doesTriggerAttack = (bool)triggerData[0];
+
         if(opportunitySkill != null)
         {
             if(opportunityAttackLeft > 0 && HoldingEntity.IsHostileTo(attackTarget.HoldingEntity))
             {
-                opportunityAttackLeft--;
-                ResolveSkill(opportunitySkill.Scriptable, attackTarget.CurrentNode);
+                if (doesTriggerAttack)
+                {
+                    opportunityAttackLeft--;
+                    ResolveSkill(opportunitySkill.Scriptable, attackTarget.CurrentNode);
+                }
 
                 return true;
             }
