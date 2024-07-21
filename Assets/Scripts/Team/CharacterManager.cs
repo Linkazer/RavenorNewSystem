@@ -11,6 +11,21 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public List<CharacterEntity> ActiveCharacters => activeCharacters;
 
+    public List<CharacterEntity> GetPlayerEntites()
+    {
+        List<CharacterEntity> toReturn = new List<CharacterEntity>();
+
+        foreach(CharacterEntity entity in ActiveCharacters)
+        {
+            if(entity.Hostility == CharacterHostility.Ally)
+            {
+                toReturn.Add(entity);
+            }
+        }
+
+        return toReturn;
+    }
+
     public void AddActiveCharacter(CharacterEntity toAdd)
     {
         if(!activeCharacters.Contains(toAdd))

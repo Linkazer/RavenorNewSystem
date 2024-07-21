@@ -7,7 +7,7 @@ public class TooltipDisplayer : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     [SerializeField] private TooltipData tooltip;
     [SerializeField] private Transform tooltipPosition;
-    [SerializeField] private Vector2 offset = new Vector2(0, 5);
+    [SerializeField] private Vector2 offset = new Vector2(0, 25);
 
     private void Start()
     {

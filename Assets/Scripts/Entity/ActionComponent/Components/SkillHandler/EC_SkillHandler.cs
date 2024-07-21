@@ -110,7 +110,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     protected override void OnUseAction(Vector3 actionTargetPosition)
     {
-        if(selectedSkill != null && CanUseSkillAtNode(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)))
+        if(selectedSkill != null && CanUseSkillAtNode(selectedSkill, CurrentNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)))
         {
             ResolveSkill(selectedSkill, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
 
@@ -131,9 +131,9 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         GetSkillHolderForScriptable(selectedSkill)?.UseSkill();
     }
 
-    private bool CanUseSkillAtNode(SKL_SkillScriptable skillToCheck, Node nodeToCheck)
+    public bool CanUseSkillAtNode(SKL_SkillScriptable skillToCheck, Node castNode, Node nodeToCheck)
     {
-        return Pathfinding.Instance.IsNodeVisible(CurrentNode, nodeToCheck, skillToCheck.Range);
+        return Pathfinding.Instance.IsNodeVisible(castNode, nodeToCheck, skillToCheck.Range);
     }
 
     public override void CancelAction()
@@ -151,7 +151,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         selectedSkill = null;
     }
 
-    private SkillHolder GetSkillHolderForScriptable(SKL_SkillScriptable scriptable)
+    public SkillHolder GetSkillHolderForScriptable(SKL_SkillScriptable scriptable)
     {
         foreach(SkillHolder skill in usableSkills)
         {

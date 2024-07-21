@@ -123,6 +123,8 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
     /// <param name="lockCaller">The caller of the Lock.</param>
     public void AddLock(MonoBehaviour lockCaller)
     {
+        Debug.Log("Add lock : " + lockCaller);
+
         locks.Add(lockCaller);
 
         if(locks.Count == 1)
@@ -145,8 +147,12 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
     /// <param name="unlockCaller">The caller of the lock to remove.</param>
     public void RemoveLock(MonoBehaviour unlockCaller)
     {
+        Debug.Log("Try remove lock : " + unlockCaller);
+
         if (locks.Contains(unlockCaller))
         {
+            Debug.Log("Remove lock : " + unlockCaller);
+
             locks.Remove(unlockCaller);
 
             if (locks.Count == 0)

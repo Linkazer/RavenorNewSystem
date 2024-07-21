@@ -25,10 +25,10 @@ public class SKL_SkillResolverManager : Singleton<SKL_SkillResolverManager>
 
     public void ResolveSpell(SKL_ResolvingSkillData resolvingSkill, Action callback)
     {
+        PlayerActionManager.instance.AddLock(this);
+
         SKL_SkillResolver skillResolver = new SKL_SkillResolver(resolvingSkill, () => EndResolveSkill(callback));
         skillResolver.StartSkillAction(resolvingSkill.SkillData.GetFirstUsableSkillAction(resolvingSkill));
-
-        PlayerActionManager.instance.AddLock(this);
     }
 
     private void EndResolveSkill(Action callback)

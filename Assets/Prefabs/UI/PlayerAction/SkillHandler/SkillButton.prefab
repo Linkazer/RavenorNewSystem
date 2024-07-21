@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2753589679838224021}
+  - component: {fileID: 2593197090697929713}
   m_Layer: 0
   m_Name: UseLeft
   m_TagString: Untagged
@@ -126,6 +127,21 @@ RectTransform:
   m_AnchoredPosition: {x: -42.5, y: -5}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2593197090697929713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534917467032434362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fb5de3b825b7c40a4c2e41e2c18023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 11400000, guid: 5bcfddd24150f7c4d9feef12c7a5990f, type: 2}
+  tooltipPosition: {fileID: 2753589679838224021}
+  offset: {x: 0, y: 25}
 --- !u!1 &620396536077000063
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4923297626626707338}
+  - component: {fileID: 8348088535164678637}
   m_Layer: 0
   m_Name: RessourceCost
   m_TagString: Untagged
@@ -162,6 +179,21 @@ RectTransform:
   m_AnchoredPosition: {x: 42.5, y: -5}
   m_SizeDelta: {x: 40, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8348088535164678637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620396536077000063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fb5de3b825b7c40a4c2e41e2c18023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 11400000, guid: a43c2c94236f4764bb48aa54053e797b, type: 2}
+  tooltipPosition: {fileID: 4923297626626707338}
+  offset: {x: 0, y: 25}
 --- !u!1 &2762140276534955298
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +577,7 @@ GameObject:
   - component: {fileID: 8990433655714796861}
   - component: {fileID: 4883021829048374553}
   - component: {fileID: 3570788658647918444}
+  - component: {fileID: 3799557692090096729}
   m_Layer: 0
   m_Name: FullAction
   m_TagString: Untagged
@@ -609,6 +642,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3799557692090096729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020398864780311035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fb5de3b825b7c40a4c2e41e2c18023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 11400000, guid: b2646e96176c4a341a6e71fb33c41fa4, type: 2}
+  tooltipPosition: {fileID: 8990433655714796861}
+  offset: {x: 0, y: 25}
 --- !u!1 &7133634618423591800
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,6 +668,7 @@ GameObject:
   - component: {fileID: 1308340368865043724}
   - component: {fileID: 3419658481881914704}
   - component: {fileID: 4217416528986156772}
+  - component: {fileID: 3290789415588964552}
   m_Layer: 0
   m_Name: FreeAction
   m_TagString: Untagged
@@ -684,6 +733,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3290789415588964552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133634618423591800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fb5de3b825b7c40a4c2e41e2c18023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooltip: {fileID: 11400000, guid: 0946ebd5e9dd4f840acc04309a85ff8f, type: 2}
+  tooltipPosition: {fileID: 1308340368865043724}
+  offset: {x: 0, y: 25}
 --- !u!1 &7439065642411794418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,7 +1487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3671837087767529617, guid: af408d82432a77d448a1f584d4046eda, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 225
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3671837087767529617, guid: af408d82432a77d448a1f584d4046eda, type: 3}
       propertyPath: m_AnchoredPosition.y
