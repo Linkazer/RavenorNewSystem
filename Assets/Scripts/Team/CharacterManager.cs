@@ -11,21 +11,6 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public List<CharacterEntity> ActiveCharacters => activeCharacters;
 
-    public List<CharacterEntity> GetPlayerEntites()
-    {
-        List<CharacterEntity> toReturn = new List<CharacterEntity>();
-
-        foreach(CharacterEntity entity in ActiveCharacters)
-        {
-            if(entity.Hostility == CharacterHostility.Ally)
-            {
-                toReturn.Add(entity);
-            }
-        }
-
-        return toReturn;
-    }
-
     public void AddActiveCharacter(CharacterEntity toAdd)
     {
         if(!activeCharacters.Contains(toAdd))
@@ -62,5 +47,37 @@ public class CharacterManager : Singleton<CharacterManager>
     public void UpdateCharacterHostility(Entity toUpdate)
     {
         BattleManager.Instance.OnCharacterUpdateHostility(toUpdate);
+    }
+
+    public static int AreCharacterAlly(Entity e1, Entity e2)
+    {
+        if(e1.Hostility == CharacterHostility.Neutral || e2.Hostility == CharacterHostility.Neutral)
+        {
+            return 0;
+        }
+
+        switch(e1.Hostility)
+        {
+            case CharacterHostility.Ally:
+                switch(e2.Hostility)
+                {
+                    case CharacterHostility.Ally:
+                        return 1;
+                    case CharacterHostility.Hostile:
+                        return -1;
+                }
+                break;
+            case CharacterHostility.Hostile:
+                switch (e2.Hostility)
+                {
+                    case CharacterHostility.Ally:
+                        return -1;
+                    case CharacterHostility.Hostile:
+                        return 1;
+                }
+                break;
+        }
+
+        return 0;
     }
 }

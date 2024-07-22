@@ -6,7 +6,7 @@ using System;
 public class Pathfinding : Singleton<Pathfinding> 
 {
 	public const float DirectDistance = 1.5f;
-	private const float DiagonaleDistance = 2.25f;
+	public const float DiagonaleDistance = 2.25f;
 
 	[SerializeField] private Grid grid;
 	

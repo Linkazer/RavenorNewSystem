@@ -24,6 +24,7 @@ MonoBehaviour:
   useByLevel: -1
   useByTurn: 0
   ressourceCost: 0
+  castHostility: 1
   range: 2.5
   privisualizedShape:
     rid: 6537641225162326018
@@ -35,6 +36,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 5188351792059252739
+      type: {class: SKL_Animation_Fx, ns: , asm: Assembly-CSharp}
+      data:
+        animationTarget: 1
+        animationDuration: 4
+        fxToPlay: {fileID: 1611882667578466474, guid: 3c4c1000ee6cf75468859a3758c7611e, type: 3}
     - rid: 6429555930163314688
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:
@@ -45,7 +52,8 @@ MonoBehaviour:
         numberDicesToRoll: 2
         offensiveTrait: 0
         defensiveTrait: 0
-        onDiceRollAnimation: []
+        onDiceRollAnimation:
+        - rid: 5188351792059252739
         touchAction:
           possibleActions: []
         touchSubActionOnTarget:
@@ -78,19 +86,12 @@ MonoBehaviour:
         - origin:
             rid: 6429555930163314695
           damageType: 0
-        damageAnimations:
-        - rid: 6429555930163314693
+        damageAnimations: []
         nextAction:
           possibleActions: []
     - rid: 6429555930163314692
       type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6429555930163314693
-      type: {class: SKL_Animation_Fx, ns: , asm: Assembly-CSharp}
-      data:
-        animationTarget: 1
-        animationDuration: 0
-        fxToPlay: {fileID: 1611882667578466474, guid: 3c4c1000ee6cf75468859a3758c7611e, type: 3}
     - rid: 6429555930163314695
       type: {class: SKL_DO_Dices, ns: , asm: Assembly-CSharp}
       data: 

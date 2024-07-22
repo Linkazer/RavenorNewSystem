@@ -24,6 +24,7 @@ MonoBehaviour:
   useByLevel: -1
   useByTurn: 0
   ressourceCost: 2
+  castHostility: 1
   range: 10
   privisualizedShape:
     rid: 6537641225162326018
@@ -35,12 +36,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 5188351792059252737
+      type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
+      data:
+        animationTarget: 2
+        animationDuration: 1
+        animationName: Cast
     - rid: 6429556112013918209
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:
         shape:
           rid: 6429556112013918210
-        startAnimations: []
+        startAnimations:
+        - rid: 5188351792059252737
         numberDicesToRoll: 5
         offensiveTrait: 0
         defensiveTrait: 0

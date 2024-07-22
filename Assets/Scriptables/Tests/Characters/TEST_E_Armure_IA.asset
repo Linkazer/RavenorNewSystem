@@ -37,23 +37,17 @@ MonoBehaviour:
   expertises:
   - level: 4
     expertise: {fileID: 11400000, guid: 3885207e93e7a9d44a4d72b3868388a4, type: 2}
+  movementBehavior:
+    rid: 5188351792059252736
   conciderations:
   - skillToCheck: {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
-    conditions:
-    - calculImportance: 0
-      abcissaCalcul:
-        rid: 5188351766810066944
-      condition: 1
-      baseValue: 0
+    conditions: []
     bonusScore: 0
     scoreCalculs:
     - rid: 5188351766810066945
   references:
     version: 2
     RefIds:
-    - rid: 5188351766810066944
-      type: {class: AI_CA_DistanceFromTarget_CalculatedPosition, ns: , asm: Assembly-CSharp}
-      data: 
     - rid: 5188351766810066945
       type: {class: AICalcul_Affine, ns: , asm: Assembly-CSharp}
       data:
@@ -65,4 +59,7 @@ MonoBehaviour:
         maxValue: 1
     - rid: 5188351766810066946
       type: {class: AI_CA_DistanceFromTarget_CalculatedPosition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5188351792059252736
+      type: {class: AIMVT_StayMelee, ns: , asm: Assembly-CSharp}
       data: 

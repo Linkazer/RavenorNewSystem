@@ -28,6 +28,9 @@ public class SKL_SkillScriptable : ScriptableObject
     [Header("Ressource")]
     [SerializeField] private int ressourceCost;
 
+    [Header("Targets")]
+    [SerializeField] private CharacterHostility castHostility;
+
     [Header("Shape")]
     [SerializeField] private float range;
     [SerializeField, SerializeReference, ReferenceEditor(typeof(SKL_SkillActionShape))] private SKL_SkillActionShape privisualizedShape;
@@ -47,6 +50,8 @@ public class SKL_SkillScriptable : ScriptableObject
 
     public float Range => range;
     public SkillComplexity CastComplexity => castComplexity;
+
+    public CharacterHostility CastHostility => castHostility;
 
     public SKL_SkillActionChooser SkillActions => skillActions;
 

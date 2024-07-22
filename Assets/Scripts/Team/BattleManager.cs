@@ -9,6 +9,8 @@ public class BattleManager : Singleton<BattleManager>
     /// </summary>
     [SerializeField] private ControllableTeamHandler controllableTeamHandler;
 
+    [SerializeField] private EnnemyBattleController ennemyBattleController;
+
     /// <summary>
     /// List of all character used in the battle.
     /// </summary>
@@ -24,6 +26,8 @@ public class BattleManager : Singleton<BattleManager>
     private bool isBattleRunning = false;
 
     public bool IsBattleRunning => isBattleRunning;
+
+    public List<CharacterEntity> CharactersInBattle => charactersInBattle;
 
     /// <summary>
     /// Update the Battle state when a character change its hostility
@@ -161,7 +165,7 @@ public class BattleManager : Singleton<BattleManager>
         }
         else
         {
-            //AI
+            ennemyBattleController.AddCharactersToPlay(currentlyPlayingCharacter);
         }
     }
 
@@ -251,5 +255,23 @@ public class BattleManager : Singleton<BattleManager>
         charactersInBattle.Sort((x, y) => CheckCharacterPriority(x, y));
 
         StartBattleRound();
+    }
+
+    public List<CharacterEntity> GetCharacterInBattleByAlliance(CharacterEntity entityToCheck, bool searchForAlly)
+    {
+        List<CharacterEntity> toReturn = new List<CharacterEntity>();
+
+        foreach (CharacterEntity entity in charactersInBattle)
+        {
+            if (CharacterManager.AreCharacterAlly(entity, entityToCheck) == 1 && searchForAlly)
+            {
+                toReturn.Add(entity);
+            }
+            else if (CharacterManager.AreCharacterAlly(entity, entityToCheck) == -1 && !searchForAlly)
+            {
+                toReturn.Add(entity);
+            }
+        }
+        return toReturn;
     }
 }

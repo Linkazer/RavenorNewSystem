@@ -418,7 +418,7 @@ MonoBehaviour:
         entityToHandle:
         - {fileID: 6512528138447134785}
         doesActivate: 1
-        TEMP_isControllable: 1
+        TEMP_isControllable: 0
 --- !u!1 &330107483123385836
 GameObject:
   m_ObjectHideFlags: 0
@@ -9169,6 +9169,10 @@ PrefabInstance:
     - target: {fileID: 3125883405212109715, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: currentHealth
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
+      propertyPath: hostility
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: characterData

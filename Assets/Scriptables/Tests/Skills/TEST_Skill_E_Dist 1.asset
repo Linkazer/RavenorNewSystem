@@ -24,6 +24,7 @@ MonoBehaviour:
   useByLevel: -1
   useByTurn: 0
   ressourceCost: 0
+  castHostility: 1
   range: 8.5
   privisualizedShape:
     rid: 6537641225162326018

@@ -314,6 +314,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     public bool CheckForOpportunityAttack(Node nodeToCheckAround, bool triggerAttack)
     {
+        return false;
+
         bool toReturn = false;
 
         object[] blockerTriggerData = new object[] { triggerAttack };

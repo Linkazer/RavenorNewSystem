@@ -163,24 +163,6 @@ public class CameraController : Singleton<CameraController>
         }
     }
 
-    [System.Obsolete("Obsolete ? A supprimé la prochaine fois qu'on passe sur le script")]
-    public void SetCameraPositionAndZoom(Vector2 position, float zoom)
-    {
-        SetCameraPosition(position);
-        targetZoom = zoom;
-
-        if (targetZoom < 0)
-        {
-            targetZoom = 0;
-        }
-        else if (targetZoom > 1)
-        {
-            targetZoom = 1;
-        }
-
-        virtualCamera.m_Lens.OrthographicSize = RealTargetZoom;
-    }
-
     /// <summary>
     /// Focus la camera sur un Transform.
     /// </summary>

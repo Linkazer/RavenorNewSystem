@@ -9,5 +9,5 @@ public class AIAction
     public Node movementTarget;
     public Node skillTarget;
     public List<Node> hitedNodes = new List<Node>();
-    public float score;
+    public float distanceToTravel;
 }
