@@ -32,7 +32,7 @@ public class AICalcul_Conditional : AICalcul
     {
         float toReturn = 0;
 
-        float abscissa = abcissaCalcul.GetAbcissaValue(plannedAction);
+        float abscissa = abcissaCalcul.GetAbscissaValue(plannedAction);
 
         switch (condition)
         {
@@ -80,7 +80,7 @@ public class AICalcul_Affine : AICalcul
 
     public override float Calculate(AIAction plannedAction)
     {
-        float abscissa = abcissaCalcul.GetAbcissaValue(plannedAction);
+        float abscissa = abcissaCalcul.GetAbscissaValue(plannedAction);
 
         return (constantToAdd + abscissa * abscissaCoeficient) / maxValue;
     }

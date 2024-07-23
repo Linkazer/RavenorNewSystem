@@ -53,13 +53,15 @@ MonoBehaviour:
       data:
         calculImportance: 1
         abcissaCalcul:
-          rid: 5188351766810066946
+          rid: 5188351810648408064
         abscissaCoeficient: 1
         constantToAdd: 1
         maxValue: 1
-    - rid: 5188351766810066946
-      type: {class: AI_CA_DistanceFromTarget_CalculatedPosition, ns: , asm: Assembly-CSharp}
-      data: 
     - rid: 5188351792059252736
       type: {class: AIMVT_StayMelee, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 5188351810648408064
+      type: {class: AICailculAbcsissa_HealthAmount, ns: , asm: Assembly-CSharp}
+      data:
+        targetType: 0
+        quantityWanted: 0

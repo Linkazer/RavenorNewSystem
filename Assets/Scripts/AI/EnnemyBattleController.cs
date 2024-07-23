@@ -23,8 +23,36 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
         if(!isProccessingCharacter)
         {
-            PrepareStartCharacterTurn();
+            StartAITurn();
         }
+    }
+
+    private void StartAITurn()
+    {
+        isProccessingCharacter = true;
+        PlayerActionManager.instance.AddLock(this);
+        PrepareStartCharacterTurn();
+    }
+
+    private void EndAITurn()
+    {
+        isProccessingCharacter = false;
+        PlayerActionManager.instance.RemoveLock(this);
+        charactersToPlay.Clear();
+    }
+
+    private void PrepareStartCharacterTurn()
+    {
+        CameraController.Instance.SetCameraFocus(charactersToPlay[0].transform);
+
+        TimerManager.CreateGameTimer(durationBeforeEndAndStartTurn, PlayNextCharacter);
+    }
+
+    private void PlayNextCharacter()
+    {
+        Debug.Log("Start AI Character Turn");
+
+        StartCoroutine(CalculateCharacterPossibilities(charactersToPlay[0]));
     }
 
     private void PrepareEndCharacterTurn()
@@ -39,8 +67,6 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
         charactersToPlay.RemoveAt(0);
         BattleManager.Instance.EndCharacterTurn(characterToEndTurn);
 
-        isProccessingCharacter = false;
-
         Debug.Log("End AI Character Turn");
 
         if (charactersToPlay.Count > 0)
@@ -49,28 +75,14 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
         }
         else
         {
-            charactersToPlay.Clear();
+            EndAITurn();
         }
-    }
-
-    private void PrepareStartCharacterTurn()
-    {
-        CameraController.Instance.SetCameraFocus(charactersToPlay[0].transform);
-
-        TimerManager.CreateGameTimer(durationBeforeEndAndStartTurn, PlayNextCharacter);
-    }
-
-    private void PlayNextCharacter()
-    {
-        isProccessingCharacter = true;
-
-        Debug.Log("Start AI Character Turn");
-
-        StartCoroutine(CalculateCharacterPossibilities(charactersToPlay[0]));
     }
 
     private void DoNextAction(AIAction actionFound)
     {
+        Debug.Log("Do Next Action");
+
         CurrentCharacter.TryGetEntityComponentOfType(out EC_Movement characterMovementHandler);
 
         if (actionFound != null)

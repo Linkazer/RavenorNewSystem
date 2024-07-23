@@ -203,6 +203,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
         onEndMovement?.Invoke();
 
+        Debug.Log("End movement callback : " + endMovementCallback?.Method?.Name);
+
         endMovementCallback?.Invoke();
 
         StopMovement();
@@ -275,11 +277,6 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
                 if (targetIndex >= path.Length)//Check if the movement should end.
                 {
-                    /*if (currentRoundMode == RoundMode.Round)
-                    {
-                        currentMovementLeft -= CurrentNode.gCost;
-                    }*/
-
                     EndMovement();
 
                     transformToMove.position = currentWaypoint.WorldPosition;
