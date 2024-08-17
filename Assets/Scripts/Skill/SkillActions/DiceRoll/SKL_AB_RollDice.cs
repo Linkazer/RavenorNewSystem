@@ -92,6 +92,8 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
             if (hitedObject.HoldingEntity.TryGetEntityComponentOfType(out EC_SkillAbsorberHandler skillAbsorberHandlers))
             {
                 RollDices(rolledDices, actionToResolve.DefensiveTrait, resolvingData.Caster, skillAbsorberHandlers, out didHit);
+
+                skillAbsorberHandlers.DisplayDices(rolledDices);
             }
             else
             {
@@ -103,8 +105,6 @@ public class SKL_AB_RollDice : SKL_SkillActionBehavior<SKL_AS_RollDice>
                     UnityEngine.Debug.Log("Force Success");
                 }
             }
-
-            //hitedObject.DisplayDiceResults(actionDices); //TODO : Feedback des résultats de dés
 
             if (didHit)
             {

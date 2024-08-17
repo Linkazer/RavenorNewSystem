@@ -31,6 +31,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     private EC_Renderer entityAnimator;
 
+    private int opportunityAttackLeft;
+
     public Action<Node> onEnterNode;
     public Action<Node> onExitNode;
     public Action onStartMovement;
@@ -201,13 +203,13 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     {
         path = new Node[0];
 
-        onEndMovement?.Invoke();
-
-        Debug.Log("End movement callback : " + endMovementCallback?.Method?.Name);
-
-        endMovementCallback?.Invoke();
+        Action movementCallback = endMovementCallback;
 
         StopMovement();
+
+        onEndMovement?.Invoke();
+
+        movementCallback?.Invoke();
     }
 
     /// <summary>
@@ -311,21 +313,30 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
     public bool CheckForOpportunityAttack(Node nodeToCheckAround, bool triggerAttack)
     {
-        return false;
-
         bool toReturn = false;
 
         object[] blockerTriggerData = new object[] { triggerAttack };
 
         foreach (Node.NodeBlocker blocker in nodeToCheckAround.exitBlockers)
         {
-            if (blocker.Invoke(nodeHandler, blockerTriggerData))
+            if (blocker.Invoke(nodeHandler, TriggeredOpportunityAttackEnded, blockerTriggerData))
             {
+                opportunityAttackLeft++;
                 toReturn = true;
             }
         }
 
         return toReturn;
+    }
+
+    private void TriggeredOpportunityAttackEnded()
+    {
+        opportunityAttackLeft--;
+
+        if(opportunityAttackLeft <= 0)
+        {
+            EndMovement();
+        }
     }
 
     /*private bool TryTriggerOpportunityAttack(Node nodeToExit)

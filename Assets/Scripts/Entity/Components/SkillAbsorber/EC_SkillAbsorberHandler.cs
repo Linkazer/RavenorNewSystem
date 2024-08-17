@@ -10,6 +10,10 @@ public class EC_SkillAbsorberHandler : EntityComponent<IEC_SkillAbsorberHandlerD
     [SerializeField] private int defensiveAdvantage;
     [SerializeField] private int defensiveDisavantage;
 
+    [Header("UI")]
+    [SerializeField] private SKL_AB_RollDice_DiceResultDisplayer rollResultDisplayer;
+    [SerializeField] private RectTransform rollResultDisplayHolder;
+
     public int dodgeBonus;
     public int willBonus;
 
@@ -81,5 +85,10 @@ public class EC_SkillAbsorberHandler : EntityComponent<IEC_SkillAbsorberHandlerD
     public override void EndRound()
     {
         
+    }
+
+    public void DisplayDices(List<Dice> dicesToDisplay)
+    {
+        Instantiate(rollResultDisplayer, rollResultDisplayHolder).DisplayDices(dicesToDisplay);
     }
 }

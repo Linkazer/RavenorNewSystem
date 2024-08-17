@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,10 @@ public class ECUI_HealthDisplayer : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
     [SerializeField] private ECUI_ArmorState[] armorDisplayed;
+
+    [SerializeField] private TextMeshProUGUI damageTakenDisplayer;
+    [SerializeField] private RectTransform damageTakenHolder;
+    [SerializeField] private float damageTakenDisplayTime;
 
     private float maxHealthBarFill;
     private float currentHealthBarFill;
@@ -56,25 +61,24 @@ public class ECUI_HealthDisplayer : MonoBehaviour
         }
     }
 
-    //Feedback Lose Health
     public void OnGainHealth(int amountToGain)
     {
 
     }
 
-    //Feedback Gain Health
     public void OnLoseHealth(int amountToLose)
     {
+        TextMeshProUGUI instantiatedDamageTakenDisplay = Instantiate(damageTakenDisplayer, damageTakenHolder);
+        instantiatedDamageTakenDisplay.text = amountToLose.ToString();
 
+        TimerManager.CreateRealTimer(damageTakenDisplayTime, () => Destroy(instantiatedDamageTakenDisplay.gameObject));
     }
 
-    //Feedback Lose Armor
     public void OnGainArmor(int amountToGain)
     {
 
     }
 
-    //Feedback Gain Armor
     public void OnLoseArmor(int amountToLose)
     {
 

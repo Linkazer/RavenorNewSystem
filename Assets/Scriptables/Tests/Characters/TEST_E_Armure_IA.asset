@@ -24,11 +24,11 @@ MonoBehaviour:
   speed: 5
   movementByTurn: 7.5
   healthPoints: 6
-  armor: 2
+  armor: 0
   force: 0
   esprit: 0
   presence: 0
-  agilite: 50
+  agilite: 0
   instinct: 0
   passives: []
   skills:
@@ -53,15 +53,14 @@ MonoBehaviour:
       data:
         calculImportance: 1
         abcissaCalcul:
-          rid: 5188351810648408064
+          rid: 5188351810648408065
         abscissaCoeficient: 1
         constantToAdd: 1
         maxValue: 1
     - rid: 5188351792059252736
       type: {class: AIMVT_StayMelee, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 5188351810648408064
-      type: {class: AICailculAbcsissa_HealthAmount, ns: , asm: Assembly-CSharp}
+    - rid: 5188351810648408065
+      type: {class: AICalculAbscissa_EntitiesInSkillZone, ns: , asm: Assembly-CSharp}
       data:
-        targetType: 0
-        quantityWanted: 0
+        hostilityWanted: 2

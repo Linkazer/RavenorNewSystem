@@ -42,6 +42,10 @@ MonoBehaviour:
         animationTarget: 2
         animationDuration: 1
         animationName: Cast
+    - rid: 5188351815013105664
+      type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}
+      data:
+        damageAmount: 10
     - rid: 6429556112013918209
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:
@@ -78,6 +82,9 @@ MonoBehaviour:
         damagesData:
         - origin:
             rid: 6429556112013918213
+          damageType: 3
+        - origin:
+            rid: 5188351815013105664
           damageType: 3
         damageAnimations: []
         nextAction:

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -196,7 +197,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         }
     }
 
-    private bool CheckOpportunityAttack(EC_NodeHandler attackTarget, object[] triggerData)
+    private bool CheckOpportunityAttack(EC_NodeHandler attackTarget, Action callback, object[] triggerData)
     {
         bool doesTriggerAttack = (bool)triggerData[0];
 
@@ -207,6 +208,9 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
                 if (doesTriggerAttack)
                 {
                     opportunityAttackLeft--;
+                    
+                    endActionCallback += callback;
+
                     ResolveSkill(opportunitySkill.Scriptable, attackTarget.CurrentNode);
                 }
 

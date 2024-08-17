@@ -50,7 +50,7 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
     private void PlayNextCharacter()
     {
-        Debug.Log("Start AI Character Turn");
+        //Debug.Log("Start AI Character Turn");
 
         StartCoroutine(CalculateCharacterPossibilities(charactersToPlay[0]));
     }
@@ -67,7 +67,7 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
         charactersToPlay.RemoveAt(0);
         BattleManager.Instance.EndCharacterTurn(characterToEndTurn);
 
-        Debug.Log("End AI Character Turn");
+        //Debug.Log("End AI Character Turn");
 
         if (charactersToPlay.Count > 0)
         {
@@ -81,7 +81,7 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
     private void DoNextAction(AIAction actionFound)
     {
-        Debug.Log("Do Next Action");
+        //Debug.Log("Do Next Action");
 
         CurrentCharacter.TryGetEntityComponentOfType(out EC_Movement characterMovementHandler);
 
@@ -89,12 +89,12 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
         { 
             if(actionFound.movementTarget != null && actionFound.movementTarget != characterMovementHandler.CurrentNode)
             {
-                Debug.Log("AI Move toward action destination");
+                //Debug.Log("AI Move toward action destination");
                 characterMovementHandler.TryMoveToDestination(actionFound.movementTarget, () => DoNextAction(actionFound));
             }
             else
             {
-                Debug.Log("AI Use skill");
+                //Debug.Log("AI Use skill");
                 CurrentCharacter.TryGetEntityComponentOfType(out EC_SkillHandler characterSkillHandler);
 
                 characterSkillHandler.SelectSkill(actionFound.skillToUse);
@@ -107,7 +107,7 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
             if (movementTarget != characterMovementHandler.CurrentNode)
             {
-                Debug.Log("AI Move toward best destination");
+                //Debug.Log("AI Move toward best destination");
                 characterMovementHandler.TryMoveToDestination(movementTarget, () => DoNextAction(actionFound));
             }
             else

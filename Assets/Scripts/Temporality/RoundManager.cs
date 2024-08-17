@@ -21,6 +21,8 @@ public class RoundManager : Singleton<RoundManager>
 
     private List<RoundTimer> activeTimers = new List<RoundTimer>();
 
+    private List<RoundTimer> activeTimersToRemove = new List<RoundTimer>();
+
     private RoundTimer globalRoundTimer = null;
 
     private List<IRoundHandler> activeRoundHandlers = new List<IRoundHandler>();
@@ -32,6 +34,19 @@ public class RoundManager : Singleton<RoundManager>
     private void Start()
     {
         SetRoundMode(RoundMode.RealTime);
+    }
+
+    private void LateUpdate()
+    {
+        if (activeTimersToRemove.Count > 0)
+        {
+            foreach (RoundTimer timer in activeTimersToRemove)
+            {
+                activeTimers.Remove(timer);
+            }
+
+            activeTimersToRemove.Clear();
+        }
     }
 
     /// <summary>
@@ -61,7 +76,7 @@ public class RoundManager : Singleton<RoundManager>
     /// <param name="roundTimer">The timer to remove.</param>
     public void RemoveTimer(RoundTimer roundTimer)
     {
-        activeTimers.Remove(roundTimer);
+        activeTimersToRemove.Add(roundTimer);
     }
 
     /// <summary>
