@@ -56,7 +56,7 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
     {
         if (effectiveStatus.ContainsKey(status))
         {
-            //TODO : Stack + Reset Cooldown et autres
+            effectiveStatus[status].ResetStatusDuration();
         }
         else
         {

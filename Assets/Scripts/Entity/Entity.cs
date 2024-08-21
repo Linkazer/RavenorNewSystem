@@ -126,7 +126,7 @@ public class Entity : MonoBehaviour, IRoundHandler
             component.Deactivate();
         }
 
-        gameObject.SetActive(false);//TEST
+        gameObject.SetActive(false);
     }
 
     /// <summary>

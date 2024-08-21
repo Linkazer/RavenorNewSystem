@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
+using static Node;
 
 public class EnnemyBattleController : Singleton<EnnemyBattleController>
 {
@@ -340,4 +341,21 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
         return Mathf.Clamp(calculResult, 0, 1);
     }
+
+    //TODO : Calculate Attack of Opportunity (Si nécessaire)
+    /*private float CalculateOpportunityAttackScore(List<Node> pathTotravel, EC_NodeHandler movingCharacterHandler)
+    {
+        float ooportunityAttackAmount = 0;
+
+        foreach (Node node in pathTotravel)
+        {
+            foreach(NodeBlocker blocker in node.exitBlockers)
+            {
+                if (blocker.Invoke(movingCharacterHandler, null, new object[] { false }))
+                {
+                    ooportunityAttackAmount++;
+                }
+            }
+        }
+    }*/
 }

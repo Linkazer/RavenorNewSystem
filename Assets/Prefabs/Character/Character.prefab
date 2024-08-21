@@ -661,6 +661,9 @@ MonoBehaviour:
   currentHealth: 0
   maxArmor: 0
   currentArmor: 0
+  animationToPlayOnDamageTaken: Hurt
+  deathDuration: 1
+  animationToPlayOnSuccomb: Death
 --- !u!1 &3842557839578619345
 GameObject:
   m_ObjectHideFlags: 0

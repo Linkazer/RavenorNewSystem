@@ -267,6 +267,14 @@ MonoBehaviour:
     animationUsed: {fileID: 6706563370260675977}
     doesLoop: 1
     linkedAnimation: Idle
+  - animationName: Death
+    animationUsed: {fileID: 6706563370260675977}
+    doesLoop: 0
+    linkedAnimation: 
+  - animationName: Hurt
+    animationUsed: {fileID: 6706563370260675977}
+    doesLoop: 0
+    linkedAnimation: Idle
   - animationName: Cast
     animationUsed: {fileID: 6706563370260675977}
     doesLoop: 0
