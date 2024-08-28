@@ -33,7 +33,8 @@ MonoBehaviour:
   passives: []
   skills:
   - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
-  ressourceUsed: 2
+  - {fileID: 11400000, guid: 5b5ac32392f890245a7e8190d3052e17, type: 2}
+  ressourceUsed: {fileID: 11400000, guid: a5f474bd2bdfaac4bbf29761f558c743, type: 2}
   expertises:
   - level: 4
     expertise: {fileID: 11400000, guid: 3885207e93e7a9d44a4d72b3868388a4, type: 2}

@@ -15,6 +15,9 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     [SerializeField] private Color skillRangeColor;
     [SerializeField] private Color skillShapeColor;
+    [SerializeField] private Color skillShapeTargetOulineColor;
+
+    private List<EC_Renderer> rendererOutlined = new List<EC_Renderer>();
 
     private void Update()
     {
@@ -100,6 +103,11 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         skillsGroup.interactable = !isLocked;
         skillsGroup.blocksRaycasts = !isLocked;
 
+        UpdateSkillsAvailability();
+    }
+
+    public void UpdateSkillsAvailability()
+    {
         for (int i = 0; i < skillHandler.UsableSkills.Count; i++)
         {
             bool isUsable = (skillHandler.RessourceUsed == null || skillHandler.RessourceUsed.HasEnoughRessource(skillHandler.UsableSkills[i].Scriptable.RessourceCost))
@@ -159,7 +167,8 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
     protected override void DisplayAction(Vector3 actionTargetPosition)
     {
-        GridZoneDisplayer.UnsetGridFeedback();
+        UndisplayAction();
+
         List<Node> rangeNodes = Pathfinding.Instance.GetAllNodeInDistance(skillHandler.CurrentNode, skillHandler.SelectedSkill.Range, true);
         Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition);
 
@@ -167,12 +176,38 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
 
         if (targetNode != null && rangeNodes.Contains(targetNode))
         {
-            GridZoneDisplayer.SetGridFeedback(skillHandler.SelectedSkill.GetDisplayShape(targetNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition)), skillShapeColor);
+            List<Node> zoneToDisplay = skillHandler.SelectedSkill.GetDisplayShape(targetNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
+
+            GridZoneDisplayer.SetGridFeedback(zoneToDisplay, skillShapeColor);
+
+            foreach(Node n in zoneToDisplay)
+            {
+                List<EC_HealthHandler> targetablesInZone = n.GetEntityComponentsOnNode<EC_HealthHandler>();
+
+                foreach (EC_HealthHandler healthHandler in targetablesInZone)
+                {
+                    if(healthHandler.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rend))
+                    {
+                        rend.AnimHandler.SetOutline(skillShapeTargetOulineColor);
+
+                        if (!rendererOutlined.Contains(rend))
+                        {
+                            rendererOutlined.Add(rend);
+                        }
+                    }
+                }
+            }
         }
     }
 
     protected override void UndisplayAction()
     {
+        foreach (EC_Renderer renderedOutline in rendererOutlined)
+        {
+            renderedOutline.AnimHandler.SetOutline(false);
+        }
+        rendererOutlined.Clear();
+
         GridZoneDisplayer.UnsetGridFeedback();
     }
 

@@ -75,7 +75,7 @@ MonoBehaviour:
       data:
         animationTarget: 2
         animationDuration: 0.5
-        animationName: Cast
+        animationName: MeleeAttack
     - rid: 6429555930163314691
       type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
       data:

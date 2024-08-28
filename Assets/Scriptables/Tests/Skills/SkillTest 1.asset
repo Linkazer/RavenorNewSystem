@@ -45,7 +45,7 @@ MonoBehaviour:
     - rid: 5188351815013105664
       type: {class: SKL_DO_Direct, ns: , asm: Assembly-CSharp}
       data:
-        damageAmount: 10
+        damageAmount: 1
     - rid: 6429556112013918209
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:

@@ -18,6 +18,8 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
         {
             transform.localEulerAngles = new Vector3(0, -180, 0);
         }
+
+        animationHandler.SetOrientation(new Vector2(Mathf.Abs(direction.x), direction.y));
     }
 
     public override void SetComponentData(IEC_RendererData componentData)

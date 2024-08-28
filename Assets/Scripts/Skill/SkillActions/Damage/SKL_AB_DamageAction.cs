@@ -31,6 +31,12 @@ public class SKL_AB_DamageAction : SKL_SkillActionBehavior<SKL_AS_DamageAction>
 
         foreach(EC_HealthHandler hitedHealthHandlers in healthHandlersOnNode)
         {
+            if(hitedHealthHandlers.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer hitedRenderer))
+            {
+                //Set the orientation of the damaged enity for animations.
+                hitedRenderer.AnimHandler.SetOrientation(nodeToApplyDamageOn.WorldPosition - resolvingSkillData.Caster.CurrentNode.WorldPosition);
+            }
+
             foreach(SKL_DamageData damageData in actionToResolve.DamagesData)
             {
                 ApplyDamageOnTarget(damageData, hitedHealthHandlers, resolvingSkillData);

@@ -35,7 +35,14 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         offensiveAdvantage = componentData.OffensiveAdvantage;
         offensiveDisavantage = componentData.OffensiveDisavantage;
 
-        ressourceUsed = SkillRessourceHelper.GetNewRessourceFromEnum(componentData.RessourceTypeUsed);
+        if (componentData.RessourceTypeUsed != null)
+        {
+            ressourceUsed = componentData.RessourceTypeUsed.RessourceBehavior.GetAsNew();
+        }
+        else
+        {
+            ressourceUsed = null;
+        }
 
         usableSkills = new List<SkillHolder>();
 

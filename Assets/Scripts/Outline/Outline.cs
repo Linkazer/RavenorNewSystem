@@ -33,4 +33,17 @@ public class Outline : MonoBehaviour
             rnd.material.SetColor("_Color1out", Color.white);
         }
     }
+
+    public void SetSpecialOutline(Color colorWanted)
+    {
+        outlineColor = colorWanted;
+        renderer.material.SetColor("_Color1in", targetColor);
+        renderer.material.SetColor("_Color1out", colorWanted);
+
+        foreach (SpriteRenderer rnd in seconderyRenderers)
+        {
+            rnd.material.SetColor("_Color1in", targetColor);
+            rnd.material.SetColor("_Color1out", colorWanted);
+        }
+    }
 }

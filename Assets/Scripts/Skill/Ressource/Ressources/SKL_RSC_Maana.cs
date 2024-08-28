@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class SKL_RSC_Maana : SkillRessource
 {
-    public override SkillRessourceType RessourceType => SkillRessourceType.Maana;
+    public override SkillRessource GetAsNew()
+    {
+        return new SKL_RSC_Maana();
+    }
 
     public override void Initialize(EC_SkillHandler nSkillHandler)
     {

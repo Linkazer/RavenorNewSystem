@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public abstract class SkillRessource
 {
+    [SerializeField] protected SkillRessourceType ressourceType;
     [SerializeField] protected int startAmount;
     [SerializeField] protected Vector2Int limits;
     [SerializeField] protected int currentAmount;
@@ -15,7 +17,9 @@ public abstract class SkillRessource
 
     public int CurrentAmount => currentAmount;
 
-    public abstract SkillRessourceType RessourceType { get; }
+    public SkillRessourceType RessourceType => ressourceType;
+
+    public abstract SkillRessource GetAsNew();
 
     public virtual void Initialize(EC_SkillHandler nSkillHandler)
     {
