@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextPrefab: {fileID: 6630865550672729789, guid: af408d82432a77d448a1f584d4046eda, type: 3}
   Button: {fileID: 1281809739263541995, guid: 25a9a7a722f9e8d40990ecf2e909bd84, type: 3}
-  ButtonWithText: {fileID: 0}
+  ButtonWithText: {fileID: 5363712317943401758, guid: 2d564efea3129f4429d50589e3af3b9c, type: 3}
