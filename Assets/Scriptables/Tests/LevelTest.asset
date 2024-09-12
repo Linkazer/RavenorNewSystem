@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelPrefab: {fileID: 6143604554719649977, guid: 6c2992fc434f70f48b4d112b6c1c7631, type: 3}
   title:
-    frenchText: 
-    englishText: 
+    frenchText: Niveau Test 1
+    englishText: Test Level 1
   description:
     frenchText: 
     englishText: 

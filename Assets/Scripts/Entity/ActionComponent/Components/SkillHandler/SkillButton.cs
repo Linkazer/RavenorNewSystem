@@ -6,6 +6,9 @@ using TMPro;
 
 public class SkillButton : MonoBehaviour
 {
+    [SerializeField] private ECAH_SkillHandler skillHandler;
+
+    [Header("Button")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Image skillIcon;
     [SerializeField] private Image skillCooldown;
@@ -93,13 +96,14 @@ public class SkillButton : MonoBehaviour
 
     private void UpdateCooldown(int turnLeft)
     {
-        if (linkedSkill.Scriptable.Cooldown > 0)
+        if (turnLeft > 0)
         {
             skillCooldown.fillAmount = (float)turnLeft / (float)linkedSkill.Scriptable.Cooldown;
         }
         else
         {
             skillCooldown.fillAmount = 0;
+            skillHandler.UpdateSkillsAvailability();
         }
     }
 

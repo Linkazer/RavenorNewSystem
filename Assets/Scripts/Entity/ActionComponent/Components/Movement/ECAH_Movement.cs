@@ -11,14 +11,15 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
 
     [SerializeField] private CanvasGroup movementGroup;
 
+    [SerializeField] private Color mouseTargetOutlineColor;
+
+    private List<EC_Renderer> rendererOutlined = new List<EC_Renderer>();
+
     private void Update()
     {
-        if (RoundManager.Instance.CurrentRoundMode == RoundMode.Round)
+        if (!isLocked)
         {
-            if (movementHandler.CanMove && !isLocked)
-            {
-                DisplayAction(InputManager.MousePosition);
-            }
+            DisplayAction(InputManager.MousePosition);
         }
     }
 
@@ -76,6 +77,28 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
 
     protected override void DisplayAction(Vector3 actionTargetPosition)
     {
+        UndisplayAction();
+
+        Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition);
+
+        if (targetNode != null)
+        {
+            List<EC_HealthHandler> targetablesInZone = targetNode.GetEntityComponentsOnNode<EC_HealthHandler>();
+
+            foreach (EC_HealthHandler healthHandler in targetablesInZone)
+            {
+                if (healthHandler.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rend))
+                {
+                    rend.AnimHandler.SetOutline(mouseTargetOutlineColor);
+
+                    if (!rendererOutlined.Contains(rend))
+                    {
+                        rendererOutlined.Add(rend);
+                    }
+                }
+            }
+        }
+
         if (RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime || !movementHandler.CanMove)
         {
             return;
@@ -85,9 +108,9 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         colorMovement.a = 0.5f;
         GridZoneDisplayer.SetGridFeedback(Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, null, movementHandler.MovementLeft), colorMovement);
 
-        if (Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition) != null)
+        if (targetNode != null)
         {
-            List<Node> path = Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition), movementHandler.MovementLeft);
+            List<Node> path = Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, targetNode, movementHandler.MovementLeft);
 
             List<Node> validPath = new List<Node>();
             List<Node> opportunityPath = new List<Node>();
@@ -123,6 +146,12 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
 
     protected override void UndisplayAction()
     {
+        foreach (EC_Renderer renderedOutline in rendererOutlined)
+        {
+            renderedOutline.AnimHandler.SetOutline(false);
+        }
+        rendererOutlined.Clear();
+
         GridZoneDisplayer.UnsetGridFeedback();
     }
 

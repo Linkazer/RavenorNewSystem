@@ -7,10 +7,12 @@ using UnityEngine;
 /// </summary>
 public class LevelManager : Singleton<LevelManager>
 {
-    [SerializeField] private LevelScriptable levelToLoad;
+    private static LevelScriptable levelToLoad;
+
+    [SerializeField] private LevelScriptable testLevel;
     [SerializeField] private float delayForStart = 0f;
 
-    private void SelectLevel(LevelScriptable levelToSelect)
+    public static void SelectLevel(LevelScriptable levelToSelect)
     {
         levelToLoad = levelToSelect;
     }
@@ -31,6 +33,10 @@ public class LevelManager : Singleton<LevelManager>
             yield return new WaitForSeconds(delay);
         }
 
+        if(levelToLoad == null)
+        {
+            levelToLoad = testLevel;
+        }
         Instantiate(levelToLoad.LevelPrefab).InstantiateLevel();
     }
 }

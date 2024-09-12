@@ -51,6 +51,12 @@ public class AppliedStatus
         effects.Clear();
     }
 
+    public void ResetStatusDuration()
+    {
+        duration?.StopRealTimer();
+        duration = RoundManager.Instance.CreateRoundTimer(duration.maximumRound, UpdateStatusDuration, EndStatus);
+    }
+
     public void ProgressStatusDuration()
     {
         duration.ProgressRound(1);

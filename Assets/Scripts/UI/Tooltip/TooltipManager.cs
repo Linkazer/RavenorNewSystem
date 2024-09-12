@@ -38,8 +38,11 @@ public class TooltipManager : Singleton<TooltipManager>
 
     public void HideTooltip()
     {
-        activeTooltip.HideTooltip();
-        activeTooltip = null;
+        if (activeTooltip != null)
+        {
+            activeTooltip.HideTooltip();
+            activeTooltip = null;
+        }
     }
 
     private TooltipHandler GetHandlerForTooltipType(TooltipData tooltip)

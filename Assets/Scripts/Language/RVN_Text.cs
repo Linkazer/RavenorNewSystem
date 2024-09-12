@@ -27,6 +27,6 @@ public class RVN_Text
                 break;
         }
 
-        return $"{LanguageManager.Language} language text not set";
+        return "";
     }
 }

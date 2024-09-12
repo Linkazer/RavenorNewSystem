@@ -27,7 +27,7 @@ MonoBehaviour:
   castHostility: 1
   range: 7
   privisualizedShape:
-    rid: 6537641225162326018
+    rid: 1334095280304553984
   skillActions:
     possibleActions:
     - conditions: []
@@ -36,9 +36,11 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 6537641225162326018
-      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
-      data: 
+    - rid: 1334095280304553984
+      type: {class: SKL_Shape_ByDistance, ns: , asm: Assembly-CSharp}
+      data:
+        zoneDistance: 4
+        needVision: 0
     - rid: 6537641606301089793
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:

@@ -12,7 +12,7 @@ public class LanguageManager : Singleton<LanguageManager>
 {
     [SerializeField] private PossibleLanguage currentLanguage;
 
-    public static PossibleLanguage Language => instance.currentLanguage;
+    public static PossibleLanguage Language => instance?instance.currentLanguage:PossibleLanguage.Francais;
 
     public static void SetLanguage(int languageIndex)
     {

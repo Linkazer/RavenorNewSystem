@@ -9,6 +9,9 @@ public class AnimationHandler : MonoBehaviour
     [Header("Character Display")]
     [SerializeField] private Transform rendererTransform;
 
+    [Header("Animations Data")]
+    [SerializeField] private Animator animator;
+
     [Header("Character Animations")]
     [SerializeField] private AnimationData[] animations;
 
@@ -17,7 +20,33 @@ public class AnimationHandler : MonoBehaviour
     [SerializeField] private SortingGroup frontHandSortingGroup;
     [SerializeField] private SortingGroup backHandSortingGroup;
 
+    [Header("Outline")]
+    [SerializeField] private Outline outline;
+
     private AnimationData currentAnim;
+
+    public void SetOutline(bool toSet)
+    {
+        if (outline != null)
+        {
+            if (toSet)
+            {
+                outline.SetOutline();
+            }
+            else
+            {
+                outline.UnsetOutline();
+            }
+        }
+    }
+
+    public void SetOutline(Color colorWanted)
+    {
+        if (outline != null)
+        {
+            outline.SetSpecialOutline(colorWanted);
+        }
+    }
 
     /// <summary>
     /// Play an animation.
@@ -61,6 +90,12 @@ public class AnimationHandler : MonoBehaviour
     {
         PlayAnimation("Idle");
         currentAnim = null;
+    }
+
+    public void SetOrientation(Vector2 orientation)
+    {
+        animator.SetFloat("OrientationX", orientation.x);
+        animator.SetFloat("OrientationY", orientation.y);
     }
 
     /// Methods that can be used in the Animator.

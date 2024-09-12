@@ -9,7 +9,7 @@ public class ECUI_HealthDisplayer : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private ECUI_ArmorState[] armorDisplayed;
 
-    [SerializeField] private TextMeshProUGUI damageTakenDisplayer;
+    [SerializeField] private DamageDisplayer damageTakenDisplayer;
     [SerializeField] private RectTransform damageTakenHolder;
     [SerializeField] private float damageTakenDisplayTime;
 
@@ -68,10 +68,11 @@ public class ECUI_HealthDisplayer : MonoBehaviour
 
     public void OnLoseHealth(int amountToLose)
     {
-        TextMeshProUGUI instantiatedDamageTakenDisplay = Instantiate(damageTakenDisplayer, damageTakenHolder);
-        instantiatedDamageTakenDisplay.text = amountToLose.ToString();
-
-        TimerManager.CreateRealTimer(damageTakenDisplayTime, () => Destroy(instantiatedDamageTakenDisplay.gameObject));
+        if (amountToLose > 0)
+        {
+            DamageDisplayer instantiatedDamageTakenDisplay = Instantiate(damageTakenDisplayer, damageTakenHolder);
+            instantiatedDamageTakenDisplay.Display(amountToLose, true);
+        }
     }
 
     public void OnGainArmor(int amountToGain)

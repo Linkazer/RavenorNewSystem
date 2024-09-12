@@ -12,7 +12,6 @@ public class AIMVT_StayMelee : AIMovementBehavior
         List<Node> toReturn = new List<Node>();
         Node casterNode = characterMovement.CurrentNode;
 
-        //TODO : Get closest character
         Node targetCharacterNode = GetClosestCharacterode(casterNode, BattleManager.Instance.GetCharacterInBattleByAlliance(characterMovement.HoldingEntity as CharacterEntity, false));
 
         if (Pathfinding.Instance.IsNodeVisible(targetCharacterNode, casterNode, MaxDistanceForMelee))
@@ -30,7 +29,6 @@ public class AIMVT_StayMelee : AIMovementBehavior
             {
                 float distanceMovementPosTargetPos = -1;
 
-                //TODO : Get closest character
                 targetCharacterNode = GetClosestCharacterode(casterNode, BattleManager.Instance.GetCharacterInBattleByAlliance(characterMovement.HoldingEntity as CharacterEntity, false));
 
                 List<Node> pathFromNToTarget = Pathfinding.Instance.CalculatePathfinding(n, targetCharacterNode, -1, true, true);

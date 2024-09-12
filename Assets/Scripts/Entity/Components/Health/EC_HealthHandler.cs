@@ -17,6 +17,14 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
     [SerializeField] private int maxArmor;
     [SerializeField] private int currentArmor;
 
+    [Header("Animations")]
+    [Header("Damage Taken")]
+    [SerializeField] private string animationToPlayOnDamageTaken;
+
+    [Header("Death")]
+    [SerializeField] private float deathDuration = 1f;
+    [SerializeField] private string animationToPlayOnSuccomb;
+
     public int MaxHealth => maxHealth;
     public int CurrentHealth => currentHealth;
     public int MaxArmor => maxArmor;
@@ -116,6 +124,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         }
         else
         {
+            TryPlayAnimation(animationToPlayOnDamageTaken);
             SetHealth(currentHealth - toLose);
         }
     }
@@ -134,8 +143,9 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     private void Succomb()
     {
-        holdingEntity.Deactivate();
-        //TODO : Animations et tout
+        TryPlayAnimation(animationToPlayOnSuccomb);
+
+        Timer despawnTimer = TimerManager.CreateGameTimer(deathDuration, holdingEntity.Deactivate);
     }
 
     public void SetMaxArmor(int toSet)
@@ -202,5 +212,17 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         }
 
         actOnChangeArmor?.Invoke(currentArmor);
+    }
+
+    private void TryPlayAnimation(string animationName)
+    {
+        if (HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rendererComponent))
+        {
+            if (rendererComponent.AnimHandler != null)
+            {
+                rendererComponent.AnimHandler.PlayAnimation(animationName);
+            }
+        }
+
     }
 }

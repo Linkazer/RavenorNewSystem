@@ -23,8 +23,8 @@ MonoBehaviour:
       data:
         speaker: {fileID: 11400000, guid: 0d3e96f85dd6a07439f8263a4766853d, type: 2}
         text:
-          frenchText: "Ylia regarda Eral d'un air perpl\xE8xe. Ils avaient simplement
-            travers\xE9 la rue."
+          frenchText: "Ylia regarda <link=\"Cost\">Eral</link> d'un air perpl\xE8xe.
+            Ils avaient simplement travers\xE9 la rue."
           englishText: 
     - rid: 855651298100903937
       type: {class: DialogueAction_DisplayText, ns: , asm: Assembly-CSharp}

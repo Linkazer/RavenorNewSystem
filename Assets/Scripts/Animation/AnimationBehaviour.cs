@@ -38,7 +38,7 @@ public abstract class AnimationBehaviour : MonoBehaviour
     public abstract void End();
 }
 
-[System.Obsolete("Non utilisé. Obsolète ?")]
+[System.Obsolete("Non utilisé. Obsolète ?")]//Pas forcément obsolète (Ex : Pour les animations d'attaque, on a besoin de savoir où est faite l'attaque)
 public abstract class CharacterAnimation<T> : AnimationBehaviour
 {
     protected T data;

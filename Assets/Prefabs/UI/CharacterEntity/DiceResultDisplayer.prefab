@@ -60,13 +60,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ea80d5d7f6c3440904983005cf379a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayTime: 5
-  successDice: {fileID: 21300000, guid: 0c992fd04b8320344ad13a33ecfa1348, type: 3}
-  failedDice: {fileID: 21300000, guid: 602bc3357f0cd65419c93362cb00e0e0, type: 3}
-  successDiceWithMissedReroll: {fileID: 21300000, guid: 602bc3357f0cd65419c93362cb00e0e0, type: 3}
-  failedDiceWithSuccessReroll: {fileID: 0}
-  successDiceWithDoubleReroll: {fileID: 21300000, guid: 0c992fd04b8320344ad13a33ecfa1348, type: 3}
-  failedDiceWithDoubleReroll: {fileID: 21300000, guid: 602bc3357f0cd65419c93362cb00e0e0, type: 3}
+  displayTime: 3
+  successDice: {fileID: 21300000, guid: 88c59d2c6bc4b1245b340e156d1707fc, type: 3}
+  failedDice: {fileID: 21300000, guid: e3b2ca1cf88dcde42a94fc97e9b272ec, type: 3}
+  successDiceWithMissedReroll: {fileID: 21300000, guid: 88c59d2c6bc4b1245b340e156d1707fc, type: 3}
+  failedDiceWithSuccessReroll: {fileID: 21300000, guid: e3b2ca1cf88dcde42a94fc97e9b272ec, type: 3}
+  successDiceWithDoubleReroll: {fileID: 21300000, guid: 88c59d2c6bc4b1245b340e156d1707fc, type: 3}
+  failedDiceWithDoubleReroll: {fileID: 21300000, guid: e3b2ca1cf88dcde42a94fc97e9b272ec, type: 3}
   displayableDices:
   - diceHolder: {fileID: 6949288174972349844}
     resultImage: {fileID: 8932985244644207898}
@@ -116,7 +116,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0.05
+  m_Spacing: 0.015625
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
