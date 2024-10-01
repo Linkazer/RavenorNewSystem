@@ -17,7 +17,11 @@ MonoBehaviour:
     frenchText: Niveau Test 1
     englishText: Test Level 1
   description:
-    frenchText: 
+    frenchText: "Ouvrant la porte, Ryn se retrouva nez \xE0 nez avec une des cr\xE9atures.
+      Avant de pouvoir r\xE9agir, quelque chose explosa au pied de la cr\xE9ature
+      qui tomba \xE0 terre.\r\nSadrif : \u201CVous voil\xE0 ! Qu\u2019est-ce que
+      vous avez encore fait ?\u201D\r\nRyn : \u201CJ\u2019ai fait exactement comme
+      tu l\u2019as dit. J\u2019ai cri\xE9 avant d\u2019actionner le levier.\u201D\r"
     englishText: 
   charactersDetails:
   - {fileID: 11400000, guid: 25a3b859424bbaf499f600f7da21d3b3, type: 2}

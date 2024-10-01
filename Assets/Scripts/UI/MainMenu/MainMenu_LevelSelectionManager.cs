@@ -18,7 +18,6 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
 
     [Header("Scene")]
     [SerializeField] private int levelSceneIndex;
-    //[SerializeField] private MainMenuCharacterChoice[] characters;
 
     public void SelectLevel(LevelScriptable newLevel)
     {
@@ -41,20 +40,8 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
 
         selectedLevel = newLevel;
 
-        //levelName.text = selectedLevel.Title;
-        //levelDescription.text = selectedLevel.Description;
-
-        /*for (int i = 0; i < characters.Length; i++)
-        {
-            if (i < selectedLevel.charactersInLevel.Count)
-            {
-                characters[i].SetCharacter(selectedLevel.charactersInLevel[i]);
-            }
-            else
-            {
-                characters[i].gameObject.SetActive(false);
-            }
-        }*/
+        levelName.text = selectedLevel.Title;
+        levelDescription.text = selectedLevel.Description;
 
         levelInformationGroup.alpha = 1;
         levelInformationGroup.interactable = true;
