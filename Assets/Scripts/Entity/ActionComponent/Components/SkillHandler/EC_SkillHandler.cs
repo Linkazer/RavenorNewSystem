@@ -19,6 +19,9 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     private EC_NodeHandler nodeHandler;
 
+    private Dictionary<SkillComplexity, int> skillComplexityActionByAmountInTurn = new Dictionary<SkillComplexity, int>();
+    private Dictionary<SkillComplexity, int> skillComplexityActionByAmountInTurnLeft = new Dictionary<SkillComplexity, int>();
+
     public int OffensiveAdvantage => offensiveAdvantage;
     public int OffensiveDisavantage => offensiveDisavantage;
 
@@ -43,6 +46,9 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         {
             ressourceUsed = null;
         }
+
+        skillComplexityActionByAmountInTurn = new Dictionary<SkillComplexity, int> { { SkillComplexity.Ordinary, 1 }, { SkillComplexity.Fast, 1 } };
+        skillComplexityActionByAmountInTurnLeft = new Dictionary<SkillComplexity, int>(skillComplexityActionByAmountInTurn);
 
         usableSkills = new List<SkillHolder>();
 
@@ -92,7 +98,8 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public override void StartRound()
     {
-        //opportunityAttackLeft = 1;
+        skillComplexityActionByAmountInTurnLeft = new Dictionary<SkillComplexity, int>(skillComplexityActionByAmountInTurn);
+        opportunityAttackLeft = 1;
     }
 
     public override void EndRound()
@@ -108,6 +115,41 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
 
     public override bool IsActionAvailable()
     {
+        return true;
+    }
+
+    public bool CanSelectSkill(SkillHolder skillToCheck)
+    {
+        if(!skillToCheck.IsUsable())
+        {
+            return false;
+        }
+
+        if(ressourceUsed != null && !ressourceUsed.HasEnoughRessource(skillToCheck.Scriptable.RessourceCost))
+        {
+            return false;
+        }
+        
+        if(!CheckUsabilityByComplexity(skillToCheck.Scriptable.CastComplexity))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool CheckUsabilityByComplexity(SkillComplexity complexityUsed)
+    {
+        switch (complexityUsed)
+        {
+            case SkillComplexity.Ordinary:
+                return skillComplexityActionByAmountInTurnLeft[SkillComplexity.Ordinary] > 0;
+            case SkillComplexity.Fast:
+                return skillComplexityActionByAmountInTurnLeft[SkillComplexity.Fast] > 0 || skillComplexityActionByAmountInTurnLeft[SkillComplexity.Ordinary] > 0;
+            case SkillComplexity.Instant:
+                return true;
+        }
+
         return true;
     }
 
@@ -136,7 +178,31 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
         SKL_ResolvingSkillData resolvingSkillData = new SKL_ResolvingSkillData(skillData, this, resolutionPosition);
         SKL_SkillResolverManager.Instance.ResolveSpell(resolvingSkillData, OnEndResolveSkill);
 
+        SpendActionByComplexiy(skillData.CastComplexity);
         GetSkillHolderForScriptable(selectedSkill)?.UseSkill();
+    }
+
+    private void SpendActionByComplexiy(SkillComplexity complexityUsed)
+    {
+        switch(complexityUsed)
+        {
+            case SkillComplexity.Ordinary:
+                skillComplexityActionByAmountInTurnLeft[SkillComplexity.Ordinary]--;
+                break;
+            case SkillComplexity.Fast:
+                if (skillComplexityActionByAmountInTurnLeft[SkillComplexity.Fast] > 0)
+                {
+                    skillComplexityActionByAmountInTurnLeft[SkillComplexity.Fast]--;
+                }
+                else
+                {
+                    skillComplexityActionByAmountInTurnLeft[SkillComplexity.Ordinary]--;
+                }
+                break;
+            case SkillComplexity.Instant:
+                //No Action used.
+                break;
+        }
     }
 
     public bool CanUseSkillAtNode(SKL_SkillScriptable skillToCheck, Node castNode, Node nodeToCheck)

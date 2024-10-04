@@ -8,6 +8,7 @@ public enum SkillComplexity
 {
     Ordinary,
     Fast,
+    Instant,
 }
 
 [CreateAssetMenu(fileName = "Skill", menuName = "Skill/Create Skill")]

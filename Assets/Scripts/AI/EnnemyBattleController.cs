@@ -161,7 +161,7 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
             //Check for Skill
             SkillHolder skillHolder = characterSkillHandler.GetSkillHolderForScriptable(concideration.SkillToCheck);
 
-            if (skillHolder == null || !skillHolder.IsUsable())
+            if (skillHolder == null || !characterSkillHandler.CanSelectSkill(skillHolder))
             {
                 if (skillHolder == null)
                 {

@@ -28,8 +28,9 @@ public class SkillButton : MonoBehaviour
     [SerializeField] private TextMeshProUGUI ressourceCostTextUi;
 
     [Header("Complexity")]
-    [SerializeField] private Image fullActionImage;
-    [SerializeField] private Image freectionImage;
+    [SerializeField] private Image normalActionImage;
+    [SerializeField] private Image fastActionImage;
+    [SerializeField] private Image instantActionImage;
 
     private SkillHolder linkedSkill;
 
@@ -81,12 +82,19 @@ public class SkillButton : MonoBehaviour
             switch(linkedSkill.Scriptable.CastComplexity)
             {
                 case SkillComplexity.Ordinary:
-                    fullActionImage.enabled = true;
-                    freectionImage.enabled = false;
+                    normalActionImage.enabled = true;
+                    fastActionImage.enabled = false;
+                    instantActionImage.enabled = false;
                     break;
                 case SkillComplexity.Fast:
-                    fullActionImage.enabled = false;
-                    freectionImage.enabled = true;
+                    normalActionImage.enabled = false;
+                    fastActionImage.enabled = true;
+                    instantActionImage.enabled = false;
+                    break;
+                case SkillComplexity.Instant:
+                    normalActionImage.enabled = false;
+                    fastActionImage.enabled = false;
+                    instantActionImage.enabled = true;
                     break;
             }
 
