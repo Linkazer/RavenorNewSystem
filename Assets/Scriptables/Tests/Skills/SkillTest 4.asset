@@ -20,7 +20,7 @@ MonoBehaviour:
     frenchText: 
     englishText: 
   cooldown: 4
-  castComplexity: 0
+  castComplexity: 1
   useByLevel: -1
   useByTurn: 0
   ressourceCost: 0

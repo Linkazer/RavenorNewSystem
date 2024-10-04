@@ -110,8 +110,7 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
     {
         for (int i = 0; i < skillHandler.UsableSkills.Count; i++)
         {
-            bool isUsable = (skillHandler.RessourceUsed == null || skillHandler.RessourceUsed.HasEnoughRessource(skillHandler.UsableSkills[i].Scriptable.RessourceCost))
-                            && skillHandler.UsableSkills[i].IsUsable();
+            bool isUsable = skillHandler.CanSelectSkill(skillHandler.UsableSkills[i]);
 
             skillsButtons[i].SetUsability(isUsable);
         }

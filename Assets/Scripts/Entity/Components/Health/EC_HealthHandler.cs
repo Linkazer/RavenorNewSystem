@@ -124,7 +124,7 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         }
         else
         {
-            TryPlayAnimation(animationToPlayOnDamageTaken);
+            TryPlayAnimation(animationToPlayOnDamageTaken, null);
             SetHealth(currentHealth - toLose);
         }
     }
@@ -143,9 +143,9 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
 
     private void Succomb()
     {
-        TryPlayAnimation(animationToPlayOnSuccomb);
+        TryPlayAnimation(animationToPlayOnSuccomb, new Action[] { holdingEntity.Deactivate });
 
-        Timer despawnTimer = TimerManager.CreateGameTimer(deathDuration, holdingEntity.Deactivate);
+        //Timer despawnTimer = TimerManager.CreateGameTimer(deathDuration, holdingEntity.Deactivate); RECUP ANIM EVENT
     }
 
     public void SetMaxArmor(int toSet)
@@ -214,13 +214,13 @@ public class EC_HealthHandler : EntityComponent<IEC_HealthHandlerData>
         actOnChangeArmor?.Invoke(currentArmor);
     }
 
-    private void TryPlayAnimation(string animationName)
+    private void TryPlayAnimation(string animationName, Action[] callbacks)
     {
         if (HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rendererComponent))
         {
             if (rendererComponent.AnimHandler != null)
             {
-                rendererComponent.AnimHandler.PlayAnimation(animationName);
+                rendererComponent.AnimHandler.PlayAnimation(animationName, callbacks);
             }
         }
 

@@ -17,6 +17,13 @@ MonoBehaviour:
     englishText: 
   speakerNameColor: {r: 0.28773582, g: 0.7976702, b: 1, a: 1}
   speakerPortrait: {fileID: 21300000, guid: eac86b572decff04b9c34c62e1830160, type: 3}
+  characterTitle:
+    frenchText: "\xC9veill\xE9e de Sarenrae"
+    englishText: 
+  characterDescription:
+    frenchText: "Suivant les principes de Sarenrae, le liens qui l'unit \xE0 sa d\xE9esse
+      permet \xE0 Ylia de guider les \xE2mes vagabondes."
+    englishText: 
   walkable: 0
   blockVision: 0
   height: 1
@@ -34,6 +41,7 @@ MonoBehaviour:
   skills:
   - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
   - {fileID: 11400000, guid: 5b5ac32392f890245a7e8190d3052e17, type: 2}
+  - {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
   ressourceUsed: {fileID: 11400000, guid: a5f474bd2bdfaac4bbf29761f558c743, type: 2}
   expertises:
   - level: 4

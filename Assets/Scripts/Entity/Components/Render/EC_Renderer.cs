@@ -60,7 +60,7 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
 
     public override void Activate()
     {
-        animationHandler.PlayAnimation("Idle");
+        animationHandler.PlayAnimation("Idle", null);
     }
 
     public override void Deactivate()

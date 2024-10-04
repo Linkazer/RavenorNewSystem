@@ -1922,7 +1922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistant: 0
-  testLevel: {fileID: 0}
+  testLevel: {fileID: 11400000, guid: 643a2814b38aad24ab90f3cb6ebf38d9, type: 2}
   delayForStart: 0
 --- !u!1001 &313761836
 PrefabInstance:

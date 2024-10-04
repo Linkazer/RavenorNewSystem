@@ -17,6 +17,7 @@ public abstract class SKL_SkillActionAnimation
     [SerializeField] protected SKL_AnimationTarget animationTarget;
     [SerializeField] protected float animationDuration;
 
+    [Obsolete("Potentiellement obsolète si le système d'Event des animations fonctionne (Pas utilisé dans les FX)")]
     public abstract float AnimationDuration { get; }
 
     public void PlayAnimation(SKL_SkillAction skillAction, SKL_SkillResolver resolver)

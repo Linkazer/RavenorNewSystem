@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,12 +19,12 @@ public class SKL_Animation_EntityAnimation : SKL_SkillActionAnimation
             {
                 if(renderer.AnimHandler != null)
                 {
-                    renderer.AnimHandler.PlayAnimation(animationName, resolver.SkillToResolve);
+                    renderer.AnimHandler.PlayAnimation(animationName, new Action[] { () => EndAnimation(resolver) }, resolver.SkillToResolve);
                 }
             }
         }
 
-        animationTimer = TimerManager.CreateGameTimer(animationDuration, () => EndAnimation(resolver));
+        //animationTimer = TimerManager.CreateGameTimer(animationDuration, () => EndAnimation(resolver)); RECUP ANIM EVENT
     }
 
     protected override void EndAnimation(SKL_SkillResolver resolver)

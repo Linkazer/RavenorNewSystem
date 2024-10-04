@@ -6,20 +6,47 @@ using UnityEngine.UI;
 
 public class MainMenu_LevelSelector : MonoBehaviour
 {
+    [Header("Level data")]
     [SerializeField] private LevelScriptable level;
-    [SerializeField] private TextMeshProUGUI levelName;
+
+    [Header("Selection Button")]
+    [SerializeField] private GameObject selectionHolder;
+    [SerializeField] private TextMeshProUGUI selectionLevelName;
+
+    [Header("Selected")]
+    [SerializeField] private GameObject selectedHolder;
+    [SerializeField] private TextMeshProUGUI selectedLevelName;
+    [SerializeField] private TextMeshProUGUI selectedLevelDescription;
+
+    [Header("Dev")]
     [SerializeField] private MainMenu_LevelSelectionManager selectionManager;
 
-    [SerializeField] private Button button;
+    public LevelScriptable Level => level;
 
     private void OnEnable()
     {
-        levelName.text = level.Title;
+        selectionLevelName.text = level.Title;
+
+        selectedLevelName.text = level.Title;
+        selectedLevelDescription.text = level.Description;
+    }
+
+    public void UnselectLevel()
+    {
+        selectionHolder.SetActive(true);
+        selectedHolder.SetActive(false);
     }
 
     public void UE_SelectLevel()
     {
-        button.Select();
-        selectionManager.SelectLevel(level);
+        selectionHolder.SetActive(false);
+        selectedHolder.SetActive(true);
+
+        selectionManager.SelectLevel(this);
+    }
+
+    public void UE_PlayLevel()
+    {
+        selectionManager.LoadLevel(level);
     }
 }
