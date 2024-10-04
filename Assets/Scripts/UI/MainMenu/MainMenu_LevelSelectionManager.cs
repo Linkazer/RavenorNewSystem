@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MainMenu_LevelSelectionManager : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
     [Header("Scene")]
     [SerializeField] private int levelSceneIndex;
 
-    private LevelScriptable selectedLevel;
+    [Header("Dev")]
+    [SerializeField] private RectTransform rectToRebuild;
+
+    private MainMenu_LevelSelector selectedLevel;
 
     private void Start()
     {
@@ -38,9 +42,17 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
         }
     }
 
-    public void SelectLevel(LevelScriptable newLevel)
+    public void SelectLevel(MainMenu_LevelSelector newLevel)
     {
-        if (selectedLevel == newLevel)
+        if(selectedLevel != null)
+        {
+            selectedLevel.UnselectLevel();
+        }
+
+        selectedLevel = newLevel;
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectToRebuild);
+        /*if (selectedLevel == newLevel)
         {
             EventSystem.current.SetSelectedGameObject(null);
 
@@ -59,8 +71,8 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
 
         selectedLevel = newLevel;
 
-        levelName.text = selectedLevel.Title;
-        levelDescription.text = selectedLevel.Description;
+        levelName.text = selectedLevel.Level.Title;
+        levelDescription.text = selectedLevel.Level.Description;
 
         levelInformationGroup.alpha = 1;
         levelInformationGroup.interactable = true;
@@ -68,7 +80,13 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
 
         characterInformationGroup.alpha = 0f;
         characterInformationGroup.interactable = false;
-        characterInformationGroup.blocksRaycasts = false;
+        characterInformationGroup.blocksRaycasts = false;*/
+    }
+
+    public void LoadLevel(LevelScriptable levelToLoad)
+    {
+        LevelManager.SelectLevel(levelToLoad);
+        RVN_SceneManager.Instance.LoadScene(levelSceneIndex);
     }
 
     public void UE_OpenBook()
@@ -84,7 +102,7 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
 
     public void UE_LoadLevel()
     {
-        LevelManager.SelectLevel(selectedLevel);
+        LevelManager.SelectLevel(selectedLevel.Level);
         RVN_SceneManager.Instance.LoadScene(levelSceneIndex);
     }
 }
