@@ -6,10 +6,13 @@ using UnityEngine.EventSystems;
 
 public class MainMenu_LevelSelectionManager : MonoBehaviour
 {
-    private LevelScriptable selectedLevel;
+    [Header("Menus")]
+    [SerializeField] private CanvasGroup closedBookGroup;
+    [SerializeField] private CanvasGroup openedBookGroup;
 
     [Header("Character Detail")]
     [SerializeField] private CanvasGroup characterInformationGroup;
+    [SerializeField] private MainMenu_PresentedCharacter[] characterPresentations;
 
     [Header("Level Detail")]
     [SerializeField] private CanvasGroup levelInformationGroup;
@@ -18,6 +21,22 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
 
     [Header("Scene")]
     [SerializeField] private int levelSceneIndex;
+
+    private LevelScriptable selectedLevel;
+
+    private void Start()
+    {
+        SelectCampaign();
+    }
+
+    public void SelectCampaign()
+    {
+        //Campaign selection
+        foreach (MainMenu_PresentedCharacter character in characterPresentations)
+        {
+            character.SetCharacter(null);
+        }
+    }
 
     public void SelectLevel(LevelScriptable newLevel)
     {
@@ -50,6 +69,17 @@ public class MainMenu_LevelSelectionManager : MonoBehaviour
         characterInformationGroup.alpha = 0f;
         characterInformationGroup.interactable = false;
         characterInformationGroup.blocksRaycasts = false;
+    }
+
+    public void UE_OpenBook()
+    {
+        closedBookGroup.alpha = 0f;
+        closedBookGroup.interactable = false;
+        closedBookGroup.blocksRaycasts = false;
+
+        openedBookGroup.alpha = 1f;
+        openedBookGroup.interactable = true;
+        openedBookGroup.blocksRaycasts = true;
     }
 
     public void UE_LoadLevel()

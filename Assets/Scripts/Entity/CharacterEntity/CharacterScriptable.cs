@@ -13,6 +13,9 @@ public class CharacterScriptable : DialogueSpeaker,
     IEC_SkillAbsorberHandlerData,
     IEC_StatusHandlerData
 {
+    [SerializeField] private RVN_Text characterTitle;
+    [SerializeField] private RVN_Text characterDescription;
+
     [Header("Movement")]
     [SerializeField] private bool walkable = false;
     [SerializeField] private bool blockVision = true;
@@ -45,6 +48,9 @@ public class CharacterScriptable : DialogueSpeaker,
 
     [Header("Expertises")]
     [SerializeField] private List<ChallengeExpertiseLevel> expertises;
+
+    public string CharacterTitle => characterTitle.GetText();
+    public string CharacterDescription => characterDescription.GetText();
 
     public bool Walkable => walkable;
 

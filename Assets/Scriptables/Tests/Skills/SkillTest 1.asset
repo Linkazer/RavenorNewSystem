@@ -39,12 +39,12 @@ MonoBehaviour:
     - rid: 1140582884468326401
       type: {class: SKL_Shape_ByDistance, ns: , asm: Assembly-CSharp}
       data:
-        zoneDistance: 7.5
+        zoneDistance: 3
         needVision: 0
-    - rid: 1140582884468326403
+    - rid: 1140582884468326405
       type: {class: SKL_Shape_ByDistance, ns: , asm: Assembly-CSharp}
       data:
-        zoneDistance: 7.5
+        zoneDistance: 2
         needVision: 0
     - rid: 5188351792059252737
       type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
@@ -60,7 +60,7 @@ MonoBehaviour:
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:
         shape:
-          rid: 1140582884468326403
+          rid: 1140582884468326405
         startAnimations:
         - rid: 5188351792059252737
         numberDicesToRoll: 5
