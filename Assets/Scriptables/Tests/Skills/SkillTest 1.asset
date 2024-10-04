@@ -27,7 +27,7 @@ MonoBehaviour:
   castHostility: 1
   range: 10
   privisualizedShape:
-    rid: 6537641225162326018
+    rid: 1140582884468326401
   skillActions:
     possibleActions:
     - conditions: []
@@ -36,6 +36,16 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1140582884468326401
+      type: {class: SKL_Shape_ByDistance, ns: , asm: Assembly-CSharp}
+      data:
+        zoneDistance: 7.5
+        needVision: 0
+    - rid: 1140582884468326403
+      type: {class: SKL_Shape_ByDistance, ns: , asm: Assembly-CSharp}
+      data:
+        zoneDistance: 7.5
+        needVision: 0
     - rid: 5188351792059252737
       type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
       data:
@@ -50,7 +60,7 @@ MonoBehaviour:
       type: {class: SKL_AS_RollDice, ns: , asm: Assembly-CSharp}
       data:
         shape:
-          rid: 6429556112013918210
+          rid: 1140582884468326403
         startAnimations:
         - rid: 5188351792059252737
         numberDicesToRoll: 5
@@ -70,9 +80,6 @@ MonoBehaviour:
           possibleActions: []
         nextAction:
           possibleActions: []
-    - rid: 6429556112013918210
-      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
-      data: 
     - rid: 6429556112013918211
       type: {class: SKL_AS_DamageAction, ns: , asm: Assembly-CSharp}
       data:
@@ -94,7 +101,4 @@ MonoBehaviour:
       data: 
     - rid: 6429556112013918213
       type: {class: SKL_DO_Dices, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 6537641225162326018
-      type: {class: SKL_Shape_TargetNode, ns: , asm: Assembly-CSharp}
       data: 

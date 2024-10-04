@@ -257,7 +257,7 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
             yield break;
         }
 
-        entityAnimator?.AnimHandler.PlayAnimation("Walk");
+        entityAnimator?.AnimHandler.PlayAnimation("Walk", null);
 
         while (true)
         {

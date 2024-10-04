@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -24,6 +25,8 @@ public class AnimationHandler : MonoBehaviour
     [SerializeField] private Outline outline;
 
     private AnimationData currentAnim;
+
+    private Action[] animationCallbacks;
 
     public void SetOutline(bool toSet)
     {
@@ -52,9 +55,9 @@ public class AnimationHandler : MonoBehaviour
     /// Play an animation.
     /// </summary>
     /// <param name="animationName">The Name/ID of the animation to play.</param>
-    public void PlayAnimation(string animationName)
+    public void PlayAnimation(string animationName, Action[] callbacks)
     {
-        PlayAnimation(animationName, null);
+        PlayAnimation(animationName, callbacks, null);
     }
 
     /// <summary>
@@ -62,7 +65,7 @@ public class AnimationHandler : MonoBehaviour
     /// </summary>
     /// <param name="animationName">The Name/ID of the animation to play.</param>
     /// <param name="animationData">The data for the animation.</param>
-    public void PlayAnimation(string animationName, object animationData)
+    public void PlayAnimation(string animationName, Action[] callbacks, object animationData)
     {
         if (currentAnim == null || currentAnim.AnimationName != animationName)
         {
@@ -77,7 +80,9 @@ public class AnimationHandler : MonoBehaviour
 
                     currentAnim = anim;
 
-                    currentAnim.Play(animationData, () => PlayAnimation(currentAnim.LinkedAnimation, animationData));
+                    animationCallbacks = callbacks;
+
+                    currentAnim.Play(animationData, () => PlayAnimation(currentAnim.LinkedAnimation, callbacks, animationData));
                 }
             }
         }
@@ -88,7 +93,7 @@ public class AnimationHandler : MonoBehaviour
     /// </summary>
     public void EndAnimation()
     {
-        PlayAnimation("Idle");
+        PlayAnimation("Idle", null);
         currentAnim = null;
     }
 
@@ -118,6 +123,17 @@ public class AnimationHandler : MonoBehaviour
     public void ANIM_PlayFX(Poolable_FX fxToPlay)
     {
         PoolManager.InstatiatePoolableAtPosition(fxToPlay, transform.position, null);
+    }
+
+    public void ANIM_CALLBACK_PlayCallback(int callbackIndex)
+    {
+        if(animationCallbacks != null)
+        {
+            if(callbackIndex < animationCallbacks.Length)
+            {
+                animationCallbacks[callbackIndex]?.Invoke();
+            }
+        }
     }
     #endregion
 }
