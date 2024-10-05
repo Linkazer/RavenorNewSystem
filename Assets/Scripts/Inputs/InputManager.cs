@@ -25,6 +25,10 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private PlayerControl playerControl;
     [SerializeField] private EventSystem evtSyst;
 
+    [Header("Cmmon interactions")]
+    [SerializeField] private UICharacterBattleInformation characterBattleInformation;
+
+
     private Vector2 mouseScreenPosition;
 
     private Vector2 mouseWorldPosition;

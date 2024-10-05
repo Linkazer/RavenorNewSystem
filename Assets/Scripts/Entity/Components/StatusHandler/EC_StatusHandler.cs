@@ -10,6 +10,18 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
 
     private Dictionary<StatusData, AppliedStatus> effectiveStatus = new Dictionary<StatusData, AppliedStatus>();
 
+    public List<AppliedStatus> GetAppliedStatus()
+    {
+        List<AppliedStatus> toReturn = new List<AppliedStatus>();
+
+        foreach(KeyValuePair<StatusData, AppliedStatus> pair in effectiveStatus)
+        {
+            toReturn.Add(pair.Value);
+        }
+
+        return toReturn;
+    }
+
     public override void SetComponentData(IEC_StatusHandlerData componentData)
     {
         foreach(StatusData passive in componentData.Passives)
