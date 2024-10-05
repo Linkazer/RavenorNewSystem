@@ -15,6 +15,7 @@ public class Node : IHeapItem<Node>
 	public List<NodeBlocker> exitBlockers = new List<NodeBlocker>();
 
 	//Data
+	private GridElement linkedElement;
 	private bool staticObstacle;
     private Vector3 worldPosition;
     private int gridX;
@@ -31,6 +32,8 @@ public class Node : IHeapItem<Node>
 	public int GridY => gridY;
 	public Vector3 WorldPosition => worldPosition;
 
+	public GridElement LinkedElement => linkedElement;
+
     public bool IsWalkable => !staticObstacle && CheckWalkableFromEntitiesOnNode();
 
     public bool IsVisible => !staticObstacle && CheckVisibleFromEntitiesOnNode();
@@ -38,9 +41,9 @@ public class Node : IHeapItem<Node>
     public List<EC_NodeHandler> EntitiesOnNode => entitiesOnNode;
 
 
-    public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY) {
+    public Node(bool _walkable, GridElement element, Vector3 _worldPos, int _gridX, int _gridY) {
 
-		SetNode(_walkable, _worldPos, _gridX, _gridY);
+		SetNode(_walkable, element, _worldPos, _gridX, _gridY);
 	}
 
     /// <summary>
@@ -50,8 +53,10 @@ public class Node : IHeapItem<Node>
     /// <param name="_worldPos">The Node World Position.</param>
     /// <param name="_gridX">The Node grid position on X axis.</param>
     /// <param name="_gridY">The Node grid position on Y axis.</param>
-    public void SetNode(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
+    public void SetNode(bool _walkable, GridElement element, Vector3 _worldPos, int _gridX, int _gridY)
 	{
+		linkedElement = element;
+
 		staticObstacle = !_walkable;
 		worldPosition = _worldPos;
 		gridX = _gridX;

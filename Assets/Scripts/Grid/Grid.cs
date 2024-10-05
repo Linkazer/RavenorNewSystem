@@ -9,12 +9,15 @@ public class Grid : Singleton<Grid>
     [SerializeField] private LayerMask unwalkableMask;
     [SerializeField] private Vector2 gridWorldSize;
     [SerializeField] private float nodeRadius;
-	private Node[,] grid;
 
-	private float nodeDiameter;
+	private float nodeDiameter => nodeRadius * 2f;
 	private int gridSizeX, gridSizeY;
 
     [SerializeField] private GridZoneDisplayer gridDisplayer;
+
+	[Header("Generated Grid")]
+	[SerializeField] private GridElement[] levelGrid;
+    [SerializeField] private Node[,] grid;
 
     public int MaxSize
     {
@@ -23,51 +26,95 @@ public class Grid : Singleton<Grid>
             return gridSizeX * gridSizeY;
         }
     }
+
     protected override void OnAwake()
     {
         base.OnAwake();
-        nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-        CreateGrid();
+        //CreateGrid();
     }
 
 	/// <summary>
 	/// Create the Grid.
 	/// </summary>
-	public void CreateGrid() {
-		if (grid == null)
+	[ContextMenu("GenerateGrid")]
+	public void CreateGrid() 
+	{
+		Dictionary<Vector2, GridElement> generatedNodes = new Dictionary<Vector2, GridElement>();
+
+		float minXPosition = levelGrid[0].WorldPosition.x;
+		float minYPosition = levelGrid[0].WorldPosition.y;
+        float maxXPosition = levelGrid[0].WorldPosition.x;
+        float maxYPosition = levelGrid[0].WorldPosition.y;
+
+		int elementIndex = 0;
+
+        foreach (GridElement element in levelGrid)
 		{
-			grid = new Node[gridSizeX, gridSizeY];
-		}
-		Vector3 worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x/2 - Vector3.up * gridWorldSize.y/2;
+			elementIndex++;
 
-		for (int x = 0; x < gridSizeX; x ++) {
-			for (int y = 0; y < gridSizeY; y ++) {
-				Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-				bool walkable = !(Physics2D.OverlapCircle(worldPoint,nodeRadius*0.2f,unwalkableMask));
-
-				if (grid[x, y] != null)
-				{
-					grid[x, y].SetNode(walkable, worldPoint, x, y);
-				}
-				else
-                {
-					grid[x, y] = new Node(walkable, worldPoint, x, y); ;
-				}
+			if(generatedNodes.ContainsKey(element.FlatPosition))
+			{
+				Debug.LogError("Found 2 GridElements at position " + element.FlatPosition);
+				continue;
 			}
-		}
+
+			generatedNodes.Add(element.FlatPosition,element);
+
+			if(element.WorldPosition.x < minXPosition)
+			{
+				minXPosition = element.WorldPosition.x;
+			}
+
+			if(element.WorldPosition.y < minYPosition)
+			{
+				minYPosition = element.WorldPosition.y;
+			}
+
+			if (element.WorldPosition.x > maxXPosition)
+			{
+				maxXPosition = element.WorldPosition.x;
+			}
+
+            if (element.WorldPosition.y > maxYPosition)
+            {
+                maxYPosition = element.WorldPosition.y;
+            }
+        }
+
+		Vector2Int gridSize = new Vector2Int(Mathf.RoundToInt((maxXPosition - minXPosition) / nodeDiameter), Mathf.RoundToInt((maxYPosition - minYPosition) / nodeDiameter));
+
+		grid = new Node[gridSize.x+1, gridSize.y+1];
+
+		foreach(KeyValuePair<Vector2, GridElement> element in generatedNodes)
+		{
+            Vector2Int gridPosition = new Vector2Int(Mathf.RoundToInt((element.Value.FlatPosition.x - minXPosition) / nodeDiameter), Mathf.RoundToInt((element.Value.FlatPosition.y - minYPosition) / nodeDiameter));
+
+			grid[gridPosition.x, gridPosition.y] = new Node(element.Value.Walkable, element.Value, element.Value.WorldPosition, gridPosition.x, gridPosition.y);
+        }
+
+        for (int x = 0; x <= gridSize.x; x++)
+        {
+            for (int y = 0; y <= gridSize.y; y++)
+            {
+				if (grid[x,y] == null)
+				{
+                    grid[x, y] = new Node(false, null, new Vector2(x * nodeDiameter - nodeDiameter, y * nodeDiameter), x, y);
+                }
+            }
+        }
 
 		gridDisplayer.OnSetGrid(grid, gridSizeX, gridSizeY);
 	}
 
-	/// <summary>
-	/// Get the Node at its Grid Position.
-	/// </summary>
-	/// <param name="x">Position on X on the grid.</param>
-	/// <param name="y">Position on Y on the grid.</param>
-	/// <returns></returns>
-	public Node GetNode(int x, int y)
+    /// <summary>
+    /// Get the Node at its Grid Position.
+    /// </summary>
+    /// <param name="x">Position on X on the grid.</param>
+    /// <param name="y">Position on Y on the grid.</param>
+    /// <returns></returns>
+    public Node GetNode(int x, int y)
     {
 		if(x >= 0 && x < gridSizeX && y >= 0 && y < gridSizeY)
         {
@@ -181,9 +228,15 @@ public class Grid : Singleton<Grid>
 #if UNITY_EDITOR
 	void OnDrawGizmos() {
 		Gizmos.DrawWireCube(transform.position,new Vector3(gridWorldSize.x,gridWorldSize.y,1));
-		if (grid != null && displayGridGizmos) {
-			foreach (Node n in grid) {
-				bool redColor = n.IsWalkable;
+
+		if (grid != null && displayGridGizmos) 
+		{
+            foreach (Node n in grid) {
+				bool redColor = false;//n.IsWalkable;
+				if(n.LinkedElement != null)
+				{
+					redColor = n.LinkedElement.Walkable;
+				}
 				Gizmos.color = redColor?Color.white:Color.red;
 				Gizmos.DrawCube(n.WorldPosition, Vector3.one * (nodeDiameter/2));
 			}

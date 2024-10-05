@@ -34,7 +34,7 @@ public class LevelHandler : MonoBehaviour
     private IEnumerator InitializeLevel()
     {
         yield return 0;
-        Grid.Instance.CreateGrid();
+        //Grid.Instance.CreateGrid();
 
         ControllableTeamHandler.Instance.Initialize();
 

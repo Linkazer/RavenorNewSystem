@@ -25,7 +25,7 @@ public class InputManager : Singleton<InputManager>
     [SerializeField] private PlayerControl playerControl;
     [SerializeField] private EventSystem evtSyst;
 
-    [Header("Cmmon interactions")]
+    [Header("Common interactions")]
     [SerializeField] private UICharacterBattleInformation characterBattleInformation;
 
 
