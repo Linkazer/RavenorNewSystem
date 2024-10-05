@@ -7,6 +7,9 @@ public class AppliedEffect
     private StatusEffect effect;
     private AppliedStatus effectStatus;
 
+    public StatusEffect Effect => effect;
+    public AppliedStatus EffectStatus => effectStatus;
+
     public AppliedEffect(StatusEffect effectToApply, AppliedStatus parentStatus)
     {
         effect = effectToApply;

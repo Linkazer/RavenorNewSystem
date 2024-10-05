@@ -20,6 +20,8 @@ public class AppliedStatus
 
     public EC_StatusHandler StatusTarget => targetStatusHandler;
 
+    public StatusData Status;
+
     public AppliedStatus(StatusData nStatus, float nDuration, Action endCallback)
     {
         status = MonoBehaviour.Instantiate(nStatus);
