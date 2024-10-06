@@ -20,8 +20,8 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
     //Pathfinding
 	private Node[] path = new Node[0];
     private int targetIndex;
-    private Vector2 posUnit;
-    private Vector2 posTarget;
+    private Vector3 posUnit;
+    private Vector3 posTarget;
     private Coroutine currentMovementRoutine;
 
 	private float currentMovementLeft;
@@ -244,10 +244,10 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
         float lerpValue = 0;
         float distance = 0;
 
-        posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
-        posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
+        posUnit = new Vector3(transformToMove.position.x, transformToMove.position.y, transform.position.z);
+        posTarget = new Vector3(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y, currentWaypoint.WorldPosition.z);
 
-        distance = Vector2.Distance(posUnit, posTarget);
+        distance = Vector3.Distance(posUnit, posTarget);
 
         entityAnimator?.SetOrientation(posTarget - posUnit);
 
@@ -297,12 +297,12 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
 
                     lerpValue--;
 
-                    posUnit = new Vector2(transformToMove.position.x, transformToMove.position.y);
-                    posTarget = new Vector2(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y);
+                    posUnit = new Vector3(transformToMove.position.x, transformToMove.position.y, transform.position.z);
+                    posTarget = new Vector3(currentWaypoint.WorldPosition.x, currentWaypoint.WorldPosition.y, currentWaypoint.WorldPosition.z);
 
                     entityAnimator?.SetOrientation(posTarget - posUnit);
 
-                    distance = Vector2.Distance(posUnit, posTarget);
+                    distance = Vector3.Distance(posUnit, posTarget);
                 }
             }
 

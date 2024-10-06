@@ -37,6 +37,7 @@ public class LevelManager : Singleton<LevelManager>
         {
             levelToLoad = testLevel;
         }
-        Instantiate(levelToLoad.LevelPrefab).InstantiateLevel();
+        ControllableTeamHandler.Instance.Initialize();
+        //Instantiate(levelToLoad.LevelPrefab).InstantiateLevel();
     }
 }

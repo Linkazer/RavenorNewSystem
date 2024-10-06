@@ -2,6 +2,7 @@
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class Grid : Singleton<Grid> 
 {
@@ -12,6 +13,10 @@ public class Grid : Singleton<Grid>
 
 	private float nodeDiameter => nodeRadius * 2f;
 	private int gridSizeX, gridSizeY;
+    float minXPosition;
+    float minYPosition;
+    float maxXPosition;
+    float maxYPosition;
 
     [SerializeField] private GridZoneDisplayer gridDisplayer;
 
@@ -32,7 +37,7 @@ public class Grid : Singleton<Grid>
         base.OnAwake();
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-        //CreateGrid();
+        CreateGrid();
     }
 
 	/// <summary>
@@ -43,10 +48,10 @@ public class Grid : Singleton<Grid>
 	{
 		Dictionary<Vector2, GridElement> generatedNodes = new Dictionary<Vector2, GridElement>();
 
-		float minXPosition = levelGrid[0].WorldPosition.x;
-		float minYPosition = levelGrid[0].WorldPosition.y;
-        float maxXPosition = levelGrid[0].WorldPosition.x;
-        float maxYPosition = levelGrid[0].WorldPosition.y;
+		minXPosition = levelGrid[0].WorldPosition.x;
+		minYPosition = levelGrid[0].WorldPosition.y;
+        maxXPosition = levelGrid[0].WorldPosition.x;
+        maxYPosition = levelGrid[0].WorldPosition.y;
 
 		int elementIndex = 0;
 
@@ -85,7 +90,11 @@ public class Grid : Singleton<Grid>
 
 		Vector2Int gridSize = new Vector2Int(Mathf.RoundToInt((maxXPosition - minXPosition) / nodeDiameter), Mathf.RoundToInt((maxYPosition - minYPosition) / nodeDiameter));
 
-		grid = new Node[gridSize.x+1, gridSize.y+1];
+        gridSizeX = gridSize.x;
+		gridSizeY = gridSize.y;
+		
+
+        grid = new Node[gridSize.x+1, gridSize.y+1];
 
 		foreach(KeyValuePair<Vector2, GridElement> element in generatedNodes)
 		{
@@ -139,12 +148,15 @@ public class Grid : Singleton<Grid>
         int x = Mathf.RoundToInt((gridSizeX) * percentX) - 1;
         int y = Mathf.RoundToInt((gridSizeY) * percentY) - 1;
 
-        if (x < 0 || x >= gridSizeX || y < 0 || y >= gridSizeY)
+        Vector2Int gridPos = new Vector2Int(Mathf.RoundToInt((worldPosition.x - minXPosition) / nodeDiameter), Mathf.RoundToInt((worldPosition.y - minYPosition) / nodeDiameter));
+       
+		if (gridPos.x < 0 || gridPos.x >= gridSizeX || gridPos.y < 0 || gridPos.y >= gridSizeY)
         {
             return null;
         }
 
-        return grid[x, y];
+		Debug.Log($"X : {gridPos.x} | Y : {gridPos.y}");
+        return grid[gridPos.x, gridPos.y];
     }
 
     /// <summary>
@@ -174,8 +186,9 @@ public class Grid : Singleton<Grid>
 				int checkX = node.GridX + x;
 				int checkY = node.GridY + y;
 
-				if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY) {
-					neighbours.Add(grid[checkX,checkY]);
+				if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY) 
+				{
+                    neighbours.Add(grid[checkX,checkY]);
 				}
 			}
 		}

@@ -5,10 +5,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider))]
 public class EC_Clicable : EntityComponent
 {
-    [SerializeField] private Collider2D clicableCollider;
+    [SerializeField] private Collider clicableCollider;
 
     [Header("Events")]
     [SerializeField] protected UnityEvent OnLeftMouseDownEvent;

@@ -31,11 +31,14 @@ public class InputManager : Singleton<InputManager>
 
     private Vector2 mouseScreenPosition;
 
-    private Vector2 mouseWorldPosition;
+    private Vector3 mouseScreenToWorldPosition;
+    private Vector3 mouseWorldPosition;
 
     private EC_Clicable currentClicHandlerTouched;
 
     private bool isMiddleMouseDown;
+
+    private RaycastHit raycastHited;
 
     public Action<Vector2> OnMouseLeftDown;
     public Action<Vector2> OnMouseLeftDownWithoutObject;
@@ -103,7 +106,7 @@ public class InputManager : Singleton<InputManager>
     {
         mouseScreenPosition = context.ReadValue<Vector2>();
 
-        mouseWorldPosition = usedCamera.ScreenToWorldPoint(mouseScreenPosition);
+        mouseScreenToWorldPosition = usedCamera.ScreenToWorldPoint(mouseScreenPosition);
     }
 
     private void LeftMouseInput(InputAction.CallbackContext context)
@@ -170,15 +173,33 @@ public class InputManager : Singleton<InputManager>
         }
     }
 
-    private RaycastHit2D UpdateRaycastHitObject()
+    private Ray ray;
+
+    private RaycastHit UpdateRaycastHitObject()
     {
-        RaycastHit2D hit = Physics2D.Raycast(mouseWorldPosition, Vector2.zero, 25f, ~layerToIgnore);
+        ray = usedCamera.ScreenPointToRay(mouseScreenPosition);
+
+        if(Physics.Raycast(ray, out raycastHited, 5000, ~layerToIgnore))
+        {
+            mouseWorldPosition = raycastHited.point;
+        }
+        else
+        {
+            mouseWorldPosition = mouseScreenToWorldPosition;
+        }
 
         EC_Clicable lastClicHandler = currentClicHandlerTouched;
 
-        if (hit.transform != null && hit.transform.gameObject.GetComponent<EC_Clicable>() != null)
+        if (raycastHited.transform != null)
         {
-            currentClicHandlerTouched = hit.transform.gameObject.GetComponent<EC_Clicable>();
+            if (raycastHited.transform.gameObject.GetComponent<EC_Clicable>() != null)
+            {
+                currentClicHandlerTouched = raycastHited.transform.gameObject.GetComponent<EC_Clicable>();
+            }
+            else
+            {
+                currentClicHandlerTouched = null;
+            }
         }
         else if (currentClicHandlerTouched != null)
         {
@@ -198,6 +219,12 @@ public class InputManager : Singleton<InputManager>
             }
         }
 
-        return hit;
+        return raycastHited;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(ray);
     }
 }

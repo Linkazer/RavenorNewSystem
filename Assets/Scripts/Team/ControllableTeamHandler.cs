@@ -22,6 +22,7 @@ public class ControllableTeamHandler : Singleton<ControllableTeamHandler>
         if (controllableCharacters.Count > 0)
         {
             SelectCharacter(controllableCharacters[0]);
+            controllableCharacters[0].Activate();
         }
 
         teamUi.SetGroupMode(areGrouped);
