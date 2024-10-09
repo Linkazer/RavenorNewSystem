@@ -359,7 +359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (21)
+      value: Grid Element (8.00, 20.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -665,7 +665,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (19)
+      value: Grid Element (10.00, 18.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1220,22 +1220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487d944b6fc6a4b4d9c70a364f4c6959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &99313421 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-  m_PrefabInstance: {fileID: 207380887}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &99313422 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3140330940477426263, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-  m_PrefabInstance: {fileID: 207380887}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487d944b6fc6a4b4d9c70a364f4c6959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &104940025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,7 +1526,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (32)
+      value: Grid Element (8.00, 12.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -1852,9 +1836,7 @@ Transform:
   - {fileID: 812528950}
   - {fileID: 238194168}
   - {fileID: 1046577206}
-  - {fileID: 275217073}
   - {fileID: 427746647}
-  - {fileID: 99313421}
   - {fileID: 2041897611}
   - {fileID: 765236663}
   - {fileID: 844136079}
@@ -2080,7 +2062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (3)
+      value: Grid Element (2.00, 4.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2318,7 +2300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (44)
+      value: Grid Element (6.00, 14.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2399,7 +2381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (49)
+      value: Grid Element (8.00, 0.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2432,7 +2414,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (29)
+      value: Grid Element (6.00, 16.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -2453,71 +2435,6 @@ PrefabInstance:
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
---- !u!1001 &207380887
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 151523218}
-    m_Modifications:
-    - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_Name
-      value: GridElement_Walkable (23)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2648,7 +2565,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (33)
+      value: Grid Element (8.00, 16.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -2903,7 +2820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (5)
+      value: Grid Element (2.00, 8.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3022,22 +2939,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261332592}
   m_CullTransparentMesh: 1
---- !u!4 &275217073 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-  m_PrefabInstance: {fileID: 1507072950}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &275217074 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3140330940477426263, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-  m_PrefabInstance: {fileID: 1507072950}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487d944b6fc6a4b4d9c70a364f4c6959, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &281085273
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3096,7 +2997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (43)
+      value: Grid Element (8.00, 10.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3177,7 +3078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (8)
+      value: Grid Element (8.00, 2.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3716,7 +3617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (25)
+      value: Grid Element (4.00, 24.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3781,7 +3682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (7)
+      value: Grid Element (6.00, 4.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4531,7 +4432,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (27)
+      value: Grid Element (6.00, 10.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -4596,7 +4497,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (14)
+      value: Grid Element (2.00, 22.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -4874,7 +4775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (18)
+      value: Grid Element (10.00, 16.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5321,7 +5222,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (18)
+      value: Grid Element (4.00, 12.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -5402,7 +5303,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (7)
+      value: Grid Element (0.00, 16.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -6183,7 +6084,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -4.440892e-16, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6584,7 +6485,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (4)
+      value: Grid Element (0.00, 10.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -7754,7 +7655,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (11)
+      value: Grid Element (2.00, 12.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -7834,7 +7735,7 @@ Transform:
   m_GameObject: {fileID: 671582378}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.64, y: 9.94, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8256,7 +8157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (27)
+      value: Grid Element (0.00, 24.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8321,7 +8222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (32)
+      value: Grid Element (-2.00, 16.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8402,7 +8303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (33)
+      value: Grid Element (-2.00, 14.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8419,7 +8320,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (17)
+      value: Grid Element (4.00, 22.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -8474,89 +8375,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
---- !u!1 &710026453
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 710026454}
-  - component: {fileID: 710026456}
-  - component: {fileID: 710026455}
-  m_Layer: 0
-  m_Name: Capsule
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &710026454
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710026453}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1690683459}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!23 &710026455
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710026453}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &710026456
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710026453}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &735824820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8567,7 +8385,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (3)
+      value: Grid Element (0.00, 8.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -8632,7 +8450,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (22)
+      value: Grid Element (4.00, 20.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -9723,7 +9541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (8)
+      value: Grid Element (0.00, 18.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -9852,7 +9670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (40)
+      value: Grid Element (4.00, 0.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10174,7 +9992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (38)
+      value: Grid Element (-2.00, 4.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10239,7 +10057,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (48)
+      value: Grid Element (2.00, 20.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10288,7 +10106,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (20)
+      value: Grid Element (4.00, 8.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -10401,7 +10219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (23)
+      value: Grid Element (8.00, 24.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10466,7 +10284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (24)
+      value: Grid Element (6.00, 24.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10557,7 +10375,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (6)
+      value: Grid Element (0.00, 14.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -10717,7 +10535,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (30)
+      value: Grid Element (6.00, 20.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -11260,7 +11078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (45)
+      value: Grid Element (4.00, 14.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11438,7 +11256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (47)
+      value: Grid Element (2.00, 16.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11838,7 +11656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (26)
+      value: Grid Element (2.00, 24.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11871,7 +11689,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable
+      value: Grid Element (0.00, 2.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -12218,7 +12036,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (17)
+      value: Grid Element (10.00, 14.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12299,7 +12117,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (36)
+      value: Grid Element (-2.00, 8.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12604,7 +12422,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (39)
+      value: Grid Element (10.00, 10.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -12854,7 +12672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (20)
+      value: Grid Element (8.00, 18.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12919,7 +12737,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (35)
+      value: Grid Element (-2.00, 10.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13096,7 +12914,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (10)
+      value: Grid Element (0.00, 22.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -13346,7 +13164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (37)
+      value: Grid Element (-2.00, 6.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13404,8 +13222,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 1
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 671582379}
+  m_Follow: {fileID: 671582379}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 6
@@ -13433,15 +13251,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1219892519}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.50100183, y: -0, z: -0, w: 0.86544627}
-  m_LocalPosition: {x: 0, y: -9.02, z: -10}
+  m_LocalRotation: {x: -0.3404253, y: 0.000000016189208, z: 0.0000000058613026, w: 0.9402716}
+  m_LocalPosition: {x: 1.64, y: -2.5600004, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1867959682}
   - {fileID: 519420032}
   m_Father: {fileID: 758719857}
-  m_LocalEulerAnglesHint: {x: -60.133, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -48.06, y: 0, z: 0}
 --- !u!1001 &1226397995
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13452,7 +13270,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (37)
+      value: Grid Element (10.00, 12.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -13914,7 +13732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (22)
+      value: Grid Element (8.00, 22.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14180,7 +13998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (42)
+      value: Grid Element (6.00, 2.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14346,7 +14164,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (21)
+      value: Grid Element (4.00, 16.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -14556,7 +14374,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (36)
+      value: Grid Element (8.00, 8.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -14849,7 +14667,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (9)
+      value: Grid Element (10.00, 2.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14866,7 +14684,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (12)
+      value: Grid Element (2.00, 10.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -14995,7 +14813,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (39)
+      value: Grid Element (-2.00, 2.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15430,7 +15248,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (13)
+      value: Grid Element (2.00, 18.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -15588,7 +15406,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (2)
+      value: Grid Element (0.00, 6.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -15701,7 +15519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (16)
+      value: Grid Element (12.00, 14.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15766,7 +15584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (31)
+      value: Grid Element (-2.00, 18.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15933,7 +15751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (41)
+      value: Grid Element (4.00, 4.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16014,7 +15832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (34)
+      value: Grid Element (-2.00, 12.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16075,7 +15893,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (16)
+      value: Grid Element (4.00, 18.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -16565,78 +16383,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (10)
+      value: Grid Element (10.00, 4.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2605386826365a841822323e1b0098c7, type: 3}
---- !u!1001 &1507072950
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 151523218}
-    m_Modifications:
-    - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_Name
-      value: GridElement_Walkable (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
 --- !u!1001 &1516285681
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16695,7 +16448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (12)
+      value: Grid Element (12.00, 6.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16712,7 +16465,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (19)
+      value: Grid Element (4.00, 10.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -17396,7 +17149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (46)
+      value: Grid Element (2.00, 14.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17413,7 +17166,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (5)
+      value: Grid Element (0.00, 12.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -17591,9 +17344,7 @@ MonoBehaviour:
   - {fileID: 812528951}
   - {fileID: 238194169}
   - {fileID: 1046577207}
-  - {fileID: 275217074}
   - {fileID: 427746648}
-  - {fileID: 99313422}
   - {fileID: 2041897612}
   - {fileID: 765236664}
   - {fileID: 844136080}
@@ -17697,7 +17448,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (26)
+      value: Grid Element (6.00, 12.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -17826,7 +17577,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (2)
+      value: Grid Element (2.00, 2.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17918,7 +17669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (29)
+      value: Grid Element (-2.00, 22.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18374,7 +18125,7 @@ PrefabInstance:
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: characterData
       value: 
-      objectReference: {fileID: 11400000, guid: 25a3b859424bbaf499f600f7da21d3b3, type: 2}
+      objectReference: {fileID: 11400000, guid: e38e45411f1e7e742b9b49d5bb2e88c0, type: 2}
     - target: {fileID: 3409250983530852487, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: components.Array.size
       value: 4
@@ -18525,7 +18276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7360491099147134179, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7360491099147134179, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18602,10 +18353,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 3415576868527278499, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7360491099147134179, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 710026454}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5160252466445924264, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
       insertIndex: -1
@@ -18614,11 +18362,6 @@ PrefabInstance:
 --- !u!4 &1690683458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5310817080565035071, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
-  m_PrefabInstance: {fileID: 1690683457}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1690683459 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7360491099147134179, guid: 9f789f5fa00ca0d40a448c6b56518409, type: 3}
   m_PrefabInstance: {fileID: 1690683457}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1690683460 stripped
@@ -19222,7 +18965,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (30)
+      value: Grid Element (-2.00, 20.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19239,7 +18982,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (31)
+      value: Grid Element (8.00, 4.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -20199,7 +19942,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (24)
+      value: Grid Element (6.00, 18.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -20355,7 +20098,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (25)
+      value: Grid Element (6.00, 22.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -20513,7 +20256,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (40)
+      value: Grid Element (10.00, 8.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -20775,7 +20518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (6)
+      value: Grid Element (4.00, 6.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20793,6 +20536,7 @@ GameObject:
   - component: {fileID: 1867959682}
   - component: {fileID: 1867959683}
   - component: {fileID: 1867959684}
+  - component: {fileID: 1867959685}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -20840,15 +20584,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
+  m_FollowOffset: {x: 0, y: -12.5, z: -15}
+  m_XDamping: 0
+  m_YDamping: 0
   m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
-  m_YawDamping: 1
+  m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
+--- !u!114 &1867959685
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867959681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_LookaheadTime: 0
+  m_LookaheadSmoothing: 0
+  m_LookaheadIgnoreY: 0
+  m_HorizontalDamping: 0.5
+  m_VerticalDamping: 0.5
+  m_ScreenX: 0.5
+  m_ScreenY: 0.5
+  m_DeadZoneWidth: 2
+  m_DeadZoneHeight: 2
+  m_SoftZoneWidth: 2
+  m_SoftZoneHeight: 2
+  m_BiasX: 0
+  m_BiasY: 0
+  m_CenterOnActivate: 1
 --- !u!4 &1869636280 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 403363084378352931, guid: 2605386826365a841822323e1b0098c7, type: 3}
@@ -21191,7 +20962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (13)
+      value: Grid Element (12.00, 8.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21395,7 +21166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (15)
+      value: Grid Element (12.00, 12.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21460,7 +21231,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (4)
+      value: Grid Element (2.00, 6.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -21841,7 +21612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (11)
+      value: Grid Element (10.00, 6.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22105,7 +21876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (28)
+      value: Grid Element (-2.00, 24.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22170,7 +21941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3005457818236887943, guid: 2605386826365a841822323e1b0098c7, type: 3}
       propertyPath: m_Name
-      value: GridElement_Unwalkable (14)
+      value: Grid Element (12.00, 10.00)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22345,7 +22116,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (34)
+      value: Grid Element (8.00, 6.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -22470,7 +22241,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (1)
+      value: Grid Element (0.00, 4.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -22535,7 +22306,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (28)
+      value: Grid Element (6.00, 8.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -22661,7 +22432,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (35)
+      value: Grid Element (6.00, 6.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -23277,7 +23048,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (38)
+      value: Grid Element (8.00, 14.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x
@@ -23342,7 +23113,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 634502538017243151, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_Name
-      value: GridElement_Walkable (9)
+      value: Grid Element (0.00, 20.00)
       objectReference: {fileID: 0}
     - target: {fileID: 2657893243254247083, guid: b22561ce1c79f3a44a634b2690b0c57b, type: 3}
       propertyPath: m_LocalScale.x

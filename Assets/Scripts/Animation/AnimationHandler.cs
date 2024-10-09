@@ -16,17 +16,17 @@ public class AnimationHandler : MonoBehaviour
     [Header("Character Animations")]
     [SerializeField] private AnimationData[] animations;
 
-    [Header("Sorting Groups")]
-    [SerializeField] private SortingGroup mainSortingGroup;
-    [SerializeField] private SortingGroup frontHandSortingGroup;
-    [SerializeField] private SortingGroup backHandSortingGroup;
-
-    [Header("Outline")]
+    [Header("Outline - Currently Obsolete")]
     [SerializeField] private Outline outline;
 
     private AnimationData currentAnim;
 
     private Action[] animationCallbacks;
+
+    private void Start()
+    {
+        transform.localEulerAngles = new Vector3(-90f, 0f, 0f);
+    }
 
     public void SetOutline(bool toSet)
     {
@@ -105,21 +105,6 @@ public class AnimationHandler : MonoBehaviour
 
     /// Methods that can be used in the Animator.
     #region Animator Methods
-    public void ANIM_UpdateMainSortingGroup(int sortingOrder)
-    {
-        mainSortingGroup.sortingOrder = sortingOrder;
-    }
-
-    public void ANIM_UpdateFrontHandSortingGroup(int sortingOrder)
-    {
-        frontHandSortingGroup.sortingOrder = sortingOrder;
-    }
-
-    public void ANIM_UpdateBackHandSortingGroup(int sortingOrder)
-    {
-        backHandSortingGroup.sortingOrder = sortingOrder;
-    }
-
     public void ANIM_PlayFX(Poolable_FX fxToPlay)
     {
         PoolManager.InstatiatePoolableAtPosition(fxToPlay, transform.position, null);

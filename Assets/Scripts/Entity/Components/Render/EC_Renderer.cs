@@ -10,7 +10,8 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
 
     public void SetOrientation(Vector2 direction)
     {
-        if (direction.x > 0)
+        //TODO 3D : Gérer les rotations des personnages
+        /*if (direction.x > 0)
         {
             transform.localEulerAngles = new Vector3(0, 0, 0);
         }
@@ -19,7 +20,7 @@ public class EC_Renderer : EntityComponent<IEC_RendererData>
             transform.localEulerAngles = new Vector3(0, -180, 0);
         }
 
-        animationHandler.SetOrientation(new Vector2(Mathf.Abs(direction.x), direction.y));
+        animationHandler.SetOrientation(new Vector2(Mathf.Abs(direction.x), direction.y));*/
     }
 
     public override void SetComponentData(IEC_RendererData componentData)

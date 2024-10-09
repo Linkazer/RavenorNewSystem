@@ -136,7 +136,35 @@ public class CameraController : Singleton<CameraController>
             currentFocus = null;
         }
 
-        SetCameraPosition(cameraHandler.transform.position + new Vector3(direction.x, direction.y, 0) * speed * Time.unscaledDeltaTime);
+        float zDirection = 0;
+
+        Node currenNode = Grid.Instance.GetNodeFromWorldPoint(cameraHandler.transform.position);
+
+        if (currenNode != null)
+        {
+            zDirection = currenNode.WorldPosition.z - cameraHandler.transform.position.z;
+
+            Debug.Log("Diff : " + zDirection);
+
+            if (zDirection > 0)
+            {
+                zDirection = 1;
+            }
+            else if (zDirection < 0)
+            {
+                zDirection = -1;
+            }
+            else
+            {
+                zDirection = 0;
+            }
+        }
+
+        Debug.Log(zDirection);
+
+        Vector3 plannedPosition = cameraHandler.transform.position + new Vector3(direction.x, direction.y, zDirection) * speed * Time.unscaledDeltaTime;
+
+        SetCameraPosition(plannedPosition);
     }
 
     /// <summary>
@@ -176,7 +204,7 @@ public class CameraController : Singleton<CameraController>
     /// Met la camera à la position voulue. (Prend en compte les limites de la map)
     /// </summary>
     /// <param name="position">La position voulue pour la camera.</param>
-    public void SetCameraPosition(Vector2 position)
+    public void SetCameraPosition(Vector3 position)
     {
         if (position.x < cameraLimit.x)
         {

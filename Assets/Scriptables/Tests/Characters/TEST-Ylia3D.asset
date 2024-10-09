@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfd48a00dcb32947a9377bfde6bbc0c, type: 3}
+  m_Name: TEST-Ylia3D
+  m_EditorClassIdentifier: 
+  speakerName:
+    frenchText: Ylia
+    englishText: 
+  speakerNameColor: {r: 0.28773582, g: 0.7976702, b: 1, a: 1}
+  speakerPortrait: {fileID: 21300000, guid: eac86b572decff04b9c34c62e1830160, type: 3}
+  characterTitle:
+    frenchText: "\xC9veill\xE9e de Sarenrae"
+    englishText: 
+  characterDescription:
+    frenchText: "Suivant les principes de Sarenrae, le liens qui l'unit \xE0 sa d\xE9esse
+      permet \xE0 Ylia de guider les \xE2mes vagabondes."
+    englishText: 
+  walkable: 0
+  blockVision: 0
+  height: 1
+  renderer: {fileID: 5052669220206500832, guid: 949bad6a3c7efec4a98b5b1441b45b95, type: 3}
+  speed: 5
+  movementByTurn: 15
+  healthPoints: 10
+  armor: 3
+  force: 0
+  esprit: -1
+  presence: 2
+  agilite: 0
+  instinct: 1
+  passives: []
+  skills:
+  - {fileID: 11400000, guid: 29769616012a07643800e76fbc875513, type: 2}
+  - {fileID: 11400000, guid: 5b5ac32392f890245a7e8190d3052e17, type: 2}
+  - {fileID: 11400000, guid: 97e9c43fcbfd84545af6ec3a03f5656d, type: 2}
+  ressourceUsed: {fileID: 11400000, guid: a5f474bd2bdfaac4bbf29761f558c743, type: 2}
+  expertises:
+  - level: 4
+    expertise: {fileID: 11400000, guid: 3885207e93e7a9d44a4d72b3868388a4, type: 2}

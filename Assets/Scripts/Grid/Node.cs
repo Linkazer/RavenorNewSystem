@@ -30,7 +30,7 @@ public class Node : IHeapItem<Node>
 	public bool IsStaticObstacle => staticObstacle;
 	public int GridX => gridX;
 	public int GridY => gridY;
-	public Vector3 WorldPosition => worldPosition;
+	public Vector3 WorldPosition => linkedElement?linkedElement.EntityPosition:worldPosition;
 
 	public GridElement LinkedElement => linkedElement;
 

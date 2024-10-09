@@ -36,7 +36,7 @@ public class GridZoneDisplayer : Singleton<GridZoneDisplayer>
     /// <param name="ySize">The size of the grid on the Y axis</param>
     public void OnSetGrid(Node[,] grid, int xSize, int ySize)
     {
-        if (displayedGrid == null)
+        /*if (displayedGrid == null)
         {
             displayedGrid = new GridNodeDisplay[xSize, ySize];
 
@@ -53,7 +53,7 @@ public class GridZoneDisplayer : Singleton<GridZoneDisplayer>
                     }
                 }
             }
-        }
+        }*/
     }
 
     /// <summary>

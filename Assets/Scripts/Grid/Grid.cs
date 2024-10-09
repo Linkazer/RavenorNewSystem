@@ -59,7 +59,10 @@ public class Grid : Singleton<Grid>
 		{
 			elementIndex++;
 
-			if(generatedNodes.ContainsKey(element.FlatPosition))
+            element.gameObject.name = "Grid Element " + element.FlatPosition;
+
+
+            if (generatedNodes.ContainsKey(element.FlatPosition))
 			{
 				Debug.LogError("Found 2 GridElements at position " + element.FlatPosition);
 				continue;
@@ -140,13 +143,13 @@ public class Grid : Singleton<Grid>
     /// <returns>The Node at the World Position wanted.</returns>
     public Node GetNodeFromWorldPoint(Vector3 worldPosition)
     {
-        float percentX = (worldPosition.x + nodeRadius + gridWorldSize.x / 2) / gridWorldSize.x;
+        /*float percentX = (worldPosition.x + nodeRadius + gridWorldSize.x / 2) / gridWorldSize.x;
         float percentY = (worldPosition.y + nodeRadius + gridWorldSize.y / 2) / gridWorldSize.y;
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
 
         int x = Mathf.RoundToInt((gridSizeX) * percentX) - 1;
-        int y = Mathf.RoundToInt((gridSizeY) * percentY) - 1;
+        int y = Mathf.RoundToInt((gridSizeY) * percentY) - 1;*/
 
         Vector2Int gridPos = new Vector2Int(Mathf.RoundToInt((worldPosition.x - minXPosition) / nodeDiameter), Mathf.RoundToInt((worldPosition.y - minYPosition) / nodeDiameter));
        
@@ -155,7 +158,6 @@ public class Grid : Singleton<Grid>
             return null;
         }
 
-		Debug.Log($"X : {gridPos.x} | Y : {gridPos.y}");
         return grid[gridPos.x, gridPos.y];
     }
 
