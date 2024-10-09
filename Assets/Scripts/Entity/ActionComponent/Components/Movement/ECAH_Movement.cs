@@ -75,29 +75,9 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         base.UnselectAction();
     }
 
-    protected override void DisplayAction(Vector3 actionTargetPosition)
+    protected override void DisplayAction(Vector3? actionTargetPosition)
     {
         UndisplayAction();
-
-        Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition);
-
-        if (targetNode != null)
-        {
-            List<EC_HealthHandler> targetablesInZone = targetNode.GetEntityComponentsOnNode<EC_HealthHandler>();
-
-            foreach (EC_HealthHandler healthHandler in targetablesInZone)
-            {
-                if (healthHandler.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rend))
-                {
-                    rend.AnimHandler.SetOutline(mouseTargetOutlineColor);
-
-                    if (!rendererOutlined.Contains(rend))
-                    {
-                        rendererOutlined.Add(rend);
-                    }
-                }
-            }
-        }
 
         if (RoundManager.Instance.CurrentRoundMode == RoundMode.RealTime || !movementHandler.CanMove)
         {
@@ -108,39 +88,62 @@ public class ECAH_Movement : PlayerEntityActionHandler<EC_Movement>
         colorMovement.a = 0.5f;
         GridZoneDisplayer.SetGridFeedback(Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, null, movementHandler.MovementLeft), colorMovement);
 
-        if (targetNode != null)
+        if (actionTargetPosition != null)
         {
-            List<Node> path = Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, targetNode, movementHandler.MovementLeft);
+            Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition.Value);
 
-            List<Node> validPath = new List<Node>();
-            List<Node> opportunityPath = new List<Node>();
-
-            bool foundOpportunityAttack = false;
-
-            if (movementHandler.CheckForOpportunityAttack(movementHandler.CurrentNode, false))
+            if (targetNode != null)
             {
-                foundOpportunityAttack = true;
-            }
+                List<EC_HealthHandler> targetablesInZone = targetNode.GetEntityComponentsOnNode<EC_HealthHandler>();
 
-            foreach (Node n in path)
-            {
-                if (!foundOpportunityAttack)
+                foreach (EC_HealthHandler healthHandler in targetablesInZone)
                 {
-                    if (movementHandler.CheckForOpportunityAttack(n, false))
+                    if (healthHandler.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rend))
                     {
-                        foundOpportunityAttack = true;
-                    }
+                        rend.AnimHandler.SetOutline(mouseTargetOutlineColor);
 
-                    validPath.Add(n);
-                }
-                else
-                {
-                    opportunityPath.Add(n);
+                        if (!rendererOutlined.Contains(rend))
+                        {
+                            rendererOutlined.Add(rend);
+                        }
+                    }
                 }
             }
 
-            GridZoneDisplayer.SetGridFeedback(validPath, Color.green);
-            GridZoneDisplayer.SetGridFeedback(opportunityPath, Color.red);
+            if (targetNode != null)
+            {
+                List<Node> path = Pathfinding.Instance.CalculatePathfinding(movementHandler.CurrentNode, targetNode, movementHandler.MovementLeft);
+
+                List<Node> validPath = new List<Node>();
+                List<Node> opportunityPath = new List<Node>();
+
+                bool foundOpportunityAttack = false;
+
+                if (movementHandler.CheckForOpportunityAttack(movementHandler.CurrentNode, false))
+                {
+                    foundOpportunityAttack = true;
+                }
+
+                foreach (Node n in path)
+                {
+                    if (!foundOpportunityAttack)
+                    {
+                        if (movementHandler.CheckForOpportunityAttack(n, false))
+                        {
+                            foundOpportunityAttack = true;
+                        }
+
+                        validPath.Add(n);
+                    }
+                    else
+                    {
+                        opportunityPath.Add(n);
+                    }
+                }
+
+                GridZoneDisplayer.SetGridFeedback(validPath, Color.green);
+                GridZoneDisplayer.SetGridFeedback(opportunityPath, Color.red);
+            }
         }
     }
 

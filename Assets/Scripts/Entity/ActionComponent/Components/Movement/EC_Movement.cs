@@ -138,7 +138,9 @@ public class EC_Movement : EntityActionComponent<IEC_MovementData>
             possibleMovement = -1f;
         }
 
-        if (Pathfinding.Instance.TryFindPath(CurrentNode.WorldPosition, targetPosition, possibleMovement, OnPathFound))
+        Node targetNode = Grid.Instance.GetNodeFromWorldPoint(targetPosition);
+
+        if (targetNode != null && Pathfinding.Instance.TryFindPath(CurrentNode, targetNode, possibleMovement, OnPathFound))
         {
             endMovementCallback = movementCallback;
         }

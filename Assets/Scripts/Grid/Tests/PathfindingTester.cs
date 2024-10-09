@@ -43,14 +43,14 @@ public class PathfindingTester : MonoBehaviour
 
         bool isTargetObstacle = !Grid.Instance.GetNodeFromWorldPoint(endPosition.position).IsWalkable;
 
-        if(Pathfinding.Instance.TryFindPath(startPosition.position, endPosition.position, maxDistance, OnPathFound, checkNonStatic, isTargetObstacle))
+        /*if(Pathfinding.Instance.TryFindPath(startPosition.position, endPosition.position, maxDistance, OnPathFound, checkNonStatic, isTargetObstacle))
         {
             Debug.Log("Path Found");
         }
         else
         {
             Debug.Log("No Path Found");
-        }
+        }*/
     }
 
     private void OnPathFound(Node[] pathFound)

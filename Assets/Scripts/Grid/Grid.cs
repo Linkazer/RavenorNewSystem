@@ -35,6 +35,10 @@ public class Grid : Singleton<Grid>
     protected override void OnAwake()
     {
         base.OnAwake();
+    }
+
+	public void InitializeGrid()
+	{
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
@@ -143,14 +147,6 @@ public class Grid : Singleton<Grid>
     /// <returns>The Node at the World Position wanted.</returns>
     public Node GetNodeFromWorldPoint(Vector3 worldPosition)
     {
-        /*float percentX = (worldPosition.x + nodeRadius + gridWorldSize.x / 2) / gridWorldSize.x;
-        float percentY = (worldPosition.y + nodeRadius + gridWorldSize.y / 2) / gridWorldSize.y;
-        percentX = Mathf.Clamp01(percentX);
-        percentY = Mathf.Clamp01(percentY);
-
-        int x = Mathf.RoundToInt((gridSizeX) * percentX) - 1;
-        int y = Mathf.RoundToInt((gridSizeY) * percentY) - 1;*/
-
         Vector2Int gridPos = new Vector2Int(Mathf.RoundToInt((worldPosition.x - minXPosition) / nodeDiameter), Mathf.RoundToInt((worldPosition.y - minYPosition) / nodeDiameter));
        
 		if (gridPos.x < 0 || gridPos.x >= gridSizeX || gridPos.y < 0 || gridPos.y >= gridSizeY)

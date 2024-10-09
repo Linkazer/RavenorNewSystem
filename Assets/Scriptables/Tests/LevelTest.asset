@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d40c46471e6bc634bbe6c7f539c27505, type: 3}
   m_Name: LevelTest
   m_EditorClassIdentifier: 
-  levelPrefab: {fileID: 6143604554719649977, guid: 6c2992fc434f70f48b4d112b6c1c7631, type: 3}
+  levelPrefab: {fileID: 3855158983505893781, guid: d96a51af57e15604c8845dbcd6ca6af4, type: 3}
   title:
     frenchText: Niveau Test 1
     englishText: Test Level 1

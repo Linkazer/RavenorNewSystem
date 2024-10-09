@@ -80,15 +80,15 @@ public class CameraController : Singleton<CameraController>
     {
         InputManager.WaitForInitialization -= SetInputs;
 
-        InputManager.Instance.OnMouseMiddleDown += StartMoveFromMiddleClic;
-        InputManager.Instance.OnMouseMiddleUp += EndMoveFromMiddleClic;
+        InputManager.Instance.OnSimpleMouseMiddleDown += StartRotateFromMiddleClic;
+        InputManager.Instance.OnSimpleMouseMiddleUp += EndMoveFromMiddleClic;
         InputManager.Instance.OnMouseScroll += Zoom;
     }
 
     private void UnsetInput()
     {
-        InputManager.Instance.OnMouseMiddleDown -= StartMoveFromMiddleClic;
-        InputManager.Instance.OnMouseMiddleUp -= EndMoveFromMiddleClic;
+        InputManager.Instance.OnSimpleMouseMiddleDown -= StartRotateFromMiddleClic;
+        InputManager.Instance.OnSimpleMouseMiddleUp -= EndMoveFromMiddleClic;
         InputManager.Instance.OnMouseScroll -= Zoom;
     }
 
@@ -106,23 +106,15 @@ public class CameraController : Singleton<CameraController>
     /// <summary>
     /// Définit le point de départ du Clic Molette.
     /// </summary>
-    /// <param name="mouseWorldPosition"></param>
-    private void StartMoveFromMiddleClic(Vector2 mouseWorldPosition)
+    private void StartRotateFromMiddleClic()
     {
-        if (currentFocus != null)
-        {
-            currentFocus = null;
-        }
-
-        Debug.Log("Start move middle");
-
         isMouseMoving = true;
         mouseStartScreenPosition = InputManager.MouseScreenPosition;
         mouseLastScreenPosition = mouseStartScreenPosition;
         mouseStartWorldPosition = cameraHandler.transform.position;
     }
 
-    private void EndMoveFromMiddleClic(Vector2 mouseWorldPosition)
+    private void EndMoveFromMiddleClic()
     {
         isMouseMoving = false;
     }

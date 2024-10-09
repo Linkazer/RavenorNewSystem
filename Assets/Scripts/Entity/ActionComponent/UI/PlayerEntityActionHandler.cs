@@ -77,7 +77,7 @@ public abstract class PlayerEntityActionHandler : PlayerActionHandler
     /// Display the action.
     /// </summary>
     /// <param name="actionTargetPosition"></param>
-    protected abstract void DisplayAction(Vector3 actionTargetPosition);
+    protected abstract void DisplayAction(Vector3? actionTargetPosition);
 
     /// <summary>
     /// Undisplay the action.

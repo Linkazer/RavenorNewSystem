@@ -8,8 +8,6 @@ public class Pathfinding : Singleton<Pathfinding>
 	public const float DirectDistance = 1.5f;
 	public const float DiagonaleDistance = 2.25f;
 
-	[SerializeField] private Grid grid;
-	
 	/// <summary>
 	/// Try to find a Path between 2 Nodes.
 	/// </summary>
@@ -20,13 +18,13 @@ public class Pathfinding : Singleton<Pathfinding>
 	/// <param name="checkNonStaticObstacle">Does the path Check or Ignore NonStatic obstacle.</param>
 	/// <param name="targetIsObstacle">Is the target an obstacle.</param>
 	/// <returns>TRUE if a Path is found.</returns>
-	public bool TryFindPath(Vector3 startPos, Vector3 targetPos, float pathMaxDistance, Action<Node[]> onPathFound, bool checkNonStaticObstacle = true, bool targetIsObstacle = false)
+	public bool TryFindPath(Node startPos, Node targetPos, float pathMaxDistance, Action<Node[]> onPathFound, bool checkNonStaticObstacle = true, bool targetIsObstacle = false)
 	{
         Node[] path = new Node[0];
         bool hasFoundPath = true;
 
-        Node startNode = grid.GetNodeFromWorldPoint(startPos);
-        Node targetNode = grid.GetNodeFromWorldPoint(targetPos);
+        Node startNode = startPos; //grid.GetNodeFromWorldPoint(startPos);
+        Node targetNode = targetPos; //grid.GetNodeFromWorldPoint(targetPos);
 
         path = CalculatePathfinding(startNode, targetNode, pathMaxDistance, checkNonStaticObstacle, targetIsObstacle).ToArray();
 
@@ -53,7 +51,7 @@ public class Pathfinding : Singleton<Pathfinding>
     /// <returns></returns>
     public List<Node> CalculatePathfinding(Node startNode, Node targetNode, float distance, bool checkNonStaticObstacle = true, bool targetIsObstacle = false)
     {
-        Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+        Heap<Node> openSet = new Heap<Node>(Grid.Instance.MaxSize);
         List<Node> usableNode = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
 
@@ -67,7 +65,7 @@ public class Pathfinding : Singleton<Pathfinding>
             Node currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);
 
-            foreach (Node neighbour in grid.GetNeighbours(currentNode))
+            foreach (Node neighbour in Grid.Instance.GetNeighbours(currentNode))
             {
                 if (closedSet.Contains(neighbour) || !IsNodeUsable(neighbour, currentNode, targetNode, checkNonStaticObstacle, targetIsObstacle))
                 {
@@ -247,8 +245,8 @@ public class Pathfinding : Singleton<Pathfinding>
             return true;
         }
 
-        bool xAxis = grid.GetNode(startNode.GridX + direction.x, startNode.GridY).IsWalkable;
-        bool yAxis = grid.GetNode(startNode.GridX, startNode.GridY + direction.y).IsWalkable;
+        bool xAxis = Grid.Instance.GetNode(startNode.GridX + direction.x, startNode.GridY).IsWalkable;
+        bool yAxis = Grid.Instance.GetNode(startNode.GridX, startNode.GridY + direction.y).IsWalkable;
 
         return xAxis || yAxis;
     }
@@ -330,7 +328,7 @@ public class Pathfinding : Singleton<Pathfinding>
             if (decision == 0)
             {
                 //Diagonal
-                if (grid.GetNode(p.x, p.y + signY).IsVisible || grid.GetNode(p.x + signX, p.y).IsVisible)
+                if (Grid.Instance.GetNode(p.x, p.y + signY).IsVisible || Grid.Instance.GetNode(p.x + signX, p.y).IsVisible)
                 {
                     p.x += signX;
                     ix++;
@@ -355,7 +353,7 @@ public class Pathfinding : Singleton<Pathfinding>
                 iy++;
             }
 
-            if (!grid.GetNode(p.x, p.y).IsVisible && (grid.GetNode(p.x, p.y) != visibilityTargetNode || visibilityTargetNode.IsStaticObstacle))
+            if (!Grid.Instance.GetNode(p.x, p.y).IsVisible && (Grid.Instance.GetNode(p.x, p.y) != visibilityTargetNode || visibilityTargetNode.IsStaticObstacle))
             {
                 return false;
             }
@@ -373,7 +371,7 @@ public class Pathfinding : Singleton<Pathfinding>
     /// <returns></returns>
     public List<Node> GetAllNodeInDistance(Node startNode, float distance, bool needVision)
     {
-        Heap<Node> openSet = new Heap<Node>(grid.MaxSize);
+        Heap<Node> openSet = new Heap<Node>(Grid.Instance.MaxSize);
         List<Node> usableNode = new List<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
 
@@ -386,7 +384,7 @@ public class Pathfinding : Singleton<Pathfinding>
         {
             Node currentNode = openSet.RemoveFirst();
             closedSet.Add(currentNode);
-            foreach (Node neighbour in grid.GetNeighbours(currentNode))
+            foreach (Node neighbour in Grid.Instance.GetNeighbours(currentNode))
             {
                 if (closedSet.Contains(neighbour))
                 {

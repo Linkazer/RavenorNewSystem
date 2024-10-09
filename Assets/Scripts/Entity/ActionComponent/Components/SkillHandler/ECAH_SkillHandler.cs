@@ -164,34 +164,38 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
         enabled = false;
     }
 
-    protected override void DisplayAction(Vector3 actionTargetPosition)
+    protected override void DisplayAction(Vector3? actionTargetPosition)
     {
         UndisplayAction();
 
         List<Node> rangeNodes = Pathfinding.Instance.GetAllNodeInDistance(skillHandler.CurrentNode, skillHandler.SelectedSkill.Range, true);
-        Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition);
 
         GridZoneDisplayer.SetGridFeedback(rangeNodes, skillRangeColor);
 
-        if (targetNode != null && rangeNodes.Contains(targetNode))
+        if (actionTargetPosition != null)
         {
-            List<Node> zoneToDisplay = skillHandler.SelectedSkill.GetDisplayShape(targetNode, Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition));
+            Node targetNode = Grid.Instance.GetNodeFromWorldPoint(actionTargetPosition.Value);
 
-            GridZoneDisplayer.SetGridFeedback(zoneToDisplay, skillShapeColor);
-
-            foreach(Node n in zoneToDisplay)
+            if (targetNode != null && rangeNodes.Contains(targetNode))
             {
-                List<EC_HealthHandler> targetablesInZone = n.GetEntityComponentsOnNode<EC_HealthHandler>();
+                List<Node> zoneToDisplay = skillHandler.SelectedSkill.GetDisplayShape(targetNode, targetNode);
 
-                foreach (EC_HealthHandler healthHandler in targetablesInZone)
+                GridZoneDisplayer.SetGridFeedback(zoneToDisplay, skillShapeColor);
+
+                foreach (Node n in zoneToDisplay)
                 {
-                    if(healthHandler.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rend))
-                    {
-                        rend.AnimHandler.SetOutline(skillShapeTargetOulineColor);
+                    List<EC_HealthHandler> targetablesInZone = n.GetEntityComponentsOnNode<EC_HealthHandler>();
 
-                        if (!rendererOutlined.Contains(rend))
+                    foreach (EC_HealthHandler healthHandler in targetablesInZone)
+                    {
+                        if (healthHandler.HoldingEntity.TryGetEntityComponentOfType(out EC_Renderer rend))
                         {
-                            rendererOutlined.Add(rend);
+                            rend.AnimHandler.SetOutline(skillShapeTargetOulineColor);
+
+                            if (!rendererOutlined.Contains(rend))
+                            {
+                                rendererOutlined.Add(rend);
+                            }
                         }
                     }
                 }

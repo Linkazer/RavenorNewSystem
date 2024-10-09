@@ -17,12 +17,17 @@ public class LevelHandler : MonoBehaviour
     [SerializeField] private SequenceCutscene startCutscene;
     [SerializeField] private LevelEnd[] possibleEnds = new LevelEnd[0];
 
+    [Header("Grid")]
+    [SerializeField] private Grid grid;
+
     /// <summary>
     /// Instantiate the Level.
     /// </summary>
     public void InstantiateLevel()
     {
         CurrentLevel = this;
+
+        grid.InitializeGrid();
 
         StartCoroutine(InitializeLevel());
     }
@@ -62,7 +67,14 @@ public class LevelHandler : MonoBehaviour
             ControllableTeamHandler.Instance.AddCharacter(character);
         }
 
-        startCutscene.PlaySequence(ActivateLevel);
+        if (startCutscene != null)
+        {
+            startCutscene.PlaySequence(ActivateLevel);
+        }
+        else
+        {
+            ActivateLevel();
+        }
     }
 
     public void ActivateLevel()

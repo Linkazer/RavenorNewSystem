@@ -19,7 +19,7 @@ public class ECAH_Inventory : PlayerEntityActionHandler<EC_InventoryHandler>
         UpdateDisplayedItems();
     }
 
-    protected override void DisplayAction(Vector3 actionTargetPosition)
+    protected override void DisplayAction(Vector3? actionTargetPosition)
     {
         
     }

@@ -32,7 +32,7 @@ public class InputManager : Singleton<InputManager>
     private Vector2 mouseScreenPosition;
 
     private Vector3 mouseScreenToWorldPosition;
-    private Vector3 mouseWorldPosition;
+    private Vector3? mouseWorldPosition;
 
     private EC_Clicable currentClicHandlerTouched;
 
@@ -40,21 +40,25 @@ public class InputManager : Singleton<InputManager>
 
     private RaycastHit raycastHited;
 
+    public Action OnSimpleMouseLeftDown;
     public Action<Vector2> OnMouseLeftDown;
     public Action<Vector2> OnMouseLeftDownWithoutObject;
     public Action<EC_Clicable> OnMouseLeftDownOnObject;
+    public Action OnSimpleMouseRightDown;
     public Action<Vector2> OnMouseRightDown;
     public Action<Vector2> OnMouseRightDownWithoutObject;
     public Action<EC_Clicable> OnMouseRightDownOnObject;
     public Action<Vector2> OnMoveCameraInput;
+    public Action OnSimpleMouseMiddleDown;
     public Action<Vector2> OnMouseMiddleDown;
+    public Action OnSimpleMouseMiddleUp;
     public Action<Vector2> OnMouseMiddleUp;
     public Action<Vector2> OnMouseScroll;
 
     public PlayerControl PlayerControl => playerControl;
     public InputActionReference ScrollAction => actionMouseScroll;
     public static Vector2 MouseScreenPosition => instance.mouseScreenPosition;
-    public static Vector2 MousePosition => instance.mouseWorldPosition;
+    public static Vector2? MousePosition => instance.mouseWorldPosition;
 
     protected override void OnAwake()
     {
@@ -113,7 +117,12 @@ public class InputManager : Singleton<InputManager>
     {
         if (!evtSyst.IsPointerOverGameObject())
         {
-            OnMouseLeftDown?.Invoke(mouseWorldPosition);
+            OnSimpleMouseLeftDown?.Invoke();
+
+            if (mouseWorldPosition != null)
+            {
+                OnMouseLeftDown?.Invoke(mouseWorldPosition.Value);
+            }
 
             if (currentClicHandlerTouched != null)
             {
@@ -121,9 +130,10 @@ public class InputManager : Singleton<InputManager>
 
                 currentClicHandlerTouched.MouseDown(0);
             }
-            else
+
+            else if (mouseWorldPosition != null)
             {
-                OnMouseLeftDownWithoutObject?.Invoke(mouseWorldPosition);
+                OnMouseLeftDownWithoutObject?.Invoke(mouseWorldPosition.Value);
             }
         }
     }
@@ -135,14 +145,26 @@ public class InputManager : Singleton<InputManager>
             if (context.started)
             {
                 isMiddleMouseDown = true;
-                OnMouseMiddleDown?.Invoke(mouseWorldPosition);
+
+                OnSimpleMouseMiddleDown.Invoke();
+
+                if (mouseWorldPosition != null)
+                {
+                    OnMouseMiddleDown?.Invoke(mouseWorldPosition.Value);
+                }
             }
         }
 
         if (context.canceled && isMiddleMouseDown)
         {
             isMiddleMouseDown = false;
-            OnMouseMiddleUp?.Invoke(mouseWorldPosition);
+
+            OnSimpleMouseMiddleUp.Invoke();
+
+            if (mouseWorldPosition != null)
+            {
+                OnMouseMiddleUp?.Invoke(mouseWorldPosition.Value);
+            }
         }
     }
 
@@ -150,7 +172,12 @@ public class InputManager : Singleton<InputManager>
     {
         if (!evtSyst.IsPointerOverGameObject())
         {
-            OnMouseRightDown?.Invoke(mouseWorldPosition);
+            OnSimpleMouseRightDown.Invoke();
+
+            if (mouseWorldPosition != null)
+            {
+                OnMouseRightDown?.Invoke(mouseWorldPosition.Value);
+            }
 
             if (currentClicHandlerTouched != null)
             {
@@ -158,9 +185,9 @@ public class InputManager : Singleton<InputManager>
 
                 currentClicHandlerTouched.MouseDown(1);
             }
-            else
+            else if(mouseWorldPosition != null)
             {
-                OnMouseRightDownWithoutObject?.Invoke(mouseWorldPosition);
+                OnMouseRightDownWithoutObject?.Invoke(mouseWorldPosition.Value);
             }
         }
     }
