@@ -36,6 +36,7 @@ public class CameraController : Singleton<CameraController>
 
     private Vector2 mouseStartWorldPosition;
     private Vector2 mouseStartScreenPosition;
+    private Vector2 mouseLastScreenPosition;
     private bool isMouseMoving;
 
     private float targetZoom;
@@ -95,11 +96,11 @@ public class CameraController : Singleton<CameraController>
     /// Calcul la position de la camera selon le Clic Molette.
     /// </summary>
     /// <param name="mousePosition">The mouse position.</param>
-    private void MoveFromMiddleClic(Vector2 mousePosition)
+    private void RotateFromMiddleClic(Vector2 mousePosition)
     {
-        mouseDirection = (mouseStartScreenPosition - mousePosition) * mouseSpeed * 0.001f;
+        float rotationToApply = (mousePosition.x - mouseLastScreenPosition.x) * mouseSpeed;
 
-        SetCameraPosition(mouseDirection + mouseStartWorldPosition);
+        ChangeCameraRotation(rotationToApply);
     }
 
     /// <summary>
@@ -117,6 +118,7 @@ public class CameraController : Singleton<CameraController>
 
         isMouseMoving = true;
         mouseStartScreenPosition = InputManager.MouseScreenPosition;
+        mouseLastScreenPosition = mouseStartScreenPosition;
         mouseStartWorldPosition = cameraHandler.transform.position;
     }
 
@@ -140,17 +142,18 @@ public class CameraController : Singleton<CameraController>
 
         Node currenNode = Grid.Instance.GetNodeFromWorldPoint(cameraHandler.transform.position);
 
+
         if (currenNode != null)
         {
             zDirection = currenNode.WorldPosition.z - cameraHandler.transform.position.z;
 
             Debug.Log("Diff : " + zDirection);
 
-            if (zDirection > 0)
+            if (zDirection > 0.1f)
             {
                 zDirection = 1;
             }
-            else if (zDirection < 0)
+            else if (zDirection < -0.1f)
             {
                 zDirection = -1;
             }
@@ -160,9 +163,11 @@ public class CameraController : Singleton<CameraController>
             }
         }
 
-        Debug.Log(zDirection);
+        CinemachineOrbitalTransposer orbitalTransposer = virtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
 
-        Vector3 plannedPosition = cameraHandler.transform.position + new Vector3(direction.x, direction.y, zDirection) * speed * Time.unscaledDeltaTime;
+        Vector2 calculatedDirection = Quaternion.AngleAxis(orbitalTransposer.m_XAxis.Value, Vector3.back) * direction;
+
+        Vector3 plannedPosition = cameraHandler.transform.position + new Vector3(calculatedDirection.x, calculatedDirection.y, zDirection) * speed * Time.unscaledDeltaTime;
 
         SetCameraPosition(plannedPosition);
     }
@@ -198,6 +203,13 @@ public class CameraController : Singleton<CameraController>
     public void SetCameraFocus(Transform targetTransform)
     {
         currentFocus = targetTransform;
+    }
+
+    private void ChangeCameraRotation(float rotationToApply)
+    {
+        CinemachineOrbitalTransposer orbitalTransposer = virtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+
+        orbitalTransposer.m_XAxis.Value += rotationToApply;
     }
 
     /// <summary>
@@ -236,9 +248,10 @@ public class CameraController : Singleton<CameraController>
 
         if (isMouseMoving)
         {
-            MoveFromMiddleClic(InputManager.MouseScreenPosition);
+            RotateFromMiddleClic(InputManager.MouseScreenPosition);
         }
-        else if(actionMoveCameraInput.action.ReadValue<Vector2>() != Vector2.zero)
+
+        if(actionMoveCameraInput.action.ReadValue<Vector2>() != Vector2.zero)
         {
             MoveCamera(actionMoveCameraInput.action.ReadValue<Vector2>());
         }
@@ -274,5 +287,7 @@ public class CameraController : Singleton<CameraController>
                 virtualCamera.m_Lens.OrthographicSize = RealTargetZoom;
             }
         }
+
+        mouseLastScreenPosition = InputManager.MouseScreenPosition;
     }
 }
