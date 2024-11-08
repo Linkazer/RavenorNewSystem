@@ -15,7 +15,7 @@ public class PlayerActionManager : Singleton<PlayerActionManager>
 
     private PlayerEntityActionHandler selectedAction;
 
-    [SerializeField] private List<MonoBehaviour> locks = new List<MonoBehaviour>();
+    private List<MonoBehaviour> locks = new List<MonoBehaviour>();
 
     public Entity EntityHandled => entityHandled;
 

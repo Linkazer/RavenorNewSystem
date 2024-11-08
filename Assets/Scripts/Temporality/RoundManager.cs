@@ -7,7 +7,7 @@ using UnityEngine;
 public enum RoundMode
 {
     Round,
-    RealTime,
+    RealTime
 }
 
 /// <summary>
@@ -28,6 +28,9 @@ public class RoundManager : Singleton<RoundManager>
     private List<IRoundHandler> activeRoundHandlers = new List<IRoundHandler>();
 
     public Action<RoundMode> actOnUpdateRoundMode;
+
+
+    private List<MonoBehaviour> locks = new List<MonoBehaviour>();
 
     public RoundMode CurrentRoundMode => currentRoundMode;
 
@@ -85,7 +88,7 @@ public class RoundManager : Singleton<RoundManager>
     /// <param name="toAdd">The IRoundManager to add.</param>
     public void AddHandler(IRoundHandler toAdd)
     {
-        if(!activeRoundHandlers.Contains(toAdd))
+        if (!activeRoundHandlers.Contains(toAdd))
         {
             activeRoundHandlers.Add(toAdd);
         }
@@ -109,7 +112,7 @@ public class RoundManager : Singleton<RoundManager>
     /// <param name="toSet">The RoundMode to set.</param>
     public void SetRoundMode(RoundMode toSet)
     {
-        if(currentRoundMode != toSet)
+        if (currentRoundMode != toSet)
         {
             switch (toSet)
             {
@@ -178,5 +181,55 @@ public class RoundManager : Singleton<RoundManager>
         globalRoundTimer = CreateRoundTimer(1f, null, OnGlobalRoundTimerEnd);
 
         StartGlobalRound();
+    }
+
+    /// <summary>
+    /// Add a Lock on the player action, preventing him to control the entity.
+    /// </summary>
+    /// <param name="lockCaller">The caller of the Lock.</param>
+    public void AddLock(MonoBehaviour lockCaller)
+    {
+        locks.Add(lockCaller);
+
+        if (locks.Count == 1)
+        {
+            if (globalRoundTimer != null)
+            {
+                RemoveTimer(globalRoundTimer);
+
+                globalRoundTimer.StopRealTimer();
+                globalRoundTimer = null;
+            }
+
+            foreach (RoundTimer timer in activeTimers)
+            {
+                timer.StopRealTimer();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Remove a Lock on the player action.
+    /// </summary>
+    /// <param name="unlockCaller">The caller of the lock to remove.</param>
+    public void RemoveLock(MonoBehaviour unlockCaller)
+    {
+        if (locks.Contains(unlockCaller))
+        {
+            locks.Remove(unlockCaller);
+
+            if (locks.Count == 0)
+            {
+                if (globalRoundTimer == null)
+                {
+                    globalRoundTimer = CreateRoundTimer(1f, null, OnGlobalRoundTimerEnd);
+                }
+
+                foreach (RoundTimer timer in activeTimers)
+                {
+                    timer.StartRealTimer();
+                }
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using static Node;
+using static UnityEngine.InputSystem.DefaultInputActions;
 
 public class EnnemyBattleController : Singleton<EnnemyBattleController>
 {
@@ -15,6 +16,8 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
     [SerializeField] private List<CharacterEntity> charactersToPlay = new List<CharacterEntity> ();
 
     private bool isProccessingCharacter = false;
+
+    private List<MonoBehaviour> locks = new List<MonoBehaviour>();
 
     private CharacterEntity CurrentCharacter => charactersToPlay[0];
 
@@ -51,8 +54,6 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
     private void PlayNextCharacter()
     {
-        //Debug.Log("Start AI Character Turn");
-
         StartCoroutine(CalculateCharacterPossibilities(charactersToPlay[0]));
     }
 
@@ -82,43 +83,44 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
 
     private void DoNextAction(AIAction actionFound)
     {
-        //Debug.Log("Do Next Action");
-
-        CurrentCharacter.TryGetEntityComponentOfType(out EC_Movement characterMovementHandler);
-
-        if (actionFound != null)
-        { 
-            if(actionFound.movementTarget != null && actionFound.movementTarget != characterMovementHandler.CurrentNode)
-            {
-                //Debug.Log("AI Move toward action destination");
-                characterMovementHandler.TryMoveToDestination(actionFound.movementTarget, () => DoNextAction(actionFound));
-            }
-            else
-            {
-                //Debug.Log("AI Use skill");
-                CurrentCharacter.TryGetEntityComponentOfType(out EC_SkillHandler characterSkillHandler);
-
-                characterSkillHandler.SelectSkill(actionFound.skillToUse);
-                characterSkillHandler.UseAction(actionFound.skillTarget.WorldPosition, () => DoNextAction(null));
-            }
-        }
-        else if (characterMovementHandler.CanMove)
+        if (locks.Count <= 0)
         {
-            Node movementTarget = SearchForBestMovement(characterMovementHandler);
+            CurrentCharacter.TryGetEntityComponentOfType(out EC_Movement characterMovementHandler);
 
-            if (movementTarget != characterMovementHandler.CurrentNode)
+            if (actionFound != null)
             {
-                //Debug.Log("AI Move toward best destination");
-                characterMovementHandler.TryMoveToDestination(movementTarget, () => DoNextAction(actionFound));
+                if (actionFound.movementTarget != null && actionFound.movementTarget != characterMovementHandler.CurrentNode)
+                {
+                    //Debug.Log("AI Move toward action destination");
+                    characterMovementHandler.TryMoveToDestination(actionFound.movementTarget, () => DoNextAction(actionFound));
+                }
+                else
+                {
+                    //Debug.Log("AI Use skill");
+                    CurrentCharacter.TryGetEntityComponentOfType(out EC_SkillHandler characterSkillHandler);
+
+                    characterSkillHandler.SelectSkill(actionFound.skillToUse);
+                    characterSkillHandler.UseAction(actionFound.skillTarget.WorldPosition, () => DoNextAction(null));
+                }
+            }
+            else if (characterMovementHandler.CanMove)
+            {
+                Node movementTarget = SearchForBestMovement(characterMovementHandler);
+
+                if (movementTarget != characterMovementHandler.CurrentNode)
+                {
+                    //Debug.Log("AI Move toward best destination");
+                    characterMovementHandler.TryMoveToDestination(movementTarget, () => DoNextAction(actionFound));
+                }
+                else
+                {
+                    PrepareEndCharacterTurn();
+                }
             }
             else
             {
                 PrepareEndCharacterTurn();
             }
-        }
-        else
-        {
-            PrepareEndCharacterTurn();
         }
     }
 
@@ -358,4 +360,33 @@ public class EnnemyBattleController : Singleton<EnnemyBattleController>
             }
         }
     }*/
+
+    /// <summary>
+    /// Add a Lock on the player action, preventing him to control the entity.
+    /// </summary>
+    /// <param name="lockCaller">The caller of the Lock.</param>
+    public void AddLock(MonoBehaviour lockCaller)
+    {
+        locks.Add(lockCaller);
+    }
+
+    /// <summary>
+    /// Remove a Lock on the player action.
+    /// </summary>
+    /// <param name="unlockCaller">The caller of the lock to remove.</param>
+    public void RemoveLock(MonoBehaviour unlockCaller)
+    {
+        if (locks.Contains(unlockCaller))
+        {
+            locks.Remove(unlockCaller);
+
+            if(locks.Count == 0)
+            {
+                if (charactersToPlay.Count > 0)
+                {
+                    PlayNextCharacter();
+                }
+            }
+        }
+    }
 }
