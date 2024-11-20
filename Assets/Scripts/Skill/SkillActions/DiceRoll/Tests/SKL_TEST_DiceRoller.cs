@@ -8,7 +8,7 @@ public class SKL_TEST_DiceRoller : MonoBehaviour
     [SerializeField] private int testsAmount;
 
     [Header("Dices")]
-    [SerializeField] private int numberDicesToRoll;
+    [SerializeField, Range(1,10)] private int numberDicesToRoll;
 
     [Header("Attacker")]
     [SerializeField] private int traitScore;
@@ -18,33 +18,69 @@ public class SKL_TEST_DiceRoller : MonoBehaviour
     [Header("Defender")]
     [SerializeField] private int defenseScore;
     [SerializeField] private int defensiveAdvantage;
+    [SerializeField] private int health;
+    [SerializeField] private int armor;
 
     [ContextMenu("Roll Test Dice")]
     private void LaunchTest()
     {
-        SortedDictionary<int, int> touchesAmount = new SortedDictionary<int, int>();
+        SortedDictionary<int, int> actionsSpents = new SortedDictionary<int, int>();
 
         for(int i = 0; i < testsAmount; i++)
         {
-            List<Dice> dices = RollDices(numberDicesToRoll, traitScore, defenseScore);
+            int actionsSpent = 0;
+            int armorLeft = armor;
+            int healthLeft = health;
 
-            int hitAmount = 0;
-            foreach(Dice d in dices)
+            int nbTries = testsAmount;
+
+            while (healthLeft > 0 && actionsSpent < nbTries)
             {
-                if(d.DoesHit)
+                actionsSpent++;
+
+                int hitsForAction = CheckHits();
+
+                if(hitsForAction > 0)
                 {
-                    hitAmount++;
+                    int damageDone = hitsForAction + damageBonus;
+
+                    if(armorLeft > 0)
+                    {
+                        damageDone -= armorLeft;
+                        armorLeft--;
+                    }
+
+                    if(damageDone > 0)
+                    {
+                        healthLeft -= damageDone;
+                    }
                 }
             }
 
-            if(!touchesAmount.ContainsKey(hitAmount))
+            if (!actionsSpents.ContainsKey(actionsSpent))
             {
-                touchesAmount.Add(hitAmount, 0);
+                actionsSpents.Add(actionsSpent, 0);
             }
-            touchesAmount[hitAmount]++;
+            actionsSpents[actionsSpent]++;
         }
 
-        DisplayResults(touchesAmount);
+        DisplayResults(actionsSpents);
+    }
+
+    private int CheckHits()
+    {
+        List<Dice> dices = RollDices(numberDicesToRoll, traitScore, defenseScore);
+
+        int hitAmount = 0;
+        foreach (Dice d in dices)
+        {
+            if (d.DoesHit)
+            {
+                hitAmount++;
+            }
+        }
+
+        return hitAmount;
     }
 
     private void DisplayResults(SortedDictionary<int, int> touchesAmount)

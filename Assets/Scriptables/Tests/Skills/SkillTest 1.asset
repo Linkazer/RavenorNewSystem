@@ -46,6 +46,12 @@ MonoBehaviour:
       data:
         zoneDistance: 2
         needVision: 0
+    - rid: 2297589167067234304
+      type: {class: SKL_Animation_Fx, ns: , asm: Assembly-CSharp}
+      data:
+        animationTarget: 0
+        animationDuration: 0
+        fxToPlay: {fileID: 0}
     - rid: 5188351792059252737
       type: {class: SKL_Animation_EntityAnimation, ns: , asm: Assembly-CSharp}
       data:
@@ -63,6 +69,7 @@ MonoBehaviour:
           rid: 1140582884468326405
         startAnimations:
         - rid: 5188351792059252737
+        - rid: 2297589167067234304
         numberDicesToRoll: 5
         offensiveTrait: 0
         defensiveTrait: 0

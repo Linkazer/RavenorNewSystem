@@ -307,7 +307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -689,12 +689,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testsAmount: 1000
-  numberDicesToRoll: 5
-  traitScore: 0
+  numberDicesToRoll: 4
+  traitScore: 2
   offensiveAdvantage: 0
-  damageBonus: 0
+  damageBonus: 4
   defenseScore: 8
   defensiveAdvantage: 0
+  health: 10
+  armor: 0
 --- !u!4 &39544529
 Transform:
   m_ObjectHideFlags: 0
@@ -807,7 +809,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2608,7 +2610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3961,7 +3963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -4465,7 +4467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5895,7 +5897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6378,6 +6380,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   zoomLimits: {x: 3, y: 10}
+  zoomLimitsY: {x: 0, y: 0}
+  zoomLimitsZ: {x: 0, y: 0}
   currentFocus: {fileID: 0}
 --- !u!4 &758719857
 Transform:
@@ -10161,7 +10165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -11159,7 +11163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 1388588940370657923, guid: a47a59973f90b1f48b5b89cc42300f69, type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -29,6 +29,9 @@ public class CameraController : Singleton<CameraController>
     [SerializeField] private AnimationCurve zoomCurve;
     [SerializeField] private Vector2 zoomLimits;
 
+    [SerializeField] private Vector2 zoomLimitsY;
+    [SerializeField] private Vector2 zoomLimitsZ;
+
     [Header("Debug")]
     [SerializeField] private Transform currentFocus;
 
@@ -174,7 +177,16 @@ public class CameraController : Singleton<CameraController>
         {
             float nextZoom = targetZoom - (scrollDirection.normalized.y * zoomForce);
 
-            if (nextZoom > 1)
+            float zZoom = zoomLimitsZ.x +(zoomLimitsZ.y - zoomLimitsZ.x) * nextZoom;
+            float yZoom = zoomLimitsY.x +(zoomLimitsY.y - zoomLimitsY.x) * nextZoom;
+
+            CinemachineOrbitalTransposer orbitalTransposer = virtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+
+            orbitalTransposer.m_FollowOffset = new Vector3(orbitalTransposer.m_FollowOffset.x, yZoom, zZoom);
+
+            targetZoom = nextZoom;
+
+            /*if (nextZoom > 1)
             {
                 nextZoom = 1;
             }
@@ -184,7 +196,7 @@ public class CameraController : Singleton<CameraController>
             }
 
             targetZoom = nextZoom;
-            zoomDirection = -scrollDirection.y;
+            zoomDirection = -scrollDirection.y;*/
         }
     }
 
