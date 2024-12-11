@@ -12,6 +12,7 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
     [SerializeField] private int offensiveAdvantage;
     [SerializeField] private int offensiveDisavantage;
 
+    private SkillRessourceType ressourceTypeData;
     private SkillRessource ressourceUsed;
     private int opportunityAttackLeft = 1;
 
@@ -32,15 +33,17 @@ public class EC_SkillHandler : EntityActionComponent<IEC_SkillHandlerData>
     public SKL_SkillScriptable SelectedSkill => selectedSkill;
 
     public SkillRessource RessourceUsed => ressourceUsed;
+    public SkillRessourceType RessourceTypeData => ressourceTypeData;
 
     public override void SetComponentData(IEC_SkillHandlerData componentData)
     {
         offensiveAdvantage = componentData.OffensiveAdvantage;
         offensiveDisavantage = componentData.OffensiveDisavantage;
+        ressourceTypeData = componentData.RessourceTypeUsed;
 
-        if (componentData.RessourceTypeUsed != null)
+        if (ressourceTypeData != null)
         {
-            ressourceUsed = componentData.RessourceTypeUsed.RessourceBehavior.GetAsNew();
+            ressourceUsed = ressourceTypeData.RessourceBehavior.GetAsNew();
         }
         else
         {

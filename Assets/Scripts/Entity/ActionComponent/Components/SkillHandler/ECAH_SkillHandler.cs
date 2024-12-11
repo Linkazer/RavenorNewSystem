@@ -9,10 +9,15 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
     private EC_SkillHandler skillHandler => entityActionComponentHandled;
 
     [SerializeField] private CanvasGroup skillsGroup;
-
-    [SerializeField] private TextMeshProUGUI ressourceAmountText;
     [SerializeField] private SkillButton[] skillsButtons;
 
+    [Header("Ressources")]
+    [SerializeField] private GameObject ressourceAmountHolder;
+    [SerializeField] private TextMeshProUGUI ressourceAmountText;
+    [SerializeField] private Image ressourceAmountBackground;
+
+
+    [Header("Skill Preview Colors")]
     [SerializeField] private Color skillRangeColor;
     [SerializeField] private Color skillShapeColor;
     [SerializeField] private Color skillShapeTargetOulineColor;
@@ -36,6 +41,13 @@ public class ECAH_SkillHandler : PlayerEntityActionHandler<EC_SkillHandler>
             skillHandler.RessourceUsed.actOnUpdateRessource += UpdateRessource;
 
             UpdateRessource(skillHandler.RessourceUsed.CurrentAmount);
+
+            ressourceAmountBackground.sprite = skillHandler.RessourceTypeData.UiPortraitBackground;
+            ressourceAmountHolder.SetActive(true);
+        }
+        else
+        {
+            ressourceAmountHolder.SetActive(false);
         }
     }
 

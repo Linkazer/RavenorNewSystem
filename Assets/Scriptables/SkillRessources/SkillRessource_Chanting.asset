@@ -18,7 +18,7 @@ MonoBehaviour:
   ressourceBehavior:
     rid: 1334095275407441920
   uiIcon: {fileID: 21300000, guid: b99d9e07adaf2e04e912d8b10df0e22d, type: 3}
-  uiPortraitBackground: {fileID: 21300000, guid: a9f8fbdf82938e44a854418071626b20, type: 3}
+  uiPortraitBackground: {fileID: 21300000, guid: 5f010c8861be80f4ba8abfd3fcd23a2a, type: 3}
   uiSkillBackground: {fileID: 21300000, guid: 7eaea7f6ab88a414799e149ce55163a4, type: 3}
   references:
     version: 2

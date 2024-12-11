@@ -26,6 +26,7 @@ public class SkillButton : MonoBehaviour
     [Header("URessource Cost")]
     [SerializeField] private GameObject ressourceCostHolder;
     [SerializeField] private TextMeshProUGUI ressourceCostTextUi;
+    [SerializeField] private Image ressourceBackground;
 
     [Header("Complexity")]
     [SerializeField] private Image normalActionImage;
