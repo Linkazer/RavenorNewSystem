@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Poolable_FX : MonoBehaviour
+public class Poolable_FX : PoolableObject
 {
     public enum ActionOnEnd
     {
@@ -59,7 +59,8 @@ public class Poolable_FX : MonoBehaviour
     /// </summary>
     public void End()
     {
-        switch (endAction)
+        Disable();
+        /*switch (endAction)
         {
             case ActionOnEnd.Destroy:
                 Destroy(gameObject);
@@ -72,6 +73,6 @@ public class Poolable_FX : MonoBehaviour
                 break;
             case ActionOnEnd.None:
                 break;
-        }
+        }*/
     }
 }

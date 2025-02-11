@@ -78,7 +78,7 @@ public class EC_StatusHandler : EntityComponent<IEC_StatusHandlerData>
 
             if (status.StatusFX != null)
             {
-                appliedEffect.statusFX = PoolManager.InstatiatePoolableAtPosition(status.StatusFX, effectVisualHolder.position);
+                appliedEffect.statusFX = PoolManager.InstantiatePoolableAtPosition(status.StatusFX, effectVisualHolder.position);
                 appliedEffect.statusFX.transform.parent = effectVisualHolder;
             }
 

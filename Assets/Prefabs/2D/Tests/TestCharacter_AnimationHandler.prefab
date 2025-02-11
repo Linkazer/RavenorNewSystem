@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestCharacter_AnimationHandler
       objectReference: {fileID: 0}
+    - target: {fileID: 4263027280345247888, guid: c629dae5d03cff9438c11d283334a9db, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 930fb84ba5ec0d442a262985eb058c5a, type: 3}
+    - target: {fileID: 4263027280345247888, guid: c629dae5d03cff9438c11d283334a9db, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b84ffecc0dbd575428d8e833dc6cfbab, type: 2}
     - target: {fileID: 4271005650024493009, guid: c629dae5d03cff9438c11d283334a9db, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

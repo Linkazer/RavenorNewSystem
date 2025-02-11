@@ -462,7 +462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57749e7eed446a4db80e0e88836c1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPersistant: 1
+  isPersistant: 0
+  poolablesHolder: {fileID: 0}
 --- !u!1 &4596023142013398628
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,6 +681,7 @@ MonoBehaviour:
   actionMouseScroll: {fileID: -3218351577606647362, guid: 4d534e77863cc8241b86355c368b0847, type: 3}
   usedCamera: {fileID: 0}
   evtSyst: {fileID: 0}
+  characterBattleInformation: {fileID: 0}
 --- !u!114 &970671119131083943
 MonoBehaviour:
   m_ObjectHideFlags: 0

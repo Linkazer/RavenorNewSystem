@@ -15,7 +15,7 @@ public class SKL_Animation_Fx : SKL_SkillActionAnimation
 
         foreach (Node node in GetAnimationNodes(skillAction, resolver))
         {
-            PoolManager.InstatiatePoolableAtPosition(fxToPlay, node.WorldPosition, animationCallback);
+            PoolManager.InstantiatePoolableAtPosition(fxToPlay, node.WorldPosition).Play(animationCallback);
             animationCallback = null;
         }
 

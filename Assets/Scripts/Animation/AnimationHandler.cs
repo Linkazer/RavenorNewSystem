@@ -122,7 +122,7 @@ public class AnimationHandler : MonoBehaviour
 
     public void ANIM_PlayFX(Poolable_FX fxToPlay)
     {
-        PoolManager.InstatiatePoolableAtPosition(fxToPlay, transform.position, null);
+        PoolManager.InstantiatePoolableAtPosition(fxToPlay, transform.position);
     }
 
     public void ANIM_CALLBACK_PlayCallback(int callbackIndex)

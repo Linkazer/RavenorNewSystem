@@ -6,20 +6,43 @@ using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager>
 {
-    private Dictionary<PrefabAssetType, List<Poolable_FX>> instantiatedFX = new Dictionary<PrefabAssetType, List<Poolable_FX>>(); //Peut être utilisé comme base pour un système de Pool complet
+    private Dictionary<PoolableObject, List<PoolableObject>> usablePool = new Dictionary<PoolableObject, List<PoolableObject>>();
 
-    /// <summary>
-    /// Instatiate an Animation object at the wanted position.
-    /// </summary>
-    /// <param name="toPlay">The animation object to instantiate.</param>
-    /// <param name="position">The position where the animation is played.</param>
-    /// <param name="callback">The callback to call at the end of the animation.</param>
-    public static Poolable_FX InstatiatePoolableAtPosition(Poolable_FX toPlay, Vector2 position, Action callback = null)
+    [SerializeField] private Transform poolablesHolder;
+
+    public static T InstantiatePoolableAtPosition<T>(T poolableObjectToInstantiate, Vector2 instancePosition) where T : PoolableObject
     {
-        Poolable_FX runtimePlayedAnimation = Instantiate(toPlay, position, Quaternion.identity);
+        T pooledObject = null;
 
-        runtimePlayedAnimation.Play(callback);
+        if (!Instance.usablePool.ContainsKey(poolableObjectToInstantiate))
+        {
+            Instance.usablePool.Add(poolableObjectToInstantiate , new List<PoolableObject>());
+        }
 
-        return runtimePlayedAnimation;
+        if (Instance.usablePool[poolableObjectToInstantiate].Count == 0)
+        {
+            pooledObject = Instantiate(poolableObjectToInstantiate, Instance.poolablesHolder, true);
+        }
+        else
+        {
+            pooledObject = Instance.usablePool[poolableObjectToInstantiate][0] as T;
+            Instance.usablePool[poolableObjectToInstantiate].RemoveAt(0);
+        }
+
+        pooledObject.transform.position = instancePosition;
+        pooledObject.transform.rotation = Quaternion.identity;
+
+        pooledObject.Initialize(poolableObjectToInstantiate);
+        return pooledObject;
+    }
+
+    public static void DisablePoolableObject(PoolableObject objectToDisable)
+    {
+        if (!Instance.usablePool.ContainsKey(objectToDisable.PoolPrefab))
+        {
+            Instance.usablePool.Add(objectToDisable.PoolPrefab, new List<PoolableObject>());
+        }
+
+        Instance.usablePool[objectToDisable.PoolPrefab].Add(objectToDisable);
     }
 }
